@@ -6,7 +6,8 @@ Class {
 		'selected',
 		'selectionListeners',
 		'mooseModelPresenter',
-		'announcer'
+		'announcer',
+		'pwbBrowser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-CallTree-Models'
 }
@@ -18,9 +19,16 @@ CIMMooseModelPresenterModel >> announcer [
 ]
 
 { #category : #'as yet unclassified' }
+CIMMooseModelPresenterModel >> globallySelect: anEntity [
+	pwbBrowser globallySelect: anEntity
+]
+
+{ #category : #'as yet unclassified' }
 CIMMooseModelPresenterModel >> globallySelected: anEntity [
-	self
-		selected: (self pbModel detect: [ :each | each pbModel = anEntity ])
+	selected := anEntity.
+	mooseModelPresenter focusElement: anEntity.
+	self setContent.
+	self notifySelectionListener
 ]
 
 { #category : #initialization }
@@ -57,6 +65,11 @@ CIMMooseModelPresenterModel >> pbModel: anObject [
 	pbModel := anObject
 ]
 
+{ #category : #accessing }
+CIMMooseModelPresenterModel >> pwbBrowser: aPWBBrowser [
+	pwbBrowser := aPWBBrowser
+]
+
 { #category : #api }
 CIMMooseModelPresenterModel >> roassal [
 	^ selected roassalPresenter
@@ -69,14 +82,14 @@ CIMMooseModelPresenterModel >> selected [
 
 { #category : #accessing }
 CIMMooseModelPresenterModel >> selected: anObject [
-  selected := anObject.
-  self setContent.
-  self notifySelectionListener
+	selected := anObject.
+	self setContent.
+	self notifySelectionListener
 ]
 
 { #category : #initialization }
 CIMMooseModelPresenterModel >> setContent [
-	selected setContent
+	selected ifNotNil: [ selected setContent ] 
 ]
 
 { #category : #api }

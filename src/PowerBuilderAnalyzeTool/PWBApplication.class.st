@@ -34,7 +34,7 @@ PWBApplication >> globallySelect: anEntity [
 { #category : #initialization }
 PWBApplication >> initialize [
 	super initialize.
-	logger := PWBLogger new
+	self logger: PWBLogger new
 ]
 
 { #category : #accessing }
@@ -50,5 +50,5 @@ PWBApplication >> logger: anObject [
 
 { #category : #'as yet unclassified' }
 PWBApplication >> refreshBrowsersWith: anEntity [
-	self browsers selectEntity: anEntity
+	self browsers do: [ :browser | browser selectEntity: anEntity ]
 ]

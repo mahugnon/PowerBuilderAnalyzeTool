@@ -83,15 +83,16 @@ PWBCallTreeBrowser >> initializeRoassal [
 
 { #category : #initialization }
 PWBCallTreeBrowser >> initializeWidgets [
-  modelPresenter := self instantiate: CIMMooseModelPresenter.
-  model := modelPresenter pbModel.
-  model subscribeToSelectionChannel: self.
-  searchField := self newTextInput
-     placeholder: 'rechercher dans le model ...';
-     yourself.
-  searchField acceptOnCR: true.
-  self initializeRoassal.
-"  menu := self instantiate: CIMMainMenu"
+	modelPresenter := self instantiate: CIMMooseModelPresenter.
+	model := modelPresenter pbModel.
+	model pwbBrowser: self.
+	model subscribeToSelectionChannel: self.
+	searchField := self newTextInput
+		placeholder: 'rechercher dans le model ...';
+		yourself.
+	searchField acceptOnCR: true.
+	self initializeRoassal
+	"  menu := self instantiate: CIMMainMenu"
 ]
 
 { #category : #accessing }

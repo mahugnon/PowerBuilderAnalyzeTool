@@ -20,7 +20,11 @@ PWBLogger >> application: aPWBApplication [
 
 { #category : #enumerating }
 PWBLogger >> globallySelect: anEntity [
-	logs add: (PWBSelectedEntityLog entity: anEntity)
+	logs
+		add:
+			(PWBSelectedEntityLog new
+				logger: self;
+				entity: anEntity)
 ]
 
 { #category : #initialization }

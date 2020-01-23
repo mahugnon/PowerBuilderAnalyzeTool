@@ -35,7 +35,7 @@ CIMMooseModelPresenter >> initializeModel [
 { #category : #initialization }
 CIMMooseModelPresenter >> initializePresenter [
 	pbModelTable
-		whenSelectionChangedDo: [ :selected | model selected: selected selectedItem ]
+		whenSelectionChangedDo: [ :selected | model globallySelect: selected selectedItem ]
 ]
 
 { #category : #initialization }
