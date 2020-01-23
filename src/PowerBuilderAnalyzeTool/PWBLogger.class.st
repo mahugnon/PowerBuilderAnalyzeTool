@@ -1,0 +1,30 @@
+Class {
+	#name : #PWBLogger,
+	#superclass : #Object,
+	#instVars : [
+		'logs',
+		'application'
+	],
+	#category : #PowerBuilderAnalyzeTool
+}
+
+{ #category : #accessing }
+PWBLogger >> application [
+	^ application
+]
+
+{ #category : #accessing }
+PWBLogger >> application: aPWBApplication [
+	application := aPWBApplication
+]
+
+{ #category : #enumerating }
+PWBLogger >> globallySelect: anEntity [
+	logs add: (PWBSelectedEntityLog entity: anEntity)
+]
+
+{ #category : #initialization }
+PWBLogger >> initialize [
+	super initialize.
+	logs := OrderedCollection new
+]
