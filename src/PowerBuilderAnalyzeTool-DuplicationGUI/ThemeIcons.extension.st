@@ -1,6 +1,6 @@
 Extension { #name : #ThemeIcons }
 
-{ #category : #'*PowerBuilderAnalyzeTool-DuplicationGUI' }
+{ #category : #'*DuplicationGUI' }
 ThemeIcons >> duplicationIcon [
 	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
 SFlzAAAAWQAAAFkBqp2phgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA

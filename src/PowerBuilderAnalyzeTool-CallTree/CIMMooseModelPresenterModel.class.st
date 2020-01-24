@@ -33,11 +33,12 @@ CIMMooseModelPresenterModel >> globallySelected: anEntity [
 
 { #category : #initialization }
 CIMMooseModelPresenterModel >> initialize [
-  | liq_cal |
-  super initialize.
-  selectionListeners := OrderedCollection new.
-  liq_cal := (MooseModel root first allWithType: FamixPWBUserObject) detect: [:each |  each name = 'uo_traitement_liq_cal' ].
-  pbModel := (CIMCodeAnalyserFmxUserObjectAdapter new pbModel: liq_cal) allReferences
+	| liq_cal |
+	super initialize.
+	selectionListeners := OrderedCollection new.
+	liq_cal := (MooseModel root first allWithType: FamixPWBUserObject)
+		detect: [ :each | each name = 'uo_traitement_liq_cal' ].
+	pbModel := liq_cal allReferences
 ]
 
 { #category : #accessing }

@@ -36,14 +36,14 @@ CIMUserObjectShowLinePresenter >> drawOn: v [
 	es
 		@
 			(RTShowEdge new
-				connectToAll: [ :elt | elt outgoingReferences collectAsSet: #target ];
+				connectToAll: [ :elt | elt outgoingReferencesTarget collectAsSet: #target ];
 				shape: (RTLine new color: Color red);
 				yourself).
 	es
 		@
 			(RTShowLabel new
 				color: Color red;
-				highlight: [ :elt | elt outgoingReferences collectAsSet: #target ];
+				highlight: [ :elt | elt outgoingReferencesTarget collectAsSet: #target ];
 				top;
 				yourself).
 	RTMetricNormalizer new

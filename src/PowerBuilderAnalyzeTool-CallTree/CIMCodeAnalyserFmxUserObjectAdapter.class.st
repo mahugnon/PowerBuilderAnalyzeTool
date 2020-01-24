@@ -21,21 +21,21 @@ CIMCodeAnalyserFmxUserObjectAdapter >> adaptPbModel [
 ]
 
 { #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> allIncomingReferences [
+CIMCodeAnalyserFmxUserObjectAdapter >> allIncomingReferencesSenders [
   | scan scanTop |
-  scan := self incomingReferences asOrderedCollection.
+  scan := self incomingReferencesSenders asOrderedCollection.
   scanTop := 1.
-  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) incomingReferences collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
+  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) incomingReferencesSenders collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
         scanTop := scanTop + 1 ].
   ^scan
 ]
 
 { #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferences [
+CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferencesTarget [
   | scan scanTop |
-  scan := self outgoingReferences asOrderedCollection.
+  scan := self outgoingReferencesTarget asOrderedCollection.
   scanTop := 1.
-  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) outgoingReferences collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
+  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) outgoingReferencesTarget collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
         scanTop := scanTop + 1 ].
   ^scan
 ]
@@ -44,8 +44,8 @@ CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferences [
 CIMCodeAnalyserFmxUserObjectAdapter >> allReferences [
   | result |
   result := Set new.
-  result addAll: self allIncomingReferences.
-  result addAll: self allOutgoingReferences.
+  result addAll: self allIncomingReferencesSenders.
+  result addAll: self allOutgoingReferencesTarget.
   ^CIMCodeAnalyserBasicAdapter adapt: (FAMIXTypeGroup withAll: (result reject: [:obj |  obj name = 'uo_datawindow' ]))
 ]
 
@@ -57,8 +57,8 @@ CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 ]
 
 { #category : #api }
-CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferences [
-  ^((pbModel incomingReferences collectAsSet: #from) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
+CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesSenders [
+  ^((pbModel incomingReferencesSenders collectAsSet: #from) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,13 +67,13 @@ CIMCodeAnalyserFmxUserObjectAdapter >> numberOfMethods [
 ]
 
 { #category : #accessing }
-CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
-	^ self content collect: #outgoingInvocations
+CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocationsTargets [
+	^ self content collect: #outgoingInvocationsTargets
 ]
 
 { #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> outgoingReferences [
-  ^((pbModel outgoingReferences collectAsSet: #target) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
+CIMCodeAnalyserFmxUserObjectAdapter >> outgoingReferencesTarget [
+  ^((pbModel outgoingReferencesTarget collectAsSet: #target) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
 ]
 
 { #category : #'as yet unclassified' }
@@ -88,9 +88,10 @@ CIMCodeAnalyserFmxUserObjectAdapter >> setContent [
 
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxUserObjectAdapter >> toSkipForNow: anObject [
-  self flag: 'To be considered later'.
-  ^{FamixPWBWindow . 
-  FamixPWBCustomType . 
-  FamixPWBDataWindow . 
-  FamixPWBFunction} includes: anObject class
+	self flag: 'To be considered later'.
+	^ {FamixPWBWindow.
+	FamixPWBCustomType.
+	FamixPWBDataWindow.
+	FamixPWBFunction.
+	FamixPWBEvent} includes: anObject class
 ]
