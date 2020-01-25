@@ -82,16 +82,43 @@ PWBCallTreeBrowser >> initializeRoassal [
 ]
 
 { #category : #initialization }
+PWBCallTreeBrowser >> initializeTable [
+	| title |
+	modelPresenter := self newTreeTable.
+	title := 'Source code components'.
+	modelPresenter
+		addColumn:
+			(SpCompositeTableColumn new
+				title: title;
+				addColumn:
+					((SpImageTableColumn evaluated: #systemIcon)
+						width: 20;
+						yourself);
+				addColumn: (SpStringTableColumn evaluated: #name);
+				yourself);
+		addColumn:
+			(SpStringTableColumn
+				title: 'Number of Line of code'
+				evaluated: [ :elt | elt numberOfLinesOfCode ]);
+		addColumn:
+			(SpStringTableColumn
+				title: 'Number of invocation'
+				evaluated: [ :elt | elt numberOfIncomingInvocations ]);
+		roots: model pbModel;
+		children: [ :elt | elt content ];
+		beResizable
+]
+
+{ #category : #initialization }
 PWBCallTreeBrowser >> initializeWidgets [
-	modelPresenter := self instantiate: CIMMooseModelPresenter.
-	model := modelPresenter pbModel.
+  self initializeTable.
 	model pwbBrowser: self.
 	model subscribeToSelectionChannel: self.
 	searchField := self newTextInput
 		placeholder: 'rechercher dans le model ...';
 		yourself.
 	searchField acceptOnCR: true.
-	self initializeRoassal
+	self initializeRoassal.
 	"  menu := self instantiate: CIMMainMenu"
 ]
 

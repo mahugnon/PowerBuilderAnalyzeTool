@@ -28,35 +28,17 @@ CIMMooseModelPresenter >> focusElement: aCIMCodeAnalyserFmxPWBMethodAdapter [
 
 { #category : #initialization }
 CIMMooseModelPresenter >> initializeModel [
-  model := CIMMooseModelPresenterModel new.
-  model mooseModelPresenter: self
+  model := PWBCallTreeBrowserModel new.
+  model mooseModelPresenter: self.
+
 ]
 
 { #category : #initialization }
 CIMMooseModelPresenter >> initializePresenter [
 	pbModelTable
-		whenSelectionChangedDo: [ :selected | model globallySelect: selected selectedItem ]
-]
-
-{ #category : #initialization }
-CIMMooseModelPresenter >> initializeTable [
-  | title |
-  pbModelTable := self newTreeTable.
-  self searchEntity.
-  title := 'Source code components'.
-  pbModelTable
-     addColumn: (SpCompositeTableColumn new
-           title: title;
-           addColumn: ((SpImageTableColumn evaluated: #systemIcon)
-                 width: 20;
-                 yourself);
-           addColumn: (SpStringTableColumn evaluated: #name);
-           yourself);
-     addColumn: (SpStringTableColumn title: 'Number of Line of code' evaluated: [:elt |  elt numberOfLinesOfCode ]);
-     addColumn: (SpStringTableColumn title: 'Number of invocation' evaluated: [:elt |  elt numberOfIncomingInvocations ]);
-     roots: {model pbModel};
-     children: [:elt |  elt content ];
-     beResizable
+		whenSelectionChangedDo: [ :selected | 
+			selected selectedItem
+				ifNotNil: [ model globallySelect: selected selectedItem ] ]
 ]
 
 { #category : #initialization }
