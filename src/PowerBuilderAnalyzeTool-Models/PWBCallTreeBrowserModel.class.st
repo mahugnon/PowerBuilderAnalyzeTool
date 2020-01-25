@@ -61,8 +61,7 @@ PWBCallTreeBrowserModel >> selected [
 { #category : #accessing }
 PWBCallTreeBrowserModel >> selected: anObject [
 	selected := anObject.
-	self setContent.
-	self notifySelectionListener
+	self setContent
 ]
 
 { #category : #initialization }

@@ -5,7 +5,6 @@ Class {
 		'modelPresenter',
 		'diagramPresenter',
 		'model',
-		'statisticPresenter',
 		'searchField'
 	],
 	#category : #PowerBuilderAnalyzeTool
@@ -71,8 +70,17 @@ PWBCallTreeBrowser class >> title [
 ]
 
 { #category : #initialization }
+PWBCallTreeBrowser >> initializeBrowserModel [
+	model := PWBCallTreeBrowserModel new.
+	model pwbBrowser: self
+]
+
+{ #category : #initialization }
 PWBCallTreeBrowser >> initializePresenters [
-  searchField whenTextIsAcceptedDo: [:text |  modelPresenter searchFor: text ]
+	modelPresenter
+		whenSelectionChangedDo: [ :selected | model selected: selected selectedItem ].
+	searchField
+		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
 ]
 
 { #category : #initialization }
@@ -104,27 +112,32 @@ PWBCallTreeBrowser >> initializeTable [
 			(SpStringTableColumn
 				title: 'Number of invocation'
 				evaluated: [ :elt | elt numberOfIncomingInvocations ]);
-		roots: model pbModel;
+		roots: {model pbModel};
 		children: [ :elt | elt content ];
 		beResizable
 ]
 
 { #category : #initialization }
 PWBCallTreeBrowser >> initializeWidgets [
-  self initializeTable.
-	model pwbBrowser: self.
-	model subscribeToSelectionChannel: self.
+	"  menu := self instantiate: CIMMainMenu"
+
+	self initializeBrowserModel.
+	self initializeTable.
 	searchField := self newTextInput
 		placeholder: 'rechercher dans le model ...';
 		yourself.
 	searchField acceptOnCR: true.
-	self initializeRoassal.
-	"  menu := self instantiate: CIMMainMenu"
+	self initializeRoassal
 ]
 
 { #category : #accessing }
 PWBCallTreeBrowser >> model [
 	^ model
+]
+
+{ #category : #accessing }
+PWBCallTreeBrowser >> modelPresenter [
+	^ modelPresenter
 ]
 
 { #category : #accessing }
