@@ -44,29 +44,34 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> drawOn: aView [
-  | es eb |
-  aView @ RTDraggableView @ RTZoomableView.
-  es := (RTEllipse new color: Color blue) elementsOn: (self pbModel collect: #pbModel).
-  aView addAll: es.
-  es @ RTDraggable.
-  es @ (ElementClick new
-           model: self guiModel;
-           yourself).
-  es @ ((RTLabeled new text: #name)
-           fontSize: 5;
-           top).
-  eb := RTEdgeBuilder new.
-  eb shape arrowedLine.
-  eb
-     view: aView;
-     highlightable;
-     elements: es;
-     moveBehind;
-     connectFromAll: [:each |  each incomingReferences collect: #from ].
-  RTMetricNormalizer new
-     elements: es;
-     normalizeSize: #numberOfMethods.
-  RTHorizontalTreeLayout new on: aView elements;
-horizontalGap:20.0 .
-  ^aView build
+	| es eb |
+	aView @ RTDraggableView @ RTZoomableView.
+	es := (RTEllipse new color: Color blue) elementsOn: self pbModel.
+	aView addAll: es.
+	es @ RTDraggable.
+	es
+		@
+			(ElementClick new
+				model: self guiModel;
+				yourself).
+	es
+		@
+			((RTLabeled new text: #name)
+				fontSize: 5;
+				top).
+	eb := RTEdgeBuilder new.
+	eb shape arrowedLine.
+	eb
+		view: aView;
+		highlightable;
+		elements: es;
+		moveBehind;
+		connectFromAll: [ :each | each incomingReferencesSenders ].
+	RTMetricNormalizer new
+		elements: es;
+		normalizeSize: #numberOfMethods.
+	RTHorizontalTreeLayout new
+		on: aView elements;
+		horizontalGap: 20.0.
+	^ aView build
 ]

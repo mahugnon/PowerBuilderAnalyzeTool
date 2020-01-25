@@ -78,7 +78,9 @@ PWBCallTreeBrowser >> initializeBrowserModel [
 { #category : #initialization }
 PWBCallTreeBrowser >> initializePresenters [
 	modelPresenter
-		whenSelectionChangedDo: [ :selected | model selected: selected selectedItem ].
+		whenSelectionChangedDo: [ :selected | 
+			model selected: selected selectedItem.
+			self updateWithSelection ].
 	searchField
 		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
 ]

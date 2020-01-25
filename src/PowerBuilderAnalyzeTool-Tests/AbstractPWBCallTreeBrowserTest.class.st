@@ -10,6 +10,6 @@ Class {
 
 { #category : #running }
 AbstractPWBCallTreeBrowserTest >> setUp [
-	pwbCallTreeBrowserModel := PWBCallTreeBrowserModel new.
-	pwbCallTreeBrowser := PWBCallTreeBrowser new
+	pwbCallTreeBrowser := PWBCallTreeBrowser new.
+	pwbCallTreeBrowserModel := pwbCallTreeBrowser model
 ]

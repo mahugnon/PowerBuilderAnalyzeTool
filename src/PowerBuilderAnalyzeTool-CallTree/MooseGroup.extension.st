@@ -39,5 +39,6 @@ MooseGroup >> roassalPresenter [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 MooseGroup >> setContent [
-	content := {self}
+	content := self
+		sorted: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
 ]
