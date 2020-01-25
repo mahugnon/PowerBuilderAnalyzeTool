@@ -80,7 +80,8 @@ PWBCallTreeBrowser >> initializePresenters [
 	modelPresenter
 		whenSelectionChangedDo: [ :selected | 
 			model selected: selected selectedItem.
-			self updateWithSelection ].
+			self updateWithSelection.
+			self globallySelect: selected selectedItem ].
 	searchField
 		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
 ]

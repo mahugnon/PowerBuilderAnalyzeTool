@@ -32,3 +32,13 @@ PWBLogger >> initialize [
 	super initialize.
 	logs := OrderedCollection new
 ]
+
+{ #category : #accessing }
+PWBLogger >> logs [
+	^ logs
+]
+
+{ #category : #accessing }
+PWBLogger >> logs: anObject [
+	logs := anObject
+]

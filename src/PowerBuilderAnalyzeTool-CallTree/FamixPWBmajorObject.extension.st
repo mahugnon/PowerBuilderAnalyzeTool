@@ -42,7 +42,7 @@ FamixPWBmajorObject >> allReferences [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> content [
-	content ifNil: [ content := {} ].
+	content ifEmpty: [ self setContent ].
 	^ content
 ]
 
@@ -90,7 +90,7 @@ FamixPWBmajorObject >> roassalPresenter [
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> setContent [
 	content := ((self methods asSet
-		reject: [ :method | method name = 'constructor' or: method name = 'destroy' ])
+		reject: [ :method | method isNoisyMethod ])
 		flatCollect: #withAllOutgoingInvocationCandidates)
 		asOrderedCollection
 		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]

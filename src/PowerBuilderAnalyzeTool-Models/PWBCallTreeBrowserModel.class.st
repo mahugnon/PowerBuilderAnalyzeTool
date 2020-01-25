@@ -18,9 +18,7 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 { #category : #'as yet unclassified' }
 PWBCallTreeBrowserModel >> globallySelected: anEntity [
 	selected := anEntity.
-	mooseModelPresenter focusElement: anEntity.
-	self setContent.
-	self notifySelectionListener
+	self setContent
 ]
 
 { #category : #initialization }

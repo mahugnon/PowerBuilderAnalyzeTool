@@ -22,18 +22,26 @@ FamixPWBBehavioral >> allOutgoingInvocationCandidates [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> content [
-	content ifNil: [ content := {} ].
+	content ifEmpty: [ self setContent ].
 	^ content
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> incomingInvocationsSenders [
-	^ self incomingInvocations collectAsSet: #sender
+	incomingInvocationSenders
+		ifNil: [ incomingInvocationSenders := self incomingInvocations
+				collectAsSet: #sender ].
+	^ incomingInvocationSenders
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBBehavioral >> isNoisyMethod [
+	^ self noisyMethods includes: self name
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> noisyMethods [
-	^ #('sort' 'len' 'setnull' 'string' 'long' 'rowcount' 'Find' 'getitemdate' 'retrieve' 'isnull' 'setsort' 'getitemstring' 'isnull' 'left' 'setrow' 'upprt' 'trim' 'right' 'now' 'datetime' 'relativedate' 'today' 'triggerevent' 'replace' 'long' 'isnumber' 'getitemnumber')
+	^ #('sort' 'len' 'setnull' 'string' 'long' 'rowcount' 'Find' 'getitemdate' 'retrieve' 'isnull' 'setsort' 'getitemstring' 'isnull' 'left' 'setrow' 'upprt' 'trim' 'right' 'now' 'datetime' 'relativedate' 'today' 'triggerevent' 'replace' 'long' 'isnumber' 'getitemnumber' 'constructor' 'destroy')
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

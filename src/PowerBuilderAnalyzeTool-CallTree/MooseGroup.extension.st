@@ -2,7 +2,7 @@ Extension { #name : #MooseGroup }
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 MooseGroup >> content [
-	content ifNil: [ content := {} ].
+	content ifNil: [ self setContent ].
 	^ content
 ]
 
