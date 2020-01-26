@@ -73,5 +73,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 	RTHorizontalTreeLayout new
 		on: aView elements;
 		horizontalGap: 20.0.
+	es
+		@ (RTMenuActivable item: #MarkAsObsolet action: [ :elt | self halt ]).
 	^ aView build
 ]
