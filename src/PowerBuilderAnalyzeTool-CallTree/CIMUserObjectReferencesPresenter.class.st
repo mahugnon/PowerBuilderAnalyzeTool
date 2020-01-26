@@ -74,6 +74,14 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		on: aView elements;
 		horizontalGap: 20.0.
 	es
-		@ (RTMenuActivable item: #MarkAsObsolet action: [ :elt | self halt ]).
+		@
+			((RTMenuActivable item: #globalSelect action: [ :elt |  ])
+				item: #MarkAsObsolet
+					action: [ :elt | elt model tag: FamixPWBTag isCIMObsolette ];
+				item: #MarkAsToRefactor
+					action: [ :elt | elt model tag: FamixPWBTag toRefactor ];
+				item: #MarkAsNotSure
+					action: [ :elt | elt model tag: FamixPWBTag notSure ];
+				item: #RunDuplication action: [ :elt |  ]).
 	^ aView build
 ]
