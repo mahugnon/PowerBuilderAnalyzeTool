@@ -170,10 +170,11 @@ DuplicationBrowserModel >> selectedFragmentLocationName [
 { #category : #api }
 DuplicationBrowserModel >> updateFragmentColorFor: aFamixPWBFunction [
 	| fragment |
-	fragment := (duplicationEntities at: aFamixPWBFunction)
-		collect: #clonedFragment.
+	fragment := ((duplicationEntities at: aFamixPWBFunction)
+		collect: #clonedFragment) asOrderedCollection.
 	fragmentColors := OrderedDictionary
 		newFromKeys: (Color wheel: fragment size)
 		andValues: fragment asOrderedCollection.
-	self refreshRoassal
+	^ fragmentColors
+	"	self refreshRoassal"
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #DPFragmentLocationClick,
+	#name : #InsideBoxClick,
 	#superclass : #RTInteraction,
 	#instVars : [
 		'model'
@@ -7,14 +7,19 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-core'
 }
 
+{ #category : #accessing }
+InsideBoxClick >> elements [
+	self shouldBeImplemented.
+]
+
 { #category : #hooks }
-DPFragmentLocationClick >> initializeElement1: element [
+InsideBoxClick >> initializeElement1: element [
   element announcer when: TRMouseClick do: [ model selectedFragmentLocation: element model.
         model addFragment: element model color: Color random ]
 ]
 
 { #category : #hooks }
-DPFragmentLocationClick >> initializeElement: element [
+InsideBoxClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick
 		do: [ model selectedFragmentLocation: element model.
@@ -22,6 +27,6 @@ DPFragmentLocationClick >> initializeElement: element [
 ]
 
 { #category : #accessing }
-DPFragmentLocationClick >> model: aDuplicationBrowserModel [ 
+InsideBoxClick >> model: aDuplicationBrowserModel [ 
 	model := aDuplicationBrowserModel
 ]

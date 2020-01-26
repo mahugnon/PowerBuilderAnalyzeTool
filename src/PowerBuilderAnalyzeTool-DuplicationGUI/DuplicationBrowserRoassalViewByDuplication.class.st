@@ -12,7 +12,7 @@ DuplicationBrowserRoassalViewByDuplication class >> viewName [
 { #category : #initialization }
 DuplicationBrowserRoassalViewByDuplication >> drawDuplicationDiagramOn: aView [
 	| es onclick |
-	onclick := DPFragmentLocationClick new model: model.
+	onclick := InsideBoxClick new model: model.
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTBox new
 		fillColor: Color white;
@@ -43,7 +43,7 @@ DuplicationBrowserRoassalViewByDuplication >> drawDuplicationDiagramOn: aView [
 	RTGridLayout new
 		gapSize: 10;
 		applyOn: es.
-	es @ (DPFragmentClick new model: model)
+	es @ (OutSideBoxClick new model: model)
 		@
 			(RTPopup new
 				text: [ :el | 

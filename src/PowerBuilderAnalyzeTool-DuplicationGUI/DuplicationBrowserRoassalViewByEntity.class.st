@@ -29,7 +29,7 @@ DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
 								ifTrue: [ Color black ]
 								ifFalse: [ model colorFor: elt ] ];
 						elementsOn: (model duplicationEntities at: each)).
-			group @ (DPFragmentLocationClick new model: model).
+			group @ (InsideBoxClick new model: model).
 			group
 				@
 					(RTPopup new
@@ -61,6 +61,6 @@ DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
 				text: #name;
 				fontSize: 5;
 				top).
-	es @ (DPFragmentClick new model: model).
+	es @ (OutSideBoxClick new model: model).
 	^ aView
 ]
