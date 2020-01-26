@@ -8,6 +8,13 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-core'
 }
 
+{ #category : #hooks }
+OutSideBoxClick >> colorBoxsUsing: element [
+	model updateFragmentColorFor: element model.
+	^ element view nestedElements
+		do: [ :nested | nested color: (model colorFor: nested model) ]
+]
+
 { #category : #accessing }
 OutSideBoxClick >> elements: aCollection [
 	elements := aCollection
@@ -17,9 +24,7 @@ OutSideBoxClick >> elements: aCollection [
 OutSideBoxClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick
-		do: [ model updateFragmentColorFor: element model.
-			element view nestedElements
-				do: [ :nested | nested color: (model colorFor: nested model) ] ]
+		do: [ self colorBoxsUsing: element ]
 ]
 
 { #category : #accessing }

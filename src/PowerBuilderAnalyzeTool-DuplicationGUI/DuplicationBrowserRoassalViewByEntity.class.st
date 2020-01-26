@@ -11,7 +11,8 @@ DuplicationBrowserRoassalViewByEntity class >> viewName [
 
 { #category : #initialization }
 DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
-	| es |
+	| es locationClick |
+	locationClick := InsideBoxClick new model: model.
 	aView @ RTDraggableView.
 	aView @ RTZoomableView.
 	es := (RTBox new
@@ -24,12 +25,9 @@ DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
 			group
 				addAll:
 					(RTBox new
-						fillColor: [ :elt | 
-							elt clonedFragment = model focusClonedFragment
-								ifTrue: [ Color black ]
-								ifFalse: [ model colorFor: elt ] ];
+						fillColor: [ :elt | model colorFor: elt ];
 						elementsOn: (model duplicationEntities at: each)).
-			group @ (InsideBoxClick new model: model).
+			group @ locationClick.
 			group
 				@
 					(RTPopup new
@@ -62,5 +60,6 @@ DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
 				fontSize: 5;
 				top).
 	es @ (OutSideBoxClick new model: model).
+	locationClick view: aView.
 	^ aView
 ]

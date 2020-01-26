@@ -2,7 +2,8 @@ Class {
 	#name : #InsideBoxClick,
 	#superclass : #RTInteraction,
 	#instVars : [
-		'model'
+		'model',
+		'view'
 	],
 	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-core'
 }
@@ -22,11 +23,21 @@ InsideBoxClick >> initializeElement1: element [
 InsideBoxClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick
-		do: [ model selectedFragmentLocation: element model.
-			model refreshRoassal ]
+		do: [ view nestedElements
+				do: [ :nested | 
+					nested model clonedFragment = element model clonedFragment
+						ifTrue: [ nested color: Color black ]
+						ifFalse: [ nested color: Color gray ] ].
+			model selectedFragmentLocation: element model
+			"model refreshRoassal" ]
 ]
 
 { #category : #accessing }
 InsideBoxClick >> model: aDuplicationBrowserModel [ 
 	model := aDuplicationBrowserModel
+]
+
+{ #category : #accessing }
+InsideBoxClick >> view: aView [
+	view := aView
 ]
