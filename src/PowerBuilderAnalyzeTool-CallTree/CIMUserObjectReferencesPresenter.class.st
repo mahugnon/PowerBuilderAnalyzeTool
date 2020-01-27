@@ -97,5 +97,20 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 			(ElementClick new
 				model: self guiModel;
 				yourself).
+	RTLegendBuilder new
+		textSize: 3;
+		gapSize: 1;
+		"	onDemand: 'Show legend';"
+			view: aView;
+		below;
+		addText: 'Each circle is a Powerbuilder user object ';
+		addText:
+			'Each arrow is a refence from its source user objet to the target object';
+		addColor: Color paleGreen text: 'Selected user object';
+		addColor: Color red text: 'User object to remove';
+		addColor: Color orange text: 'User object to remove refactor';
+		addColor: Color yellow
+			text: 'Not sure of action to perform about the user object';
+		build.
 	^ aView build
 ]
