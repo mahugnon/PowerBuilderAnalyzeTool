@@ -129,9 +129,14 @@ DuplicationBrowserModel >> initializeColors [
 	fragmentColors ifNil: [ fragmentColors := Dictionary new ]
 ]
 
+{ #category : #accessing }
+DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [ 
+	mooseModel := aFamixPWBUserObject
+]
+
 { #category : #'as yet unclassified' }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ mooseModel allMethods
+	^ mooseModel methods asSet
 ]
 
 { #category : #api }

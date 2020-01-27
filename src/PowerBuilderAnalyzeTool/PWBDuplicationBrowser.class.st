@@ -69,8 +69,10 @@ PWBDuplicationBrowser class >> duplicationView: aBuilder [
 
 { #category : #'as yet unclassified' }
 PWBDuplicationBrowser class >> lunchOn: anObject [
-	self new
+	self basicNew
+		initializeModel;
 		mooseModel: anObject;
+		initialize;
 		openWithSpec;
 		selectFirstItem
 ]
@@ -126,11 +128,17 @@ PWBDuplicationBrowser >> initializeSourceCodePanel [
 
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeWidgets [
-	self initializeModel.
+	"self initializeModel."
 	self initializeEntityPanel.
 	self initializeDuplicationResultPanel.
 	self initializeSourceCodePanel.
 	self initializeDuplicationRoassalViewSelector
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
+	model mooseModel: aFamixPWBUserObject.
+	self initializeEntityPanel
 ]
 
 { #category : #accessing }
