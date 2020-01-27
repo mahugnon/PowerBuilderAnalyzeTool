@@ -10,9 +10,9 @@ QueryDuplication >> runOn: aCollection [
 		runOn: aCollection
 		parametrizedWith:
 		(DPParameters new
-		minNumberOfLines: 150;
+		minNumberOfLines: 10;
 		frequency: 2;
-		minNumberOfCharacters: 75;
+		minNumberOfCharacters: 55;
 		cleaner: DPPWBCleaner new))
 		setColors;
 		fragments
