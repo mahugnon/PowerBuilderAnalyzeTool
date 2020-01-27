@@ -67,6 +67,14 @@ PWBDuplicationBrowser class >> duplicationView: aBuilder [
 		action: [ self runMe ]
 ]
 
+{ #category : #'as yet unclassified' }
+PWBDuplicationBrowser class >> lunchOn: anObject [
+	self new
+		mooseModel: anObject;
+		openWithSpec;
+		selectFirstItem
+]
+
 { #category : #examples }
 PWBDuplicationBrowser class >> runMe [
   < example>
@@ -128,6 +136,11 @@ PWBDuplicationBrowser >> initializeWidgets [
 { #category : #accessing }
 PWBDuplicationBrowser >> selectEntity: anEntity [
 	model selected: anEntity
+]
+
+{ #category : #'event handling' }
+PWBDuplicationBrowser >> selectFirstItem [
+	entityPanel selectItem: entityPanel items first
 ]
 
 { #category : #updating }

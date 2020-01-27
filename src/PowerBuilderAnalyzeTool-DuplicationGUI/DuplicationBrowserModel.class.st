@@ -131,7 +131,7 @@ DuplicationBrowserModel >> initializeColors [
 
 { #category : #'as yet unclassified' }
 DuplicationBrowserModel >> mooseModelFunctions [
-  ^mooseModel allWithType: FamixPWBFunction
+	^ mooseModel allMethods
 ]
 
 { #category : #api }

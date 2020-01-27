@@ -20,7 +20,7 @@ ElementClick >> colorSelectedElement: element [
 ElementClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick
-		do: [ "model mooseModelPresenterSelectedItem: element model"
+		do: [ model mooseModelPresenterSelectedItem: element model.
 			self colorSelectedElement: element ]
 ]
 

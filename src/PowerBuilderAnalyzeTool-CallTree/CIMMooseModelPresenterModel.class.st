@@ -84,8 +84,7 @@ CIMMooseModelPresenterModel >> selected [
 { #category : #accessing }
 CIMMooseModelPresenterModel >> selected: anObject [
 	selected := anObject.
-	self setContent.
-	self notifySelectionListener
+	self setContent
 ]
 
 { #category : #initialization }
