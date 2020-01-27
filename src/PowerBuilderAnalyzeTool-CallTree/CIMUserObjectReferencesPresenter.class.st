@@ -11,6 +11,28 @@ CIMUserObjectReferencesPresenter class >> run [
 ]
 
 { #category : #initialization }
+CIMUserObjectReferencesPresenter >> contextMenu [
+	^ (RTMenuActivable item: #globalSelect action: [ :elt |  ])
+		item: #MarkAsObsolet
+			action: [ :elt | 
+			elt model tag: FamixPWBTag isCIMObsolette.
+			elt color: (ColorObject colorFor: elt model) ];
+		item: #MarkAsToRefactor
+			action: [ :elt | 
+			elt model tag: FamixPWBTag toRefactor.
+			elt color: (ColorObject colorFor: elt model) ];
+		item: #MarkAsNotSure
+			action: [ :elt | 
+			elt model tag: FamixPWBTag notSure.
+			elt color: (ColorObject colorFor: elt model) ];
+		item: #UnMark
+			action: [ :elt | 
+			elt model tag: nil.
+			elt color: (ColorObject colorFor: elt model) ];
+		item: #RunDuplication action: [ :elt |  ]
+]
+
+{ #category : #initialization }
 CIMUserObjectReferencesPresenter >> drawOn1: aView [
   | userObjects userObjectElement userObjectElements shapeBuilder methods methodElements |
   aView @ RTDraggableView.
@@ -69,21 +91,6 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 	RTHorizontalTreeLayout new
 		on: aView elements;
 		horizontalGap: 20.0.
-	es
-		@
-			((RTMenuActivable item: #globalSelect action: [ :elt |  ])
-				item: #MarkAsObsolet
-					action: [ :elt | 
-					elt model tag: FamixPWBTag isCIMObsolette.
-					elt color: (ColorObject colorFor: elt model) ];
-				item: #MarkAsToRefactor
-					action: [ :elt | 
-					elt model tag: FamixPWBTag toRefactor.
-					elt color: (ColorObject colorFor: elt model) ];
-				item: #MarkAsNotSure
-					action: [ :elt | 
-					elt model tag: FamixPWBTag notSure.
-					elt color: (ColorObject colorFor: elt model) ];
-				item: #RunDuplication action: [ :elt |  ]).
+	es @ self contextMenu.
 	^ aView build
 ]

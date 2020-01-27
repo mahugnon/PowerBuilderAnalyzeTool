@@ -133,6 +133,5 @@ PWBDuplicationBrowser >> selectEntity: anEntity [
 { #category : #updating }
 PWBDuplicationBrowser >> updateCode [
 	sourceCodePanel text: model fragmentText.
-	sourceCodePanel entityName: model selectedFragmentLocationName.
-	"fragmentFileName label: model fragmentAnchorName"
+	sourceCodePanel entityName: model selectedFragmentLocationName
 ]
