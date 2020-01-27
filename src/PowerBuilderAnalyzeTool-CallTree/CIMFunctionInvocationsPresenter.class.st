@@ -48,7 +48,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTEllipse new
 		size: 15;
-		color: [ :elt | ColorStrategy colorFor: elt ])
+		color: [ :elt | ColorFunction colorFor: elt ])
 		elementsOn: self pbModel.
 	aView addAll: es.
 	es @ RTDraggable.

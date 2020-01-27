@@ -42,7 +42,7 @@ FamixPWBmajorObject >> allReferences [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> content [
-	content ifEmpty: [ self setContent ].
+	content ifNil: [ self setContent ].
 	^ content
 ]
 

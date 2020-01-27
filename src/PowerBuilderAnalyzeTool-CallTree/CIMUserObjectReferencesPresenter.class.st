@@ -46,14 +46,10 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
 CIMUserObjectReferencesPresenter >> drawOn: aView [
 	| es eb |
 	aView @ RTDraggableView @ RTZoomableView.
-	es := (RTEllipse new color: Color blue) elementsOn: self pbModel.
+	es := (RTEllipse new color: [ :elt | ColorObject colorFor: elt ])
+		elementsOn: self pbModel.
 	aView addAll: es.
 	es @ RTDraggable.
-	es
-		@
-			(ElementClick new
-				model: self guiModel;
-				yourself).
 	es
 		@
 			((RTLabeled new text: #name)
@@ -77,11 +73,17 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		@
 			((RTMenuActivable item: #globalSelect action: [ :elt |  ])
 				item: #MarkAsObsolet
-					action: [ :elt | elt model tag: FamixPWBTag isCIMObsolette ];
+					action: [ :elt | 
+					elt model tag: FamixPWBTag isCIMObsolette.
+					elt color: (ColorObject colorFor: elt model) ];
 				item: #MarkAsToRefactor
-					action: [ :elt | elt model tag: FamixPWBTag toRefactor ];
+					action: [ :elt | 
+					elt model tag: FamixPWBTag toRefactor.
+					elt color: (ColorObject colorFor: elt model) ];
 				item: #MarkAsNotSure
-					action: [ :elt | elt model tag: FamixPWBTag notSure ];
+					action: [ :elt | 
+					elt model tag: FamixPWBTag notSure.
+					elt color: (ColorObject colorFor: elt model) ];
 				item: #RunDuplication action: [ :elt |  ]).
 	^ aView build
 ]

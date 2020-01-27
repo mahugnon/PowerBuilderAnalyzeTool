@@ -1,6 +1,6 @@
 Class {
 	#name : #ColorToBlack,
-	#superclass : #ColorStrategy,
+	#superclass : #ColorFunction,
 	#category : #'PowerBuilderAnalyzeTool-CallTree-RoassalElementColorStrategy'
 }
 
