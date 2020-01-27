@@ -157,13 +157,16 @@ PWBCallTreeBrowser >> initializeToolBar [
 		iconName: #duplication.
 	zoomInButton := self newButton
 		label: 'Zoom In';
-		icon: (self iconNamed: #glamorousZoomIn).
+		icon: (self iconNamed: #glamorousZoomIn);
+		action: [ diagramPresenter zoomIn ].
 	zoomOutButton := self newButton
 		label: 'Zoom Out';
-		icon: (self iconNamed: #glamorousZoomOut).
+		icon: (self iconNamed: #glamorousZoomOut);
+		action: [ diagramPresenter zoomOut ].
 	hideButton := self newCheckBox
 		label: 'Hide all obsolette';
 		help: 'Hide all obsolette element of the view';
+		color: Color white;
 		yourself
 ]
 

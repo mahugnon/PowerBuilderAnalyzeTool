@@ -92,5 +92,10 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		on: aView elements;
 		horizontalGap: 20.0.
 	es @ self contextMenu.
+	es
+		@
+			(ElementClick new
+				model: self guiModel;
+				yourself).
 	^ aView build
 ]

@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'diagram',
-		'guiModel'
+		'guiModel',
+		'view'
 	],
 	#category : #'PowerBuilderAnalyzeTool-CallTree-TreeBase-Presenters'
 }
@@ -51,7 +52,8 @@ CIMRoassalPresenter >> initializeDiagram [
 	diagram
 		script: [ :aView :canvas | 
 			self drawOn: aView.
-			aView canvas focusOnCenterScaled]
+			view := aView.
+			aView canvas focusOnCenterScaled ]
 ]
 
 { #category : #initialization }
@@ -62,4 +64,19 @@ CIMRoassalPresenter >> initializeWidgets [
 { #category : #accessing }
 CIMRoassalPresenter >> pbModel [
   ^guiModel selected content
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> view [
+	^ view
+]
+
+{ #category : #initialization }
+CIMRoassalPresenter >> zoomIn [
+	RTZoomInMove on: view
+]
+
+{ #category : #initialization }
+CIMRoassalPresenter >> zoomOut [
+	RTZoomOutMove on: view
 ]
