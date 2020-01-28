@@ -12,7 +12,7 @@ Class {
 		'duplicationEntities',
 		'fragmentColors'
 	],
-	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-model'
+	#category : #'PowerBuilderAnalyzeTool-Models'
 }
 
 { #category : #api }
@@ -50,9 +50,6 @@ DuplicationBrowserModel >> duplicationEntities [
 	| dpLocations |
 	dpLocations := self duplicationLocations.
 	duplicationEntities := dpLocations groupedBy: #entity.
-
-
-	"(((dpLocations groupedBy: #startLine) collect: [:dpl |  dpl groupedBy: #entity ]) values flatCollect: [:elt |  elt values flatCollect: [:each |  each anyOne clonedFragment members ] ]) groupedBy: #entity."
 	^ duplicationEntities
 ]
 
@@ -86,11 +83,6 @@ DuplicationBrowserModel >> focusClonedFragment [
 	^ selectedFragmentLocation clonedFragment
 ]
 
-{ #category : #'as yet unclassified' }
-DuplicationBrowserModel >> fragmentAnchorName [
-  ^selectedFragmentLocation entity mooseName
-]
-
 { #category : #api }
 DuplicationBrowserModel >> fragmentText [
   ^self fragmentText: selectedFragmentLocation
@@ -118,7 +110,7 @@ DuplicationBrowserModel >> fragmentText: aFragmentLocation [
 { #category : #initialization }
 DuplicationBrowserModel >> initialize [
 	super initialize.
-	mooseModel := MooseModel root first.
+	mooseModel := FamixPWBFunction new.
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new
@@ -134,9 +126,9 @@ DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
 	mooseModel := aFamixPWBUserObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ mooseModel methods asSet
+	^ mooseModel content
 ]
 
 { #category : #api }
@@ -147,7 +139,7 @@ DuplicationBrowserModel >> openTextPresenters [
            openWithSpec ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 DuplicationBrowserModel >> openTextPresenters: aFragment [
   aFragment members do: [:each |  SourceTextPresenter new
            text: (self fragmentText: each);
@@ -167,7 +159,7 @@ DuplicationBrowserModel >> selectedFragmentLocation: anObject [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 DuplicationBrowserModel >> selectedFragmentLocationName [
 	^ selectedFragmentLocation name
 ]
