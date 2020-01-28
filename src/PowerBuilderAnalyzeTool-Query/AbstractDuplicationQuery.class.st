@@ -1,7 +1,7 @@
 Class {
 	#name : #AbstractDuplicationQuery,
 	#superclass : #Object,
-	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-queries'
+	#category : #'PowerBuilderAnalyzeTool-Query'
 }
 
 { #category : #running }

@@ -90,13 +90,21 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		normalizeSize: #numberOfMethods.
 	RTHorizontalTreeLayout new
 		on: aView elements;
-		horizontalGap: 20.0.
+		verticalGap: 50;
+		horizontalGap: 50.
 	es @ self contextMenu.
 	es
 		@
 			(ElementClick new
 				model: self guiModel;
 				yourself).
+	self legend: aView.
+	"	onDemand: 'Show legend';"
+	^ aView build
+]
+
+{ #category : #initialization }
+CIMUserObjectReferencesPresenter >> legend: aView [
 	RTLegendBuilder new
 		textSize: 3;
 		gapSize: 1;
@@ -111,6 +119,5 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		addColor: Color orange text: 'User object to remove refactor';
 		addColor: Color yellow
 			text: 'Not sure of action to perform about the user object';
-		build.
-	^ aView build
+		build
 ]
