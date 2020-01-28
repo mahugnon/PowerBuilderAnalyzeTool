@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #tests }
+PWBDuplicationBrowserTest >> testMinNumberOfCharactersChange [
+	| duplicationBrowser |
+	duplicationBrowser := PWBDuplicationBrowser new.
+	duplicationBrowser minNumberOfCharactersInput text: 5.
+	self assert: duplicationBrowser minNumberOfCharacters equals: 5
+]
+
+{ #category : #tests }
 PWBDuplicationBrowserTest >> testMinNumberOfCharactersInputIntialIs55 [
 	| duplicationBrowser |
 	duplicationBrowser := PWBDuplicationBrowser new.

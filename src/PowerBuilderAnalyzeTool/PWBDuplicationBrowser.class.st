@@ -42,15 +42,24 @@ PWBDuplicationBrowser class >> createIcon [
 PWBDuplicationBrowser class >> defaultSpec [
 	^ SpPanedLayout newVertical
 		add:
-			(SpBoxLayout newHorizontal
-				add: #entityPanel
-					withConstraints: [ :constraints | constraints width: 300 ];
+			(SpBoxLayout newVertical
 				add:
-					(SpBoxLayout newVertical
-						add: #duplicationViewSelector
-							withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-						add: #duplicationResultPanel;
+					(SpBoxLayout newHorizontal
+						add: #entityPanel
+							withConstraints: [ :constraints | constraints width: 300 ];
+						add:
+							(SpBoxLayout newVertical
+								add: #duplicationViewSelector
+									withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+								add: #duplicationResultPanel;
+								yourself);
 						yourself);
+				add:
+					(SpBoxLayout newHorizontal
+						add: #minNumberOfLinesTextInput;
+						add: #minNumberOfCharactersInput;
+						yourself)
+					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 				yourself);
 		add: #sourceCodePanel;
 		yourself
@@ -116,12 +125,12 @@ PWBDuplicationBrowser >> initializeMinNumberOfCharactersInput [
 	minNumberOfCharactersInput := self
 		instantiate:
 			(SpLabelledPresenter
-				label: 'Min number of character: '
+				label: 'Min character: '
 				input:
 					(self newTextInput
 						autoAccept: true;
 						placeholder: 'Fill the minimum character of dupplicated lines to return';
-						text: self minNumberOfCharacters))
+						text: self minNumberOfCharacters asString))
 ]
 
 { #category : #initialization }
@@ -129,12 +138,12 @@ PWBDuplicationBrowser >> initializeMinNumberOfLinesTextInput [
 	minNumberOfLinesTextInput := self
 		instantiate:
 			(SpLabelledPresenter
-				label: 'Min number of duplicated lines : '
+				label: 'Min line: '
 				input:
 					(self newTextInput
 						autoAccept: true;
 						placeholder: 'Fill the minimum number of dupplicated lines to return';
-						text: self minNumberOfLines))
+						text: self minNumberOfLines asString))
 ]
 
 { #category : #initialization }
@@ -149,7 +158,9 @@ PWBDuplicationBrowser >> initializePresenter [
 	entityPanel
 		whenSelectionChangedDo: [ :selection | model computeDuplicationWith: selection selectedItem ].
 	minNumberOfLinesTextInput
-		whenTextChangedDo: [ :aText | model minNumberOfLines: aText ]
+		whenTextChangedDo: [ :aText | model minNumberOfLines: aText asInteger ].
+	minNumberOfCharactersInput
+		whenTextChangedDo: [ :aText | model minNumberOfCharacters: aText asInteger ]
 ]
 
 { #category : #initialization }
@@ -161,7 +172,7 @@ PWBDuplicationBrowser >> initializeSourceCodePanel [
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeWidgets [
 	super initializeWidgets.
-	self initializeModel.
+	"self initializeModel."
 	self initializeEntityPanel.
 	self initializeDuplicationResultPanel.
 	self initializeSourceCodePanel.

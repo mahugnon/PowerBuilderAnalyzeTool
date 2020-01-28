@@ -139,6 +139,11 @@ DuplicationBrowserModel >> minNumberOfCharacters [
 ]
 
 { #category : #accessing }
+DuplicationBrowserModel >> minNumberOfCharacters: anInteger [ 
+	minNumberOfCharacters := anInteger
+]
+
+{ #category : #accessing }
 DuplicationBrowserModel >> minNumberOfLines [
 	^ minNumberOfLines
 ]
