@@ -2,7 +2,7 @@
 ```Smalltalk
 Metacello new
    	githubUser: 'mahugnon' project: 'PowerBuilderAnalyzeTool' commitish: 'master' path: 'src';
-   	baseline: 'PWBCodeAnalyser';
+   	baseline: 'PowerBuilderAnalyzeTool';
     onConflict: [ :e | e useIncoming ];
        onUpgrade: [ :e | e useIncoming ];
        
