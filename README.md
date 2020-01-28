@@ -6,6 +6,5 @@ Metacello new
     onConflict: [ :e | e useIncoming ];
        onUpgrade: [ :e | e useIncoming ];
        
-   	load
-    
+   	load   
     ```
