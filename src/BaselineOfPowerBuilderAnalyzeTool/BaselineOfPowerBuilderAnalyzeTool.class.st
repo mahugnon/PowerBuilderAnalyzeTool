@@ -20,8 +20,7 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 				package: 'PowerBuilderAnalyzeTool'
 					with: [ spec
 						requires:
-							#('PowerBuilderParser' 'Roassal2Spec2' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ];
-				package: 'PowerBuilderAnalyzeTool-Tests' ]
+							#('PowerBuilderParser' 'Roassal2Spec2' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ] ]
 ]
 
 { #category : #baselines }
