@@ -17,3 +17,10 @@ QueryDuplication >> runOn: aCollection [
 		setColors;
 		fragments
 ]
+
+{ #category : #running }
+QueryDuplication >> runOn: aCollection with: aDPParameters [
+	^ (DPDetector runOn: aCollection parametrizedWith: aDPParameters)
+		setColors;
+		fragments
+]

@@ -10,7 +10,9 @@ Class {
 		'colorMap',
 		'focusClonedFragment',
 		'duplicationEntities',
-		'fragmentColors'
+		'fragmentColors',
+		'minNumberOfLines',
+		'minNumberOfCharacters'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -31,7 +33,15 @@ DuplicationBrowserModel >> colorFor: anObject [
 
 { #category : #initialization }
 DuplicationBrowserModel >> computeDuplicationWith: aCollection [
-	duplicationFragments := QueryDuplication runOn: aCollection.
+	| param |
+	param := DPParameters new
+		minNumberOfLines: minNumberOfLines;
+		frequency: 2;
+		minNumberOfCharacters: minNumberOfCharacters;
+		cleaner: DPPWBCleaner new.
+	duplicationFragments := QueryDuplication new
+		runOn: aCollection
+		with: param.
 	self refreshRoassal
 ]
 
@@ -110,15 +120,32 @@ DuplicationBrowserModel >> fragmentText: aFragmentLocation [
 { #category : #initialization }
 DuplicationBrowserModel >> initialize [
 	super initialize.
-	mooseModel := FamixPWBFunction new.
+	mooseModel := FamixPWBFunction new content: #().
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
-	selectedFragmentLocation := DPFragmentLocation new
+	selectedFragmentLocation := DPFragmentLocation new.
+	minNumberOfLines := 10.
+	minNumberOfCharacters := 55
 ]
 
 { #category : #initialization }
 DuplicationBrowserModel >> initializeColors [
 	fragmentColors ifNil: [ fragmentColors := Dictionary new ]
+]
+
+{ #category : #accessing }
+DuplicationBrowserModel >> minNumberOfCharacters [
+	^ minNumberOfCharacters
+]
+
+{ #category : #accessing }
+DuplicationBrowserModel >> minNumberOfLines [
+	^ minNumberOfLines
+]
+
+{ #category : #accessing }
+DuplicationBrowserModel >> minNumberOfLines: anInteger [ 
+	minNumberOfLines := anInteger
 ]
 
 { #category : #accessing }

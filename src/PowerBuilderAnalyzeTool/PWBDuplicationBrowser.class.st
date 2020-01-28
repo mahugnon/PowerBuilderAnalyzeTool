@@ -6,7 +6,9 @@ Class {
 		'sourceCodePanel',
 		'model',
 		'duplicationResultPanel',
-		'duplicationViewSelector'
+		'duplicationViewSelector',
+		'minNumberOfLinesTextInput',
+		'minNumberOfCharactersInput'
 	],
 	#classInstVars : [
 		'colorMap'
@@ -110,6 +112,32 @@ PWBDuplicationBrowser >> initializeEntityPanel [
 ]
 
 { #category : #initialization }
+PWBDuplicationBrowser >> initializeMinNumberOfCharactersInput [
+	minNumberOfCharactersInput := self
+		instantiate:
+			(SpLabelledPresenter
+				label: 'Min number of character: '
+				input:
+					(self newTextInput
+						autoAccept: true;
+						placeholder: 'Fill the minimum character of dupplicated lines to return';
+						text: self minNumberOfCharacters))
+]
+
+{ #category : #initialization }
+PWBDuplicationBrowser >> initializeMinNumberOfLinesTextInput [
+	minNumberOfLinesTextInput := self
+		instantiate:
+			(SpLabelledPresenter
+				label: 'Min number of duplicated lines : '
+				input:
+					(self newTextInput
+						autoAccept: true;
+						placeholder: 'Fill the minimum number of dupplicated lines to return';
+						text: self minNumberOfLines))
+]
+
+{ #category : #initialization }
 PWBDuplicationBrowser >> initializeModel [
 	model := DuplicationBrowserModel new.
 	model duplicationBrowser: self
@@ -117,7 +145,11 @@ PWBDuplicationBrowser >> initializeModel [
 
 { #category : #initialization }
 PWBDuplicationBrowser >> initializePresenter [
-  entityPanel whenSelectionChangedDo: [:selection |  model computeDuplicationWith: selection selectedItem ]
+	super initializePresenter.
+	entityPanel
+		whenSelectionChangedDo: [ :selection | model computeDuplicationWith: selection selectedItem ].
+	minNumberOfLinesTextInput
+		whenTextChangedDo: [ :aText | model minNumberOfLines: aText ]
 ]
 
 { #category : #initialization }
@@ -128,11 +160,34 @@ PWBDuplicationBrowser >> initializeSourceCodePanel [
 
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeWidgets [
-	"self initializeModel."
+	super initializeWidgets.
+	self initializeModel.
 	self initializeEntityPanel.
 	self initializeDuplicationResultPanel.
 	self initializeSourceCodePanel.
-	self initializeDuplicationRoassalViewSelector
+	self initializeDuplicationRoassalViewSelector.
+	self initializeMinNumberOfLinesTextInput.
+	self initializeMinNumberOfCharactersInput
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> minNumberOfCharacters [
+	^ model minNumberOfCharacters
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> minNumberOfCharactersInput [
+	^ minNumberOfCharactersInput
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> minNumberOfLines [
+	^ model minNumberOfLines
+]
+
+{ #category : #acessing }
+PWBDuplicationBrowser >> minNumberOfLinesTextInput [
+	^ minNumberOfLinesTextInput
 ]
 
 { #category : #accessing }
