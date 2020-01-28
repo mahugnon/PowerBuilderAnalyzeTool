@@ -16,12 +16,12 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 				package: 'PowerBuilderAnalyzeTool-Models';
 				package: 'PowerBuilderAnalyzeTool-Query';
 				package: 'PowerBuilderAnalyzeTool-DuplicationGUI';
-				package: 'PowerBuilderAnalyzeTool-Tests';
 				package: 'PowerBuilderAnalyzeTool-CallTree';
 				package: 'PowerBuilderAnalyzeTool'
 					with: [ spec
 						requires:
-							#('PowerBuilderParser' 'Roassal2Spec2' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ] ]
+							#('PowerBuilderParser' 'Roassal2Spec2' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ];
+				package: 'PowerBuilderAnalyzeTool-Tests' ]
 ]
 
 { #category : #baselines }
