@@ -16,6 +16,17 @@ PWBCallTreeBrowserTest >> testBrowserModelIsNotNil [
 ]
 
 { #category : #tests }
+PWBCallTreeBrowserTest >> testPWBModelIsNotNil [
+	self assert: PWBCallTreeBrowserModel new pbModel isNotNil
+]
+
+{ #category : #tests }
+PWBCallTreeBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
+	pwbCallTreeBrowser setModelPresenterSelection.
+	self assert: pwbCallTreeBrowserModel selected isNotNil
+]
+
+{ #category : #tests }
 PWBCallTreeBrowserTest >> testSelectedItemIsNotNil [
 	pwbCallTreeBrowser setModelPresenterSelection.
 	self assert: pwbCallTreeBrowser modelPresenter selectedItem isNotNil

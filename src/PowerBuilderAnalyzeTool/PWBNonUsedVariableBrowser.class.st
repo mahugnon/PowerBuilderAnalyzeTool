@@ -10,6 +10,34 @@ Class {
 	#category : #PowerBuilderAnalyzeTool
 }
 
+{ #category : #specs }
+PWBNonUsedVariableBrowser class >> defaultSpec [
+	^ SpPanedLayout newHorizontal
+		position: 25 percent;
+		add: #instAndVarList;
+		add:
+			(SpPanedLayout newHorizontal
+				position: 25 percent;
+				add: #insVarLocaVarArgList;
+				add:
+					(SpPanedLayout newHorizontal
+						position: 40 percent;
+						add: #functionList;
+						add:
+							(SpBoxLayout newVertical
+								add: #variableList;
+								yourself);
+						yourself);
+				yourself);
+		yourself
+]
+
+{ #category : #examples }
+PWBNonUsedVariableBrowser class >> example [
+	<example>
+	self new openWithSpec
+]
+
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> initializeDialogWindow: aDialog [
 	super initializeDialogWindow: aDialog.
@@ -39,11 +67,16 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		display: #name;
 		sortingBlock: #name ascending.
 	variableList
-		items: model instAndVars;
+		items: model variables;
 		display: #name;
 		sortingBlock: #name ascending.
 	self focusOrder
 		add: instAndVarList;
 		add: insVarLocaVarArgList;
 		add: functionList
+]
+
+{ #category : #accessing }
+PWBNonUsedVariableBrowser >> selectEntity: anObject [
+	model selected: anObject
 ]
