@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'entityPanel',
 		'sourceCodePanel',
-		'model',
 		'duplicationResultPanel',
 		'duplicationViewSelector',
 		'minNumberOfLinesTextInput',

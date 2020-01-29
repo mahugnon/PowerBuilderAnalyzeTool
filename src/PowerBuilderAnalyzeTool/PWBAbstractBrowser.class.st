@@ -1,6 +1,9 @@
 Class {
 	#name : #PWBAbstractBrowser,
 	#superclass : #PWBPresenter,
+	#instVars : [
+		'model'
+	],
 	#category : #PowerBuilderAnalyzeTool
 }
 

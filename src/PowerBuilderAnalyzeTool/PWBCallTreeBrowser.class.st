@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'modelPresenter',
 		'diagramPresenter',
-		'model',
 		'searchField',
 		'obsoletteVarButton',
 		'uselessFunctionButton',
