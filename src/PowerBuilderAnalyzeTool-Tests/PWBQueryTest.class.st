@@ -14,7 +14,8 @@ PWBQueryTest >> testQueryDeedVariables [
 			{testInstVar3.
 			testInstVar4}.
 	self
-		assertCollection: query localVariables
-		hasSameElements: {testLocalVar3}.
-	self assertCollection: query arguments hasSameElements: {testArg1}
+		assertCollection: query variables
+		hasSameElements:
+			{testLocalVar3.
+			testArg1}
 ]
