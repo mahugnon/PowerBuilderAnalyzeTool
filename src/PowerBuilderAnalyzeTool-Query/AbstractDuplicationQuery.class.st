@@ -10,6 +10,6 @@ AbstractDuplicationQuery class >> runOn: anObject [
 ]
 
 { #category : #running }
-AbstractDuplicationQuery >> runOn: anObject [
+AbstractDuplicationQuery >> runOn: aCollection [
 	^ self subclassResponsibility
 ]
