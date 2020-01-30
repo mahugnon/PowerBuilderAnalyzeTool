@@ -35,7 +35,11 @@ PWBNonUsedVariableBrowser class >> defaultSpec [
 { #category : #examples }
 PWBNonUsedVariableBrowser class >> example [
 	<example>
-	self new openWithSpec
+	self new
+		selectEntity:
+			((MooseModel root first allWithType: FamixPWBUserObject)
+				detect: [ :object | object name endsWith: '_liq_cal' ]);
+		openWithSpec
 ]
 
 { #category : #initialization }
@@ -74,6 +78,15 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		add: instAndVarList;
 		add: insVarLocaVarArgList;
 		add: functionList
+]
+
+{ #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowser >> instAndVarListAction [
+	instAndVarList
+		transmitTo: insVarLocaVarArgList
+		transform:
+			[ :selectedElement | selectedElement ifNotNil: [ model instOrVarFor: selectedElement ] ]
+		postTransmission: [ insVarLocaVarArgList selectIndex: 1 ]
 ]
 
 { #category : #accessing }

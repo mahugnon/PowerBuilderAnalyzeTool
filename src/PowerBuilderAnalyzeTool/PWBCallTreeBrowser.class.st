@@ -185,11 +185,6 @@ PWBCallTreeBrowser >> initializeWidgets [
 ]
 
 { #category : #accessing }
-PWBCallTreeBrowser >> model [
-	^ model
-]
-
-{ #category : #accessing }
 PWBCallTreeBrowser >> modelPresenter [
 	^ modelPresenter
 ]

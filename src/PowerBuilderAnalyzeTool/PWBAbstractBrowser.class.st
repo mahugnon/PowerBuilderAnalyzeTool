@@ -18,6 +18,16 @@ PWBAbstractBrowser >> isPWBBrowser [
 ]
 
 { #category : #accessing }
+PWBAbstractBrowser >> model [
+	^ model
+]
+
+{ #category : #accessing }
+PWBAbstractBrowser >> model: anObject [
+	model := anObject
+]
+
+{ #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
 	self subclassResponsibility
 ]

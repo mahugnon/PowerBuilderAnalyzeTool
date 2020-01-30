@@ -35,10 +35,25 @@ PWBNonUsedVariableBrowserModel >> instAndVars [
 	^ instAndVars
 ]
 
+{ #category : #utility }
+PWBNonUsedVariableBrowserModel >> instOrVarFor: aString [
+	^ instAndVars at: aString
+]
+
 { #category : #accessing }
 PWBNonUsedVariableBrowserModel >> selected: anObject [
 	selected := anObject.
 	self updateNonUsedVariable
+]
+
+{ #category : #utility }
+PWBNonUsedVariableBrowserModel >> updateNonUsedVariable [
+	| query |
+	query := QueryDeadVariables runOn: selected.
+	instAndVars := OrderedDictionary new.
+	instAndVars
+		at: 'Attributs' put: query instanceVariables;
+		at: 'Variables' put: {'Local Variables' . 'Arguments'}
 ]
 
 { #category : #accessing }

@@ -6,5 +6,5 @@ Class {
 
 { #category : #running }
 QueryDeadLocalVariables >> runOn: aCollection [
-	^ aCollection select: [ :var | var name matchesRegex: 'l.*' ]
+	^ aCollection select: #isLocal
 ]

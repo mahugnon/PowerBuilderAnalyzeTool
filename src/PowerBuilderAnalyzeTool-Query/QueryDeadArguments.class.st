@@ -6,5 +6,5 @@ Class {
 
 { #category : #running }
 QueryDeadArguments >> runOn: aCollection [
-	^ aCollection select: [ :var | var name matchesRegex: 'a.*' ]
+	^ aCollection select: #isArgument
 ]
