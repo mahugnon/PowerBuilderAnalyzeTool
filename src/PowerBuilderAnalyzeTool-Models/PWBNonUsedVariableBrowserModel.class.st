@@ -7,19 +7,15 @@ Class {
 		'functions',
 		'variables',
 		'selected',
-		'nonUsedVariables'
+		'nonUsedVariables',
+		'nonUsedInstVars'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
 
-{ #category : #accessing }
-PWBNonUsedVariableBrowserModel >> functions [
-	^ functions
-]
-
 { #category : #utility }
-PWBNonUsedVariableBrowserModel >> functionsFor: aString [
-	^ QueryBehavioral runOn: nonUsedVariables for: aString
+PWBNonUsedVariableBrowserModel >> functionsFor: anObject [
+	^ QueryBehavioral runOn: anObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -28,7 +24,10 @@ PWBNonUsedVariableBrowserModel >> initialize [
 	variables := OrderedCollection new.
 	insVarLocaVarArgs := OrderedCollection new.
 	functions := OrderedCollection new.
-	instAndVars := OrderedCollection new
+	instAndVars := OrderedCollection new.
+	instAndVars
+		add: 'Attributs';
+		add: 'Variables'
 ]
 
 { #category : #accessing }
@@ -42,8 +41,15 @@ PWBNonUsedVariableBrowserModel >> instAndVars [
 ]
 
 { #category : #utility }
-PWBNonUsedVariableBrowserModel >> instOrVarFor: aString [
-	^ instAndVars at: aString
+PWBNonUsedVariableBrowserModel >> instOrFunctionFor: aString [
+	^ aString = 'Attributs'
+		ifTrue: [ nonUsedInstVars ]
+		ifFalse: [ QueryBehavioral runOn: nonUsedVariables ]
+]
+
+{ #category : #accessing }
+PWBNonUsedVariableBrowserModel >> nonUsedVarBehavioral [
+	^ QueryBehavioral runOn: nonUsedVariables
 ]
 
 { #category : #accessing }
@@ -56,11 +62,8 @@ PWBNonUsedVariableBrowserModel >> selected: anObject [
 PWBNonUsedVariableBrowserModel >> updateNonUsedVariable [
 	| query |
 	query := QueryDeadVariables runOn: selected.
-	instAndVars := Dictionary new.
 	nonUsedVariables := query variables.
-	instAndVars
-		at: 'Attributs' put: query instanceVariables;
-		at: 'Variables' put: {'Local Variables' . 'Arguments'}
+	nonUsedInstVars := query instanceVariables
 ]
 
 { #category : #accessing }

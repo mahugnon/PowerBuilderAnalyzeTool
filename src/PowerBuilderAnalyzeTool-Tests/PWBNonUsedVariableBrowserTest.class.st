@@ -21,7 +21,7 @@ PWBNonUsedVariableBrowserTest >> setUp [
 
 { #category : #tests }
 PWBNonUsedVariableBrowserTest >> testFunctionForInstanceVarShouldRetunEmptyCollection [
-	self assert: (self model functionsFor: testInstVar1 name) isEmpty
+	self assert: (self model functionsFor: testInstVar1) isEmpty
 ]
 
 { #category : #tests }
@@ -45,12 +45,12 @@ PWBNonUsedVariableBrowserTest >> testModelIsWellInitialized [
 { #category : #tests }
 PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
 	self
-		assertCollection: (self model instOrVarFor: 'Attributs')
+		assertCollection: (self model instOrFunctionFor: 'Attributs')
 		hasSameElements:
-			{testInstVar3 name.
-			testInstVar4 name}.
+			{testInstVar3.
+			testInstVar4}.
 	self
-		assertCollection: (self model instOrVarFor: 'Variables')
+		assertCollection: (self model instOrFunctionFor: 'Variables')
 		hasSameElements: {'Local Variables' . 'Arguments'}
 ]
 

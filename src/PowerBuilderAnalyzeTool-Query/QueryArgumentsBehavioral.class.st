@@ -11,5 +11,6 @@ QueryArgumentsBehavioral class >> accept: aString [
 
 { #category : #running }
 QueryArgumentsBehavioral >> runOn: aCollection [
-	^ super runOn: (aCollection select: #isArgument)
+	^ (super runOn: (aCollection select: #isArgument))
+		asOrderedCollection
 ]

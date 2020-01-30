@@ -44,14 +44,15 @@ PWBNonUsedVariableBrowser class >> example [
 
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> connectPresenters [
-	self instAndVarListAction
+	self instAndVarListAction.
+	self insVarLocaVarArgListAction
 ]
 
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> initializeDialogWindow: aDialog [
 	super initializeDialogWindow: aDialog.
 	aDialog
-		initialExtent: 600 @ 400;
+		initialExtent: 700 @ 400;
 		title: 'obsolete variables';
 		closeOnBackdropClick: false
 ]
@@ -66,31 +67,27 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 	instAndVarList
 		items: model instAndVars;
 		display: #name;
-		sortingBlock: #name ascending.
+		sortingBlock: #name ascending;
+		enableItemSubstringFilter.
 	insVarLocaVarArgList
-		items: model insVarLocaVarArgs;
 		display: #name;
-		sortingBlock: #name ascending.
+		sortingBlock: #name ascending;
+		enableItemSubstringFilter.
 	functionList
-		items: model functions;
 		display: #name;
-		sortingBlock: #name ascending.
+		sortingBlock: #name ascending;
+		enableItemSubstringFilter.
 	variableList
-		items: model variables;
 		display: #name;
-		sortingBlock: #name ascending.
-	self focusOrder
-		add: instAndVarList;
-		add: insVarLocaVarArgList;
-		add: functionList
+		sortingBlock: #name ascending;
+		enableItemSubstringFilter
 ]
 
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowser >> insVarLocaVarArgListAction [
 	insVarLocaVarArgList
 		transmitTo: functionList
-		transform:
-			[ :selectedElement | selectedElement ifNotNil: [ model functionsFor: selectedElement ] ]
+		transform: [ :selectedElement | selectedElement ifNotNil: [ {} ] ]
 		postTransmission: [ insVarLocaVarArgList selectIndex: 1 ]
 ]
 
@@ -104,13 +101,12 @@ PWBNonUsedVariableBrowser >> instAndVarListAction [
 	instAndVarList
 		transmitTo: insVarLocaVarArgList
 		transform:
-			[ :selectedElement | selectedElement ifNotNil: [ model instOrVarFor: selectedElement ] ]
-		postTransmission: [ insVarLocaVarArgList selectIndex: 1 ]
+			[ :selectedElement | selectedElement ifNotNil: [ model instOrFunctionFor: selectedElement ] ]
+		postTransmission: [ "insVarLocaVarArgList selectIndex: 1" ]
 ]
 
 { #category : #accessing }
 PWBNonUsedVariableBrowser >> selectEntity: anObject [
 	model selected: anObject.
-	instAndVarList items: model instAndVars keys.
-	instAndVarList selectIndex: 1
+	instAndVarList items: model instAndVars
 ]

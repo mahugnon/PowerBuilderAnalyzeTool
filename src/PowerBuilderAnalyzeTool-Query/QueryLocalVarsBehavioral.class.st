@@ -11,5 +11,5 @@ QueryLocalVarsBehavioral class >> accept: aString [
 
 { #category : #running }
 QueryLocalVarsBehavioral >> runOn: aCollection [
-	^ super runOn: (aCollection select: #isLocal)
+	^ (super runOn: (aCollection select: #isLocal)) asOrderedCollection
 ]

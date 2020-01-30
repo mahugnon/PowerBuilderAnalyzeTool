@@ -19,5 +19,7 @@ QueryBehavioral class >> runOn: aCollection for: aString [
 
 { #category : #running }
 QueryBehavioral >> runOn: aCollection [
-	^ aCollection collectAsSet: [ :var | var behavioralForIfDead ]
+	^ ((aCollection reject: [ :each | each class = FamixPWBAttribute ])
+		collectAsSet: [ :var | var behavioralForIfDead ])
+		asOrderedCollection
 ]
