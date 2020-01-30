@@ -8,10 +8,24 @@ Class {
 		'variables',
 		'selected',
 		'nonUsedVariables',
-		'nonUsedInstVars'
+		'nonUsedInstVars',
+		'focusVariables'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
+
+{ #category : #accessing }
+PWBNonUsedVariableBrowserModel >> focusVariables: anObject [
+	focusVariables := {('Local variables' -> anObject deadLocalVariables).
+	('Arguments' -> anObject deadArguments)} asOrderedDictionary.
+	^ focusVariables keys
+]
+
+{ #category : #api }
+PWBNonUsedVariableBrowserModel >> focusVariablesFor: aString [
+	^ ((focusVariables at: aString) collectAsSet: #name)
+		asOrderedCollection
+]
 
 { #category : #utility }
 PWBNonUsedVariableBrowserModel >> functionsFor: anObject [

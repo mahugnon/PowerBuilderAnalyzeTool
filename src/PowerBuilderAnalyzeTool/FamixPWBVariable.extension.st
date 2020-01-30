@@ -3,9 +3,8 @@ Extension { #name : #FamixPWBVariable }
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBVariable >> behavioralForIfDead [
 	self isLocal
-		ifTrue: [ self behavioral addDeadLocalVar: self ].
-	self isArgument
-		ifTrue: [ self behavioral addDeadArgumentVar: self ].
+		ifTrue: [ self behavioral addDeadLocalVar: self ]
+		ifFalse: [ self behavioral addDeadArgumentVar: self ].
 	^ self behavioral
 ]
 

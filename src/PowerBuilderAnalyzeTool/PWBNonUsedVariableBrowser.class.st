@@ -3,9 +3,9 @@ Class {
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
 		'instAndVarList',
-		'insVarLocaVarArgList',
-		'functionList',
-		'variableList'
+		'variableList',
+		'attributOrBehaviorList',
+		'variableTypeList'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -18,11 +18,11 @@ PWBNonUsedVariableBrowser class >> defaultSpec [
 		add:
 			(SpPanedLayout newHorizontal
 				position: 25 percent;
-				add: #insVarLocaVarArgList;
+				add: #attributOrBehaviorList;
 				add:
 					(SpPanedLayout newHorizontal
 						position: 40 percent;
-						add: #functionList;
+						add: #variableTypeList;
 						add:
 							(SpBoxLayout newVertical
 								add: #variableList;
@@ -42,10 +42,24 @@ PWBNonUsedVariableBrowser class >> example [
 		openWithSpec
 ]
 
+{ #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowser >> attributOrBehaviorListAction [
+	attributOrBehaviorList
+		transmitTo: variableTypeList
+		transform: [ :selectedElement | 
+			selectedElement
+				ifNotNil: [ (selectedElement name beginsWith: 'i')
+						ifTrue: [ {} ]
+						ifFalse: [ model focusVariables: selectedElement ] ] ]
+		postTransmission: [ variableTypeList model items
+				ifNotEmpty: [ variableTypeList selectIndex: 1 ] ]
+]
+
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> connectPresenters [
 	self instAndVarListAction.
-	self insVarLocaVarArgListAction
+	self attributOrBehaviorListAction.
+	self variableTypeListAction
 ]
 
 { #category : #initialization }
@@ -61,34 +75,23 @@ PWBNonUsedVariableBrowser >> initializeDialogWindow: aDialog [
 PWBNonUsedVariableBrowser >> initializePresenters [
 	model := PWBNonUsedVariableBrowserModel new.
 	instAndVarList := self newList.
-	insVarLocaVarArgList := self newList.
-	functionList := self newList.
+	attributOrBehaviorList := self newList.
+	variableTypeList := self newList.
 	variableList := self newList.
 	instAndVarList
 		items: model instAndVars;
 		display: #name;
 		sortingBlock: #name ascending;
 		enableItemSubstringFilter.
-	insVarLocaVarArgList
-		display: #name;
-		sortingBlock: #name ascending;
-		enableItemSubstringFilter.
-	functionList
+	attributOrBehaviorList
 		display: #name;
 		sortingBlock: #name ascending;
 		enableItemSubstringFilter.
 	variableList
 		display: #name;
 		sortingBlock: #name ascending;
-		enableItemSubstringFilter
-]
-
-{ #category : #'as yet unclassified' }
-PWBNonUsedVariableBrowser >> insVarLocaVarArgListAction [
-	insVarLocaVarArgList
-		transmitTo: functionList
-		transform: [ :selectedElement | selectedElement ifNotNil: [ {} ] ]
-		postTransmission: [ insVarLocaVarArgList selectIndex: 1 ]
+		enableItemSubstringFilter.
+	variableTypeList enableItemSubstringFilter
 ]
 
 { #category : #accessing }
@@ -99,14 +102,23 @@ PWBNonUsedVariableBrowser >> instAndVarList [
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowser >> instAndVarListAction [
 	instAndVarList
-		transmitTo: insVarLocaVarArgList
+		transmitTo: attributOrBehaviorList
 		transform:
 			[ :selectedElement | selectedElement ifNotNil: [ model instOrFunctionFor: selectedElement ] ]
-		postTransmission: [ "insVarLocaVarArgList selectIndex: 1" ]
+		postTransmission: [ attributOrBehaviorList selectIndex: 1 ]
 ]
 
 { #category : #accessing }
 PWBNonUsedVariableBrowser >> selectEntity: anObject [
 	model selected: anObject.
 	instAndVarList items: model instAndVars
+]
+
+{ #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowser >> variableTypeListAction [
+	variableTypeList
+		transmitTo: variableList
+		transform:
+			[ :selectedElement | selectedElement ifNotNil: [ model focusVariablesFor: selectedElement ] ]
+		postTransmission: [ variableList selectIndex: 1 ]
 ]
