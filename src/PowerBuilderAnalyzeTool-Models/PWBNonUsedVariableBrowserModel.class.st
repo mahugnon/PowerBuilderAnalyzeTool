@@ -16,9 +16,12 @@ Class {
 
 { #category : #accessing }
 PWBNonUsedVariableBrowserModel >> focusVariables: anObject [
-	focusVariables := {('Local variables' -> anObject deadLocalVariables).
-	('Arguments' -> anObject deadArguments)} asOrderedDictionary.
-	^ focusVariables keys
+	focusVariables := {('Local variables'
+		-> (anObject deadLocalVariables collectAsSet: #name) asOrderedCollection).
+	('Arguments'
+		-> (anObject deadArguments collectAsSet: #name) asOrderedCollection)}
+		asOrderedDictionary.
+	^ focusVariables
 ]
 
 { #category : #api }

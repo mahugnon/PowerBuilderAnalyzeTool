@@ -50,5 +50,5 @@ PWBApplication >> logger: anObject [
 
 { #category : #'as yet unclassified' }
 PWBApplication >> refreshBrowsersWith: anEntity [
-	self browsers do: [ :browser | browser selectEntity: anEntity ]
+	"self browsers do: [ :browser | browser selectEntity: anEntity ]"
 ]

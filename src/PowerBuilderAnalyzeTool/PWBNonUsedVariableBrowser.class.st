@@ -23,11 +23,11 @@ PWBNonUsedVariableBrowser class >> defaultSpec [
 					(SpPanedLayout newHorizontal
 						position: 40 percent;
 						add: #variableTypeList;
-						add:
+						"add:
 							(SpBoxLayout newVertical
 								add: #variableList;
-								yourself);
-						yourself);
+								yourself);"
+							yourself);
 				yourself);
 		yourself
 ]
@@ -45,21 +45,22 @@ PWBNonUsedVariableBrowser class >> example [
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowser >> attributOrBehaviorListAction [
 	attributOrBehaviorList
-		transmitTo: variableTypeList
-		transform: [ :selectedElement | 
-			selectedElement
-				ifNotNil: [ (selectedElement name beginsWith: 'i')
-						ifTrue: [ {} ]
-						ifFalse: [ model focusVariables: selectedElement ] ] ]
-		postTransmission: [ variableTypeList model items
-				ifNotEmpty: [ variableTypeList selectIndex: 1 ] ]
+		whenSelectionChangedDo: [ :item | 
+			item selectedItem ifNil: [ ^ self ].
+			(item selectedItem name beginsWith: 'i')
+				ifTrue: [ {} ]
+				ifFalse: [ | dic |
+					dic := model focusVariables: item selectedItem.
+					variableTypeList
+						roots: dic keys;
+						children: [ :elt | dic at: elt ifAbsent: [ #() ] ] ] ]
 ]
 
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> connectPresenters [
 	self instAndVarListAction.
-	self attributOrBehaviorListAction.
-	self variableTypeListAction
+	self attributOrBehaviorListAction
+	"self variableTypeListAction"
 ]
 
 { #category : #initialization }
@@ -76,7 +77,7 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 	model := PWBNonUsedVariableBrowserModel new.
 	instAndVarList := self newList.
 	attributOrBehaviorList := self newList.
-	variableTypeList := self newList.
+	variableTypeList := self newTreeTable .
 	variableList := self newList.
 	instAndVarList
 		items: model instAndVars;
@@ -91,7 +92,7 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		display: #name;
 		sortingBlock: #name ascending;
 		enableItemSubstringFilter.
-	variableTypeList enableItemSubstringFilter
+"	variableTypeList enableItemSubstringFilter"
 ]
 
 { #category : #accessing }
