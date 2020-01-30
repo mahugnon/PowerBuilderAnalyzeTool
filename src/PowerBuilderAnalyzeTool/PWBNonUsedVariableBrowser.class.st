@@ -85,6 +85,15 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		add: functionList
 ]
 
+{ #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowser >> insVarLocaVarArgListAction [
+	insVarLocaVarArgList
+		transmitTo: functionList
+		transform:
+			[ :selectedElement | selectedElement ifNotNil: [ model functionsFor: selectedElement ] ]
+		postTransmission: [ insVarLocaVarArgList selectIndex: 1 ]
+]
+
 { #category : #accessing }
 PWBNonUsedVariableBrowser >> instAndVarList [
 	^ instAndVarList

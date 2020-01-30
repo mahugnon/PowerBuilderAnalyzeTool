@@ -6,7 +6,8 @@ Class {
 		'insVarLocaVarArgs',
 		'functions',
 		'variables',
-		'selected'
+		'selected',
+		'nonUsedVariables'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -14,6 +15,11 @@ Class {
 { #category : #accessing }
 PWBNonUsedVariableBrowserModel >> functions [
 	^ functions
+]
+
+{ #category : #utility }
+PWBNonUsedVariableBrowserModel >> functionsFor: aString [
+	^ QueryBehavioral runOn: nonUsedVariables for: aString
 ]
 
 { #category : #'as yet unclassified' }
@@ -51,6 +57,7 @@ PWBNonUsedVariableBrowserModel >> updateNonUsedVariable [
 	| query |
 	query := QueryDeadVariables runOn: selected.
 	instAndVars := Dictionary new.
+	nonUsedVariables := query variables.
 	instAndVars
 		at: 'Attributs' put: query instanceVariables;
 		at: 'Variables' put: {'Local Variables' . 'Arguments'}

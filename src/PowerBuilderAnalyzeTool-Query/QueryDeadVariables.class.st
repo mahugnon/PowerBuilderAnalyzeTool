@@ -9,9 +9,8 @@ Class {
 
 { #category : #accessing }
 QueryDeadVariables >> instanceVariables [
-	self halt.
-	^ (result select: [ :each | each name matchesRegex: 'i.*' ])
-		asOrderedCollection
+	^ ((result select: [ :each | each name matchesRegex: 'i.*' ])
+		collectAsSet: #name) asOrderedCollection
 ]
 
 { #category : #running }

@@ -2,37 +2,55 @@ Class {
 	#name : #PWBNonUsedVariableBrowserTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
 	#instVars : [
-		'model',
 		'browser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
+{ #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowserTest >> model [
+	^ browser model
+]
+
 { #category : #running }
 PWBNonUsedVariableBrowserTest >> setUp [
 	super setUp.
-	model := PWBNonUsedVariableBrowserModel new.
 	browser := PWBNonUsedVariableBrowser new
 		selectEntity: testUserObject1
 ]
 
+{ #category : #tests }
+PWBNonUsedVariableBrowserTest >> testFunctionForInstanceVarShouldRetunEmptyCollection [
+	self assert: (self model functionsFor: testInstVar1 name) isEmpty
+]
+
+{ #category : #tests }
+PWBNonUsedVariableBrowserTest >> testFunctionsForArguments [
+	self assert: (self model functionsFor: 'Arguments') isNotEmpty
+]
+
+{ #category : #tests }
+PWBNonUsedVariableBrowserTest >> testFunctionsForLocalVars [
+	self assert: (self model functionsFor: 'Local Variables') isNotEmpty
+]
+
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowserTest >> testModelIsWellInitialized [
-	self assert: model insVarLocaVarArgs isNotNil.
-	self assert: model functions isNotNil.
-	self assert: model instAndVars isNotNil.
-	self assert: model variables isNotNil
+	self assert: self model insVarLocaVarArgs isNotNil.
+	self assert: self model functions isNotNil.
+	self assert: self model instAndVars isNotNil.
+	self assert: self model variables isNotNil
 ]
 
 { #category : #tests }
 PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
 	self
-		assertCollection: (browser model instOrVarFor: 'Attributs')
+		assertCollection: (self model instOrVarFor: 'Attributs')
 		hasSameElements:
-			{testInstVar3.
-			testInstVar4}.
+			{testInstVar3 name.
+			testInstVar4 name}.
 	self
-		assertCollection: (browser model instOrVarFor: 'Variables')
+		assertCollection: (self model instOrVarFor: 'Variables')
 		hasSameElements: {'Local Variables' . 'Arguments'}
 ]
 
@@ -43,8 +61,8 @@ PWBNonUsedVariableBrowserTest >> testWhenSelectedEntityInstAndVarListShouldBeUpd
 
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowserTest >> testWhenSelectionChangedForTheFirstTimeInstAndVarsBecomeADictionnaryWith2Keys [
-	self assert: browser model instAndVars isDictionary.
+	self assert: self model instAndVars isDictionary.
 	self
-		assertCollection: browser model instAndVars keys
+		assertCollection: self model instAndVars keys
 		hasSameElements: {'Attributs' . 'Variables'}
 ]
