@@ -143,7 +143,10 @@ PWBCallTreeBrowser >> initializeToolBar [
 	obsoletteVarButton := self newButton
 		label: 'Browse obsolette Var';
 		help: 'Browse non referenced varables';
-		iconName: #halt.
+		iconName: #halt;
+		action: [ PWBNonUsedVariableBrowser new
+				selectEntity: model selected;
+				openWithSpec ].
 	uselessFunctionButton := self newButton
 		label: 'Browse obsolette Function';
 		help: 'Browser non used function.';

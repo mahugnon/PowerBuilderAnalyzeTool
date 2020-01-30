@@ -22,6 +22,7 @@ FamixPWBBehavioral >> allOutgoingInvocationCandidates [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> content [
+	content ifNil: [ self setContent ].
 	content ifEmpty: [ self setContent ].
 	^ content
 ]
