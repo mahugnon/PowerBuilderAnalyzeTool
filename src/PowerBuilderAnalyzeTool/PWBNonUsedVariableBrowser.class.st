@@ -43,6 +43,11 @@ PWBNonUsedVariableBrowser class >> example [
 ]
 
 { #category : #initialization }
+PWBNonUsedVariableBrowser >> connectPresenters [
+	self instAndVarListAction
+]
+
+{ #category : #initialization }
 PWBNonUsedVariableBrowser >> initializeDialogWindow: aDialog [
 	super initializeDialogWindow: aDialog.
 	aDialog
@@ -80,6 +85,11 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		add: functionList
 ]
 
+{ #category : #accessing }
+PWBNonUsedVariableBrowser >> instAndVarList [
+	^ instAndVarList
+]
+
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowser >> instAndVarListAction [
 	instAndVarList
@@ -91,5 +101,7 @@ PWBNonUsedVariableBrowser >> instAndVarListAction [
 
 { #category : #accessing }
 PWBNonUsedVariableBrowser >> selectEntity: anObject [
-	model selected: anObject
+	model selected: anObject.
+	instAndVarList items: model instAndVars keys.
+	instAndVarList selectIndex: 1
 ]

@@ -50,7 +50,7 @@ PWBNonUsedVariableBrowserModel >> selected: anObject [
 PWBNonUsedVariableBrowserModel >> updateNonUsedVariable [
 	| query |
 	query := QueryDeadVariables runOn: selected.
-	instAndVars := OrderedDictionary new.
+	instAndVars := Dictionary new.
 	instAndVars
 		at: 'Attributs' put: query instanceVariables;
 		at: 'Variables' put: {'Local Variables' . 'Arguments'}

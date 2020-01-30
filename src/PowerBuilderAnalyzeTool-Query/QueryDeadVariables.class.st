@@ -9,7 +9,9 @@ Class {
 
 { #category : #accessing }
 QueryDeadVariables >> instanceVariables [
-	^ (result select: [ :each | each name matchesRegex: 'i.*' ]) asSet
+	self halt.
+	^ (result select: [ :each | each name matchesRegex: 'i.*' ])
+		asOrderedCollection
 ]
 
 { #category : #running }
@@ -22,5 +24,6 @@ QueryDeadVariables >> runOn: anObject [
 
 { #category : #accessing }
 QueryDeadVariables >> variables [
-	^ (result reject: [ :each | each name matchesRegex: 'i.*' ]) asSet
+	^ (result reject: [ :each | each name matchesRegex: 'i.*' ])
+		asCollection
 ]

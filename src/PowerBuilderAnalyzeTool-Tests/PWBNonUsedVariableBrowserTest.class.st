@@ -37,6 +37,11 @@ PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
 ]
 
 { #category : #'as yet unclassified' }
+PWBNonUsedVariableBrowserTest >> testWhenSelectedEntityInstAndVarListShouldBeUpdated [
+	self deny: browser instAndVarList model items isEmpty
+]
+
+{ #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowserTest >> testWhenSelectionChangedForTheFirstTimeInstAndVarsBecomeADictionnaryWith2Keys [
 	self assert: browser model instAndVars isDictionary.
 	self
