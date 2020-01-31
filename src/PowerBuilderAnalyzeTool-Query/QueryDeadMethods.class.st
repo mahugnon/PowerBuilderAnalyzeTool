@@ -11,3 +11,8 @@ QueryDeadMethods >> runOn: anObject [
 			method outgoingInvocations isEmpty
 				and: [ method incomingInvocations isEmpty ] ]
 ]
+
+{ #category : #running }
+QueryDeadMethods >> toSkip [
+	^ {'constructor'}
+]
