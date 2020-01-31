@@ -12,7 +12,8 @@ Class {
 
 { #category : #specs }
 PWBNonUsedFunctionBrowser class >> defaultSpec [
-	^ SpPanedLayout newVertical
+	^ SpBoxLayout newVertical
+		"position: 90 percent;"
 		add: #diagram;
 		yourself
 ]
@@ -86,6 +87,14 @@ PWBNonUsedFunctionBrowser >> initializeWidgets [
 	self initializeDiagram
 ]
 
+{ #category : #initialization }
+PWBNonUsedFunctionBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		title: self title;
+		initialExtent: 600 @ 600
+]
+
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> pbModel [
 	^ pbModel
@@ -99,6 +108,11 @@ PWBNonUsedFunctionBrowser >> refreshPbModel [
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 	focusEntity := anEntity
+]
+
+{ #category : #initialization }
+PWBNonUsedFunctionBrowser >> title [
+	^ 'Dead methods Browser'
 ]
 
 { #category : #accessing }

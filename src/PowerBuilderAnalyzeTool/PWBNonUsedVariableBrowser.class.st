@@ -13,21 +13,13 @@ Class {
 { #category : #specs }
 PWBNonUsedVariableBrowser class >> defaultSpec [
 	^ SpPanedLayout newHorizontal
-		position: 25 percent;
+		position: 30 percent;
 		add: #instAndVarList;
 		add:
 			(SpPanedLayout newHorizontal
-				position: 25 percent;
+				position: 70 percent;
 				add: #attributOrBehaviorList;
-				add:
-					(SpPanedLayout newHorizontal
-						position: 40 percent;
-						add: #variableTypeList;
-						"add:
-							(SpBoxLayout newVertical
-								add: #variableList;
-								yourself);"
-							yourself);
+				add: #variableTypeList;
 				yourself);
 		yourself
 ]
@@ -93,6 +85,15 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 		sortingBlock: #name ascending;
 		enableItemSubstringFilter.
 "	variableTypeList enableItemSubstringFilter"
+]
+
+{ #category : #initialization }
+PWBNonUsedVariableBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		initialExtent: 700 @ 400;
+		title: 'Obsolete Variables Browser'
+	"	closeOnBackdropClick: false"
 ]
 
 { #category : #accessing }

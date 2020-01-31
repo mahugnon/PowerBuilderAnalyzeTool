@@ -150,7 +150,7 @@ PWBCallTreeBrowser >> initializeToolBar [
 	uselessFunctionButton := self newButton
 		label: 'Browse obsolette Function';
 		help: 'Browser non used function.';
-		action: [ self inform: 'Browser non used function' ];
+		action: [ PWBNonUsedFunctionBrowser lunchOn: model selected ];
 		iconName: #glamorousExample;
 		yourself.
 	browseDuplicationButton := self newButton
