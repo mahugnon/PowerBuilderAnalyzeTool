@@ -56,15 +56,6 @@ PWBNonUsedVariableBrowser >> connectPresenters [
 ]
 
 { #category : #initialization }
-PWBNonUsedVariableBrowser >> initializeDialogWindow: aDialog [
-	super initializeDialogWindow: aDialog.
-	aDialog
-		initialExtent: 700 @ 400;
-		title: 'obsolete variables';
-		closeOnBackdropClick: false
-]
-
-{ #category : #initialization }
 PWBNonUsedVariableBrowser >> initializePresenters [
 	model := PWBNonUsedVariableBrowserModel new.
 	instAndVarList := self newList.

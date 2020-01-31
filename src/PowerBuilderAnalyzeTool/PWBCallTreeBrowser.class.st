@@ -40,6 +40,7 @@ PWBCallTreeBrowser class >> createIcon [
 { #category : #specs }
 PWBCallTreeBrowser class >> defaultSpec [
 	^ SpPanedLayout newHorizontal
+	position: 20 percent;
 		add:
 			(SpBoxLayout newVertical
 				add: #searchField
@@ -59,7 +60,7 @@ PWBCallTreeBrowser class >> defaultSpec [
 						yourself)
 					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 				add: #diagramPresenter;
-				yourself);
+				yourself)  ;
 		" add: #menu withConstraints: [:constraints |  constraints height: self toolbarHeight ];"
 			yourself
 ]
@@ -80,11 +81,6 @@ PWBCallTreeBrowser class >> lunchCallTree: aBuilder [
 PWBCallTreeBrowser class >> run [
   < example>
   ^self new openWithSpec
-]
-
-{ #category : #'as yet unclassified' }
-PWBCallTreeBrowser class >> title [
-^'Izy view'
 ]
 
 { #category : #initialization }
@@ -187,6 +183,14 @@ PWBCallTreeBrowser >> initializeWidgets [
 	self initializeToolBar
 ]
 
+{ #category : #initialization }
+PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		initialExtent: 900 @ 1000;
+		title: self title
+]
+
 { #category : #accessing }
 PWBCallTreeBrowser >> modelPresenter [
 	^ modelPresenter
@@ -195,6 +199,11 @@ PWBCallTreeBrowser >> modelPresenter [
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
 	self model globallySelected: anEntity
+]
+
+{ #category : #'as yet unclassified' }
+PWBCallTreeBrowser >> title [
+^'Izy view'
 ]
 
 { #category : #'as yet unclassified' }
