@@ -15,12 +15,6 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 	pwbBrowser globallySelect: anEntity
 ]
 
-{ #category : #'as yet unclassified' }
-PWBCallTreeBrowserModel >> globallySelected: anEntity [
-	selected := anEntity.
-	self setContent
-]
-
 { #category : #initialization }
 PWBCallTreeBrowserModel >> initialize [
 	| liq_cal |

@@ -97,6 +97,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		@
 			(ElementClick new
 				model: self guiModel;
+				application: self application;
 				yourself).
 	self legend: aView.
 	"	onDemand: 'Show legend';"

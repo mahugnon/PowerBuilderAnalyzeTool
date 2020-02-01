@@ -22,6 +22,11 @@ CIMRoassalPresenter >> adapterFrom: aCollection [
 ]
 
 { #category : #accessing }
+CIMRoassalPresenter >> application [
+	^ owner application
+]
+
+{ #category : #accessing }
 CIMRoassalPresenter >> diagram [
 	^ diagram
 ]

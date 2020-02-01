@@ -3,10 +3,21 @@ Class {
 	#superclass : #RTInteraction,
 	#instVars : [
 		'model',
-		'currentFocus'
+		'currentFocus',
+		'application'
 	],
 	#category : #'PowerBuilderAnalyzeTool-CallTree-Interaction'
 }
+
+{ #category : #accessing }
+ElementClick >> application [
+	^ application
+]
+
+{ #category : #accessing }
+ElementClick >> application: aPWBApplication [
+	application := aPWBApplication
+]
 
 { #category : #hooks }
 ElementClick >> colorSelectedElement: element [
@@ -21,7 +32,9 @@ ElementClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick
 		do: [ model selected: element model.
-			self colorSelectedElement: element ]
+			self colorSelectedElement: element.
+			self application globallySelect: element model
+			"self halt" ]
 ]
 
 { #category : #accessing }

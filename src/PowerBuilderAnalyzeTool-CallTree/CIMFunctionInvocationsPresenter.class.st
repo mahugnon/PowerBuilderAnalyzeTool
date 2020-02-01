@@ -63,6 +63,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 		@
 			(ElementClick new
 				model: self guiModel;
+				application: self application;
 				yourself).
 	eb := RTEdgeBuilder new.
 	eb shape arrowedLine.

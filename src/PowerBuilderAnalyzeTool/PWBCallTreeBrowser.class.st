@@ -187,7 +187,7 @@ PWBCallTreeBrowser >> initializeWidgets [
 PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
-		initialExtent: 900 @ 1000;
+		initialExtent: 900 @ 700;
 		title: self title
 ]
 
@@ -198,7 +198,8 @@ PWBCallTreeBrowser >> modelPresenter [
 
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
-	self model globallySelected: anEntity
+	self model selected: anEntity.
+	modelPresenter selectItem: anEntity
 ]
 
 { #category : #accessing }
