@@ -1,6 +1,9 @@
 Class {
 	#name : #PWBLogBrower,
 	#superclass : #PWBPresenter,
+	#instVars : [
+		'logsPresenter'
+	],
 	#category : #PowerBuilderAnalyzeTool
 }
 

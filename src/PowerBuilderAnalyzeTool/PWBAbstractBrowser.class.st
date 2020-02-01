@@ -12,6 +12,13 @@ PWBAbstractBrowser >> globallySelect: anEntity [
 	self application globallySelect: anEntity
 ]
 
+{ #category : #initialization }
+PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		whenClosedDo: [ self application windowClosed: aWindowPresenter ]
+]
+
 { #category : #testing }
 PWBAbstractBrowser >> isPWBBrowser [
 	^ true

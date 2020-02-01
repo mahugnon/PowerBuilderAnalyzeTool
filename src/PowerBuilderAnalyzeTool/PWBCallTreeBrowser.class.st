@@ -201,12 +201,12 @@ PWBCallTreeBrowser >> selectEntity: anEntity [
 	self model globallySelected: anEntity
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PWBCallTreeBrowser >> title [
 ^'Izy view'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 PWBCallTreeBrowser >> updateRoassal [
   diagramPresenter := self instantiate: model roassal.
   diagramPresenter guiModel: model.
