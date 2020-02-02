@@ -34,7 +34,9 @@ PWBMooseModelBrowser >> initializePresenters [
 	self initializeTable.
 	self initializeSearchField.
 	modelPresenter
-		whenSelectionChangedDo: [ :selected | self globallySelect: selected selectedItem ].
+		whenSelectionChangedDo: [ :selected | 
+			model selected: selected selectedItem.
+			self globallySelect: selected selectedItem ].
 	searchField
 		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
 ]
