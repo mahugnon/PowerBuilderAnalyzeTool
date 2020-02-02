@@ -15,16 +15,6 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 	pwbBrowser globallySelect: anEntity
 ]
 
-{ #category : #initialization }
-PWBCallTreeBrowserModel >> initialize [
-	| liq_cal |
-	super initialize.
-	selectionListeners := OrderedCollection new.
-	liq_cal := (MooseModel root first allWithType: FamixPWBUserObject)
-		detect: [ :each | each name = 'uo_traitement_liq_cal' ].
-	pbModel := liq_cal allReferences
-]
-
 { #category : #accessing }
 PWBCallTreeBrowserModel >> pbModel [
 	^ pbModel

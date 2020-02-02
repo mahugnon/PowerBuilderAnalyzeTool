@@ -2,9 +2,7 @@ Class {
 	#name : #PWBCallTreeBrowser,
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
-		'modelPresenter',
 		'diagramPresenter',
-		'searchField',
 		'obsoletteVarButton',
 		'uselessFunctionButton',
 		'browseDuplicationButton',
@@ -39,30 +37,19 @@ PWBCallTreeBrowser class >> createIcon [
 
 { #category : #specs }
 PWBCallTreeBrowser class >> defaultSpec [
-	^ SpPanedLayout newHorizontal
-	position: 20 percent;
+	^ SpBoxLayout newVertical
 		add:
-			(SpBoxLayout newVertical
-				add: #searchField
-					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-				add: #modelPresenter;
-				yourself);
-		add:
-			(SpBoxLayout newVertical
-				add:
-					(SpBoxLayout newHorizontal
-						add: #hideButton;
-						add: #browseDuplicationButton;
-						add: #uselessFunctionButton;
-						add: #obsoletteVarButton;
-						add: #zoomInButton;
-						add: #zoomOutButton;
-						yourself)
-					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-				add: #diagramPresenter;
-				yourself)  ;
-		" add: #menu withConstraints: [:constraints |  constraints height: self toolbarHeight ];"
-			yourself
+			(SpBoxLayout newHorizontal
+				add: #hideButton;
+				add: #browseDuplicationButton;
+				add: #uselessFunctionButton;
+				add: #obsoletteVarButton;
+				add: #zoomInButton;
+				add: #zoomOutButton;
+				yourself)
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+		add: #diagramPresenter;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -95,48 +82,9 @@ PWBCallTreeBrowser >> initializeBrowserModel [
 ]
 
 { #category : #initialization }
-PWBCallTreeBrowser >> initializePresenters [
-	modelPresenter
-		whenSelectionChangedDo: [ :selected | 
-			model selected: selected selectedItem.
-			self updateWithSelection.
-			self globallySelect: selected selectedItem ].
-	searchField
-		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
-]
-
-{ #category : #initialization }
 PWBCallTreeBrowser >> initializeRoassal [
 	diagramPresenter := self newLabel.
 	diagramPresenter label: 'Visualization here'
-]
-
-{ #category : #initialization }
-PWBCallTreeBrowser >> initializeTable [
-	| title |
-	modelPresenter := self newTreeTable.
-	title := 'Source code components'.
-	modelPresenter
-		addColumn:
-			(SpCompositeTableColumn new
-				title: title;
-				addColumn:
-					((SpImageTableColumn evaluated: #systemIcon)
-						width: 20;
-						yourself);
-				addColumn: (SpStringTableColumn evaluated: #name);
-				yourself);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Number of Line of code'
-				evaluated: [ :elt | elt numberOfLinesOfCode ]);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Number of invocation'
-				evaluated: [ :elt | elt numberOfIncomingInvocations ]);
-		roots: {model pbModel};
-		children: [ :elt | elt content ];
-		beResizable
 ]
 
 { #category : #initialization }
@@ -179,11 +127,6 @@ PWBCallTreeBrowser >> initializeWidgets [
 	"  menu := self instantiate: CIMMainMenu"
 
 	self initializeBrowserModel.
-	self initializeTable.
-	searchField := self newTextInput
-		placeholder: 'rechercher dans le model ...';
-		yourself.
-	searchField acceptOnCR: true.
 	self initializeRoassal.
 	self initializeToolBar
 ]
@@ -197,14 +140,8 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #accessing }
-PWBCallTreeBrowser >> modelPresenter [
-	^ modelPresenter
-]
-
-{ #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
-	self model selected: anEntity.
-	modelPresenter selectItem: anEntity
+	self model selected: anEntity
 ]
 
 { #category : #accessing }
@@ -218,9 +155,4 @@ PWBCallTreeBrowser >> updateRoassal [
 	diagramPresenter guiModel: model.
 	self needRebuild: false.
 	self buildWithSpec
-]
-
-{ #category : #api }
-PWBCallTreeBrowser >> updateWithSelection [
-	self updateRoassal
 ]

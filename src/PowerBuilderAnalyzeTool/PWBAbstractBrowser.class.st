@@ -2,7 +2,8 @@ Class {
 	#name : #PWBAbstractBrowser,
 	#superclass : #PWBPresenter,
 	#instVars : [
-		'model'
+		'model',
+		'freeze'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -12,9 +13,20 @@ PWBAbstractBrowser >> accept: anObject [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+PWBAbstractBrowser >> freeze: aBoolean [
+	freeze := aBoolean
+]
+
 { #category : #enumerating }
 PWBAbstractBrowser >> globallySelect: anEntity [
 	self application globallySelect: anEntity
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> initialize [
+	super initialize.
+	freeze := false
 ]
 
 { #category : #initialization }
@@ -22,6 +34,11 @@ PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
 		whenClosedDo: [ self application windowClosed: aWindowPresenter ]
+]
+
+{ #category : #accessing }
+PWBAbstractBrowser >> isFreeze [
+	^ freeze
 ]
 
 { #category : #testing }
