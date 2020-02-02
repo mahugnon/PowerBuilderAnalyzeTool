@@ -2,12 +2,12 @@ Class {
 	#name : #PWBDuplicationBrowser,
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
-		'entityPanel',
 		'sourceCodePanel',
 		'duplicationResultPanel',
 		'duplicationViewSelector',
 		'minNumberOfLinesTextInput',
-		'minNumberOfCharactersInput'
+		'minNumberOfCharactersInput',
+		'okButton'
 	],
 	#classInstVars : [
 		'colorMap'
@@ -44,8 +44,6 @@ PWBDuplicationBrowser class >> defaultSpec [
 			(SpBoxLayout newVertical
 				add:
 					(SpBoxLayout newHorizontal
-						add: #entityPanel
-							withConstraints: [ :constraints | constraints width: 300 ];
 						add:
 							(SpBoxLayout newVertical
 								add: #duplicationViewSelector
@@ -57,8 +55,9 @@ PWBDuplicationBrowser class >> defaultSpec [
 					(SpBoxLayout newHorizontal
 						add: #minNumberOfLinesTextInput;
 						add: #minNumberOfCharactersInput;
+						add: #okButton;
 						yourself)
-					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+					withConstraints: [ :constraints | constraints height: self inputTextHeight ];
 				yourself);
 		add: #sourceCodePanel;
 		yourself
@@ -79,12 +78,9 @@ PWBDuplicationBrowser class >> duplicationView: aBuilder [
 
 { #category : #'as yet unclassified' }
 PWBDuplicationBrowser class >> lunchOn: anObject [
-	self basicNew
-		initializeModel;
+	self new
 		mooseModel: anObject;
-		initialize;
-		openWithSpec;
-		selectFirstItem
+		openWithSpec
 ]
 
 { #category : #examples }
@@ -93,9 +89,9 @@ PWBDuplicationBrowser class >> runMe [
   self new openWithSpec
 ]
 
-{ #category : #specs }
-PWBDuplicationBrowser class >> title [
-^'Code duplication browser '
+{ #category : #visiting }
+PWBDuplicationBrowser >> accept: anObject [
+	^ anObject class = FamixPWBUserObject
 ]
 
 { #category : #initialization }
@@ -111,12 +107,6 @@ PWBDuplicationBrowser >> initializeDuplicationRoassalViewSelector [
 		items: DuplicationBrowserRoassalView views;
 		help: 'Select the roassal visualization to use';
 		display: [ :item | item viewName ]
-]
-
-{ #category : #initialization }
-PWBDuplicationBrowser >> initializeEntityPanel [
-	entityPanel := self newList.
-	entityPanel items: {model mooseModelFunctions}
 ]
 
 { #category : #initialization }
@@ -152,10 +142,18 @@ PWBDuplicationBrowser >> initializeModel [
 ]
 
 { #category : #initialization }
+PWBDuplicationBrowser >> initializeOkButton [
+	okButton := self newButton
+		"label: 'Compute it';"
+		iconName: #smallDoIt;
+		action: [ model computeDuplication ];
+		yourself.
+	SpButtonPresenter 
+]
+
+{ #category : #initialization }
 PWBDuplicationBrowser >> initializePresenter [
 	super initializePresenter.
-	entityPanel
-		whenSelectionChangedDo: [ :selection | model computeDuplicationWith: selection selectedItem ].
 	minNumberOfLinesTextInput
 		whenTextChangedDo: [ :aText | model minNumberOfLines: aText asInteger ].
 	minNumberOfCharactersInput
@@ -171,13 +169,21 @@ PWBDuplicationBrowser >> initializeSourceCodePanel [
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeWidgets [
 	super initializeWidgets.
-	"self initializeModel."
-	self initializeEntityPanel.
+	self initializeModel.
 	self initializeDuplicationResultPanel.
 	self initializeSourceCodePanel.
 	self initializeDuplicationRoassalViewSelector.
 	self initializeMinNumberOfLinesTextInput.
-	self initializeMinNumberOfCharactersInput
+	self initializeMinNumberOfCharactersInput.
+	self initializeOkButton
+]
+
+{ #category : #initialization }
+PWBDuplicationBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		title: self title;
+		initialExtent: 600 @ 600
 ]
 
 { #category : #accessing }
@@ -202,18 +208,19 @@ PWBDuplicationBrowser >> minNumberOfLinesTextInput [
 
 { #category : #accessing }
 PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
-	model mooseModel: aFamixPWBUserObject.
-	self initializeEntityPanel
+	model mooseModel: aFamixPWBUserObject
 ]
 
 { #category : #accessing }
 PWBDuplicationBrowser >> selectEntity: anEntity [
-	model selected: anEntity
+	(self accept: anEntity)
+		ifFalse: [ ^ self ].
+	model mooseModel: anEntity
 ]
 
-{ #category : #'event handling' }
-PWBDuplicationBrowser >> selectFirstItem [
-	entityPanel selectItem: entityPanel items first
+{ #category : #specs }
+PWBDuplicationBrowser >> title [
+^'Code duplication browser '
 ]
 
 { #category : #updating }

@@ -7,6 +7,11 @@ Class {
 	#category : #PowerBuilderAnalyzeTool
 }
 
+{ #category : #visiting }
+PWBAbstractBrowser >> accept: anObject [
+	^ self subclassResponsibility
+]
+
 { #category : #enumerating }
 PWBAbstractBrowser >> globallySelect: anEntity [
 	self application globallySelect: anEntity

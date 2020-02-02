@@ -83,6 +83,11 @@ PWBCallTreeBrowser class >> run [
   ^self new openWithSpec
 ]
 
+{ #category : #visiting }
+PWBCallTreeBrowser >> accept: anEntity [
+	^ true
+]
+
 { #category : #initialization }
 PWBCallTreeBrowser >> initializeBrowserModel [
 	model := PWBCallTreeBrowserModel new.

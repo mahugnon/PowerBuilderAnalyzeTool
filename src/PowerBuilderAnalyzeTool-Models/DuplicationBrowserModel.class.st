@@ -31,6 +31,11 @@ DuplicationBrowserModel >> colorFor: anObject [
 		ifNone: [ Color gray ]
 ]
 
+{ #category : #accessing }
+DuplicationBrowserModel >> computeDuplication [
+	self computeDuplicationWith: self mooseModelFunctions
+]
+
 { #category : #initialization }
 DuplicationBrowserModel >> computeDuplicationWith: aCollection [
 	| param |
@@ -124,7 +129,7 @@ DuplicationBrowserModel >> initialize [
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new.
-	minNumberOfLines := 10.
+	minNumberOfLines := 50.
 	minNumberOfCharacters := 55
 ]
 
@@ -154,8 +159,9 @@ DuplicationBrowserModel >> minNumberOfLines: anInteger [
 ]
 
 { #category : #accessing }
-DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [ 
-	mooseModel := aFamixPWBUserObject
+DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
+	mooseModel := aFamixPWBUserObject.
+	self computeDuplication
 ]
 
 { #category : #api }

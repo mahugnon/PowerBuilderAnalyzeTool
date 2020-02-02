@@ -26,6 +26,11 @@ PWBNonUsedFunctionBrowser class >> lunchOn: anObject [
 		openWithSpec
 ]
 
+{ #category : #visiting }
+PWBNonUsedFunctionBrowser >> accept: anObject [
+	^ anObject class = FamixPWBUserObject
+]
+
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> diagram [
 	^ diagram

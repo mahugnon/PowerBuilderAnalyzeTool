@@ -34,6 +34,11 @@ PWBNonUsedVariableBrowser class >> example [
 		openWithSpec
 ]
 
+{ #category : #visiting }
+PWBNonUsedVariableBrowser >> accept: anObject [
+	^ anObject class = FamixPWBUserObject
+]
+
 { #category : #'as yet unclassified' }
 PWBNonUsedVariableBrowser >> attributOrBehaviorListAction [
 	attributOrBehaviorList
