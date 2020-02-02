@@ -90,9 +90,18 @@ PWBMooseModelBrowser >> modelPresenter [
 	^ modelPresenter
 ]
 
+{ #category : #'as yet unclassified' }
+PWBMooseModelBrowser >> needUpdate: anEntity [
+	^ model selected ~= anEntity
+]
+
 { #category : #accessing }
 PWBMooseModelBrowser >> selectEntity: anEntity [
-	modelPresenter selectItem: anEntity
+	(self needUpdate: anEntity)
+		ifFalse: [ ^ self ].
+	modelPresenter selectItem: anEntity.
+	"self needRebuild: false.
+	self buildWithSpec"
 ]
 
 { #category : #TOREMOVE }

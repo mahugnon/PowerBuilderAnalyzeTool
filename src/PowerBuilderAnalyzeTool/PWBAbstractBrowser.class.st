@@ -56,6 +56,11 @@ PWBAbstractBrowser >> model: anObject [
 	model := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+PWBAbstractBrowser >> needUpdate: anEntity [
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
 	self subclassResponsibility

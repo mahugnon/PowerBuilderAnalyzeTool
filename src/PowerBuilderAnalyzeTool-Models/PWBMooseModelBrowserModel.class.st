@@ -23,6 +23,11 @@ PWBMooseModelBrowserModel >> pbModel [
 ]
 
 { #category : #accessing }
+PWBMooseModelBrowserModel >> selected [
+	^ selected
+]
+
+{ #category : #accessing }
 PWBMooseModelBrowserModel >> selected: anEntity [
 	selected := anEntity
 ]

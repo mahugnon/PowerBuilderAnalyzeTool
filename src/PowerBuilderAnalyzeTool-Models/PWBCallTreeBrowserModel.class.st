@@ -16,16 +16,6 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 ]
 
 { #category : #accessing }
-PWBCallTreeBrowserModel >> pbModel [
-	^ pbModel
-]
-
-{ #category : #accessing }
-PWBCallTreeBrowserModel >> pbModel: anObject [
-	pbModel := anObject
-]
-
-{ #category : #accessing }
 PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 	pwbBrowser := aPWBBrowser
 ]
@@ -44,6 +34,12 @@ PWBCallTreeBrowserModel >> selected [
 PWBCallTreeBrowserModel >> selected: anObject [
 	selected := anObject.
 	self setContent
+]
+
+{ #category : #initialization }
+PWBCallTreeBrowserModel >> selectedContent [
+	selected ifNil: [ selected setContent ].
+	^ selected content
 ]
 
 { #category : #initialization }

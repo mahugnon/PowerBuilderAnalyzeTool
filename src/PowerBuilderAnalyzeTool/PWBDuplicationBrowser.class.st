@@ -211,11 +211,17 @@ PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
 	model mooseModel: aFamixPWBUserObject
 ]
 
+{ #category : #'as yet unclassified' }
+PWBDuplicationBrowser >> needUpdate: anEntity [
+	^ anEntity ~= model mooseModel
+]
+
 { #category : #accessing }
 PWBDuplicationBrowser >> selectEntity: anEntity [
 	(self accept: anEntity)
 		ifFalse: [ ^ self ].
-	model mooseModel: anEntity
+	(self needUpdate: anEntity)
+		ifTrue: [ model mooseModel: anEntity ]
 ]
 
 { #category : #specs }

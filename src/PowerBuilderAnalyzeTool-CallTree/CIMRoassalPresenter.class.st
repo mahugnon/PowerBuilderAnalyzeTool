@@ -68,7 +68,7 @@ CIMRoassalPresenter >> initializeWidgets [
 
 { #category : #accessing }
 CIMRoassalPresenter >> pbModel [
-  ^guiModel selected content
+	^ guiModel selectedContent
 ]
 
 { #category : #accessing }
