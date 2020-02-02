@@ -58,5 +58,5 @@ PWBCallTreeBrowserModel >> selected: anObject [
 
 { #category : #initialization }
 PWBCallTreeBrowserModel >> setContent [
-	selected ifNotNil: [ selected setContent ] 
+	selected ifNil: [ selected setContent ]
 ]

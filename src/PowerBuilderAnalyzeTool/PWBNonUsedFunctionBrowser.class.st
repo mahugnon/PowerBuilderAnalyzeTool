@@ -107,7 +107,7 @@ PWBNonUsedFunctionBrowser >> refreshPbModel [
 
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
-	focusEntity := anEntity
+	self focusEntity: anEntity
 ]
 
 { #category : #initialization }

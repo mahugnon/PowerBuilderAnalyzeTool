@@ -209,15 +209,10 @@ PWBCallTreeBrowser >> title [
 
 { #category : #api }
 PWBCallTreeBrowser >> updateRoassal [
-  diagramPresenter := self instantiate: model roassal.
-  diagramPresenter guiModel: model.
-  self needRebuild: false.
-  self buildWithSpec
-  "self
-		instantiatePresenters:
-			{#diagramPresenter.
-			model roassal name asSymbol}.
-	diagramPresenter pbModel: model selected content."
+	diagramPresenter := self instantiate: model roassal.
+	diagramPresenter guiModel: model.
+	self needRebuild: false.
+	self buildWithSpec
 ]
 
 { #category : #api }
