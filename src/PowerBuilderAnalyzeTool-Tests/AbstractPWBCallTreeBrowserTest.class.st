@@ -28,7 +28,8 @@ Class {
 		'testLocalVar3',
 		'testLocalVar4',
 		'testArg1',
-		'testArg2'
+		'testArg2',
+		'browser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }

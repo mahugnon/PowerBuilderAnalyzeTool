@@ -11,6 +11,7 @@ Class {
 { #category : #hooks }
 OutSideBoxClick >> colorBoxsUsing: element [
 	model updateFragmentColorFor: element model.
+	model selected: element model.
 	^ element view nestedElements
 		do: [ :nested | nested color: (model colorFor: nested model) ]
 ]

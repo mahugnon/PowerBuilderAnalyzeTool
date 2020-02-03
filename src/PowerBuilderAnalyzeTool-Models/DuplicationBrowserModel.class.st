@@ -99,30 +99,6 @@ DuplicationBrowserModel >> focusClonedFragment [
 	^ selectedFragmentLocation clonedFragment
 ]
 
-{ #category : #api }
-DuplicationBrowserModel >> fragmentText [
-  ^self fragmentText: selectedFragmentLocation
-]
-
-{ #category : #api }
-DuplicationBrowserModel >> fragmentText: aFragmentLocation [
-  | source before beforeString after afterString textToRender |
-  source := aFragmentLocation entitySourceCode lines.
-  before := source select: [:l |  (source indexOf: l) < aFragmentLocation startLine ].
-  beforeString := String streamContents: [:stream |  before do: [:line |  stream
-                 << line;
-                 cr ] ].
-  after := source select: [:l |  (source indexOf: l) > aFragmentLocation endLine ].
-  afterString := String streamContents: [:stream |  after do: [:line |  stream
-                 << line;
-                 cr ] ].
-  textToRender := Text new.
-  textToRender append: beforeString.
-  textToRender append: (Text string: aFragmentLocation codeText attributes: {(TextColor new color: Color red)}).
-  textToRender append: afterString.
-  ^textToRender
-]
-
 { #category : #initialization }
 DuplicationBrowserModel >> initialize [
 	super initialize.
@@ -170,22 +146,6 @@ DuplicationBrowserModel >> mooseModelFunctions [
 	^ mooseModel content
 ]
 
-{ #category : #api }
-DuplicationBrowserModel >> openTextPresenters [
-  focusClonedFragment members do: [:each |  PWBSourceTextBrowser new
-           text: (self fragmentText: each);
-           location: each entity mooseName;
-           openWithSpec ]
-]
-
-{ #category : #api }
-DuplicationBrowserModel >> openTextPresenters: aFragment [
-  aFragment members do: [:each |  PWBSourceTextBrowser new
-           text: (self fragmentText: each);
-           location: each entity mooseName;
-           openWithSpec ]
-]
-
 { #category : #initialization }
 DuplicationBrowserModel >> refreshRoassal [
   duplicationView updateView
@@ -197,14 +157,15 @@ DuplicationBrowserModel >> selected [
 ]
 
 { #category : #accessing }
-DuplicationBrowserModel >> selectedFragmentLocation: anObject [
-	selectedFragmentLocation := anObject.
-	selected := anObject
+DuplicationBrowserModel >> selected: anObject [
+	selected := anObject.
+	duplicationBrowser globallySelect: anObject
 ]
 
-{ #category : #api }
-DuplicationBrowserModel >> selectedFragmentLocationName [
-	^ selectedFragmentLocation name
+{ #category : #accessing }
+DuplicationBrowserModel >> selectedFragmentLocation: anObject [
+	selectedFragmentLocation := anObject.
+	self selected: anObject
 ]
 
 { #category : #api }
@@ -216,5 +177,4 @@ DuplicationBrowserModel >> updateFragmentColorFor: aFamixPWBFunction [
 		newFromKeys: (Color wheel: fragment size)
 		andValues: fragment asOrderedCollection.
 	^ fragmentColors
-	"	self refreshRoassal"
 ]

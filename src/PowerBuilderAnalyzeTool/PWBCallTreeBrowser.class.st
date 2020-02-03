@@ -72,7 +72,7 @@ PWBCallTreeBrowser class >> run [
 
 { #category : #visiting }
 PWBCallTreeBrowser >> accept: anEntity [
-	^ true
+	^ ({DPFragmentLocation} includes: anEntity class) not
 ]
 
 { #category : #initialization }
@@ -131,17 +131,10 @@ PWBCallTreeBrowser >> initializeWidgets [
 	self initializeToolBar
 ]
 
-{ #category : #initialization }
-PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
-	super initializeWindow: aWindowPresenter.
-	aWindowPresenter
-		initialExtent: 900 @ 700;
-		title: self title
-]
-
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
-	((self needUpdate: anEntity) and: [ self isNotFreeze ])
+	((self needUpdate: anEntity)
+		and: [ self isNotFreeze and: [ self accept: anEntity ] ])
 		ifFalse: [ ^ self ].
 	self model selected: anEntity.
 	self updateRoassal

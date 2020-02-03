@@ -33,7 +33,10 @@ PWBAbstractBrowser >> initialize [
 PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
-		whenClosedDo: [ self application windowClosed: aWindowPresenter ]
+		whenClosedDo: [ self application windowClosed: aWindowPresenter ].
+	aWindowPresenter
+		title: self title;
+		initialExtent: 900 @ 700
 ]
 
 { #category : #accessing }

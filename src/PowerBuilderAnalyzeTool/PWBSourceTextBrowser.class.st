@@ -16,21 +16,39 @@ PWBSourceTextBrowser class >> defaultSpec [
 		yourself
 ]
 
+{ #category : #examples }
+PWBSourceTextBrowser class >> runMe [
+	<script>
+	self new openWithSpec
+]
+
+{ #category : #visiting }
+PWBSourceTextBrowser >> accept: anObject [
+	^ {FamixPWBUserObject.
+	FamixPWBBehavioral.
+	DPFragmentLocation} includes: anObject class
+]
+
 { #category : #initialization }
 PWBSourceTextBrowser >> entityName: aString [
 	sourceCodePage title: aString , ' source code'
 ]
 
 { #category : #initialization }
-PWBSourceTextBrowser >> initializePresenter [ 
-]
-
-{ #category : #initialization }
-PWBSourceTextBrowser >> initializeWidgets [
+PWBSourceTextBrowser >> initializePresenters [
+	model := PWBSourceTextBrowserModel new.
 	sourceText := self newText.
 	noteBook := self newNotebook.
 	self sourceCodePage.
 	noteBook addPage: sourceCodePage
+]
+
+{ #category : #accessing }
+PWBSourceTextBrowser >> selectEntity: anEntity [
+	(self accept: anEntity)
+		ifFalse: [ ^ self ].
+	model selected: anEntity.
+	self updateCode
 ]
 
 { #category : #initialization }
@@ -48,6 +66,6 @@ PWBSourceTextBrowser >> text: aText [
 
 { #category : #updating }
 PWBSourceTextBrowser >> updateCode [
-	sourceCodePanel text: model fragmentText.
-	sourceCodePanel entityName: model selectedFragmentLocationName
+	self text: model sourceText.
+	self entityName: model selected name
 ]

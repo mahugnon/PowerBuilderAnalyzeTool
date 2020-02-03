@@ -80,9 +80,7 @@ PWBMooseModelBrowser >> initializeTable [
 { #category : #initialization }
 PWBMooseModelBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter
-		initialExtent: 600 @ 400;
-		title: self title
+	aWindowPresenter initialExtent: 600 @ 400
 ]
 
 { #category : #accessing }
@@ -97,9 +95,9 @@ PWBMooseModelBrowser >> needUpdate: anEntity [
 
 { #category : #accessing }
 PWBMooseModelBrowser >> selectEntity: anEntity [
-	(self needUpdate: anEntity)
+	((self needUpdate: anEntity) and: [ self accept: anEntity ])
 		ifFalse: [ ^ self ].
-	modelPresenter selectItem: anEntity.
+	modelPresenter selectItem: anEntity
 	"self needRebuild: false.
 	self buildWithSpec"
 ]

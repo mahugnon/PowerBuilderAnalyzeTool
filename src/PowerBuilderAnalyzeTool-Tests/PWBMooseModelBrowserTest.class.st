@@ -1,16 +1,13 @@
 Class {
 	#name : #PWBMooseModelBrowserTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
-	#instVars : [
-		'pwbMooseModelBrowser'
-	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
 { #category : #running }
 PWBMooseModelBrowserTest >> setUp [
 	super setUp.
-	pwbMooseModelBrowser := PWBMooseModelBrowser new
+	browser := PWBMooseModelBrowser new
 ]
 
 { #category : #tests }
@@ -20,18 +17,18 @@ PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
 
 { #category : #tests }
 PWBMooseModelBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
-	pwbMooseModelBrowser setModelPresenterSelection.
-	self assert: pwbMooseModelBrowser selected isNotNil
+	browser setModelPresenterSelection.
+	self assert: browser selected isNotNil
 ]
 
 { #category : #tests }
 PWBMooseModelBrowserTest >> testSelectedItemIsNotNil [
-	pwbMooseModelBrowser setModelPresenterSelection.
-	self assert: pwbMooseModelBrowser modelPresenter selectedItem isNotNil
+	browser setModelPresenterSelection.
+	self assert: browser modelPresenter selectedItem isNotNil
 ]
 
 { #category : #'as yet unclassified' }
 PWBMooseModelBrowserTest >> testWhenItemIsGloballySelectedApplicationLogsIsnotEmpty [
-	pwbMooseModelBrowser setModelPresenterSelection.
+	browser setModelPresenterSelection.
 	self assert: PWBApplication current logger logs isNotEmpty
 ]

@@ -169,14 +169,6 @@ PWBDuplicationBrowser >> initializeWidgets [
 	self initializeOkButton
 ]
 
-{ #category : #initialization }
-PWBDuplicationBrowser >> initializeWindow: aWindowPresenter [
-	super initializeWindow: aWindowPresenter.
-	aWindowPresenter
-		title: self title;
-		initialExtent: 900 @ 700
-]
-
 { #category : #accessing }
 PWBDuplicationBrowser >> minNumberOfCharacters [
 	^ model minNumberOfCharacters
@@ -204,10 +196,9 @@ PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
 
 { #category : #accessing }
 PWBDuplicationBrowser >> selectEntity: anEntity [
-	(self accept: anEntity)
+	((self accept: anEntity) and: [ self needUpdate: anEntity ])
 		ifFalse: [ ^ self ].
-	(self needUpdate: anEntity)
-		ifTrue: [ model mooseModel: anEntity ]
+	model mooseModel: anEntity
 ]
 
 { #category : #specs }

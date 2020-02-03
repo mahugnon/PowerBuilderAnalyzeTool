@@ -79,14 +79,6 @@ PWBNonUsedFunctionBrowser >> initializeWidgets [
 	self initializeDiagram
 ]
 
-{ #category : #initialization }
-PWBNonUsedFunctionBrowser >> initializeWindow: aWindowPresenter [
-	super initializeWindow: aWindowPresenter.
-	aWindowPresenter
-		title: self title;
-		initialExtent: 600 @ 600
-]
-
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 	((self accept: anEntity)

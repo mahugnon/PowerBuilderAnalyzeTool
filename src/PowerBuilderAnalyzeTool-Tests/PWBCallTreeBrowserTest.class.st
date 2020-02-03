@@ -2,8 +2,7 @@ Class {
 	#name : #PWBCallTreeBrowserTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
 	#instVars : [
-		'pwbCallTreeBrowserModel',
-		'pwbCallTreeBrowser'
+		'browserModel'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
@@ -11,8 +10,8 @@ Class {
 { #category : #running }
 PWBCallTreeBrowserTest >> setUp [
 	super setUp.
-	pwbCallTreeBrowser := PWBCallTreeBrowser new.
-	pwbCallTreeBrowserModel := pwbCallTreeBrowser model
+	browser := PWBCallTreeBrowser new.
+browserModel := browser model
 ]
 
 { #category : #'as yet unclassified' }
@@ -23,12 +22,12 @@ PWBCallTreeBrowserTest >> testApplicationLogsIsEmpty [
 
 { #category : #tests }
 PWBCallTreeBrowserTest >> testBrowserModelIsNotNil [
-	self assert: pwbCallTreeBrowser model isNotNil
+	self assert: browser model isNotNil
 ]
 
 { #category : #tests }
 PWBCallTreeBrowserTest >> testBrowserStatedMustRemainTheSameIffreeze [
-	pwbCallTreeBrowser freeze: true.
-	pwbCallTreeBrowser selectEntity: testUserObject1.
-	self deny: pwbCallTreeBrowser model selected equals: testUserObject1
+browser freeze: true.
+browser selectEntity: testUserObject1.
+	self deny: browser model selected equals: testUserObject1
 ]

@@ -86,9 +86,8 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter
-		initialExtent: 700 @ 400;
-		title: 'Obsolete Variables Browser'
+	aWindowPresenter initialExtent: 700 @ 400
+
 	"	closeOnBackdropClick: false"
 ]
 
@@ -118,6 +117,11 @@ PWBNonUsedVariableBrowser >> selectEntity: anEntity [
 { #category : #'accessing ' }
 PWBNonUsedVariableBrowser >> selected [
 	^ model selected
+]
+
+{ #category : #TOREMOVE }
+PWBNonUsedVariableBrowser >> title [
+	^ 'Obsolete Variables Browser'
 ]
 
 { #category : #'as yet unclassified' }
