@@ -61,7 +61,7 @@ PWBCallTreeBrowser class >> lunchCallTree: aBuilder [
 			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
 		label: 'PWB callTree';
 		iconName: #callGraphIcon;
-		action: [ self run ]
+		action: [ PWBApplication current run ]
 ]
 
 { #category : #running }

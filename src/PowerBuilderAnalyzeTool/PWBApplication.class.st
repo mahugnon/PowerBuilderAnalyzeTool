@@ -52,3 +52,9 @@ PWBApplication >> logger: anObject [
 PWBApplication >> refreshBrowsersWith: anEntity [
 	self browsers do: [ :browser | browser selectEntity: anEntity ]
 ]
+
+{ #category : #accessing }
+PWBApplication >> start [
+	PWBMooseModelBrowser runMe.
+	PWBCallTreeBrowser run
+]

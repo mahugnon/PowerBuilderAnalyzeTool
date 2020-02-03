@@ -127,15 +127,19 @@ DPDetector >> registerFragmentsFor: aProgram [
 { #category : #accessing }
 DPDetector >> registerFragmentsFor: aProgram sourceAnchor: sourceAnchor [
 	| lines |
-	lines := self getCleanLinesOf: sourceAnchor sourceText lines.
-	parameters minNumberOfLines > lines size ifTrue: [ ^ self ].
-	(lines allButLast: parameters minNumberOfLines - 1) withIndexDo: [ :line :index | 
-		self
-			addText: ((lines copyFrom: index to: index + parameters minNumberOfLines - 1) collect: #value)
-			firstLineIndex: line key
-			lastLineIndex: (lines at: index + parameters minNumberOfLines - 1) key
-			fileAnchor: sourceAnchor
-			entity: aProgram ].
+	lines := self getCleanLinesOf: sourceAnchor dpsourceText lines.
+	parameters minNumberOfLines > lines size
+		ifTrue: [ ^ self ].
+	(lines allButLast: parameters minNumberOfLines - 1)
+		withIndexDo: [ :line :index | 
+			self
+				addText:
+					((lines copyFrom: index to: index + parameters minNumberOfLines - 1)
+						collect: #value)
+				firstLineIndex: line key
+				lastLineIndex: (lines at: index + parameters minNumberOfLines - 1) key
+				fileAnchor: sourceAnchor
+				entity: aProgram ]
 ]
 
 { #category : #'compute-hashes' }
