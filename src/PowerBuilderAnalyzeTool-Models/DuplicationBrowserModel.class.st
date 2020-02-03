@@ -12,7 +12,8 @@ Class {
 		'duplicationEntities',
 		'fragmentColors',
 		'minNumberOfLines',
-		'minNumberOfCharacters'
+		'minNumberOfCharacters',
+		'selected'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -190,11 +191,15 @@ DuplicationBrowserModel >> refreshRoassal [
   duplicationView updateView
 ]
 
+{ #category : #'accessing ' }
+DuplicationBrowserModel >> selected [
+	^ selected
+]
+
 { #category : #accessing }
 DuplicationBrowserModel >> selectedFragmentLocation: anObject [
-  selectedFragmentLocation := anObject.
-  duplicationBrowser updateCode.
-
+	selectedFragmentLocation := anObject.
+	selected := anObject
 ]
 
 { #category : #api }

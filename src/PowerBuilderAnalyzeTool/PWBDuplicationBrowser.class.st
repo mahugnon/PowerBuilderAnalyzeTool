@@ -2,7 +2,6 @@ Class {
 	#name : #PWBDuplicationBrowser,
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
-		'sourceCodePanel',
 		'duplicationResultPanel',
 		'duplicationViewSelector',
 		'minNumberOfLinesTextInput',
@@ -39,27 +38,26 @@ PWBDuplicationBrowser class >> createIcon [
 
 { #category : #specs }
 PWBDuplicationBrowser class >> defaultSpec [
-	^ SpPanedLayout newVertical
+	^ SpBoxLayout newVertical
 		add:
-			(SpBoxLayout newVertical
+			(SpBoxLayout newHorizontal
 				add:
-					(SpBoxLayout newHorizontal
-						add:
-							(SpBoxLayout newVertical
-								add: #duplicationViewSelector
-									withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-								add: #duplicationResultPanel;
-								yourself);
+					(SpBoxLayout newVertical
+						add: #duplicationViewSelector
+							withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+						add: #duplicationResultPanel;
 						yourself);
-				add:
-					(SpBoxLayout newHorizontal
-						add: #minNumberOfLinesTextInput;
-						add: #minNumberOfCharactersInput;
-						add: #okButton;
-						yourself)
-					withConstraints: [ :constraints | constraints height: self inputTextHeight ];
 				yourself);
-		add: #sourceCodePanel;
+		add:
+			(SpBoxLayout newHorizontal
+				add: #minNumberOfLinesTextInput;
+				add: #minNumberOfCharactersInput;
+				add: #okButton;
+				yourself)
+			withConstraints: [ :constraints | 
+				constraints
+					height: self buttonHeight;
+					width: self buttonWidth ];
 		yourself
 ]
 
@@ -144,11 +142,11 @@ PWBDuplicationBrowser >> initializeModel [
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeOkButton [
 	okButton := self newButton
-		"label: 'Compute it';"
-		iconName: #smallDoIt;
+		label: 'Do it';
+		iconName: #glamorousPlay;
 		action: [ model computeDuplication ];
 		yourself.
-	SpButtonPresenter 
+	SpButtonPresenter
 ]
 
 { #category : #initialization }
@@ -161,17 +159,10 @@ PWBDuplicationBrowser >> initializePresenter [
 ]
 
 { #category : #initialization }
-PWBDuplicationBrowser >> initializeSourceCodePanel [
-	sourceCodePanel := self instantiate: PWBSourceTextBrowser.
-	self iconNamed: #duplication
-]
-
-{ #category : #initialization }
 PWBDuplicationBrowser >> initializeWidgets [
 	super initializeWidgets.
 	self initializeModel.
 	self initializeDuplicationResultPanel.
-	self initializeSourceCodePanel.
 	self initializeDuplicationRoassalViewSelector.
 	self initializeMinNumberOfLinesTextInput.
 	self initializeMinNumberOfCharactersInput.
@@ -183,7 +174,7 @@ PWBDuplicationBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
 		title: self title;
-		initialExtent: 600 @ 600
+		initialExtent: 900 @ 700
 ]
 
 { #category : #accessing }
@@ -211,11 +202,6 @@ PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
 	model mooseModel: aFamixPWBUserObject
 ]
 
-{ #category : #'as yet unclassified' }
-PWBDuplicationBrowser >> needUpdate: anEntity [
-	^ anEntity ~= model mooseModel
-]
-
 { #category : #accessing }
 PWBDuplicationBrowser >> selectEntity: anEntity [
 	(self accept: anEntity)
@@ -227,10 +213,4 @@ PWBDuplicationBrowser >> selectEntity: anEntity [
 { #category : #specs }
 PWBDuplicationBrowser >> title [
 ^'Code duplication browser '
-]
-
-{ #category : #updating }
-PWBDuplicationBrowser >> updateCode [
-	sourceCodePanel text: model fragmentText.
-	sourceCodePanel entityName: model selectedFragmentLocationName
 ]

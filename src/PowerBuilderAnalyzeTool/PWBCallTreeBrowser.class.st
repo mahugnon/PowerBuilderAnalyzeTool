@@ -139,11 +139,6 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 		title: self title
 ]
 
-{ #category : #'as yet unclassified' }
-PWBCallTreeBrowser >> needUpdate: anEntity [
-	^ anEntity ~= model selected
-]
-
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
 	((self needUpdate: anEntity) and: [ self isNotFreeze ])

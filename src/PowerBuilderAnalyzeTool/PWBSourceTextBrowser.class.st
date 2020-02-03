@@ -45,3 +45,9 @@ PWBSourceTextBrowser >> sourceCodePage [
 PWBSourceTextBrowser >> text: aText [
   sourceText text: aText
 ]
+
+{ #category : #updating }
+PWBSourceTextBrowser >> updateCode [
+	sourceCodePanel text: model fragmentText.
+	sourceCodePanel entityName: model selectedFragmentLocationName
+]
