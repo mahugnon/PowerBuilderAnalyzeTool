@@ -75,6 +75,7 @@ PWBNonUsedFunctionBrowser >> initializeDiagram [
 
 { #category : #initialization }
 PWBNonUsedFunctionBrowser >> initializeWidgets [
+	model := PWBNonUsedFunctionBrowserModel new.
 	self initializeDiagram
 ]
 
@@ -89,6 +90,11 @@ PWBNonUsedFunctionBrowser >> initializeWindow: aWindowPresenter [
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 	model selected: anEntity
+]
+
+{ #category : #accessing }
+PWBNonUsedFunctionBrowser >> selected: aFamixPWBUserObject [
+	model selected: aFamixPWBUserObject
 ]
 
 { #category : #initialization }
