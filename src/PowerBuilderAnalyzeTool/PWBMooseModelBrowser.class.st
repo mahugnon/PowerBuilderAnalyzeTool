@@ -104,6 +104,16 @@ PWBMooseModelBrowser >> selectEntity: anEntity [
 	self buildWithSpec"
 ]
 
+{ #category : #accessing }
+PWBMooseModelBrowser >> selected [
+	^ model selected
+]
+
+{ #category : #testing }
+PWBMooseModelBrowser >> setModelPresenterSelection [
+	modelPresenter selectItem: modelPresenter roots first
+]
+
 { #category : #TOREMOVE }
 PWBMooseModelBrowser >> title [
 ^'MooseModel Browser'

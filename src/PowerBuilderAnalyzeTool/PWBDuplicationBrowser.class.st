@@ -162,7 +162,7 @@ PWBDuplicationBrowser >> initializePresenter [
 
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeSourceCodePanel [
-	sourceCodePanel := self instantiate: SourceTextPresenter.
+	sourceCodePanel := self instantiate: PWBSourceTextBrowser.
 	self iconNamed: #duplication
 ]
 

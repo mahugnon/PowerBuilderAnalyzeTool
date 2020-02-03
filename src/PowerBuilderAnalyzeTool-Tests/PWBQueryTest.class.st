@@ -4,6 +4,17 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
+{ #category : #running }
+PWBQueryTest >> setUp [
+	pwbCallTreeBrowser := PWBCallTreeBrowser new.
+	pwbCallTreeBrowserModel := pwbCallTreeBrowser model.
+	testModel := FamixPWBModel new.
+	self initializeTestUserObject.
+	self initializeTestFunctions.
+	self initializeVariables.
+	self initializeAccess
+]
+
 { #category : #tests }
 PWBQueryTest >> testQueryDeadArguments [
 	self

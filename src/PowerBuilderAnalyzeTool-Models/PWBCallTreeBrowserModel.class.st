@@ -16,6 +16,11 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 ]
 
 { #category : #accessing }
+PWBCallTreeBrowserModel >> pbModel [
+	^ pbModel
+]
+
+{ #category : #accessing }
 PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 	pwbBrowser := aPWBBrowser
 ]

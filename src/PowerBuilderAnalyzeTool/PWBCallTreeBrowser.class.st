@@ -139,6 +139,11 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 		title: self title
 ]
 
+{ #category : #testing }
+PWBCallTreeBrowser >> isNotFreeze [
+	^ self isFreeze not
+]
+
 { #category : #'as yet unclassified' }
 PWBCallTreeBrowser >> needUpdate: anEntity [
 	^ anEntity ~= model selected
@@ -146,7 +151,7 @@ PWBCallTreeBrowser >> needUpdate: anEntity [
 
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
-	(self needUpdate: anEntity)
+	((self needUpdate: anEntity) and: [ self isNotFreeze ])
 		ifFalse: [ ^ self ].
 	self model selected: anEntity.
 	self updateRoassal

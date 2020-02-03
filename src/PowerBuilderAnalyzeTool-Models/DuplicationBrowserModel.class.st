@@ -171,7 +171,7 @@ DuplicationBrowserModel >> mooseModelFunctions [
 
 { #category : #api }
 DuplicationBrowserModel >> openTextPresenters [
-  focusClonedFragment members do: [:each |  SourceTextPresenter new
+  focusClonedFragment members do: [:each |  PWBSourceTextBrowser new
            text: (self fragmentText: each);
            location: each entity mooseName;
            openWithSpec ]
@@ -179,7 +179,7 @@ DuplicationBrowserModel >> openTextPresenters [
 
 { #category : #api }
 DuplicationBrowserModel >> openTextPresenters: aFragment [
-  aFragment members do: [:each |  SourceTextPresenter new
+  aFragment members do: [:each |  PWBSourceTextBrowser new
            text: (self fragmentText: each);
            location: each entity mooseName;
            openWithSpec ]

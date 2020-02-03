@@ -4,6 +4,17 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
+{ #category : #running }
+PWBCallTreeBrowserTest >> setUp [
+	pwbCallTreeBrowser := PWBCallTreeBrowser new.
+	pwbCallTreeBrowserModel := pwbCallTreeBrowser model.
+	testModel := FamixPWBModel new.
+	self initializeTestUserObject.
+	self initializeTestFunctions.
+	self initializeVariables.
+	self initializeAccess
+]
+
 { #category : #'as yet unclassified' }
 PWBCallTreeBrowserTest >> testApplicationLogsIsEmpty [
 	PWBApplication reset.
@@ -16,24 +27,8 @@ PWBCallTreeBrowserTest >> testBrowserModelIsNotNil [
 ]
 
 { #category : #tests }
-PWBCallTreeBrowserTest >> testPWBModelIsNotNil [
-	self assert: PWBCallTreeBrowserModel new pbModel isNotNil
-]
-
-{ #category : #tests }
-PWBCallTreeBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
-	pwbCallTreeBrowser setModelPresenterSelection.
-	self assert: pwbCallTreeBrowserModel selected isNotNil
-]
-
-{ #category : #tests }
-PWBCallTreeBrowserTest >> testSelectedItemIsNotNil [
-	pwbCallTreeBrowser setModelPresenterSelection.
-	self assert: pwbCallTreeBrowser modelPresenter selectedItem isNotNil
-]
-
-{ #category : #'as yet unclassified' }
-PWBCallTreeBrowserTest >> testWhenItemIsGloballySelectedApplicationLogsIsnotEmpty [
-	pwbCallTreeBrowser setModelPresenterSelection.
-	self assert: PWBApplication current logger logs isNotEmpty
+PWBCallTreeBrowserTest >> testBrowserStatedMustRemainTheSameIffreeze [
+	pwbCallTreeBrowser freeze: true.
+	pwbCallTreeBrowser selectEntity: testUserObject1.
+	self deny: pwbCallTreeBrowser model selected equals: testUserObject1
 ]

@@ -3,9 +3,7 @@ Class {
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
 		'diagram',
-		'view',
-		'focusEntity',
-		'pbModel'
+		'view'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -20,9 +18,8 @@ PWBNonUsedFunctionBrowser class >> defaultSpec [
 
 { #category : #'as yet unclassified' }
 PWBNonUsedFunctionBrowser class >> lunchOn: anObject [
-	^ self basicNew
-		focusEntity: anObject;
-		initialize;
+	^ self new
+		selected: anObject;
 		openWithSpec
 ]
 
@@ -47,7 +44,7 @@ PWBNonUsedFunctionBrowser >> drawOn: aView [
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTBox new
 		size: 15;
-		color: Color gray) elementsOn: self pbModel.
+		color: Color gray) elementsOn: model pbModel.
 	aView addAll: es.
 	es @ RTDraggable.
 	es
@@ -64,17 +61,6 @@ PWBNonUsedFunctionBrowser >> drawOn: aView [
 		normalizeSize: #numberOfLinesOfCode.
 	RTCircleLayout new on: aView elements.
 	^ aView build
-]
-
-{ #category : #accessing }
-PWBNonUsedFunctionBrowser >> focusEntity [
-	^ focusEntity
-]
-
-{ #category : #accessing }
-PWBNonUsedFunctionBrowser >> focusEntity: anObject [
-	focusEntity := anObject.
-	self refreshPbModel
 ]
 
 { #category : #initialization }
@@ -101,18 +87,8 @@ PWBNonUsedFunctionBrowser >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #accessing }
-PWBNonUsedFunctionBrowser >> pbModel [
-	^ pbModel
-]
-
-{ #category : #accessing }
-PWBNonUsedFunctionBrowser >> refreshPbModel [
-	pbModel := QueryDeadMethods runOn: focusEntity
-]
-
-{ #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
-	self focusEntity: anEntity
+	model selected: anEntity
 ]
 
 { #category : #initialization }

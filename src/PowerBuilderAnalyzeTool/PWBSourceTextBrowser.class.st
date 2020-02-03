@@ -1,32 +1,32 @@
 Class {
-	#name : #SourceTextPresenter,
-	#superclass : #SpPresenter,
+	#name : #PWBSourceTextBrowser,
+	#superclass : #PWBAbstractBrowser,
 	#instVars : [
 		'sourceText',
 		'noteBook',
 		'sourceCodePage'
 	],
-	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-core'
+	#category : #PowerBuilderAnalyzeTool
 }
 
 { #category : #specs }
-SourceTextPresenter class >> defaultSpec [
+PWBSourceTextBrowser class >> defaultSpec [
 	^ SpBoxLayout newHorizontal
 		add: #noteBook;
 		yourself
 ]
 
 { #category : #initialization }
-SourceTextPresenter >> entityName: aString [
+PWBSourceTextBrowser >> entityName: aString [
 	sourceCodePage title: aString , ' source code'
 ]
 
 { #category : #initialization }
-SourceTextPresenter >> initializePresenter [ 
+PWBSourceTextBrowser >> initializePresenter [ 
 ]
 
 { #category : #initialization }
-SourceTextPresenter >> initializeWidgets [
+PWBSourceTextBrowser >> initializeWidgets [
 	sourceText := self newText.
 	noteBook := self newNotebook.
 	self sourceCodePage.
@@ -34,7 +34,7 @@ SourceTextPresenter >> initializeWidgets [
 ]
 
 { #category : #initialization }
-SourceTextPresenter >> sourceCodePage [
+PWBSourceTextBrowser >> sourceCodePage [
 	sourceCodePage := SpNotebookPage
 		title: 'Source code'
 		icon: (self iconNamed: #nautilusIcon)
@@ -42,6 +42,6 @@ SourceTextPresenter >> sourceCodePage [
 ]
 
 { #category : #accessing }
-SourceTextPresenter >> text: aText [
+PWBSourceTextBrowser >> text: aText [
   sourceText text: aText
 ]
