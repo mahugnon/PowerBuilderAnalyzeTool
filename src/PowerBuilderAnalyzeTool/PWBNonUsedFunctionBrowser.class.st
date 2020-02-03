@@ -95,6 +95,11 @@ PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 ]
 
 { #category : #accessing }
+PWBNonUsedFunctionBrowser >> selected [
+	^ model selected
+]
+
+{ #category : #accessing }
 PWBNonUsedFunctionBrowser >> selected: aFamixPWBUserObject [
 	model selected: aFamixPWBUserObject
 ]

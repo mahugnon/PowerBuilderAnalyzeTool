@@ -181,7 +181,6 @@ AbstractPWBCallTreeBrowserTest >> initializeVariables [
 
 { #category : #running }
 AbstractPWBCallTreeBrowserTest >> setUp [
-	pwbMooseModelBrowser := PWBMooseModelBrowser new.
 	testModel := FamixPWBModel new.
 	self initializeTestUserObject.
 	self initializeTestFunctions.

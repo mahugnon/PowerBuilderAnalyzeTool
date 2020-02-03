@@ -19,6 +19,11 @@ PWBNonUsedFunctionBrowserModel >> refreshPbModel [
 ]
 
 { #category : #accessing }
+PWBNonUsedFunctionBrowserModel >> selected [
+	^ selected
+]
+
+{ #category : #accessing }
 PWBNonUsedFunctionBrowserModel >> selected: anObject [
 	selected := anObject.
 	self refreshPbModel
