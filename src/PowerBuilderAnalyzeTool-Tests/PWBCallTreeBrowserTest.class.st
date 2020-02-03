@@ -1,18 +1,18 @@
 Class {
 	#name : #PWBCallTreeBrowserTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#instVars : [
+		'pwbCallTreeBrowserModel',
+		'pwbCallTreeBrowser'
+	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
 { #category : #running }
 PWBCallTreeBrowserTest >> setUp [
+	super setUp.
 	pwbCallTreeBrowser := PWBCallTreeBrowser new.
-	pwbCallTreeBrowserModel := pwbCallTreeBrowser model.
-	testModel := FamixPWBModel new.
-	self initializeTestUserObject.
-	self initializeTestFunctions.
-	self initializeVariables.
-	self initializeAccess
+	pwbCallTreeBrowserModel := pwbCallTreeBrowser model
 ]
 
 { #category : #'as yet unclassified' }

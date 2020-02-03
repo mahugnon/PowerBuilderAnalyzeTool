@@ -70,6 +70,11 @@ PWBNonUsedVariableBrowserModel >> nonUsedVarBehavioral [
 ]
 
 { #category : #accessing }
+PWBNonUsedVariableBrowserModel >> selected [
+	^ selected
+]
+
+{ #category : #accessing }
 PWBNonUsedVariableBrowserModel >> selected: anObject [
 	selected := anObject.
 	self updateNonUsedVariable

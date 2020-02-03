@@ -7,6 +7,12 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
+{ #category : #running }
+PWBMooseModelBrowserTest >> setUp [
+	super setUp.
+	pwbMooseModelBrowser := PWBMooseModelBrowser new
+]
+
 { #category : #tests }
 PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
 	self assert: PWBMooseModelBrowser new model pbModel isNotNil

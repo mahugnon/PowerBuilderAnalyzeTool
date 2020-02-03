@@ -42,6 +42,11 @@ PWBAbstractBrowser >> isFreeze [
 ]
 
 { #category : #testing }
+PWBAbstractBrowser >> isNotFreeze [
+	^ self isFreeze not
+]
+
+{ #category : #testing }
 PWBAbstractBrowser >> isPWBBrowser [
 	^ true
 ]
@@ -58,7 +63,7 @@ PWBAbstractBrowser >> model: anObject [
 
 { #category : #'as yet unclassified' }
 PWBAbstractBrowser >> needUpdate: anEntity [
-	^ self subclassResponsibility
+	^ anEntity ~= model selected
 ]
 
 { #category : #accessing }

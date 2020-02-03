@@ -6,13 +6,7 @@ Class {
 
 { #category : #running }
 PWBDuplicationBrowserTest >> setUp [
-	pwbCallTreeBrowser := PWBCallTreeBrowser new.
-	pwbCallTreeBrowserModel := pwbCallTreeBrowser model.
-	testModel := FamixPWBModel new.
-	self initializeTestUserObject.
-	self initializeTestFunctions.
-	self initializeVariables.
-	self initializeAccess
+	super setUp
 ]
 
 { #category : #tests }

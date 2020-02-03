@@ -107,9 +107,17 @@ PWBNonUsedVariableBrowser >> instAndVarListAction [
 ]
 
 { #category : #accessing }
-PWBNonUsedVariableBrowser >> selectEntity: anObject [
-	model selected: anObject.
+PWBNonUsedVariableBrowser >> selectEntity: anEntity [
+	((self accept: anEntity)
+		and: ((self needUpdate: anEntity) and: self isNotFreeze))
+		ifFalse: [ ^ self ].
+	model selected: anEntity.
 	instAndVarList items: model instAndVars
+]
+
+{ #category : #'accessing ' }
+PWBNonUsedVariableBrowser >> selected [
+	^ model selected
 ]
 
 { #category : #'as yet unclassified' }

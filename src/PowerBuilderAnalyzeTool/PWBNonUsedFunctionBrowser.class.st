@@ -89,7 +89,9 @@ PWBNonUsedFunctionBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
-	model selected: anEntity
+	((self accept: anEntity)
+		and: ((self needUpdate: anEntity) and: self isNotFreeze))
+		ifTrue: [ model selected: anEntity ]
 ]
 
 { #category : #accessing }

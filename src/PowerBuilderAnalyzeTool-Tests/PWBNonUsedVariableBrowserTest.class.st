@@ -19,6 +19,15 @@ PWBNonUsedVariableBrowserTest >> setUp [
 		selectEntity: testUserObject1
 ]
 
+{ #category : #asserting }
+PWBNonUsedVariableBrowserTest >> shouldNotUpdateOnMooseGroup [
+	| group |
+	group := {testUserObject1.
+	testUserObject2} asMooseGroup.
+	browser selectEntity: group.
+	self deny: browser selected equals: group
+]
+
 { #category : #tests }
 PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
 	self

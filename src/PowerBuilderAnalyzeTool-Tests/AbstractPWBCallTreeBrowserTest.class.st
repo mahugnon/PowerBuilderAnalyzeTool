@@ -2,8 +2,6 @@ Class {
 	#name : #AbstractPWBCallTreeBrowserTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'pwbCallTreeBrowserModel',
-		'pwbCallTreeBrowser',
 		'testModel',
 		'testUserObject1',
 		'testUserObject2',
@@ -30,8 +28,7 @@ Class {
 		'testLocalVar3',
 		'testLocalVar4',
 		'testArg1',
-		'testArg2',
-		'pwbMooseModelBrowser'
+		'testArg2'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
@@ -184,8 +181,6 @@ AbstractPWBCallTreeBrowserTest >> initializeVariables [
 
 { #category : #running }
 AbstractPWBCallTreeBrowserTest >> setUp [
-	pwbCallTreeBrowser := PWBCallTreeBrowser new.
-	pwbCallTreeBrowserModel := pwbCallTreeBrowser model.
 	pwbMooseModelBrowser := PWBMooseModelBrowser new.
 	testModel := FamixPWBModel new.
 	self initializeTestUserObject.
