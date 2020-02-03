@@ -25,7 +25,8 @@ PWBMooseModelBrowser class >> runMe [
 
 { #category : #visiting }
 PWBMooseModelBrowser >> accept: anObject [
-	^ anObject class ~= DPFragmentLocation
+	^ ({DPFragmentLocation.
+	FamixPWBEvent} includes: anObject class) not
 ]
 
 { #category : #initialization }

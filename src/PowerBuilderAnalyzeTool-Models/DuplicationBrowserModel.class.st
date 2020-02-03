@@ -158,8 +158,7 @@ DuplicationBrowserModel >> selected [
 
 { #category : #accessing }
 DuplicationBrowserModel >> selected: anObject [
-	selected := anObject.
-	duplicationBrowser globallySelect: anObject
+	selected := anObject
 ]
 
 { #category : #accessing }

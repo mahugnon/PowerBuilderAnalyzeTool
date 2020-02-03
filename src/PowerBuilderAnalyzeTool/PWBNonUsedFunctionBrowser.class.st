@@ -83,7 +83,9 @@ PWBNonUsedFunctionBrowser >> initializeWidgets [
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 	((self accept: anEntity)
 		and: ((self needUpdate: anEntity) and: self isNotFreeze))
-		ifTrue: [ model selected: anEntity ]
+		ifFalse: [ ^ self ].
+	model selected: anEntity.
+	diagram refresh
 ]
 
 { #category : #accessing }

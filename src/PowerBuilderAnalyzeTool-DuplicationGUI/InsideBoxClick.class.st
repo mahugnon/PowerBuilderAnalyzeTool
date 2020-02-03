@@ -28,8 +28,8 @@ InsideBoxClick >> initializeElement: element [
 					nested model clonedFragment = element model clonedFragment
 						ifTrue: [ nested color: Color black ]
 						ifFalse: [ nested color: Color gray ] ].
-			model selectedFragmentLocation: element model
-			"model refreshRoassal" ]
+			model selectedFragmentLocation: element model.
+			PWBApplication current globallySelect: element model ]
 ]
 
 { #category : #accessing }
