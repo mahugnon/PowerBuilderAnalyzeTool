@@ -79,13 +79,22 @@ PWBNonUsedFunctionBrowser >> initializeWidgets [
 	self initializeDiagram
 ]
 
+{ #category : #refreshing }
+PWBNonUsedFunctionBrowser >> refresh [
+	model pbModel isEmpty
+		ifTrue: [ diagram := self newNullPresenter ]
+		ifFalse: [ self initializeDiagram ].
+	self needRebuild: false.
+	self buildWithSpec
+]
+
 { #category : #accessing }
 PWBNonUsedFunctionBrowser >> selectEntity: anEntity [
 	((self accept: anEntity)
 		and: ((self needUpdate: anEntity) and: self isNotFreeze))
 		ifFalse: [ ^ self ].
 	model selected: anEntity.
-	diagram refresh
+	self refresh
 ]
 
 { #category : #accessing }

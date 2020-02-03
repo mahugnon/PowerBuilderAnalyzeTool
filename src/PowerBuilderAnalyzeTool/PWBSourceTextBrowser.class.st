@@ -64,6 +64,11 @@ PWBSourceTextBrowser >> text: aText [
   sourceText text: aText
 ]
 
+{ #category : #TOREMOVE }
+PWBSourceTextBrowser >> title [ 
+^'Source code Browser'
+]
+
 { #category : #updating }
 PWBSourceTextBrowser >> updateCode [
 	self text: model sourceText.
