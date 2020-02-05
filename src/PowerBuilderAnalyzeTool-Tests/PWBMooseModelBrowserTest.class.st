@@ -16,6 +16,15 @@ PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
 ]
 
 { #category : #tests }
+PWBMooseModelBrowserTest >> testSearch [
+	browser openWithSpec.
+	browser searchFor: 'uo_po'.
+	browser window close.
+	self
+		assert: (browser modelPresenter selectedItem name beginsWith: 'uo_po')
+]
+
+{ #category : #tests }
 PWBMooseModelBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
 	browser setModelPresenterSelection.
 	self assert: browser selected isNotNil

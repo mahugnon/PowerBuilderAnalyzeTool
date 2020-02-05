@@ -38,8 +38,7 @@ PWBMooseModelBrowser >> initializePresenters [
 		whenSelectionChangedDo: [ :selected | 
 			model selected: selected selectedItem.
 			self globallySelect: selected selectedItem ].
-	searchField
-		whenTextIsAcceptedDo: [ :text | modelPresenter searchFor: text ]
+	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ]
 ]
 
 { #category : #initialization }
@@ -78,12 +77,6 @@ PWBMooseModelBrowser >> initializeTable [
 		beResizable
 ]
 
-{ #category : #initialization }
-PWBMooseModelBrowser >> initializeWindow: aWindowPresenter [
-	super initializeWindow: aWindowPresenter.
-	aWindowPresenter initialExtent: 600 @ 400
-]
-
 { #category : #accessing }
 PWBMooseModelBrowser >> modelPresenter [
 	^ modelPresenter
@@ -94,9 +87,15 @@ PWBMooseModelBrowser >> needUpdate: anEntity [
 	^ model selected ~= anEntity
 ]
 
+{ #category : #initialization }
+PWBMooseModelBrowser >> searchFor: aText [
+	modelPresenter adapter widget function searchFor: aText
+]
+
 { #category : #accessing }
 PWBMooseModelBrowser >> selectEntity: anEntity [
-	((self needUpdate: anEntity) and: [ self accept: anEntity ])
+	((self needUpdate: anEntity)
+		and: [ (self accept: anEntity) and: [ self selected ~= anEntity ] ])
 		ifFalse: [ ^ self ].
 	modelPresenter selectItem: anEntity
 	"self needRebuild: false.

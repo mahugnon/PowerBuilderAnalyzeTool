@@ -36,7 +36,7 @@ PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
 		whenClosedDo: [ self application windowClosed: aWindowPresenter ].
 	aWindowPresenter
 		title: self title;
-		initialExtent: 900 @ 700
+		initialExtent: 600 @ 400
 ]
 
 { #category : #accessing }
