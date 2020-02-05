@@ -12,7 +12,7 @@ CIMUserObjectReferencesPresenter class >> run [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> contextMenu [
-	^ (RTMenuActivable item: #globalSelect action: [ :elt |  ])
+	^ RTMenuActivable new
 		item: 'Mark as dead'
 			action: [ :elt | 
 			elt model tag: FamixPWBTag isCIMObsolette.
