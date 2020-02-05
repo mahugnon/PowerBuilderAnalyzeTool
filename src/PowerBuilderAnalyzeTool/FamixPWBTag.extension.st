@@ -10,13 +10,13 @@ FamixPWBTag class >> isCIMObsolette [
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBTag class >> notSure [
 	^ self new
-		name: 'Not sur';
-		color: Color orange
+		name: 'Not sure';
+		color: Color yellow
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBTag class >> toRefactor [
 	^ self new
 		name: 'To be refactored';
-		color: Color yellow
+		color: Color orange
 ]

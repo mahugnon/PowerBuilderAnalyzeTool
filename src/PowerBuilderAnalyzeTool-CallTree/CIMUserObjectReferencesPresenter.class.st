@@ -13,23 +13,23 @@ CIMUserObjectReferencesPresenter class >> run [
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> contextMenu [
 	^ (RTMenuActivable item: #globalSelect action: [ :elt |  ])
-		item: #MarkAsObsolet
+		item: 'Mark as dead'
 			action: [ :elt | 
 			elt model tag: FamixPWBTag isCIMObsolette.
 			elt color: (ColorObject colorFor: elt model) ];
-		item: #MarkAsToRefactor
+		item: 'Mark as to refactor'
 			action: [ :elt | 
 			elt model tag: FamixPWBTag toRefactor.
 			elt color: (ColorObject colorFor: elt model) ];
-		item: #MarkAsNotSure
+		item: 'Mark as not sure'
 			action: [ :elt | 
 			elt model tag: FamixPWBTag notSure.
 			elt color: (ColorObject colorFor: elt model) ];
-		item: #UnMark
+		item: 'Unmark'
 			action: [ :elt | 
 			elt model tag: nil.
 			elt color: (ColorObject colorFor: elt model) ];
-		item: #RunDuplication action: [ :elt |  ]
+		item: 'add new Tags ...' action: [ :elt |  ]
 ]
 
 { #category : #initialization }
