@@ -11,5 +11,5 @@ ColorNonTagedObject class >> accept: anEntity [
 
 { #category : #accessing }
 ColorNonTagedObject >> color [
-	^ Color blue
+	^ Color gray
 ]
