@@ -25,14 +25,14 @@ PWBDuplicationBrowser class >> createIcon [
 						mimeEncode:
 							'/Users/honore/Documents/Resources/duplicate.png' asFileReference
 								binaryReadStream) contents , ''''
-		classified: '*DuplicationGUI'.
+		classified: '*PowerBuilderAnalyzeTool'.
 	ThemeIcons
 		compile:
 			'duplication
 	^ icons
 			at: #''duplication''
 			ifAbsentPut:[ Form fromBinaryStream: self duplicationIcon base64Decoded asByteArray readStream ]'
-		classified: 'DuplicationGUI'.
+		classified: 'PowerBuilderAnalyzeTool'.
 	Smalltalk ui icons duplication
 ]
 

@@ -24,14 +24,14 @@ PWBCallTreeBrowser class >> createIcon [
 						mimeEncode:
 							'/Users/honore/Downloads/function.png' asFileReference
 								binaryReadStream) contents , ''''
-		classified: '*PWBCodeAnalyser'.
+		classified: '*PowerBuilderAnalyzeTool'.
 	ThemeIcons
 		compile:
 			'callGraphIcon
 	^ icons
 			at: #''callGraphIcon''
 			ifAbsentPut:[ Form fromBinaryStream: self callTreeContents base64Decoded asByteArray readStream ]'
-		classified: '*PWBCodeAnalyser'.
+		classified: '*PowerBuilderAnalyzeTool'.
 	Smalltalk ui icons callGraphIcon
 ]
 
