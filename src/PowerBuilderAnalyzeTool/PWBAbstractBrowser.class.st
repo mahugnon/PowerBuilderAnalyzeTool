@@ -31,14 +31,9 @@ PWBAbstractBrowser >> accept: anObject [
 
 { #category : #initialization }
 PWBAbstractBrowser >> connectPresenters [
-	freeze whenActivatedDo: [ self frozen ].
-	follow whenDeactivatedDo: [ self follow ].
-	highlight whenChangedDo: [ self highlight ]
-]
-
-{ #category : #accessing }
-PWBAbstractBrowser >> freeze: aBoolean [
-	freeze := aBoolean
+	freeze whenActivatedDo: [ self toFrozen ].
+	follow whenDeactivatedDo: [ self toFollow ].
+	highlight whenChangedDo: [ self toHighlight ]
 ]
 
 { #category : #enumerating }
@@ -57,7 +52,9 @@ PWBAbstractBrowser >> initializePresenters [
 			highlight}.
 	freeze label: 'Freeze'.
 	follow label: 'Follow'.
-	highlight label: 'Highlight'
+	highlight label: 'Highlight'.
+	follow state: true.
+	self toFollow
 ]
 
 { #category : #initialization }
@@ -67,12 +64,22 @@ PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
 		whenClosedDo: [ self application windowClosed: aWindowPresenter ].
 	aWindowPresenter
 		title: self title;
-		initialExtent: 600 @ 400
+		initialExtent: 600 @ 500
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> isFollow [
+	^ currentState = 'Follow'
 ]
 
 { #category : #accessing }
 PWBAbstractBrowser >> isFreeze [
-	^ freeze
+	^ currentState = 'Freeze'
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> isHighlight [
+	^ currentState = 'Highlight'
 ]
 
 { #category : #testing }
@@ -103,4 +110,19 @@ PWBAbstractBrowser >> needUpdate: anEntity [
 { #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
 	self subclassResponsibility
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> toFollow [
+	currentState := 'Follow'
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> toFrozen [
+	currentState := 'Freeze'
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> toHighlight [
+	currentState := 'Highlight'
 ]

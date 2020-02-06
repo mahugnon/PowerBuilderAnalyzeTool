@@ -16,5 +16,5 @@ PWBNonUsedFunctionBrowserTest >> shouldNotUpdateOnMooseGroup [
 	group := {testUserObject1.
 	testUserObject2} asMooseGroup.
 	browser selectEntity: group.
-	self deny: browser selected equals: group
+	self assert: browser selected ~= group
 ]

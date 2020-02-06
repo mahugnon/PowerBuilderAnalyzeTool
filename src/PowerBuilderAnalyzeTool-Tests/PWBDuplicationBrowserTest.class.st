@@ -6,43 +6,43 @@ Class {
 
 { #category : #running }
 PWBDuplicationBrowserTest >> setUp [
-	super setUp
+	super setUp.
+	browser := PWBDuplicationBrowser new
+]
+
+{ #category : #tests }
+PWBDuplicationBrowserTest >> testCurrentStateChangeWhenRadionButtonIsActivated [
+	browser toFrozen.
+	self assert: browser isFreeze
+]
+
+{ #category : #tests }
+PWBDuplicationBrowserTest >> testCurrentStateIsFollowWhenLunch [
+	self assert: browser isFollow
 ]
 
 { #category : #tests }
 PWBDuplicationBrowserTest >> testMinNumberOfCharactersChange [
-	| duplicationBrowser |
-	duplicationBrowser := PWBDuplicationBrowser
-		testLunchOn: testUserObject1.
-	duplicationBrowser minNumberOfCharactersInput text: 5.
-	self assert: duplicationBrowser minNumberOfCharacters equals: 5
+	browser minNumberOfCharactersInput text: 5.
+	self assert: browser minNumberOfCharacters equals: 5
 ]
 
 { #category : #tests }
 PWBDuplicationBrowserTest >> testMinNumberOfCharactersInputIntialIs55 [
-	| duplicationBrowser |
-	duplicationBrowser := PWBDuplicationBrowser
-		testLunchOn: testUserObject1.
 	self
-		assert: duplicationBrowser minNumberOfCharactersInput text asInteger
+		assert: browser minNumberOfCharactersInput text asInteger
 		equals: 55
 ]
 
 { #category : #tests }
-PWBDuplicationBrowserTest >> testMinNumberOfLinesTextInputIntialIs10 [
-	| duplicationBrowser |
-	duplicationBrowser := PWBDuplicationBrowser
-		testLunchOn: testUserObject1.
+PWBDuplicationBrowserTest >> testMinNumberOfLinesTextInputIntialIs50 [
 	self
-		assert: duplicationBrowser minNumberOfLinesTextInput text asInteger
-		equals: 10
+		assert: browser minNumberOfLinesTextInput text asInteger
+		equals: 50
 ]
 
 { #category : #tests }
 PWBDuplicationBrowserTest >> testMinimumParamNumberOfLineChange [
-	| duplicationBrowser |
-	duplicationBrowser := PWBDuplicationBrowser
-		testLunchOn: testUserObject1.
-	duplicationBrowser minNumberOfLinesTextInput text: 5.
-	self assert: duplicationBrowser minNumberOfLines equals: 5
+	browser minNumberOfLinesTextInput text: 5.
+	self assert: browser minNumberOfLines equals: 5
 ]

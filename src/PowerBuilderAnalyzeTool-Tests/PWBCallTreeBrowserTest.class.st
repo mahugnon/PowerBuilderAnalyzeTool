@@ -27,7 +27,7 @@ PWBCallTreeBrowserTest >> testBrowserModelIsNotNil [
 
 { #category : #tests }
 PWBCallTreeBrowserTest >> testBrowserStatedMustRemainTheSameIffreeze [
-browser freeze: true.
-browser selectEntity: testUserObject1.
+	browser toFrozen.
+	browser selectEntity: testUserObject1.
 	self deny: browser model selected equals: testUserObject1
 ]
