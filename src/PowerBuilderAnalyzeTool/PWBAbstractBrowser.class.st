@@ -5,7 +5,8 @@ Class {
 		'model',
 		'freeze',
 		'follow',
-		'highlight'
+		'highlight',
+		'currentState'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -26,6 +27,13 @@ PWBAbstractBrowser class >> defaultSpec [
 { #category : #visiting }
 PWBAbstractBrowser >> accept: anObject [
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> connectPresenters [
+	freeze whenActivatedDo: [ self frozen ].
+	follow whenDeactivatedDo: [ self follow ].
+	highlight whenChangedDo: [ self highlight ]
 ]
 
 { #category : #accessing }
