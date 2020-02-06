@@ -3,10 +3,25 @@ Class {
 	#superclass : #PWBPresenter,
 	#instVars : [
 		'model',
-		'freeze'
+		'freeze',
+		'follow',
+		'highlight'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
+
+{ #category : #specs }
+PWBAbstractBrowser class >> defaultSpec [
+	^ SpBoxLayout newVertical
+		add:
+			(SpBoxLayout newHorizontal
+				add: #follow expand: false;
+				add: #highlight expand: false;
+				add: #freeze expand: false;
+				yourself)
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+		yourself
+]
 
 { #category : #visiting }
 PWBAbstractBrowser >> accept: anObject [
@@ -24,9 +39,17 @@ PWBAbstractBrowser >> globallySelect: anEntity [
 ]
 
 { #category : #initialization }
-PWBAbstractBrowser >> initialize [
-	super initialize.
-	freeze := false
+PWBAbstractBrowser >> initializePresenters [
+	freeze := self newRadioButton.
+	follow := self newRadioButton.
+	highlight := self newRadioButton.
+	follow
+		associatedRadioButtons:
+			{freeze.
+			highlight}.
+	freeze label: 'Freeze'.
+	follow label: 'Follow'.
+	highlight label: 'Highlight'
 ]
 
 { #category : #initialization }

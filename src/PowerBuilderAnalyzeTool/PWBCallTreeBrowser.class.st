@@ -37,7 +37,7 @@ PWBCallTreeBrowser class >> createIcon [
 
 { #category : #specs }
 PWBCallTreeBrowser class >> defaultSpec [
-	^ SpBoxLayout newVertical
+	^ super defaultSpec
 		add:
 			(SpBoxLayout newHorizontal
 				add: #hideButton;
@@ -82,6 +82,14 @@ PWBCallTreeBrowser >> initializeBrowserModel [
 ]
 
 { #category : #initialization }
+PWBCallTreeBrowser >> initializePresenters [
+	super initializePresenters.
+	self initializeBrowserModel.
+	self initializeRoassal.
+	self initializeToolBar
+]
+
+{ #category : #initialization }
 PWBCallTreeBrowser >> initializeRoassal [
 	diagramPresenter := self newLabel.
 	diagramPresenter label: 'Visualization here'
@@ -120,15 +128,6 @@ PWBCallTreeBrowser >> initializeToolBar [
 		help: 'Hide all obsolette element of the view';
 		color: Color white;
 		yourself
-]
-
-{ #category : #initialization }
-PWBCallTreeBrowser >> initializeWidgets [
-	"  menu := self instantiate: CIMMainMenu"
-
-	self initializeBrowserModel.
-	self initializeRoassal.
-	self initializeToolBar
 ]
 
 { #category : #accessing }

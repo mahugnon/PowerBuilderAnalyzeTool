@@ -74,7 +74,8 @@ PWBNonUsedFunctionBrowser >> initializeDiagram [
 ]
 
 { #category : #initialization }
-PWBNonUsedFunctionBrowser >> initializeWidgets [
+PWBNonUsedFunctionBrowser >> initializePresenters [
+	super initializePresenters.
 	model := PWBNonUsedFunctionBrowserModel new.
 	self initializeDiagram
 ]

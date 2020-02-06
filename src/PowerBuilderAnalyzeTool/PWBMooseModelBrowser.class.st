@@ -10,7 +10,7 @@ Class {
 
 { #category : #specs }
 PWBMooseModelBrowser class >> defaultSpec [
-	^ SpBoxLayout newVertical
+	^ super defaultSpec
 		add: #searchField
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #modelPresenter;
@@ -31,6 +31,7 @@ PWBMooseModelBrowser >> accept: anObject [
 
 { #category : #initialization }
 PWBMooseModelBrowser >> initializePresenters [
+	super initializePresenters.
 	model := PWBMooseModelBrowserModel new.
 	self initializeTable.
 	self initializeSearchField.

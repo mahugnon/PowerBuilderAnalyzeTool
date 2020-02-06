@@ -62,10 +62,11 @@ PWBNonUsedVariableBrowser >> connectPresenters [
 
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> initializePresenters [
+	super initializePresenters.
 	model := PWBNonUsedVariableBrowserModel new.
 	instAndVarList := self newList.
 	attributOrBehaviorList := self newList.
-	variableTypeList := self newTreeTable .
+	variableTypeList := self newTreeTable.
 	variableList := self newList.
 	instAndVarList
 		items: model instAndVars;
@@ -79,16 +80,8 @@ PWBNonUsedVariableBrowser >> initializePresenters [
 	variableList
 		display: #name;
 		sortingBlock: #name ascending;
-		enableItemSubstringFilter.
-"	variableTypeList enableItemSubstringFilter"
-]
-
-{ #category : #initialization }
-PWBNonUsedVariableBrowser >> initializeWindow: aWindowPresenter [
-	super initializeWindow: aWindowPresenter.
-	aWindowPresenter initialExtent: 700 @ 400
-
-	"	closeOnBackdropClick: false"
+		enableItemSubstringFilter
+	"	variableTypeList enableItemSubstringFilter"
 ]
 
 { #category : #accessing }

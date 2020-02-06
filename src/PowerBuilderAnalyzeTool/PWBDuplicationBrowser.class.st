@@ -38,7 +38,7 @@ PWBDuplicationBrowser class >> createIcon [
 
 { #category : #specs }
 PWBDuplicationBrowser class >> defaultSpec [
-	^ SpBoxLayout newVertical
+	^ super defaultSpec
 		add:
 			(SpBoxLayout newHorizontal
 				add:
@@ -90,6 +90,15 @@ PWBDuplicationBrowser class >> runMe [
 { #category : #visiting }
 PWBDuplicationBrowser >> accept: anObject [
 	^ anObject class = FamixPWBUserObject
+]
+
+{ #category : #initialization }
+PWBDuplicationBrowser >> connectPresenters [
+	super connectPresenters .
+	minNumberOfLinesTextInput
+		whenTextChangedDo: [ :aText | model minNumberOfLines: aText asInteger ].
+	minNumberOfCharactersInput
+		whenTextChangedDo: [ :aText | model minNumberOfCharacters: aText asInteger ]
 ]
 
 { #category : #initialization }
@@ -150,17 +159,8 @@ PWBDuplicationBrowser >> initializeOkButton [
 ]
 
 { #category : #initialization }
-PWBDuplicationBrowser >> initializePresenter [
-	super initializePresenter.
-	minNumberOfLinesTextInput
-		whenTextChangedDo: [ :aText | model minNumberOfLines: aText asInteger ].
-	minNumberOfCharactersInput
-		whenTextChangedDo: [ :aText | model minNumberOfCharacters: aText asInteger ]
-]
-
-{ #category : #initialization }
-PWBDuplicationBrowser >> initializeWidgets [
-	super initializeWidgets.
+PWBDuplicationBrowser >> initializePresenters [
+	super initializePresenters.
 	self initializeModel.
 	self initializeDuplicationResultPanel.
 	self initializeDuplicationRoassalViewSelector.

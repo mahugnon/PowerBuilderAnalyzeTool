@@ -36,6 +36,7 @@ PWBSourceTextBrowser >> entityName: aString [
 
 { #category : #initialization }
 PWBSourceTextBrowser >> initializePresenters [
+	super initializePresenters.
 	model := PWBSourceTextBrowserModel new.
 	sourceText := self newText.
 	noteBook := self newNotebook.
