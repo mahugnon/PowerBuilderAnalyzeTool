@@ -73,7 +73,7 @@ PWBMooseModelBrowser >> initializeTable [
 			(SpStringTableColumn
 				title: 'Number of invocation'
 				evaluated: [ :elt | elt numberOfIncomingInvocations ]);
-		roots: {model pbModel};
+		roots: {model pwbMooseModel};
 		children: [ :elt | elt content ];
 		beResizable
 ]

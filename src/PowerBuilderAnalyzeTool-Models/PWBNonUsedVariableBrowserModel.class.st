@@ -1,12 +1,11 @@
 Class {
 	#name : #PWBNonUsedVariableBrowserModel,
-	#superclass : #Object,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'instAndVars',
 		'insVarLocaVarArgs',
 		'functions',
 		'variables',
-		'selected',
 		'nonUsedVariables',
 		'nonUsedInstVars',
 		'focusVariables'
@@ -67,11 +66,6 @@ PWBNonUsedVariableBrowserModel >> instOrFunctionFor: aString [
 { #category : #accessing }
 PWBNonUsedVariableBrowserModel >> nonUsedVarBehavioral [
 	^ QueryBehavioral runOn: nonUsedVariables
-]
-
-{ #category : #accessing }
-PWBNonUsedVariableBrowserModel >> selected [
-	^ selected
 ]
 
 { #category : #accessing }

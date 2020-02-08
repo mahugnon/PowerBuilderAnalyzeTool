@@ -1,8 +1,7 @@
 Class {
 	#name : #DuplicationBrowserModel,
-	#superclass : #Object,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
-		'mooseModel',
 		'duplicationFragments',
 		'duplicationView',
 		'selectedFragmentLocation',
@@ -12,8 +11,7 @@ Class {
 		'duplicationEntities',
 		'fragmentColors',
 		'minNumberOfLines',
-		'minNumberOfCharacters',
-		'selected'
+		'minNumberOfCharacters'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -102,7 +100,7 @@ DuplicationBrowserModel >> focusClonedFragment [
 { #category : #initialization }
 DuplicationBrowserModel >> initialize [
 	super initialize.
-	mooseModel := FamixPWBFunction new content: #().
+	pwbMooseModel := FamixPWBFunction new content: #().
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new.
@@ -137,23 +135,18 @@ DuplicationBrowserModel >> minNumberOfLines: anInteger [
 
 { #category : #accessing }
 DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
-	mooseModel := aFamixPWBUserObject.
+	pwbMooseModel := aFamixPWBUserObject.
 	self computeDuplication
 ]
 
 { #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ mooseModel content
+	^ pwbMooseModel content
 ]
 
 { #category : #initialization }
 DuplicationBrowserModel >> refreshRoassal [
   duplicationView updateView
-]
-
-{ #category : #'accessing ' }
-DuplicationBrowserModel >> selected [
-	^ selected
 ]
 
 { #category : #accessing }

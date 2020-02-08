@@ -39,7 +39,7 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
   shapeBuilder := RTShapeBuilder new.
   shapeBuilder rectangle size: [:m |  m numberOfLinesOfCode min: 60 max: 5 ].
   userObjectElements := RTGroup new.
-  userObjects := self pbModel collect: #pbModel.
+  userObjects := self pwbMooseModel collect: #pwbMooseModel.
   userObjects do: [:userObject |  userObjectElement := (RTBox new color: (Color blue alpha: 0.4)) elementOn: userObject.
         userObjectElement @ RTPopup.
         aView add: userObjectElement.
@@ -69,7 +69,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 	| es eb |
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTEllipse new color: [ :elt | ColorObject colorFor: elt ])
-		elementsOn: self pbModel.
+		elementsOn: self pwbMooseModel.
 	aView addAll: es.
 	es @ RTDraggable.
 	es

@@ -1,9 +1,7 @@
 Class {
 	#name : #PWBCallTreeBrowserModel,
-	#superclass : #Object,
+	#superclass : #PWBAbstractModel,
 	#instVars : [
-		'pbModel',
-		'selected',
 		'selectionListeners',
 		'pwbBrowser'
 	],
@@ -16,11 +14,6 @@ PWBCallTreeBrowserModel >> globallySelect: anEntity [
 ]
 
 { #category : #accessing }
-PWBCallTreeBrowserModel >> pbModel [
-	^ pbModel
-]
-
-{ #category : #accessing }
 PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 	pwbBrowser := aPWBBrowser
 ]
@@ -28,11 +21,6 @@ PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 { #category : #api }
 PWBCallTreeBrowserModel >> roassal [
 	^ selected roassalPresenter
-]
-
-{ #category : #accessing }
-PWBCallTreeBrowserModel >> selected [
-	^ selected
 ]
 
 { #category : #accessing }

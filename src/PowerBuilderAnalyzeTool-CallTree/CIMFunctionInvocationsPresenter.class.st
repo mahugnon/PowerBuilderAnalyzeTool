@@ -23,9 +23,9 @@ CIMFunctionInvocationsPresenter >> drawOn1: aView [
 		color: Color blue trans;
 		withShorterDistanceAttachPoint;
 		widthFrom:
-				[ :anEdge | (anEdge from pbModel numberOfInvocationToward: anEdge to pbModel) sqrt * 4 ];
+				[ :anEdge | (anEdge from pwbMooseModel numberOfInvocationToward: anEdge to pwbMooseModel) sqrt * 4 ];
 		widthTo:
-				[ :anEdge | (anEdge to pbModel numberOfInvocationToward: anEdge from pbModel) sqrt * 4 ].
+				[ :anEdge | (anEdge to pwbMooseModel numberOfInvocationToward: anEdge from pwbMooseModel) sqrt * 4 ].
 	eb
 		view: aView;
 		noRepetition;
@@ -49,7 +49,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 	es := (RTEllipse new
 		size: 15;
 		color: [ :elt | ColorFunction colorFor: elt ])
-		elementsOn: self pbModel.
+		elementsOn: self pwbMooseModel.
 	aView addAll: es.
 	es @ RTDraggable.
 	es

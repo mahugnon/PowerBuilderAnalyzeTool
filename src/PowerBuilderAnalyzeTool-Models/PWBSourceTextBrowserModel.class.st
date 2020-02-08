@@ -1,16 +1,8 @@
 Class {
 	#name : #PWBSourceTextBrowserModel,
-	#superclass : #Object,
-	#instVars : [
-		'selected'
-	],
+	#superclass : #PWBAbstractModel,
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
-
-{ #category : #accessing }
-PWBSourceTextBrowserModel >> selected [
-	^ selected
-]
 
 { #category : #accessing }
 PWBSourceTextBrowserModel >> selected: anObject [

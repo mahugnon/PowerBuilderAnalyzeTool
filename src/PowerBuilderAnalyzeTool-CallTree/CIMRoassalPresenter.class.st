@@ -18,7 +18,7 @@ CIMRoassalPresenter class >> defaultSpec [
 
 { #category : #'as yet unclassified' }
 CIMRoassalPresenter >> adapterFrom: aCollection [
-  ^self pbModel select: [:each |  aCollection includes: each pbModel ]
+  ^self pwbMooseModel select: [:each |  aCollection includes: each pwbMooseModel ]
 ]
 
 { #category : #accessing }
@@ -67,7 +67,7 @@ CIMRoassalPresenter >> initializeWidgets [
 ]
 
 { #category : #accessing }
-CIMRoassalPresenter >> pbModel [
+CIMRoassalPresenter >> pwbMooseModel [
 	^ guiModel selectedContent
 ]
 

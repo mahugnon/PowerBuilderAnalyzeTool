@@ -130,10 +130,15 @@ PWBCallTreeBrowser >> initializeToolBar [
 		yourself
 ]
 
+{ #category : #initialization }
+PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter initialExtent: 750 @ 500
+]
+
 { #category : #accessing }
 PWBCallTreeBrowser >> selectEntity: anEntity [
-	((self needUpdate: anEntity)
-		and: [ self isNotFreeze and: [ self accept: anEntity ] ])
+	((self needUpdate: anEntity) and: [ self accept: anEntity ])
 		ifFalse: [ ^ self ].
 	self model selected: anEntity.
 	self updateRoassal

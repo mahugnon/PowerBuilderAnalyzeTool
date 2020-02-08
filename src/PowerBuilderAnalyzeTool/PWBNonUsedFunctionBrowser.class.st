@@ -44,7 +44,7 @@ PWBNonUsedFunctionBrowser >> drawOn: aView [
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTBox new
 		size: 15;
-		color: Color gray) elementsOn: model pbModel.
+		color: Color gray) elementsOn: model pwbMooseModel.
 	aView addAll: es.
 	es @ RTDraggable.
 	es
@@ -82,7 +82,7 @@ PWBNonUsedFunctionBrowser >> initializePresenters [
 
 { #category : #refreshing }
 PWBNonUsedFunctionBrowser >> refresh [
-	model pbModel isEmpty
+	model pwbMooseModel isEmpty
 		ifTrue: [ diagram := self newNullPresenter ]
 		ifFalse: [ self initializeDiagram ].
 	self needRebuild: false.

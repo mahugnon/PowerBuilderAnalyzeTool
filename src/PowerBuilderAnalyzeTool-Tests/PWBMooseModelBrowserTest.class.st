@@ -12,7 +12,7 @@ PWBMooseModelBrowserTest >> setUp [
 
 { #category : #tests }
 PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
-	self assert: PWBMooseModelBrowser new model pbModel isNotNil
+	self assert: PWBMooseModelBrowser new model pwbMooseModel isNotNil
 ]
 
 { #category : #tests }

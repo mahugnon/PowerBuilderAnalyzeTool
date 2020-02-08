@@ -1,26 +1,12 @@
 Class {
 	#name : #PWBNonUsedFunctionBrowserModel,
-	#superclass : #Object,
-	#instVars : [
-		'pbModel',
-		'selected'
-	],
+	#superclass : #PWBAbstractModel,
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
 
 { #category : #accessing }
-PWBNonUsedFunctionBrowserModel >> pbModel [
-	^ pbModel
-]
-
-{ #category : #accessing }
 PWBNonUsedFunctionBrowserModel >> refreshPbModel [
-	pbModel := QueryDeadMethods runOn: selected
-]
-
-{ #category : #accessing }
-PWBNonUsedFunctionBrowserModel >> selected [
-	^ selected
+	pwbMooseModel := QueryDeadMethods runOn: selected
 ]
 
 { #category : #accessing }
