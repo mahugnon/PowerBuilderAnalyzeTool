@@ -2,8 +2,7 @@ Class {
 	#name : #PWBCallTreeBrowserModel,
 	#superclass : #PWBAbstractModel,
 	#instVars : [
-		'selectionListeners',
-		'pwbBrowser'
+		'selectionListeners'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }

@@ -127,7 +127,7 @@ DPDetector >> registerFragmentsFor: aProgram [
 { #category : #accessing }
 DPDetector >> registerFragmentsFor: aProgram sourceAnchor: sourceAnchor [
 	| lines |
-	lines := self getCleanLinesOf: sourceAnchor dpsourceText lines.
+	lines := self getCleanLinesOf: sourceAnchor sourceText lines.
 	parameters minNumberOfLines > lines size
 		ifTrue: [ ^ self ].
 	(lines allButLast: parameters minNumberOfLines - 1)

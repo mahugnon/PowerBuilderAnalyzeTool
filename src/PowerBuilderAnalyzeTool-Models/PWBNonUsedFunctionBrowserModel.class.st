@@ -5,12 +5,12 @@ Class {
 }
 
 { #category : #accessing }
-PWBNonUsedFunctionBrowserModel >> refreshPbModel [
+PWBNonUsedFunctionBrowserModel >> refreshPwbMooseModel [
 	pwbMooseModel := QueryDeadMethods runOn: selected
 ]
 
 { #category : #accessing }
 PWBNonUsedFunctionBrowserModel >> selected: anObject [
 	selected := anObject.
-	self refreshPbModel
+	self refreshPwbMooseModel
 ]

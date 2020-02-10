@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'selected',
-		'pwbMooseModel'
+		'pwbMooseModel',
+		'pwbBrowser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }

@@ -126,3 +126,9 @@ PWBAbstractBrowser >> toFrozen [
 PWBAbstractBrowser >> toHighlight [
 	currentState := 'Highlight'
 ]
+
+{ #category : #'as yet unclassified' }
+PWBAbstractBrowser >> whenSelectEntity [
+	self isFreeze
+		ifTrue: [ ^ self ]
+]

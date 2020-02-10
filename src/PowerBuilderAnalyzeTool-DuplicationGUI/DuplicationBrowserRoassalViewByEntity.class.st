@@ -56,7 +56,7 @@ DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
 	es
 		@
 			(RTLabeled new
-				text: #name;
+				text: [ :elt | elt mooseName ];
 				fontSize: 5;
 				top).
 	es @ (OutSideBoxClick new model: model).
