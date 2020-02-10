@@ -56,5 +56,6 @@ PWBApplication >> refreshBrowsersWith: anEntity [
 { #category : #accessing }
 PWBApplication >> start [
 	PWBMooseModelBrowser runMe.
-	PWBCallTreeBrowser run
+	PWBCallTreeBrowser run.
+	PWBSourceTextBrowser runMe 
 ]

@@ -26,7 +26,7 @@ InsideBoxClick >> initializeElement: element [
 		do: [ view nestedElements
 				do: [ :nested | 
 					nested model clonedFragment = element model clonedFragment
-						ifTrue: [ nested color: Color black ]
+						ifTrue: [ nested color: Color lightGreen ]
 						ifFalse: [ nested color: Color gray ] ].
 			model selectedFragmentLocation: element model.
 			PWBApplication current globallySelect: element model ]

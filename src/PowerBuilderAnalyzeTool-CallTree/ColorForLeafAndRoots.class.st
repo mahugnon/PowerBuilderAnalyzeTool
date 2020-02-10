@@ -1,15 +1,15 @@
 Class {
-	#name : #ColorToBlack,
+	#name : #ColorForLeafAndRoots,
 	#superclass : #ColorFunction,
 	#category : #'PowerBuilderAnalyzeTool-CallTree-RoassalElementColorStrategy'
 }
 
 { #category : #private }
-ColorToBlack class >> accept: aMooseAdapter [
+ColorForLeafAndRoots class >> accept: aMooseAdapter [
   ^aMooseAdapter outgoingInvocationsCandidates isEmpty or: [ aMooseAdapter incomingInvocations isEmpty ]
 ]
 
 { #category : #accessing }
-ColorToBlack >> color [
-  ^Color black
+ColorForLeafAndRoots >> color [
+	^ Color fromHexString: '#EAD3A3'
 ]
