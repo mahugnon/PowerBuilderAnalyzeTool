@@ -37,7 +37,7 @@ FamixPWBmajorObject >> allReferences [
 	result addAll: self allIncomingReferencesSenders.
 	result addAll: self allOutgoingReferencesTarget.
 	^ FAMIXTypeGroup
-		withAll: (result reject: [ :obj | obj name = 'uo_datawindow' ])
+		withAll: (result reject: [ :obj | self isGenerallyUsed: obj ])
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
@@ -57,6 +57,12 @@ FamixPWBmajorObject >> cyclomaticComplexity [
 FamixPWBmajorObject >> incomingReferencesSenders [
 	^ ((self incomingReferences collectAsSet: #from)
 		reject: [ :userObject | self toSkipForNow: userObject ]) asSet
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBmajorObject >> isGenerallyUsed: obj [
+	^ {'uo_datawindow' . 'uo_traitement' . 'uo_parametres' . 'uo_dw_detail'.
+	'uo_liste_detail_en_partage'} includes: obj name
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

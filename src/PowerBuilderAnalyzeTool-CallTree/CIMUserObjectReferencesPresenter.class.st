@@ -89,9 +89,9 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		elements: es;
 		normalizeSize: #numberOfMethods.
 	RTHorizontalTreeLayout new
-		on: aView elements;
-		verticalGap: 50;
-		horizontalGap: 50.
+		horizontalGap: 250;
+		verticalGap: 20;
+		on: aView elements.
 	es @ self contextMenu.
 	es
 		@
