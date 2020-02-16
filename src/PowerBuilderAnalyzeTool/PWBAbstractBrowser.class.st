@@ -32,8 +32,13 @@ PWBAbstractBrowser >> accept: anObject [
 { #category : #initialization }
 PWBAbstractBrowser >> connectPresenters [
 	freeze whenActivatedDo: [ self toFrozen ].
-	follow whenDeactivatedDo: [ self toFollow ].
-	highlight whenChangedDo: [ self toHighlight ]
+	follow whenActivatedDo: [ self toFollow ].
+	highlight whenActivatedDo: [ self toHighlight ]
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> currentState: aString [
+	currentState := aString
 ]
 
 { #category : #enumerating }
@@ -53,8 +58,7 @@ PWBAbstractBrowser >> initializePresenters [
 	freeze label: 'Freeze'.
 	follow label: 'Follow'.
 	highlight label: 'Highlight'.
-	follow state: true.
-	self toFollow
+	follow state: false
 ]
 
 { #category : #initialization }
@@ -114,17 +118,17 @@ PWBAbstractBrowser >> selectEntity: anEntity [
 
 { #category : #initialization }
 PWBAbstractBrowser >> toFollow [
-	currentState := 'Follow'
+	self currentState: 'Follow'
 ]
 
 { #category : #initialization }
 PWBAbstractBrowser >> toFrozen [
-	currentState := 'Freeze'
+	self currentState: 'Freeze'
 ]
 
 { #category : #initialization }
 PWBAbstractBrowser >> toHighlight [
-	currentState := 'Highlight'
+	self currentState: 'Highlight'
 ]
 
 { #category : #'as yet unclassified' }

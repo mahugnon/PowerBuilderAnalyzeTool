@@ -29,6 +29,22 @@ PWBMooseModelBrowser >> accept: anObject [
 	FamixPWBEvent} includes: anObject class) not
 ]
 
+{ #category : #accessing }
+PWBMooseModelBrowser >> currentState [
+	^ currentState
+]
+
+{ #category : #accessing }
+PWBMooseModelBrowser >> follow [
+	^ follow
+]
+
+{ #category : #initialization }
+PWBMooseModelBrowser >> initialize [
+	super initialize.
+	freeze state: true
+]
+
 { #category : #initialization }
 PWBMooseModelBrowser >> initializePresenters [
 	super initializePresenters.
@@ -95,8 +111,9 @@ PWBMooseModelBrowser >> searchFor: aText [
 
 { #category : #accessing }
 PWBMooseModelBrowser >> selectEntity: anEntity [
-	((self needUpdate: anEntity)
-		and: [ (self accept: anEntity) and: [ self selected ~= anEntity ] ])
+	self isFreeze
+		ifTrue: [ ^ self ].
+	(self needUpdate: anEntity)
 		ifFalse: [ ^ self ].
 	modelPresenter selectItem: anEntity
 	"self needRebuild: false.

@@ -11,17 +11,13 @@ PWBMooseModelBrowserTest >> setUp [
 ]
 
 { #category : #tests }
-PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
-	self assert: PWBMooseModelBrowser new model pwbMooseModel isNotNil
+PWBMooseModelBrowserTest >> testBrowserDefaultModeIsFreeze [
+	self assert: browser currentState equals: 'Freeze'
 ]
 
 { #category : #tests }
-PWBMooseModelBrowserTest >> testSearch [
-	browser openWithSpec.
-	browser searchFor: 'uo_po'.
-	browser window close.
-	self
-		assert: (browser modelPresenter selectedItem name beginsWith: 'uo_po')
+PWBMooseModelBrowserTest >> testPWBModelIsNotNil [
+	self assert: PWBMooseModelBrowser new model pwbMooseModel isNotNil
 ]
 
 { #category : #tests }
@@ -34,6 +30,13 @@ PWBMooseModelBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
 PWBMooseModelBrowserTest >> testSelectedItemIsNotNil [
 	browser setModelPresenterSelection.
 	self assert: browser modelPresenter selectedItem isNotNil
+]
+
+{ #category : #tests }
+PWBMooseModelBrowserTest >> testSetBrowserStat [
+	self assert: browser currentState equals: 'Freeze'.
+	browser follow state: true.
+	self assert: browser currentState equals: 'Follow'
 ]
 
 { #category : #'as yet unclassified' }
