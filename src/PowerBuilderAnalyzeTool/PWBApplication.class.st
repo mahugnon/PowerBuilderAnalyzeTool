@@ -2,7 +2,8 @@ Class {
 	#name : #PWBApplication,
 	#superclass : #SpApplication,
 	#instVars : [
-		'logger'
+		'logger',
+		'mooseModel'
 	],
 	#classVars : [
 		'Current'

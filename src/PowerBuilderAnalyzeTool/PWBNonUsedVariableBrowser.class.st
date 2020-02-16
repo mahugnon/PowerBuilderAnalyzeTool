@@ -55,6 +55,7 @@ PWBNonUsedVariableBrowser >> attributOrBehaviorListAction [
 
 { #category : #initialization }
 PWBNonUsedVariableBrowser >> connectPresenters [
+	super connectPresenters.
 	self instAndVarListAction.
 	self attributOrBehaviorListAction
 	"self variableTypeListAction"
