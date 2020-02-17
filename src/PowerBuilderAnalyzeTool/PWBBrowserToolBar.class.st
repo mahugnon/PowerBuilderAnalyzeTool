@@ -62,8 +62,8 @@ PWBBrowserToolBar class >> runMe [
 PWBBrowserToolBar >> initializeCallTreeBrowserLuncher [
 	callTreeBrowser := self newButton
 		icon: PWBBrowserIcons callTreeLogo;
-		action: [ PWBCallTreeBrowser run ]";
-		title: 'Open the call graph browser'".
+		action: [ PWBCallTreeBrowser run ];
+		help: 'Open the call graph browser'.
 	callTreeBrowserLabel := self newLabel label: 'Call Graph Browser'
 ]
 
@@ -71,8 +71,8 @@ PWBBrowserToolBar >> initializeCallTreeBrowserLuncher [
 PWBBrowserToolBar >> initializeDuplicationBrowserLuncher [
 	duplicationBrowser := self newButton
 		icon: PWBBrowserIcons duplicationLogo;
-		action: [ PWBDuplicationBrowser runMe ]";
-		title: 'Open the duplication browser'".
+		action: [ PWBDuplicationBrowser runMe ];
+		help: 'Open the duplication browser'.
 	duplicationBrowserLabel := self newLabel label: 'Duplication Browser'
 ]
 
@@ -80,8 +80,8 @@ PWBBrowserToolBar >> initializeDuplicationBrowserLuncher [
 PWBBrowserToolBar >> initializeMooseModelBrowserLauncher [
 	mooseModelBrowser := self newButton
 		icon: PWBBrowserIcons mooseModelLogo;
-		action: [ ";
-		title: 'Open the Source code FamixModel Browser'" PWBMooseModelBrowser runMe ].
+		action: [ PWBMooseModelBrowser runMe ];
+		help: 'Open the Source code FamixModel Browser'.
 	mooseModelBrowserLabel := self newLabel label: 'Model Browser'
 ]
 
@@ -97,8 +97,8 @@ PWBBrowserToolBar >> initializePresenters [
 PWBBrowserToolBar >> initializeSourceTextBrowserLauncher [
 	sourceTextBrowser := self newButton
 		icon: PWBBrowserIcons sourceTextLogo;
-		action: [ PWBSourceTextBrowser runMe ]";
-		title: 'Open the source code Browser'".
+		action: [ PWBSourceTextBrowser runMe ];
+		help: 'Open the source code Browser'.
 	sourceTextBrowserLabel := self newLabel label: 'Source code Browser'
 ]
 

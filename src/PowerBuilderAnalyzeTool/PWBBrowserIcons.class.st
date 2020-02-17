@@ -42,6 +42,25 @@ XA9OiaXA6LfKaMk9NClw29cAXah+/Ei4GnDmu90Rc2hSQFesTIvYoS+Cp9cNa8BhiYDDVgPi
 ]
 
 { #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> duplicationIcon [
+	^ self icons
+			at: #'duplicationIcon'
+			ifAbsentPut:[ Form fromBinaryStream: self duplicationIconContents base64Decoded asByteArray readStream ]
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> duplicationIconContents [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
+SFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
+AAENSURBVDiNzZOxSsNQFIa/23Qxi4tIU6F9B6M+gIPv4uCYEMHRoZDJsToIAefSR3CQTA7m
+CZKCuZC13dL2ONxS1NxCWxd/OFw4nP/jh3MugOxQkYjwvVoAv5u2CoJggUXK+AVJXiAvbDMA
+aF2ipjPdcd1K6jptPT9dA7TXE3mBOveh37MCuubxKCYeo/G63/4x1e/B0RzK941JcCrUyecx
+j2dREwDGnL9C99QOODyAq0sPpe7JEqcJAGO+uNmcYpWFLDFb+Iv+CSAMw4XW5d6A2ziO79R0
+pvcCiMhARAYd160oJlBV5up3SACA1HUqo/EH6Ztmudye0Pg4Qz+S9GEu22joi/2QssQhS7YK
+8AUHPbtFnmq2zAAAAABJRU5ErkJggg=='
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
 PWBBrowserIcons class >> duplicationLogo [
 	^ self icons
 			at: #'duplicationLogo'

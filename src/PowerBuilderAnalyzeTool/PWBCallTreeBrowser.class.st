@@ -101,7 +101,7 @@ PWBCallTreeBrowser >> initializeToolBar [
 	browseDuplicationButton := self newButton
 		label: 'Browse duplication';
 		help: 'Browse duplication between functions.';
-		iconName: #duplication;
+		icon: PWBBrowserIcons duplicationIcon;
 		action: [ PWBDuplicationBrowser lunchOn: model selected ].
 	zoomInButton := self newButton
 		label: 'Zoom In';
