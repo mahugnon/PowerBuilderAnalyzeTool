@@ -24,8 +24,7 @@ DuplicationBrowserRoassalViewByDuplication >> drawDuplicationDiagramOn: aView [
 			group
 				addAll:
 					(RTBox new
-						fillColor:
-								[ :elt | model colorMap at: elt entity ifAbsent: [ Color veryLightGray ] ];
+						fillColor: [ :elt | model colorFor: elt ];
 						elementsOn: each members).
 			group @ onclick
 				@

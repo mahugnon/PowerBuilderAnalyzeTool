@@ -82,11 +82,17 @@ PWBDuplicationBrowser >> accept: anObject [
 
 { #category : #initialization }
 PWBDuplicationBrowser >> connectPresenters [
-	super connectPresenters .
+	super connectPresenters.
 	minNumberOfLinesTextInput
 		whenTextChangedDo: [ :aText | model minNumberOfLines: aText asInteger ].
 	minNumberOfCharactersInput
-		whenTextChangedDo: [ :aText | model minNumberOfCharacters: aText asInteger ]
+		whenTextChangedDo: [ :aText | model minNumberOfCharacters: aText asInteger ].
+	duplicationViewSelector
+		whenSelectedItemChangedDo: [ :selection | 
+			duplicationResultPanel := self instantiate: selection.
+			duplicationResultPanel model: model.
+			self needRebuild: false.
+			self buildWithSpec ]
 ]
 
 { #category : #initialization }
