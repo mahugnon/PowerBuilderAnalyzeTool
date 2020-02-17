@@ -40,6 +40,18 @@ PWBBrowserToolBar class >> defaultSpec [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+PWBBrowserToolBar class >> lunchPWBAnalyzeToolOn: aBuilder [
+	<worldMenu>
+	(aBuilder item: #PWBAnalyzeTool)
+		order: 10;
+		help:
+			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
+		label: 'PWBAnalyzeTool';
+		icon: PWBBrowserIcons pwbAnalyzeTool;
+		action: [ self runMe ]
+]
+
 { #category : #examples }
 PWBBrowserToolBar class >> runMe [
 	<script>

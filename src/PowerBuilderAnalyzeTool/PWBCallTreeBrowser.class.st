@@ -52,18 +52,6 @@ PWBCallTreeBrowser class >> defaultSpec [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
-PWBCallTreeBrowser class >> lunchCallTree: aBuilder [
-	<worldMenu>
-	(aBuilder item: #LaunchPWBCallTree)
-		order: 10;
-		help:
-			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
-		label: 'PWB callTree';
-		iconName: #callGraphIcon;
-		action: [ PWBApplication current run ]
-]
-
 { #category : #running }
 PWBCallTreeBrowser class >> run [
   < example>

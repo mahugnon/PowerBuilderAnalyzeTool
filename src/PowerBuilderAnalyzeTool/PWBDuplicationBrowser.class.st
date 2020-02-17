@@ -62,19 +62,6 @@ PWBDuplicationBrowser class >> defaultSpec [
 ]
 
 { #category : #'as yet unclassified' }
-PWBDuplicationBrowser class >> duplicationView: aBuilder [
-	<worldMenu>
-	self createIcon.
-	(aBuilder item: #Duplication)
-		order: 10;
-		help:
-			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
-		label: 'PWB Duplication';
-		iconName: #duplication;
-		action: [ self runMe ]
-]
-
-{ #category : #'as yet unclassified' }
 PWBDuplicationBrowser class >> lunchOn: anObject [
 	self new
 		mooseModel: anObject;

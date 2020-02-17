@@ -95,6 +95,32 @@ fIVapDtA9t3cvCHaAYHRKkzAUBcJExVgWaEUW7wXCRISgJE3D6CmVE62bPIOvyMSKCTAUnVx
 1Rth5wC8AeCrVGYYHwyvecLPv3v58KftYgpc4A8xC/C+O+jsgQAAAABJRU5ErkJggg=='
 ]
 
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> pwbAnalyzeTool [
+	^ self icons
+			at: #'pwbAnalyzeTool'
+			ifAbsentPut:[ Form fromBinaryStream: self pwbAnalyzeToolIconContents base64Decoded asByteArray readStream ]
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> pwbAnalyzeToolIconContents [. 
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
+SFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
+AAKZSURBVDiNfZLJT5NRFMV/H3aADiAtpS3Qr8hkaCglYlDUBQjE4BhQY0wMO/8ME0N0bTSu
+XcjCEEwqxKiREGUQRwSqpt2UoTEoLQUKbb9Cgc8FghQJZ/Xufeee9+7JEfgfOld5zi3Rmlkl
+yIIcCC57xn4E24HoHlyEnUVGBrZal+35+Wan81soQwBwmhLyy97v3qGR6TOSxM/dAoqdhbPU
+0lF9orKyP+c62I0ADERDQvUxHIuRlY7P337X7xZI23EuuNRQ4hiVRJJCOnM+D3M+D6tpGr7E
+RS42FDmA/P0EbDrNgYNyvoNIwL/djAT8yHkOdFqVARD3W2F6Kb4WZsFnyXTWsxaPbRI0WlY9
+fSyqVhcL6mruKjQZia2B2O/Q0E6B4GO3L9Z6JRvvegKjqwaAJe8IVbqf9AyGOHyzLcUD7yO3
+YUsgu7Ss/Nm5lqt279env+r0Tywet1sAaLCu0PnWFz56pDFHNTa3PWy321lXZqHIzDSVFBbZ
+3Y3NFyokKS4n1SXyYrJkTit5Y8nkmjA4o85uNViMrsQskcgqyrQ0NEoF3cNT6PT6hCLfZn1w
+4fK1CqVSzYvurgVXpTOv1FFDns1hAojGopSN9NHrD2DL0qNXKdmQVejTtZBMoJCk2HRgejL6
+fuBN6OzZ5kNKhYIJv5+98Gs5ilhgYUOWt3tbSXQB4r37D3vGx0ZpaGoitryZXEmSWH/Vhcts
+ZDYax6zTANC9vMFUUu7fMnEcyFar1SkvanRahoffcbyljXmDASUw//fuRmEhd9pvp0Y5FApi
+NBr/rRAEk8kEwKePH1LEZ2ZmgNQkYso1Ew6HKSouxpxrpqi4mHA4TJ7Vus0psInUnjyFTRRT
+PAAw1p9u7DTnmlJ+tR8mJiZf/wFEjvAU9ji/pwAAAABJRU5ErkJggg=='
+]
+
 { #category : #initialization }
 PWBBrowserIcons class >> resetIcons [
 	<script>
