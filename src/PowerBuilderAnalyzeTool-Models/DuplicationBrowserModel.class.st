@@ -104,8 +104,8 @@ DuplicationBrowserModel >> initialize [
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new.
-	minNumberOfLines := 50.
-	minNumberOfCharacters := 55
+	minNumberOfLines := 20.
+	minNumberOfCharacters := 160
 ]
 
 { #category : #initialization }
@@ -141,7 +141,9 @@ DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
 
 { #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ pwbMooseModel content
+	^ pwbMooseModel class = FAMIXTypeGroup
+		ifTrue: [ pwbMooseModel allMethods ]
+		ifFalse: [ pwbMooseModel content ]
 ]
 
 { #category : #initialization }
