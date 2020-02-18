@@ -6,7 +6,8 @@ Class {
 		'duplicationViewSelector',
 		'minNumberOfLinesTextInput',
 		'minNumberOfCharactersInput',
-		'okButton'
+		'okButton',
+		'duplicatedEntityList'
 	],
 	#classInstVars : [
 		'colorMap'
@@ -40,13 +41,14 @@ PWBDuplicationBrowser class >> createIcon [
 PWBDuplicationBrowser class >> defaultSpec [
 	^ super defaultSpec
 		add:
-			(SpBoxLayout newHorizontal
+			(SpPanedLayout newHorizontal
 				add:
 					(SpBoxLayout newVertical
 						add: #duplicationViewSelector
 							withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 						add: #duplicationResultPanel;
 						yourself);
+				add: #duplicatedEntityList;
 				yourself);
 		add:
 			(SpBoxLayout newHorizontal
@@ -93,6 +95,11 @@ PWBDuplicationBrowser >> connectPresenters [
 			duplicationResultPanel model: model.
 			self needRebuild: false.
 			self buildWithSpec ]
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> duplicatedEntityList [
+	^ duplicatedEntityList
 ]
 
 { #category : #initialization }
@@ -148,8 +155,7 @@ PWBDuplicationBrowser >> initializeOkButton [
 		label: 'Do it';
 		iconName: #glamorousPlay;
 		action: [ model computeDuplication ];
-		yourself.
-	SpButtonPresenter
+		yourself
 ]
 
 { #category : #initialization }
@@ -160,7 +166,9 @@ PWBDuplicationBrowser >> initializePresenters [
 	self initializeDuplicationRoassalViewSelector.
 	self initializeMinNumberOfLinesTextInput.
 	self initializeMinNumberOfCharactersInput.
-	self initializeOkButton
+	self initializeOkButton.
+	duplicatedEntityList := self newList.
+	 
 ]
 
 { #category : #accessing }
