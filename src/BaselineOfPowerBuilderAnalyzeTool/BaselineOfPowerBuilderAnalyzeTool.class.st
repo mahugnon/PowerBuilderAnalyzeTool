@@ -9,8 +9,9 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ self baselineOfRoassal2Spec2: spec.
+		do: [ 
 			self baselineOfPowerBuilderParser: spec.
+			self baselineOfRoassal2Spec2: spec.
 			self baselineOfColorsExtensions: spec.
 			spec
 				package: 'Duplication';
