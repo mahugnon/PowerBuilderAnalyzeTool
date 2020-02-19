@@ -25,5 +25,17 @@ PWBSelectedEntityLog >> entity [
 { #category : #accessor }
 PWBSelectedEntityLog >> entity: aSelectedEntity [
 	entity := aSelectedEntity.
+	time := DateAndTime now.
 	self activate
+]
+
+{ #category : #printing }
+PWBSelectedEntityLog >> printString [
+	^ Text new
+		append: entity name , '  ';
+		append:
+			(Text
+				string: time epiceaBrowsersAsString
+				attributes: {(TextColor new color: Color blue)});
+		yourself
 ]

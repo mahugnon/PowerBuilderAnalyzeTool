@@ -2,7 +2,8 @@ Class {
 	#name : #PWBLog,
 	#superclass : #Object,
 	#instVars : [
-		'logger'
+		'logger',
+		'time'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -25,4 +26,14 @@ PWBLog >> logger [
 { #category : #accessing }
 PWBLog >> logger: aPWBLogger [
 	logger := aPWBLogger
+]
+
+{ #category : #accessing }
+PWBLog >> time [
+	^ time
+]
+
+{ #category : #accessing }
+PWBLog >> time: anObject [
+	time := anObject
 ]
