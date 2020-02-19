@@ -1,5 +1,5 @@
 Class {
-	#name : #PWBBrowserToolBar,
+	#name : #PWBAnalyzeToolAppLauncher,
 	#superclass : #PWBPresenter,
 	#instVars : [
 		'callTreeBrowser',
@@ -9,13 +9,15 @@ Class {
 		'mooseModelBrowser',
 		'mooseModelBrowserLabel',
 		'sourceTextBrowser',
-		'sourceTextBrowserLabel'
+		'sourceTextBrowserLabel',
+		'logBrowser',
+		'logBrowserLabel'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
 
 { #category : #specs }
-PWBBrowserToolBar class >> defaultSpec [
+PWBAnalyzeToolAppLauncher class >> defaultSpec [
 	^ SpBoxLayout newHorizontal
 		add:
 			(SpBoxLayout newVertical
@@ -37,11 +39,16 @@ PWBBrowserToolBar class >> defaultSpec [
 				add: #sourceTextBrowserLabel;
 				add: #sourceTextBrowser;
 				yourself);
+		add:
+			(SpBoxLayout newVertical
+				add: #logBrowserLabel;
+				add: #logBrowser;
+				yourself);
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
-PWBBrowserToolBar class >> lunchPWBAnalyzeToolOn: aBuilder [
+PWBAnalyzeToolAppLauncher class >> lunchPWBAnalyzeToolOn: aBuilder [
 	<worldMenu>
 	(aBuilder item: #PWBAnalyzeTool)
 		order: 10;
@@ -53,13 +60,13 @@ PWBBrowserToolBar class >> lunchPWBAnalyzeToolOn: aBuilder [
 ]
 
 { #category : #examples }
-PWBBrowserToolBar class >> runMe [
+PWBAnalyzeToolAppLauncher class >> runMe [
 	<script>
 	self new openWithSpec
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializeCallTreeBrowserLuncher [
+PWBAnalyzeToolAppLauncher >> initializeCallTreeBrowserLuncher [
 	callTreeBrowser := self newButton
 		icon: PWBBrowserIcons callTreeLogo;
 		action: [ PWBCallTreeBrowser run ];
@@ -68,7 +75,7 @@ PWBBrowserToolBar >> initializeCallTreeBrowserLuncher [
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializeDuplicationBrowserLuncher [
+PWBAnalyzeToolAppLauncher >> initializeDuplicationBrowserLuncher [
 	duplicationBrowser := self newButton
 		icon: PWBBrowserIcons duplicationLogo;
 		action: [ PWBDuplicationBrowser runMe ];
@@ -77,7 +84,16 @@ PWBBrowserToolBar >> initializeDuplicationBrowserLuncher [
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializeMooseModelBrowserLauncher [
+PWBAnalyzeToolAppLauncher >> initializeLogBrowserLuncher [
+	logBrowser := self newButton
+		icon: PWBBrowserIcons loggerLogo;
+		action: [ PWBLogBrower runMe ];
+		help: 'Open activity logs'.
+	logBrowserLabel := self newLabel label: 'Logs Browser'
+]
+
+{ #category : #initialization }
+PWBAnalyzeToolAppLauncher >> initializeMooseModelBrowserLauncher [
 	mooseModelBrowser := self newButton
 		icon: PWBBrowserIcons mooseModelLogo;
 		action: [ PWBMooseModelBrowser runMe ];
@@ -86,15 +102,16 @@ PWBBrowserToolBar >> initializeMooseModelBrowserLauncher [
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializePresenters [
+PWBAnalyzeToolAppLauncher >> initializePresenters [
 	self initializeDuplicationBrowserLuncher.
 	self initializeCallTreeBrowserLuncher.
 	self initializeMooseModelBrowserLauncher.
-	self initializeSourceTextBrowserLauncher
+	self initializeSourceTextBrowserLauncher.
+	self initializeLogBrowserLuncher
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializeSourceTextBrowserLauncher [
+PWBAnalyzeToolAppLauncher >> initializeSourceTextBrowserLauncher [
 	sourceTextBrowser := self newButton
 		icon: PWBBrowserIcons sourceTextLogo;
 		action: [ PWBSourceTextBrowser runMe ];
@@ -103,7 +120,7 @@ PWBBrowserToolBar >> initializeSourceTextBrowserLauncher [
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> initializeWindow: aWindowPresenter [
+PWBAnalyzeToolAppLauncher >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter whenClosedDo: [ self application close ].
 	aWindowPresenter
@@ -113,6 +130,6 @@ PWBBrowserToolBar >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #initialization }
-PWBBrowserToolBar >> title [
+PWBAnalyzeToolAppLauncher >> title [
 ^'PWBAnalyzeTool Luncher'
 ]
