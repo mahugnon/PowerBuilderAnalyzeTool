@@ -34,7 +34,11 @@ PWBLogBrower >> initializePresenters [
 	logsPresenter := self newList.
 	logsPresenter
 		items: self logger logs;
-		display: #printString
+	"	display: [ :elt | 
+			elt printString.
+			self halt ];"
+		sortingBlock: [ :a :b | a time > b time ];
+		headerTitle: '             Activity Logs       '
 ]
 
 { #category : #initialization }

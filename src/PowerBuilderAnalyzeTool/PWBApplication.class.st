@@ -56,5 +56,5 @@ PWBApplication >> refreshBrowsersWith: anEntity [
 
 { #category : #accessing }
 PWBApplication >> start [
-	PWBBrowserToolBar runMe
+	PWBAnalyzeToolAppLauncher runMe
 ]
