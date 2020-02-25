@@ -12,24 +12,30 @@ CIMUserObjectReferencesPresenter class >> run [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> contextMenu [
-	^ RTMenuActivable new
-		item: 'Mark as dead'
-			action: [ :elt | 
-			elt model tag: FamixPWBTag isCIMObsolette.
-			elt color: (ColorObject colorFor: elt model) ];
-		item: 'Mark as to refactor'
-			action: [ :elt | 
-			elt model tag: FamixPWBTag toRefactor.
-			elt color: (ColorObject colorFor: elt model) ];
-		item: 'Mark as not sure'
-			action: [ :elt | 
-			elt model tag: FamixPWBTag notSure.
-			elt color: (ColorObject colorFor: elt model) ];
-		item: 'Unmark'
-			action: [ :elt | 
-			elt model tag: nil.
-			elt color: (ColorObject colorFor: elt model) ];
-		item: 'add new Tags ...' action: [ :elt |  ]
+	^ RSMenuActivable new
+		menuDo: [ :menu :element | 
+			menu
+				add: 'Mark as dead'
+					target: element
+					selector: #markAs:
+					argument: #('Obsolette');
+				add: 'Mark as to refactor'
+					target: element
+					selector: #markAs:
+					argumentList: #('To be refactored');
+				add: 'Mark as not sure'
+					target: element
+					selector: #markAs:
+					argumentList: #('Not sure');
+				add: 'Unmark'
+					target: element
+					selector: #unMark
+					argument: #();
+				add: 'add new Tags ...'
+					target: element
+					selector: #newTag:
+					argument: #(element) ];
+		yourself
 ]
 
 { #category : #initialization }
@@ -65,33 +71,32 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
 ]
 
 { #category : #initialization }
-CIMUserObjectReferencesPresenter >> drawOn: aView [
+CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	| es eb |
-	aView @ RTDraggableView @ RTZoomableView.
-	es := (RTEllipse new color: [ :elt | ColorObject colorFor: elt ])
-		elementsOn: self pwbMooseModel.
-	aView addAll: es.
-	es @ RTDraggable.
-	es
-		@
-			((RTLabeled new text: #name)
-				fontSize: 5;
-				top).
-	eb := RTEdgeBuilder new.
-	eb shape arrowedLine.
-	eb
-		view: aView;
-		highlightable;
-		elements: es;
+	aCanvas @ RSDraggableCanvas @ RSZoomToFitCanvas.
+	es := RSEllipse new color: [ :elt | ColorObject colorFor: elt ].
+	es := (self pwbMooseModel
+		collect: [ :modelElement | 
+			| elipse |
+			elipse := RSEllipse new
+				draggable;
+				model: modelElement;
+				color: (ColorObject colorFor: modelElement);
+				yourself ]) as: RSGroup.
+	es @ RSLabeled.
+	aCanvas addAll: es.
+	eb := RSEdgeBuilder arrowedLine
+		canvas: aCanvas;
+		shapes: es;
 		moveBehind;
 		connectFromAll: [ :each | each incomingReferencesSenders ].
-	RTMetricNormalizer new
-		elements: es;
-		normalizeSize: #numberOfMethods.
-	RTHorizontalTreeLayout new
+	RSNormalizer size
+		shapes: es;
+		normalize: #numberOfMethods.
+	RSHorizontalTreeLayout new
 		horizontalGap: 250;
 		verticalGap: 20;
-		on: aView elements.
+		on: aCanvas nodes.
 	es @ self contextMenu.
 	es
 		@
@@ -99,26 +104,27 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 				model: self guiModel;
 				application: self application;
 				yourself).
-	self legend: aView.
+	self legend: aCanvas.
 	"	onDemand: 'Show legend';"
-	^ aView build
+	aCanvas @ RSCanvasController.
+	^ aCanvas
 ]
 
 { #category : #initialization }
-CIMUserObjectReferencesPresenter >> legend: aView [
-	RTLegendBuilder new
-		textSize: 3;
-		gapSize: 1;
-		"	onDemand: 'Show legend';"
-			view: aView;
-		below;
-		addText: 'Each circle is a Powerbuilder user object ';
-		addText:
+CIMUserObjectReferencesPresenter >> legend: aCanvas [
+	| legend |
+	legend := RSLegend new.
+	legend defaultLabel fontSize: 30.
+	legend
+		container: aCanvas;
+		text: 'Each circle is a Powerbuilder user object ';
+		text:
 			'Each arrow is a refence from its source user objet to the target object';
-		addColor: Color paleGreen text: 'Selected user object';
-		addColor: Color red text: 'User object to remove';
-		addColor: Color orange text: 'User object to remove refactor';
-		addColor: Color yellow
-			text: 'Not sure of action to perform about the user object';
+		text: 'Selected user object' withCircleColor: Color paleGreen;
+		text: 'User object to remove' withCircleColor: Color red;
+		text: 'User object to remove refactor'
+			withCircleColor: Color orange;
+		text: 'Not sure of action to perform about the user object'
+			withCircleColor: Color yellow;
 		build
 ]

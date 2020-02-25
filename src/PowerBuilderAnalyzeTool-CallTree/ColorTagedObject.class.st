@@ -6,10 +6,10 @@ Class {
 
 { #category : #private }
 ColorTagedObject class >> accept: anEntity [
-	^ anEntity tag isNotNil
+	^ (anEntity allTags & self futureActionTags) isNotEmpty
 ]
 
 { #category : #accessing }
 ColorTagedObject >> color [
-	^ entity tag color
+	^ (entity allTags & self class futureActionTags) anyOne color
 ]

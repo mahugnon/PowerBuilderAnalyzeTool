@@ -6,7 +6,7 @@ Class {
 
 { #category : #private }
 ColorNonTagedObject class >> accept: anEntity [
-	^ anEntity tag isNil
+	^ (anEntity allTags & self futureActionTags) isEmpty
 ]
 
 { #category : #accessing }

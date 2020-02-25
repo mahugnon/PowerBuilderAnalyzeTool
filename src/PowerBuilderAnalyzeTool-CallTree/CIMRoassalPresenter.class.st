@@ -53,12 +53,11 @@ CIMRoassalPresenter >> guiModel: anObject [
 
 { #category : #initialization }
 CIMRoassalPresenter >> initializeDiagram [
-	diagram := self instantiate: RoassalModel.
+	diagram := self instantiate: SpRoassalPresenter.
 	diagram
-		script: [ :aView :canvas | 
-			self drawOn: aView.
-			view := aView.
-			aView canvas focusOnCenterScaled ]
+		script: [ :canvas | 
+			self drawOn: canvas.
+			view := canvas ]
 ]
 
 { #category : #initialization }
