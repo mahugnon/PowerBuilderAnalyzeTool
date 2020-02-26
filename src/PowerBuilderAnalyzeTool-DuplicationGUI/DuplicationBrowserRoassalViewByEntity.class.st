@@ -32,65 +32,18 @@ DuplicationBrowserRoassalViewByEntity >> colorBoxsUsing: element [
 
 { #category : #initialization }
 DuplicationBrowserRoassalViewByEntity >> drawOn: aCanvas [
-	| locationClick |
-	locationClick := InsideBoxClick new model: model.
+	| labelIteraction |
 	aCanvas @ RSDraggableCanvas.
 	aCanvas @ RSZoomableCanvas.
-	etitiesShapes := model duplicationEntities keys
-		collect: [ :anEntity | 
-			| composite border cloneBoxs |
-			cloneBoxs := (model duplicationEntities at: anEntity)
-				collect: [ :clone | 
-					| box |
-					box := RSBox new
-						model: clone;
-						color: (model colorFor: clone);
-						size: 20;
-						yourself.
-					box
-						when: RSMouseLeftClick
-						do: [ :evt | self processCloneClickEvent: evt ] ]
-				as: RSGroup.
-
-			"cloneShapes
-				@
-					(RSPopup new
-						text: [ :el | 
-							'entité: ' , el entity name , String cr , 'Ligne debut: '
-								, el startLine printString , String cr , '  Ligne fin: '
-								, el endLine printString , String cr , 'Taux : '
-								, (el endLine - el startLine + 1) asString , ' lignes sur:  '
-								, el entitySourceCode lineCount asString ];
-						yourself)."
-			RSGridLayout on: cloneBoxs.
-			border := RSBorder new
-				color: Color black;
-				width: 2.
-			composite := RSComposite new.
-		
-			composite shapes: cloneBoxs.
-			composite border: border.
-			composite color: Color white.
-			composite model: anEntity.
-			composite @ RSAnimatedPopup @ RSDraggable.
-			composite padding: 10.
-			composite
-				when: RSMouseClick
-				do:
-					[ :event | "composite@ (OutSideBoxClick new model: model)." self processEntityClickEvent: event ] ]
-		as: RSGroup.
+	labelIteraction := RSLabeled new
+		text: [ :elt | elt mooseName ];
+		yourself.
+	labelIteraction shapeBuilder labelShape fontSize: 5.
+	self buildEntityShapes.
 	RSGridLayout new
-		on: etitiesShapes;
-		gapSize: 20.
-	"	es
-		@
-			(RSPopup new
-				text: [ :entity | 
-					'nom: ' , entity name , String cr , 'Loc: '
-						, entity numberOfLinesOfCode asString , String cr
-						, 'Nbr clone: ' , entity cloneLocations size asString ];
-				yourself)."
-	etitiesShapes @ (RSLabeled new text: [ :elt | elt mooseName ]).
+		gapSize: 100;
+		on: etitiesShapes.
+	etitiesShapes @ labelIteraction.
 	aCanvas addAll: etitiesShapes.
 	aCanvas @ RSCanvasController.
 	canvas := aCanvas.
