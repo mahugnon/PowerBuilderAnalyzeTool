@@ -1,6 +1,10 @@
 Class {
 	#name : #DuplicationBrowserRoassalViewByEntity,
 	#superclass : #DuplicationBrowserRoassalView,
+	#instVars : [
+		'etitiesShapes',
+		'cloneShapes'
+	],
 	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-roassal'
 }
 
@@ -9,57 +13,104 @@ DuplicationBrowserRoassalViewByEntity class >> viewName [
 	^ 'View by cloned entities'
 ]
 
+{ #category : #accessing }
+DuplicationBrowserRoassalViewByEntity >> cloneShapes [
+	cloneShapes
+		ifNil: [ cloneShapes := etitiesShapes flatCollect: #nodes ].
+	^ cloneShapes
+]
+
+{ #category : #hooks }
+DuplicationBrowserRoassalViewByEntity >> colorBoxsUsing: element [
+	model updateFragmentColorFor: element model.
+	PWBApplication current globallySelect: element model.
+	model selected: element model.
+	^ self cloneShapes
+		do:
+			[ :aCloneShape | aCloneShape color: (model colorFor: aCloneShape model) ]
+]
+
 { #category : #initialization }
-DuplicationBrowserRoassalViewByEntity >> drawDuplicationDiagramOn: aView [
-	| es locationClick |
+DuplicationBrowserRoassalViewByEntity >> drawOn: aCanvas [
+	| locationClick |
 	locationClick := InsideBoxClick new model: model.
-	aView @ RTDraggableView.
-	aView @ RTZoomableView.
-	es := (RTBox new
-		fillColor: Color white;
-		borderColor: Color gray) elementsOn: model duplicationEntities keys.
-	aView addAll: es.
-	RTNest new
-		for: es
-		add: [ :group :each | 
-			group
-				addAll:
-					(RTBox new
-						fillColor: [ :elt | model colorFor: elt ];
-						elementsOn: (model duplicationEntities at: each)).
-			group @ locationClick.
-			group
+	aCanvas @ RSDraggableCanvas.
+	aCanvas @ RSZoomableCanvas.
+	etitiesShapes := model duplicationEntities keys
+		collect: [ :anEntity | 
+			| composite border cloneBoxs |
+			cloneBoxs := (model duplicationEntities at: anEntity)
+				collect: [ :clone | 
+					| box |
+					box := RSBox new
+						model: clone;
+						color: (model colorFor: clone);
+						size: 20;
+						yourself.
+					box
+						when: RSMouseLeftClick
+						do: [ :evt | self processCloneClickEvent: evt ] ]
+				as: RSGroup.
+
+			"cloneShapes
 				@
-					(RTPopup new
+					(RSPopup new
 						text: [ :el | 
 							'entité: ' , el entity name , String cr , 'Ligne debut: '
 								, el startLine printString , String cr , '  Ligne fin: '
 								, el endLine printString , String cr , 'Taux : '
 								, (el endLine - el startLine + 1) asString , ' lignes sur:  '
 								, el entitySourceCode lineCount asString ];
-						yourself).
-			RTGridLayout new
-				gapSize: 5;
-				applyOn: group ].
-	RTGridLayout new
-		gapSize: 60;
-		applyOn: es.
-	es @ RTDraggable.
-	es
+						yourself)."
+			RSGridLayout on: cloneBoxs.
+			border := RSBorder new
+				color: Color black;
+				width: 2.
+			composite := RSComposite new.
+		
+			composite shapes: cloneBoxs.
+			composite border: border.
+			composite color: Color white.
+			composite model: anEntity.
+			composite @ RSAnimatedPopup @ RSDraggable.
+			composite padding: 10.
+			composite
+				when: RSMouseClick
+				do:
+					[ :event | "composite@ (OutSideBoxClick new model: model)." self processEntityClickEvent: event ] ]
+		as: RSGroup.
+	RSGridLayout new
+		on: etitiesShapes;
+		gapSize: 20.
+	"	es
 		@
-			(RTPopup new
+			(RSPopup new
 				text: [ :entity | 
 					'nom: ' , entity name , String cr , 'Loc: '
 						, entity numberOfLinesOfCode asString , String cr
 						, 'Nbr clone: ' , entity cloneLocations size asString ];
-				yourself).
-	es
-		@
-			(RTLabeled new
-				text: [ :elt | elt mooseName ];
-				fontSize: 5;
-				top).
-	es @ (OutSideBoxClick new model: model).
-	locationClick view: aView.
-	^ aView
+				yourself)."
+	etitiesShapes @ (RSLabeled new text: [ :elt | elt mooseName ]).
+	aCanvas addAll: etitiesShapes.
+	aCanvas @ RSCanvasController.
+	canvas := aCanvas.
+	^ aCanvas
+]
+
+{ #category : #initialization }
+DuplicationBrowserRoassalViewByEntity >> processCloneClickEvent: evt [
+	| shape |
+	shape := evt shape.
+	self cloneShapes
+		do: [ :aCloneShape | 
+			aCloneShape model clonedFragment = shape model clonedFragment
+				ifTrue: [ aCloneShape color: Color lightGreen ]
+				ifFalse: [ aCloneShape color: Color gray ] ].
+	model selectedFragmentLocation: shape model.
+	PWBApplication current globallySelect: shape model
+]
+
+{ #category : #initialization }
+DuplicationBrowserRoassalViewByEntity >> processEntityClickEvent: evt [
+	self colorBoxsUsing: evt shape
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #InsideBoxClick,
-	#superclass : #RTInteraction,
+	#superclass : #RSInteraction,
 	#instVars : [
 		'model',
 		'view'
@@ -19,8 +19,13 @@ InsideBoxClick >> initializeElement1: element [
         model addFragment: element model color: Color random ]
 ]
 
+{ #category : #accessing }
+InsideBoxClick >> model: aDuplicationBrowserModel [ 
+	model := aDuplicationBrowserModel
+]
+
 { #category : #hooks }
-InsideBoxClick >> initializeElement: element [
+InsideBoxClick >> onShape: element [
 	element announcer
 		when: TRMouseClick
 		do: [ view nestedElements
@@ -30,11 +35,6 @@ InsideBoxClick >> initializeElement: element [
 						ifFalse: [ nested color: Color gray ] ].
 			model selectedFragmentLocation: element model.
 			PWBApplication current globallySelect: element model ]
-]
-
-{ #category : #accessing }
-InsideBoxClick >> model: aDuplicationBrowserModel [ 
-	model := aDuplicationBrowserModel
 ]
 
 { #category : #accessing }

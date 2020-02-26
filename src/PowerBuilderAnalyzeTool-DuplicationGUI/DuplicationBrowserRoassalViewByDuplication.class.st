@@ -10,7 +10,7 @@ DuplicationBrowserRoassalViewByDuplication class >> viewName [
 ]
 
 { #category : #initialization }
-DuplicationBrowserRoassalViewByDuplication >> drawDuplicationDiagramOn: aView [
+DuplicationBrowserRoassalViewByDuplication >> drawOn: aView [
 	| es onclick |
 	onclick := InsideBoxClick new model: model.
 	aView @ RTDraggableView @ RTZoomableView.

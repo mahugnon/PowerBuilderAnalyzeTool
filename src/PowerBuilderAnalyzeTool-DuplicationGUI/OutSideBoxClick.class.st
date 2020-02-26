@@ -1,6 +1,6 @@
 Class {
 	#name : #OutSideBoxClick,
-	#superclass : #RTInteraction,
+	#superclass : #RSInteraction,
 	#instVars : [
 		'model',
 		'elements'
@@ -22,14 +22,14 @@ OutSideBoxClick >> elements: aCollection [
 	elements := aCollection
 ]
 
-{ #category : #hooks }
-OutSideBoxClick >> initializeElement: element [
-	element announcer
-		when: TRMouseClick
-		do: [ self colorBoxsUsing: element ]
-]
-
 { #category : #accessing }
 OutSideBoxClick >> model: aDuplicationBrowserModel [
   model := aDuplicationBrowserModel
+]
+
+{ #category : #hooks }
+OutSideBoxClick >> onShape: element [
+	element announcer
+		when: TRMouseClick
+		do: [ self colorBoxsUsing: element ]
 ]

@@ -3,7 +3,8 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
-		'duplicationDiagram'
+		'duplicationDiagram',
+		'canvas'
 	],
 	#category : #'PowerBuilderAnalyzeTool-DuplicationGUI-roassal'
 }
@@ -25,16 +26,20 @@ DuplicationBrowserRoassalView class >> views [
 	^ self subclasses
 ]
 
+{ #category : #'as yet unclassified' }
+DuplicationBrowserRoassalView >> drawDuplicationDiagramOn: anObject [
+
+]
+
 { #category : #initialization }
-DuplicationBrowserRoassalView >> drawDuplicationDiagramOn: aView [
+DuplicationBrowserRoassalView >> drawOn: aView [
 	^ self subclassResponsibility
 ]
 
 { #category : #initialization }
 DuplicationBrowserRoassalView >> initializeDuplicationDiagram [
-  duplicationDiagram := self instantiate: RoassalModel.
-  duplicationDiagram script: [:aView :canvas |  self drawDuplicationDiagramOn: aView.
-        aView canvas focusOnCenterScaled ]
+	duplicationDiagram := self instantiate: SpRoassalPresenter.
+	duplicationDiagram script: [ :aCanvas | self drawOn: aCanvas ]
 ]
 
 { #category : #initialization }

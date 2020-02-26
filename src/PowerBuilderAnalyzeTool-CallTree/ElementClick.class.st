@@ -41,13 +41,3 @@ ElementClick >> initializeElement: element [
 ElementClick >> model: aCollection [ 
 	model := aCollection
 ]
-
-{ #category : #hooks }
-ElementClick >> onShape: element [
-	element announcer
-		when: TRMouseClick
-		do: [ model selected: element model.
-			self colorSelectedElement: element.
-			self application globallySelect: element model
-			"self halt" ]
-]
