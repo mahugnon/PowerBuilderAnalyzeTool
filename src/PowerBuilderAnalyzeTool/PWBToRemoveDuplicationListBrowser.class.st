@@ -68,6 +68,6 @@ PWBToRemoveDuplicationListBrowser >> title [
 
 { #category : #updating }
 PWBToRemoveDuplicationListBrowser >> update [
-	list items: model pwbMooseModel.
+	list items: model pwbMooseModel keys.
 	super update
 ]

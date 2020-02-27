@@ -103,7 +103,7 @@ PWBDuplicationBrowser >> initializeBrowseListButton [
 	browseListButton label: 'Browser list'.
 	browseListButton
 		action: [ PWBToRemoveDuplicationListBrowser
-				openWith: model duplicationEntities keys ]
+				openWith: model duplicationEntities ]
 ]
 
 { #category : #initialization }

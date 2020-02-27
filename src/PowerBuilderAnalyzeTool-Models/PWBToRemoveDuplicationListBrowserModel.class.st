@@ -6,12 +6,28 @@ Class {
 
 { #category : #'default actions' }
 PWBToRemoveDuplicationListBrowserModel >> exportToCSV [
-	self halt.
-	self flag: #Todo
+	'DuplicatedFunction.csv' asFileReference
+		writeStreamDo: [ :aStream | 
+			aStream
+				<< 'Object PWB';
+				nextPut: $,;
+				<< 'Function';
+				nextPut: $,;
+				<< 'Number of clones';
+				cr.
+			pwbMooseModel
+				keysAndValuesDo: [ :key :value | 
+					aStream
+						<< key parentType name;
+						nextPut: $,;
+						<< key name;
+						nextPut: $,;
+						<< value size asString;
+						cr ] ]
 ]
 
 { #category : #'accessing ' }
-PWBToRemoveDuplicationListBrowserModel >> pwbMooseModel: aCollection [
-	super pwbMooseModel: aCollection.
+PWBToRemoveDuplicationListBrowserModel >> pwbMooseModel: aDictionnary [
+	super pwbMooseModel: aDictionnary.
 	pwbBrowser update
 ]
