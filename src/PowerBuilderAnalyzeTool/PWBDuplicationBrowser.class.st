@@ -7,7 +7,7 @@ Class {
 		'minNumberOfLinesTextInput',
 		'minNumberOfCharactersInput',
 		'okButton',
-		'duplicatedEntityList'
+		'browseListButton'
 	],
 	#classInstVars : [
 		'colorMap'
@@ -41,14 +41,14 @@ PWBDuplicationBrowser class >> createIcon [
 PWBDuplicationBrowser class >> defaultSpec [
 	^ super defaultSpec
 		add:
-			(SpPanedLayout newHorizontal
+			(SpBoxLayout newVertical
 				add:
-					(SpBoxLayout newVertical
-						add: #duplicationViewSelector
-							withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-						add: #duplicationResultPanel;
-						yourself);
-				add: #duplicatedEntityList;
+					(SpBoxLayout newHorizontal
+						add: #duplicationViewSelector;
+						add: #browseListButton;
+						yourself)
+					withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+				add: #duplicationResultPanel;
 				yourself);
 		add:
 			(SpBoxLayout newHorizontal
@@ -97,9 +97,13 @@ PWBDuplicationBrowser >> connectPresenters [
 			self buildWithSpec ]
 ]
 
-{ #category : #accessing }
-PWBDuplicationBrowser >> duplicatedEntityList [
-	^ duplicatedEntityList
+{ #category : #initialization }
+PWBDuplicationBrowser >> initializeBrowseListButton [
+	browseListButton := self newButton.
+	browseListButton label: 'Browser list'.
+	browseListButton
+		action: [ PWBToRemoveDuplicationListBrowser
+				openWith: model duplicationEntities keys ]
 ]
 
 { #category : #initialization }
@@ -167,8 +171,7 @@ PWBDuplicationBrowser >> initializePresenters [
 	self initializeMinNumberOfLinesTextInput.
 	self initializeMinNumberOfCharactersInput.
 	self initializeOkButton.
-	duplicatedEntityList := self newList.
-	 
+	self initializeBrowseListButton
 ]
 
 { #category : #accessing }

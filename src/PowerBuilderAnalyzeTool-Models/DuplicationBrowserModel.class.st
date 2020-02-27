@@ -32,9 +32,7 @@ DuplicationBrowserModel >> colorFor: anObject [
 
 { #category : #accessing }
 DuplicationBrowserModel >> computeDuplication [
-	self computeDuplicationWith: self mooseModelFunctions.
-	duplicationBrowser duplicatedEntityList
-		items: self duplicationEntities keys
+	self computeDuplicationWith: self mooseModelFunctions
 ]
 
 { #category : #initialization }

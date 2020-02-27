@@ -11,7 +11,7 @@ Class {
 
 { #category : #specs }
 PWBSourceTextBrowser class >> defaultSpec [
-	^ SpBoxLayout newHorizontal
+	^ super defaultSpec
 		add: #noteBook;
 		yourself
 ]

@@ -10,8 +10,7 @@ Class {
 
 { #category : #specs }
 PWBNonUsedFunctionBrowser class >> defaultSpec [
-	^ SpBoxLayout newVertical
-		"position: 90 percent;"
+	^ super defaultSpec
 		add: #diagram;
 		yourself
 ]

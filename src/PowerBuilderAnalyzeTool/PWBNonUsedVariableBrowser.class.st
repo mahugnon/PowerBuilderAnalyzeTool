@@ -12,14 +12,17 @@ Class {
 
 { #category : #specs }
 PWBNonUsedVariableBrowser class >> defaultSpec [
-	^ SpPanedLayout newHorizontal
-		position: 30 percent;
-		add: #instAndVarList;
+	^ super defaultSpec
 		add:
 			(SpPanedLayout newHorizontal
-				position: 70 percent;
-				add: #attributOrBehaviorList;
-				add: #variableTypeList;
+				position: 30 percent;
+				add: #instAndVarList;
+				add:
+					(SpPanedLayout newHorizontal
+						position: 70 percent;
+						add: #attributOrBehaviorList;
+						add: #variableTypeList;
+						yourself);
 				yourself);
 		yourself
 ]

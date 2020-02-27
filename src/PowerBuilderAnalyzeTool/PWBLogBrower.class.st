@@ -9,7 +9,7 @@ Class {
 
 { #category : #specs }
 PWBLogBrower class >> defaultSpec [
-	^ SpBoxLayout newVertical
+	^  super defaultSpec
 		add: #logsPresenter;
 		yourself
 ]
