@@ -95,8 +95,8 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 		normalize: #numberOfMethods.
 	RSHorizontalTreeLayout new
 		horizontalGap: 250;
-		verticalGap: 20;
-		on: aCanvas nodes.
+		on: aCanvas nodes;
+		verticalGap: 20.
 	es @ self contextMenu.
 	es
 		@

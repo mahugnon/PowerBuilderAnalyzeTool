@@ -13,6 +13,51 @@ DuplicationBrowserRoassalViewByEntity class >> viewName [
 	^ 'View by cloned entities'
 ]
 
+{ #category : #initialization }
+DuplicationBrowserRoassalViewByEntity >> buildCloneShapes: anEntity [
+	| cloneBoxs |
+	cloneBoxs := (model duplicationEntities at: anEntity)
+		collect: [ :clone | 
+			| box |
+			box := RSBox new
+				model: clone;
+				color: (model colorFor: clone);
+				size: 20;
+				yourself.
+			box
+				when: RSMouseLeftClick
+				do: [ :evt | self processCloneClickEvent: evt ] ]
+		as: RSGroup.
+	RSGridLayout on: cloneBoxs.
+	^ cloneBoxs
+]
+
+{ #category : #initialization }
+DuplicationBrowserRoassalViewByEntity >> buildEntitiesShape [
+	etitiesShapes := model duplicationEntities keys
+		collect: [ :anEntity | 
+			| composite border cloneBoxs |
+			cloneBoxs := self buildCloneShapes: anEntity.
+			border := RSBorder new
+				color: Color black;
+				width: 2.
+			composite := RSComposite new.
+			composite shapes: cloneBoxs.
+			composite border: border.
+			composite color: Color white.
+			composite model: anEntity.
+			composite @ RSAnimatedPopup @ RSDraggable.
+			composite padding: 10.
+			composite
+				when: RSMouseClick
+				do: [ :event | self processEntityClickEvent: event ] ]
+		as: RSGroup.
+		RSGridLayout new
+		gapSize: 50;
+		on: etitiesShapes.
+	etitiesShapes @ (RSLabeled new text: [ :elt | elt mooseName ]).
+]
+
 { #category : #accessing }
 DuplicationBrowserRoassalViewByEntity >> cloneShapes [
 	cloneShapes
@@ -32,18 +77,10 @@ DuplicationBrowserRoassalViewByEntity >> colorBoxsUsing: element [
 
 { #category : #initialization }
 DuplicationBrowserRoassalViewByEntity >> drawOn: aCanvas [
-	| labelIteraction |
 	aCanvas @ RSDraggableCanvas.
 	aCanvas @ RSZoomableCanvas.
-	labelIteraction := RSLabeled new
-		text: [ :elt | elt mooseName ];
-		yourself.
-	labelIteraction shapeBuilder labelShape fontSize: 5.
-	self buildEntityShapes.
-	RSGridLayout new
-		gapSize: 100;
-		on: etitiesShapes.
-	etitiesShapes @ labelIteraction.
+	self buildEntitiesShape.
+	
 	aCanvas addAll: etitiesShapes.
 	aCanvas @ RSCanvasController.
 	canvas := aCanvas.
