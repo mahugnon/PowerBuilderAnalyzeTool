@@ -47,7 +47,9 @@ PWBToRemoveDuplicationListBrowser >> initializePresenters [
 	super initializePresenters.
 	list := self newList.
 	list
-		headerTitle: '             Selection Dupplicated functions list       '.
+		headerTitle: '             Selection Dupplicated functions list       ';
+		display: [ :each | each parentType name , ' >> ' , each name ];
+		sortingBlock: [ :a :b | a mooseName < b mooseName ].
 	exportButton := self newButton.
 	exportButton label: 'Export'.
 	exportButton action: [ model exportToCSV ].

@@ -6,12 +6,12 @@ Class {
 
 { #category : #'default actions' }
 PWBToRemoveDuplicationListBrowserModel >> exportToCSV [
-self flag: #Todo
+	self halt.
+	self flag: #Todo
 ]
 
 { #category : #'accessing ' }
 PWBToRemoveDuplicationListBrowserModel >> pwbMooseModel: aCollection [
-	self halt.
 	super pwbMooseModel: aCollection.
 	pwbBrowser update
 ]
