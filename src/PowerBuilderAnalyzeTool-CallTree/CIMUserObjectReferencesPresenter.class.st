@@ -18,15 +18,15 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 				add: 'Mark as dead'
 					target: element
 					selector: #markAs:
-					argument: #('Obsolette');
+					argument: 'Obsolette';
 				add: 'Mark as to refactor'
 					target: element
 					selector: #markAs:
-					argumentList: #('To be refactored');
+					argumentList: 'To be refactored';
 				add: 'Mark as not sure'
 					target: element
 					selector: #markAs:
-					argumentList: #('Not sure');
+					argumentList: 'Not sure';
 				add: 'Unmark'
 					target: element
 					selector: #unMark
@@ -34,7 +34,7 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 				add: 'add new Tags ...'
 					target: element
 					selector: #newTag:
-					argument: #(element) ];
+					argument: element ];
 		yourself
 ]
 
