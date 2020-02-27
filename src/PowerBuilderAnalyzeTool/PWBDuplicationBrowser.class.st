@@ -118,7 +118,8 @@ PWBDuplicationBrowser >> initializeDuplicationRoassalViewSelector [
 	duplicationViewSelector
 		items: DuplicationBrowserRoassalView views;
 		help: 'Select the roassal visualization to use';
-		display: [ :item | item viewName ]
+		display: [ :item | item viewName ];
+		selectItem: DuplicationBrowserRoassalViewByEntity
 ]
 
 { #category : #initialization }

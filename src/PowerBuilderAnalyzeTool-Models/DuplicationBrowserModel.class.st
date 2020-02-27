@@ -104,8 +104,8 @@ DuplicationBrowserModel >> initialize [
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new.
-	minNumberOfLines := 20.
-	minNumberOfCharacters := 160
+	minNumberOfLines := 11.
+	minNumberOfCharacters := 88
 ]
 
 { #category : #initialization }
