@@ -105,8 +105,7 @@ FamixPWBmajorObject >> setContent [
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> toSkipForNow: anObject [
 	self flag: 'To be considered later'.
-	^ {FamixPWBWindow.
-	FamixPWBCustomType.
+	^ {FamixPWBCustomType.
 	FamixPWBDataWindow.
 	FamixPWBFunction.
 	FamixPWBEvent} includes: anObject class

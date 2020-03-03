@@ -22,11 +22,11 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 				add: 'Mark as to refactor'
 					target: element
 					selector: #markAs:
-					argumentList: 'To be refactored';
+					argument: 'To be refactored';
 				add: 'Mark as not sure'
 					target: element
 					selector: #markAs:
-					argumentList: 'Not sure';
+					argument: 'Not sure';
 				add: 'Unmark'
 					target: element
 					selector: #unMark
