@@ -47,13 +47,6 @@ FamixPWBmajorObject >> content [
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
-FamixPWBmajorObject >> cyclomaticComplexity [
-	^ self content
-		inject: 0
-		into: [ :sum :each | sum + each cyclomaticComplexity ]
-]
-
-{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> incomingReferencesSenders [
 	^ ((self incomingReferences collectAsSet: #from)
 		reject: [ :userObject | self toSkipForNow: userObject ]) asSet
