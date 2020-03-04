@@ -126,8 +126,9 @@ DPDetector >> registerFragmentsFor: aProgram [
 
 { #category : #accessing }
 DPDetector >> registerFragmentsFor: aProgram sourceAnchor: sourceAnchor [
-	| lines |
-	lines := self getCleanLinesOf: sourceAnchor sourceText lines.
+	| lines cleanedSourceAnchor |
+	cleanedSourceAnchor := PWBPreprocessor parse: sourceAnchor sourceText.
+	lines := self getCleanLinesOf: cleanedSourceAnchor lines.
 	parameters minNumberOfLines > lines size
 		ifTrue: [ ^ self ].
 	(lines allButLast: parameters minNumberOfLines - 1)
