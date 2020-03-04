@@ -46,7 +46,9 @@ PWBSourceTextBrowser >> initializePresenters [
 
 { #category : #accessing }
 PWBSourceTextBrowser >> selectEntity: anEntity [
-	(self accept: anEntity)
+	self isFreeze
+		ifTrue: [ ^ self ].
+	(self needUpdate: anEntity)
 		ifFalse: [ ^ self ].
 	model selected: anEntity.
 	self updateCode
