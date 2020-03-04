@@ -6,6 +6,22 @@ MooseModel >> allTags [
 ]
 
 { #category : #'*FamixTags' }
+MooseModel >> futureActionTags [
+	FAMIXTag new
+		name: 'Obsolette';
+		mooseModel: self;
+		color: Color red.
+	FAMIXTag new
+		name: 'Not sure';
+		mooseModel: self;
+		color: Color yellow.
+	FAMIXTag new
+		name: 'To be refactored';
+		mooseModel: self;
+		color: Color orange
+]
+
+{ #category : #'*FamixTags' }
 MooseModel >> resetTags [
 	self allTags do: [ :t | t reset ].
 	self privateState attributeAt: #allTags put: OrderedCollection new.
@@ -14,13 +30,9 @@ MooseModel >> resetTags [
 
 { #category : #'*FamixTags' }
 MooseModel >> tagNamed: aString [
-	|tags|
+	| tags |
 	tags := self allTags.
-	^tags detect: [ :o | o name = aString ]
-		ifNone: [ |tag|
-			tag := FAMIXTag new.
-			tag name: aString.
-			tags add: tag.
-			tag]
-	
+	^ tags
+		detect: [ :o | o name = aString ]
+		ifNone: [ self error: 'Tag not found' ]
 ]
