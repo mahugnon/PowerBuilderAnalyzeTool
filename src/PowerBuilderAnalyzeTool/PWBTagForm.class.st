@@ -48,9 +48,9 @@ PWBTagForm >> initializePresenters [
 	addNewTag := self newCheckBox.
 	addNewTag label: 'Add new  tag'.
 	addNewTag state: false.
-	tagsList := self instantiate: SpLabelledDropList.
-	tagsList label: 'Select a Tag: '.
-	tagsList dropList display: #name.
+	tagsList := self newDropList.
+	tagsList display: [ :each | each name ].
+	"tagsList label: 'Select a Tag: '."
 	newTagForm := self instantiate: PWBNewTagForm.
 	newTagForm visibleIf: [ addNewTag state ]
 ]
@@ -58,12 +58,12 @@ PWBTagForm >> initializePresenters [
 { #category : #'instance creation' }
 PWBTagForm >> open [
 	self openDialogWithSpec
-		okAction: [ tagsList dropList selectedItem ifNil: [ ^ self ].
-			entity addTag: tagsList dropList selectedItem ]
+		okAction: [ tagsList selectedItem ifNil: [ ^ self ].
+			entity addTag: tagsList selectedItem ]
 ]
 
 { #category : #accessing }
 PWBTagForm >> selectEntity: anEntity [
 	entity := anEntity.
-	tagsList items: entity mooseModel allTags
+	tagsList items: entity mooseModel allTags asOrderedCollection
 ]

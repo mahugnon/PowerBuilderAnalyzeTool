@@ -33,8 +33,8 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 					argument: #();
 				add: 'add new Tags ...'
 					target: element
-					selector: #newTag:
-					argument: element ];
+					selector: #addTag
+					argument: #() ];
 		yourself
 ]
 

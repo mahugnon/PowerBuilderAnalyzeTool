@@ -6,6 +6,7 @@ Class {
 
 { #category : #private }
 ColorTagedObject class >> accept: anEntity [
+self halt.
 	^ ((anEntity allTags collect: #name) & self futureActionTags)
 		isNotEmpty
 ]
