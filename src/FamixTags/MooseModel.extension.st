@@ -2,7 +2,15 @@ Extension { #name : #MooseModel }
 
 { #category : #'*FamixTags' }
 MooseModel >> allTags [
-	^self privateState attributeAt: #allTags  ifAbsentPut: [ OrderedCollection new ]
+	| tags |
+	tags := self privateState
+		attributeAt: #allTags
+		ifAbsentPut: [ OrderedCollection new ].
+	tags
+		ifEmpty: [ tags := FAMIXTag allInstances
+				select: [ :tag | tag mooseModel = self ].
+			self privateState attributeAt: #allTags put: tags ].
+	^ tags
 ]
 
 { #category : #'*FamixTags' }
@@ -25,7 +33,7 @@ MooseModel >> futureActionTags [
 MooseModel >> resetTags [
 	self allTags do: [ :t | t reset ].
 	self privateState attributeAt: #allTags put: OrderedCollection new.
-	self futureActionTags
+
 ]
 
 { #category : #'*FamixTags' }
