@@ -43,10 +43,5 @@ PWBNewTagForm >> initializePresenters [
 	saveButton := self newButton
 		label: 'Save';
 		iconName: #glamorousAccept;
-		action: [ newTagName input text isEmpty
-				ifTrue: [ ^ self ].
-			(FAMIXTag named: newTagName input text)
-				mooseModel: entity mooseModel;
-				color: colorPalete selectedColor ];
 		yourself
 ]

@@ -15,13 +15,13 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 	^ RSMenuActivable new
 		menuDo: [ :menu :element | 
 			menu
-				add: 'Unmark'
-					target: element
-					selector: #unMark
-					argument: #();
-				add: 'add new Tags ...'
+				add: 'Tag element'
 					target: element
 					selector: #addTag
+					argument: #();
+				add: 'Remove tag'
+					target: element
+					selector: #unMark
 					argument: #() ];
 		yourself
 ]
