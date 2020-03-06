@@ -43,6 +43,11 @@ PWBTagForm >> accept: anObject [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+PWBTagForm >> closeTagForm [
+	addNewTag state: false
+]
+
 { #category : #initialization }
 PWBTagForm >> connectPresenters [
 	addNewTag

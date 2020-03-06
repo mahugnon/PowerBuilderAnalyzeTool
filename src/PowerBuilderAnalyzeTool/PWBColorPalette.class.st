@@ -21,3 +21,8 @@ PWBColorPalette >> initializeWindow: w [
 		title: 'Color Palettes';
 		centered
 ]
+
+{ #category : #accessing }
+PWBColorPalette >> selectedColor [
+	^ selectedColor
+]

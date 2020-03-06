@@ -30,6 +30,19 @@ PWBNewTagForm class >> runMe [
 	self new openWithSpec
 ]
 
+{ #category : #initialization }
+PWBNewTagForm >> connectPresenters [
+	saveButton
+		action: [ newTagName input text isEmpty
+				ifTrue: [ ^ self ].
+			(FAMIXTag named: newTagName input text)
+				mooseModel: entity mooseModel;
+				color: colorPalete selectedColor.
+			entity mooseModel resetTags.
+			self owner closeTagForm.
+			self owner update ]
+]
+
 { #category : #accessing }
 PWBNewTagForm >> entity: aFamixPWBUserObject [ 
 	entity := aFamixPWBUserObject
