@@ -15,18 +15,6 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 	^ RSMenuActivable new
 		menuDo: [ :menu :element | 
 			menu
-				add: 'Mark as dead'
-					target: element
-					selector: #markAs:
-					argument: 'Obsolette';
-				add: 'Mark as to refactor'
-					target: element
-					selector: #markAs:
-					argument: 'To be refactored';
-				add: 'Mark as not sure'
-					target: element
-					selector: #markAs:
-					argument: 'Not sure';
 				add: 'Unmark'
 					target: element
 					selector: #unMark

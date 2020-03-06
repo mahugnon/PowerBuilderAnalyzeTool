@@ -31,6 +31,13 @@ PWBTagForm class >> runMe [
 	self new open
 ]
 
+{ #category : #api }
+PWBTagForm class >> tag: anObject [
+	^ self new
+		entity: anObject;
+		open
+]
+
 { #category : #visiting }
 PWBTagForm >> accept: anObject [
 	^ true
@@ -41,6 +48,18 @@ PWBTagForm >> connectPresenters [
 	addNewTag
 		whenChangedDo: [ self needRebuild: false.
 			self buildWithSpec ]
+]
+
+{ #category : #accessing }
+PWBTagForm >> entity [
+	^ entity
+]
+
+{ #category : #'accessing ' }
+PWBTagForm >> entity: anObject [
+	entity := anObject.
+	newTagForm entity: entity.
+	tagsList items: entity mooseModel allTags
 ]
 
 { #category : #initialization }
@@ -55,15 +74,24 @@ PWBTagForm >> initializePresenters [
 	newTagForm visibleIf: [ addNewTag state ]
 ]
 
+{ #category : #initialization }
+PWBTagForm >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter initialExtent: 500 @ 300
+]
+
 { #category : #'instance creation' }
 PWBTagForm >> open [
 	self openDialogWithSpec
-		okAction: [ tagsList selectedItem ifNil: [ ^ self ].
-			entity addTag: tagsList selectedItem ]
 ]
 
 { #category : #accessing }
 PWBTagForm >> selectEntity: anEntity [
 	entity := anEntity.
 	tagsList items: entity mooseModel allTags asOrderedCollection
+]
+
+{ #category : #accessing }
+PWBTagForm >> tagsList [
+	^ tagsList
 ]

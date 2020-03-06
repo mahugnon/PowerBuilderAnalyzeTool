@@ -30,6 +30,11 @@ PWBNewTagForm class >> runMe [
 	self new openWithSpec
 ]
 
+{ #category : #accessing }
+PWBNewTagForm >> entity: aFamixPWBUserObject [ 
+	entity := aFamixPWBUserObject
+]
+
 { #category : #initialization }
 PWBNewTagForm >> initializePresenters [
 	newTagName := self instantiate: SpLabelledTextInput.
