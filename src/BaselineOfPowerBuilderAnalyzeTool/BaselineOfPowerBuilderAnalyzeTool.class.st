@@ -40,7 +40,7 @@ BaselineOfPowerBuilderAnalyzeTool >> baselineOfPowerBuilderParser: spec [
 	spec
 		baseline: 'PowerBuilderParser'
 		with: [ spec
-				repository: 'github://moosetechnology/PowerBuilderParser:LastestMoose8/src' ]
+				repository: 'github://moosetechnology/PowerBuilderParser: developpement/src' ]
 ]
 
 { #category : #baselines }
