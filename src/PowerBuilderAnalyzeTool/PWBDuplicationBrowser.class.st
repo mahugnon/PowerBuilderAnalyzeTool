@@ -79,7 +79,7 @@ PWBDuplicationBrowser class >> runMe [
 { #category : #visiting }
 PWBDuplicationBrowser >> accept: anObject [
 	^ {FamixPWBUserObject.
-	FAMIXTypeGroup} includes: anObject class
+	FAMIXTypeGroup. FamixPWBWindow } includes: anObject class
 ]
 
 { #category : #initialization }

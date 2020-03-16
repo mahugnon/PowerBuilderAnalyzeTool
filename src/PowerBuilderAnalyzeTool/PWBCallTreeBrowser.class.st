@@ -5,10 +5,7 @@ Class {
 		'diagramPresenter',
 		'obsoletteVarButton',
 		'uselessFunctionButton',
-		'browseDuplicationButton',
-		'zoomInButton',
-		'zoomOutButton',
-		'hideButton'
+		'browseDuplicationButton'
 	],
 	#category : #PowerBuilderAnalyzeTool
 }
@@ -40,12 +37,9 @@ PWBCallTreeBrowser class >> defaultSpec [
 	^ super defaultSpec
 		add:
 			(SpBoxLayout newHorizontal
-				add: #hideButton;
 				add: #browseDuplicationButton;
 				add: #uselessFunctionButton;
 				add: #obsoletteVarButton;
-				add: #zoomInButton;
-				add: #zoomOutButton;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #diagramPresenter;
@@ -102,20 +96,7 @@ PWBCallTreeBrowser >> initializeToolBar [
 		label: 'Browse duplication';
 		help: 'Browse duplication between functions.';
 		icon: PWBBrowserIcons duplicationIcon;
-		action: [ PWBDuplicationBrowser lunchOn: model selected ].
-	zoomInButton := self newButton
-		label: 'Zoom In';
-		icon: (self iconNamed: #glamorousZoomIn);
-		action: [ diagramPresenter zoomIn ].
-	zoomOutButton := self newButton
-		label: 'Zoom Out';
-		icon: (self iconNamed: #glamorousZoomOut);
-		action: [ diagramPresenter zoomOut ].
-	hideButton := self newCheckBox
-		label: 'Hide all obsolette';
-		help: 'Hide all obsolette element of the view';
-		color: Color white;
-		yourself
+		action: [ PWBDuplicationBrowser lunchOn: model selected ]
 ]
 
 { #category : #initialization }
