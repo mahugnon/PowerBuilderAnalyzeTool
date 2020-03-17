@@ -8,7 +8,8 @@ Class {
 		'rootFolder',
 		'space',
 		'resetButton',
-		'runModelButton'
+		'runModelButton',
+		'modulesFolderButton'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Utils'
 }
@@ -20,6 +21,7 @@ CIMIzyFilesNavigator class >> defaultSpec [
 			(SpBoxLayout newHorizontal
 				add: #space;
 				add: #rootFolder;
+				add: #modulesFolderButton;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #listPresenter;
@@ -43,8 +45,19 @@ CIMIzyFilesNavigator class >> runMe [
 ]
 
 { #category : #initialization }
+CIMIzyFilesNavigator >> connectPresenters [
+	rootFolder
+		action: [ model
+				izyProtectRootFolder: (UITheme builder chooseDirectory: 'Choose izy protect source files') ]
+]
+
+{ #category : #initialization }
 CIMIzyFilesNavigator >> initializePresenters [
 	super initializePresenters.
+	modulesFolderButton :=  self newButton
+		label: 'set modules folder';
+		iconName: #smallOpen;
+		yourself.
 	space := self newLabel
 		color: Color transparent;
 		yourself.
