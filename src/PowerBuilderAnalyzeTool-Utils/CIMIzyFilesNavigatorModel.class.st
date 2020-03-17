@@ -2,7 +2,10 @@ Class {
 	#name : #CIMIzyFilesNavigatorModel,
 	#superclass : #Object,
 	#instVars : [
-		'izyProtectRootFolder'
+		'izyProtectRootFolder',
+		'moduleFolder',
+		'bibliotheques',
+		'browser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Utils'
 }
@@ -48,22 +51,25 @@ CIMIzyFilesNavigatorModel >> allModules [
 
 { #category : #api }
 CIMIzyFilesNavigatorModel >> bibliotheques [
-	^ self allModules values flatten asSet
+	^ bibliotheques
+]
+
+{ #category : #'accessing ' }
+CIMIzyFilesNavigatorModel >> browser: aCIMIzyFilesNavigator [ 
+	browser := aCIMIzyFilesNavigator
 ]
 
 { #category : #api }
-CIMIzyFilesNavigatorModel >> generateIzyByModuleFrom: originFolder to: destinationFolder [
-	| destination originDirs |
-	originDirs := originFolder asFileReference directories.
-	destination := destinationFolder asFileReference
-		ensureCreateDirectory.
+CIMIzyFilesNavigatorModel >> generateIzyByModule [
+	| destination |
+	destination := moduleFolder asFileReference ensureCreateDirectory.
 	self allModules
 		keysAndValuesDo: [ :key :value | 
 			| moduleDir |
 			moduleDir := (destination / key) ensureCreateDirectory.
 			value
 				do: [ :val | 
-					originDirs
+					izyProtectRootFolder directories
 						detect: [ :each | each basename asLowercase = val asLowercase ]
 						ifFound: [ :founded | founded copyAllTo: moduleDir / founded basename ]
 						ifNone: [  ] ] ]
@@ -86,6 +92,12 @@ CIMIzyFilesNavigatorModel >> generateIzyByModuleTo: destinationFolder [
 						ifNone: [  ] ] ]
 ]
 
+{ #category : #initialization }
+CIMIzyFilesNavigatorModel >> initialize [
+	super initialize.
+	bibliotheques := #()
+]
+
 { #category : #accessing }
 CIMIzyFilesNavigatorModel >> izyProtectRootFolder [
 	^ izyProtectRootFolder
@@ -93,5 +105,16 @@ CIMIzyFilesNavigatorModel >> izyProtectRootFolder [
 
 { #category : #accessing }
 CIMIzyFilesNavigatorModel >> izyProtectRootFolder: anObject [
-	izyProtectRootFolder := anObject
+	izyProtectRootFolder := anObject.
+	bibliotheques := anObject directories collectAsSet: #basename.
+	browser setItems
+]
+
+{ #category : #accessing }
+CIMIzyFilesNavigatorModel >> moduleFolder: aFileReference [
+	aFileReference = izyProtectRootFolder
+		ifTrue: [ self
+				error: 'Module folder should not be Izy protect source files folder' ].
+	moduleFolder := aFileReference.
+	self generateIzyByModule
 ]

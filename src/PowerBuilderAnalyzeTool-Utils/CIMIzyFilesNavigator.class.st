@@ -48,13 +48,16 @@ CIMIzyFilesNavigator class >> runMe [
 CIMIzyFilesNavigator >> connectPresenters [
 	rootFolder
 		action: [ model
-				izyProtectRootFolder: (UITheme builder chooseDirectory: 'Choose izy protect source files') ]
+				izyProtectRootFolder: (UITheme builder chooseDirectory: 'Choose izy protect source files') ].
+	modulesFolderButton
+		action: [ model
+				moduleFolder: (UITheme builder chooseDirectory: 'Choose Modules folder') ]
 ]
 
 { #category : #initialization }
 CIMIzyFilesNavigator >> initializePresenters [
 	super initializePresenters.
-	modulesFolderButton :=  self newButton
+	modulesFolderButton := self newButton
 		label: 'set modules folder';
 		iconName: #smallOpen;
 		yourself.
@@ -73,6 +76,7 @@ CIMIzyFilesNavigator >> initializePresenters [
 		yourself.
 	selectedBib := OrderedCollection new.
 	model := CIMIzyFilesNavigatorModel new.
+	model browser: self.
 	listPresenter := self newTable.
 	listPresenter
 		enableSearch;
@@ -87,4 +91,9 @@ CIMIzyFilesNavigator >> initializePresenters [
 		addColumn: (SpStringTableColumn title: 'Bibliotheque' evaluated: #yourself);
 		items: model bibliotheques asOrderedCollection;
 		beResizable
+]
+
+{ #category : #initialization }
+CIMIzyFilesNavigator >> setItems [
+	listPresenter items: model bibliotheques asOrderedCollection
 ]
