@@ -20,14 +20,6 @@ ElementClick >> application: aPWBApplication [
 ]
 
 { #category : #hooks }
-ElementClick >> colorSelectedElement: element [
-	currentFocus
-		ifNotNil: [ currentFocus color: (ColorObject colorFor: currentFocus model) ].
-	currentFocus := element.
-	^ currentFocus color: Color paleGreen
-]
-
-{ #category : #hooks }
 ElementClick >> initializeElement: element [
 	element announcer
 		when: TRMouseClick

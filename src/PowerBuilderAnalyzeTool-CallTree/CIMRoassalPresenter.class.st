@@ -26,6 +26,14 @@ CIMRoassalPresenter >> application [
 	^ owner application
 ]
 
+{ #category : #hooks }
+CIMRoassalPresenter >> colorSelectedElement: element [
+	currentFocus
+		ifNotNil: [ currentFocus color: (ColorObject colorFor: currentFocus model) ].
+	currentFocus := element.
+	^ currentFocus color: Color paleGreen
+]
+
 { #category : #accessing }
 CIMRoassalPresenter >> diagram [
 	^ diagram

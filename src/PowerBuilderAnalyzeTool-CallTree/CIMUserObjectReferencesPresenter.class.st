@@ -70,7 +70,11 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 				draggable;
 				model: modelElement;
 				color: (ColorObject colorFor: modelElement);
-				yourself ]) as: RSGroup.
+				yourself.
+			elipse
+				when: RSMouseClick
+				do: [ :event | self processEntityClickEvent: event ] ])
+		as: RSGroup.
 	es @ RSLabeled.
 	aCanvas addAll: es.
 	eb := RSEdgeBuilder arrowedLine
@@ -86,12 +90,6 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 		on: aCanvas nodes;
 		verticalGap: 20.
 	es @ self contextMenu.
-	es
-		@
-			(ElementClick new
-				model: self guiModel;
-				application: self application;
-				yourself).
 	self legend: aCanvas.
 	"	onDemand: 'Show legend';"
 	aCanvas @ RSCanvasController.
@@ -115,4 +113,13 @@ CIMUserObjectReferencesPresenter >> legend: aCanvas [
 		text: 'Not sure of action to perform about the user object'
 			withCircleColor: Color yellow;
 		build
+]
+
+{ #category : #initialization }
+CIMUserObjectReferencesPresenter >> processEntityClickEvent: evt [
+	| element |
+	element := evt shape.
+	guiModel selected: element model.
+	self colorSelectedElement: element.
+	self application globallySelect: element model
 ]
