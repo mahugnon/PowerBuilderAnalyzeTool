@@ -3,7 +3,7 @@ Extension { #name : #FamixPWBmajorObject }
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> allIncomingReferencesSenders [
 	| scan scanTop |
-	scan := self incomingReferencesSenders asOrderedCollection.
+	scan := FAMIXTypeGroup withAll: self incomingReferencesSenders.
 	scanTop := 1.
 	[ scanTop > scan size ]
 		whileFalse: [ scan
