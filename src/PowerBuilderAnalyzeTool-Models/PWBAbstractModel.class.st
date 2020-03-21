@@ -9,6 +9,11 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
 
+{ #category : #'as yet unclassified' }
+PWBAbstractModel >> freezeDuring: aBlock [
+	pwbBrowser freezeDuring: aBlock
+]
+
 { #category : #accessing }
 PWBAbstractModel >> pwbBrowser: aPWBToRemoveDuplicationListBrowser [ 
 	pwbBrowser := aPWBToRemoveDuplicationListBrowser

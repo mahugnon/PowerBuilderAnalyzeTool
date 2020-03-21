@@ -30,13 +30,26 @@ PWBMooseModelBrowser >> accept: anObject [
 ]
 
 { #category : #accessing }
-PWBMooseModelBrowser >> currentState [
-	^ currentState
+PWBMooseModelBrowser >> follow [
+	^ follow
 ]
 
 { #category : #accessing }
-PWBMooseModelBrowser >> follow [
-	^ follow
+PWBMooseModelBrowser >> followAction [
+	(self needUpdate: toSelect)
+		ifFalse: [ ^ self ].
+	modelPresenter roots: {toSelect}
+	"self needRebuild: false.
+	self buildWithSpec"
+]
+
+{ #category : #accessing }
+PWBMooseModelBrowser >> highlightAction [
+	(self needUpdate: toSelect)
+		ifFalse: [ ^ self ].
+	modelPresenter selectItem: toSelect
+	"self needRebuild: false.
+	self buildWithSpec"
 ]
 
 { #category : #initialization }
@@ -54,7 +67,7 @@ PWBMooseModelBrowser >> initializePresenters [
 	modelPresenter
 		whenSelectionChangedDo: [ :selected | 
 			model selected: selected selectedItem.
-			self globallySelect: selected selectedItem ].
+			self freezeDuring: [ self globallySelect: selected selectedItem ] ].
 	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ]
 ]
 
@@ -107,17 +120,6 @@ PWBMooseModelBrowser >> needUpdate: anEntity [
 { #category : #initialization }
 PWBMooseModelBrowser >> searchFor: aText [
 	modelPresenter adapter widget function searchFor: aText
-]
-
-{ #category : #accessing }
-PWBMooseModelBrowser >> selectEntity: anEntity [
-	self isFreeze
-		ifTrue: [ ^ self ].
-	(self needUpdate: anEntity)
-		ifFalse: [ ^ self ].
-	modelPresenter selectItem: anEntity
-	"self needRebuild: false.
-	self buildWithSpec"
 ]
 
 { #category : #accessing }

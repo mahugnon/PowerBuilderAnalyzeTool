@@ -122,7 +122,8 @@ PWBAnalyzeToolAppLauncher >> initializeSourceTextBrowserLauncher [
 { #category : #initialization }
 PWBAnalyzeToolAppLauncher >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
-	aWindowPresenter whenClosedDo: [ self application close ].
+	aWindowPresenter whenClosedDo: [ self application close .
+		PWBApplication reset ].
 	aWindowPresenter
 		title: self title;
 		initialExtent: 600 @ 150;

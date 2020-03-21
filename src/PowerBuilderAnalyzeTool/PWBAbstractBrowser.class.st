@@ -39,9 +39,25 @@ PWBAbstractBrowser >> freezeAction [
 	^ self
 ]
 
+{ #category : #'as yet unclassified' }
+PWBAbstractBrowser >> freezeDuring: aBlock [
+	| tmpState |
+	tmpState := {follow.
+	highlight.
+	freeze} detect: [ :each | each state ].
+	self toFreeze.
+	aBlock
+		ensure: [ tmpState state: true ]
+]
+
 { #category : #enumerating }
 PWBAbstractBrowser >> globallySelect: anEntity [
 	self application globallySelect: anEntity
+]
+
+{ #category : #'as yet unclassified' }
+PWBAbstractBrowser >> highlightAction [
+	^ self subclassResponsibility
 ]
 
 { #category : #initialization }

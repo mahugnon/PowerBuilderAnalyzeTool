@@ -128,5 +128,6 @@ CIMUserObjectReferencesPresenter >> processEntityClickEvent: evt [
 	element := evt shape.
 	guiModel selected: element model.
 	self colorSelectedElement: element.
-	self application globallySelect: element model
+	guiModel
+		freezeDuring: [ self application globallySelect: element model ]
 ]

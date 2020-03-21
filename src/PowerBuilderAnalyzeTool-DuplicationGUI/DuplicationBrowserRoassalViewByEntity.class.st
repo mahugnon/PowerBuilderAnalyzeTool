@@ -103,7 +103,8 @@ DuplicationBrowserRoassalViewByEntity >> processCloneClickEvent: evt [
 				ifTrue: [ aCloneShape color: Color lightGreen ]
 				ifFalse: [ aCloneShape color: Color gray ] ].
 	model selectedFragmentLocation: shape model.
-	PWBApplication current globallySelect: shape model
+	model
+		freezeDuring: [ PWBApplication current globallySelect: shape model ]
 ]
 
 { #category : #initialization }
@@ -111,6 +112,7 @@ DuplicationBrowserRoassalViewByEntity >> processEntityClickEvent: evt [
 	| shape |
 	shape := evt shape.
 	self colorBoxsUsing: shape.
-	PWBApplication current globallySelect: shape model.
-	model selected: shape model
+	model
+		freezeDuring: [ PWBApplication current globallySelect: shape model.
+			model selected: shape model ]
 ]
