@@ -12,7 +12,7 @@ PWBDuplicationBrowserTest >> setUp [
 
 { #category : #tests }
 PWBDuplicationBrowserTest >> testCurrentStateChangeWhenRadionButtonIsActivated [
-	browser toFrozen.
+	browser toFreeze .
 	self assert: browser isFreeze
 ]
 
@@ -25,20 +25,6 @@ PWBDuplicationBrowserTest >> testCurrentStateIsFollowWhenLunch [
 PWBDuplicationBrowserTest >> testMinNumberOfCharactersChange [
 	browser minNumberOfCharactersInput text: 5.
 	self assert: browser minNumberOfCharacters equals: 5
-]
-
-{ #category : #tests }
-PWBDuplicationBrowserTest >> testMinNumberOfCharactersInputIntialIs55 [
-	self
-		assert: browser minNumberOfCharactersInput text asInteger
-		equals: 55
-]
-
-{ #category : #tests }
-PWBDuplicationBrowserTest >> testMinNumberOfLinesTextInputIntialIs50 [
-	self
-		assert: browser minNumberOfLinesTextInput text asInteger
-		equals: 50
 ]
 
 { #category : #tests }

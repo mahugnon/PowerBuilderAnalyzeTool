@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'logsPresenter'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Core'
+	#category : #'PowerBuilderAnalyzeTool-CallTree-RoassalElementColorStrategy'
 }
 
 { #category : #specs }

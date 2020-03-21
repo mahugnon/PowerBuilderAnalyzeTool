@@ -1,7 +1,7 @@
 Class {
 	#name : #BrowserModeFreeze,
-	#superclass : #BrowserModeStrategy,
-	#category : #'PowerBuilderAnalyzeTool-BrowserModeStrategy'
+	#superclass : #AbstractBrowserMode,
+	#category : #'PowerBuilderAnalyzeTool-BrowserMode'
 }
 
 { #category : #'as yet unclassified' }

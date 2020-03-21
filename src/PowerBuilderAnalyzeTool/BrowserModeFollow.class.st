@@ -1,7 +1,7 @@
 Class {
 	#name : #BrowserModeFollow,
-	#superclass : #BrowserModeStrategy,
-	#category : #'PowerBuilderAnalyzeTool-BrowserModeStrategy'
+	#superclass : #AbstractBrowserMode,
+	#category : #'PowerBuilderAnalyzeTool-BrowserMode'
 }
 
 { #category : #visiting }

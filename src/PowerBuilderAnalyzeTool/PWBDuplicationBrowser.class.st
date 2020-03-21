@@ -12,7 +12,7 @@ Class {
 	#classInstVars : [
 		'colorMap'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Core'
+	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #private }
@@ -76,6 +76,15 @@ PWBDuplicationBrowser class >> runMe [
   self new openWithSpec
 ]
 
+{ #category : #'as yet unclassified' }
+PWBDuplicationBrowser class >> testLunchOn: anObject [
+	^ self basicNew
+		initializeModel;
+		mooseModel: anObject;
+		initialize;
+		selectFirstItem
+]
+
 { #category : #visiting }
 PWBDuplicationBrowser >> accept: anObject [
 	^ {FamixPWBUserObject.
@@ -95,6 +104,20 @@ PWBDuplicationBrowser >> connectPresenters [
 			duplicationResultPanel model: model.
 			self needRebuild: false.
 			self buildWithSpec ]
+]
+
+{ #category : #accessing }
+PWBDuplicationBrowser >> followAction [
+	((self accept: toSelect) and: [ self needUpdate: toSelect ])
+		ifFalse: [ ^ self ].
+	model mooseModel: toSelect
+]
+
+{ #category : #api }
+PWBDuplicationBrowser >> highlightAction [
+	((self needUpdate: toSelect) and: [ self accept: toSelect ])
+		ifFalse: [ ^ self ].
+	duplicationResultPanel highlight: toSelect
 ]
 
 { #category : #initialization }
@@ -198,13 +221,6 @@ PWBDuplicationBrowser >> minNumberOfLinesTextInput [
 { #category : #accessing }
 PWBDuplicationBrowser >> mooseModel: aFamixPWBUserObject [
 	model mooseModel: aFamixPWBUserObject
-]
-
-{ #category : #accessing }
-PWBDuplicationBrowser >> selectEntity: anEntity [
-	((self accept: anEntity) and: [ self needUpdate: anEntity ])
-		ifFalse: [ ^ self ].
-	model mooseModel: anEntity
 ]
 
 { #category : #specs }

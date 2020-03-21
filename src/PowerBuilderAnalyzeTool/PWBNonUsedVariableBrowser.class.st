@@ -7,7 +7,7 @@ Class {
 		'attributOrBehaviorList',
 		'variableTypeList'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Core'
+	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }

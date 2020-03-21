@@ -68,8 +68,6 @@ DuplicationBrowserRoassalViewByEntity >> cloneShapes [
 { #category : #hooks }
 DuplicationBrowserRoassalViewByEntity >> colorBoxsUsing: element [
 	model updateFragmentColorFor: element model.
-	PWBApplication current globallySelect: element model.
-	model selected: element model.
 	^ self cloneShapes
 		do:
 			[ :aCloneShape | aCloneShape color: (model colorFor: aCloneShape model) ]
@@ -87,6 +85,14 @@ DuplicationBrowserRoassalViewByEntity >> drawOn: aCanvas [
 	^ aCanvas
 ]
 
+{ #category : #api }
+DuplicationBrowserRoassalViewByEntity >> highlight: anEntity [
+	canvas shapes
+		detect: [ :shape | shape model = anEntity ]
+		ifFound: [ :founded | self colorBoxsUsing: founded ]
+		ifNone: [  ]
+]
+
 { #category : #initialization }
 DuplicationBrowserRoassalViewByEntity >> processCloneClickEvent: evt [
 	| shape |
@@ -102,5 +108,9 @@ DuplicationBrowserRoassalViewByEntity >> processCloneClickEvent: evt [
 
 { #category : #initialization }
 DuplicationBrowserRoassalViewByEntity >> processEntityClickEvent: evt [
-	self colorBoxsUsing: evt shape
+	| shape |
+	shape := evt shape.
+	self colorBoxsUsing: shape.
+	PWBApplication current globallySelect: shape model.
+	model selected: shape model
 ]

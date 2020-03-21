@@ -5,7 +5,7 @@ Class {
 		'list',
 		'exportButton'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Core'
+	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }

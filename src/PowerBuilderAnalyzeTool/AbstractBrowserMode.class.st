@@ -1,21 +1,21 @@
 Class {
-	#name : #BrowserModeStrategy,
+	#name : #AbstractBrowserMode,
 	#superclass : #Object,
-	#category : #'PowerBuilderAnalyzeTool-BrowserModeStrategy'
+	#category : #'PowerBuilderAnalyzeTool-BrowserMode'
 }
 
 { #category : #'as yet unclassified' }
-BrowserModeStrategy class >> actionFor: aBrowser [
+AbstractBrowserMode class >> actionFor: aBrowser [
 	^ (self subclasses detect: [ :aStrategy | aStrategy mode: aBrowser ])
 		new applyOn: aBrowser
 ]
 
 { #category : #'as yet unclassified' }
-BrowserModeStrategy class >> mode: aBrowser [
+AbstractBrowserMode class >> mode: aBrowser [
 	^ self subclassResponsibility
 ]
 
 { #category : #'target resize' }
-BrowserModeStrategy >> applyOn: aBrowser [
+AbstractBrowserMode >> applyOn: aBrowser [
 	^ self subclassResponsibility
 ]

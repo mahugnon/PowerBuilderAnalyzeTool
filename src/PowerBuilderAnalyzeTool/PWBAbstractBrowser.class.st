@@ -8,7 +8,7 @@ Class {
 		'highlight',
 		'toSelect'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Core'
+	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }
@@ -112,5 +112,20 @@ PWBAbstractBrowser >> needUpdate: anEntity [
 { #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
 	toSelect := anEntity.
-	BrowserModeStrategy actionFor: self
+	AbstractBrowserMode actionFor: self
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> toFollow [
+	follow state: true
+]
+
+{ #category : #accessing }
+PWBAbstractBrowser >> toFreeze [
+	freeze state: true
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> toHighlight [
+	^ highlight state: true
 ]

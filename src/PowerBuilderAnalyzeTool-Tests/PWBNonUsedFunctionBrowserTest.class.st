@@ -11,7 +11,7 @@ PWBNonUsedFunctionBrowserTest >> setUp [
 ]
 
 { #category : #asserting }
-PWBNonUsedFunctionBrowserTest >> shouldNotUpdateOnMooseGroup [
+PWBNonUsedFunctionBrowserTest >> testBrowserShouldNotUpdateOnMooseGroup [
 	| group |
 	group := {testUserObject1.
 	testUserObject2} asMooseGroup.

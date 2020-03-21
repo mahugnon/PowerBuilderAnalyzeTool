@@ -12,7 +12,7 @@ PWBMooseModelBrowserTest >> setUp [
 
 { #category : #tests }
 PWBMooseModelBrowserTest >> testBrowserDefaultModeIsFreeze [
-	self assert: browser currentState equals: 'Freeze'
+	self assert: browser isFreeze
 ]
 
 { #category : #tests }
@@ -34,9 +34,8 @@ PWBMooseModelBrowserTest >> testSelectedItemIsNotNil [
 
 { #category : #tests }
 PWBMooseModelBrowserTest >> testSetBrowserStat [
-	self assert: browser currentState equals: 'Freeze'.
-	browser follow state: true.
-	self assert: browser currentState equals: 'Follow'
+	browser toFollow.
+	self assert: browser isFollow
 ]
 
 { #category : #'as yet unclassified' }
