@@ -5,7 +5,7 @@ Class {
 		'logs',
 		'application'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #accessing }

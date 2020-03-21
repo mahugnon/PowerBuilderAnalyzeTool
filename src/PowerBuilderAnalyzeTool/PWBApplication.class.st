@@ -8,7 +8,7 @@ Class {
 	#classVars : [
 		'Current'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #accessing }

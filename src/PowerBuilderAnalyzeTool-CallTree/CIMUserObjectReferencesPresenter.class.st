@@ -93,7 +93,14 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	self legend: aCanvas.
 	"	onDemand: 'Show legend';"
 	aCanvas @ RSCanvasController.
+	view := aCanvas.
 	^ aCanvas
+]
+
+{ #category : #util }
+CIMUserObjectReferencesPresenter >> highlight: anEntity [
+	self
+		colorSelectedElement: (view shapes detect: [ :el | el model = anEntity ])
 ]
 
 { #category : #initialization }

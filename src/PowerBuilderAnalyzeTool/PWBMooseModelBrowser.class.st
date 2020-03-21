@@ -5,7 +5,7 @@ Class {
 		'modelPresenter',
 		'searchField'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

@@ -5,7 +5,7 @@ Class {
 		'logger',
 		'time'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #activation }

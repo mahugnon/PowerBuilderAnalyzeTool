@@ -1,7 +1,7 @@
 Class {
 	#name : #PWBPresenter,
 	#superclass : #SpPresenter,
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #'as yet unclassified' }

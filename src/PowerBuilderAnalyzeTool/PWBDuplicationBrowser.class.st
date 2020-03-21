@@ -12,7 +12,7 @@ Class {
 	#classInstVars : [
 		'colorMap'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #private }

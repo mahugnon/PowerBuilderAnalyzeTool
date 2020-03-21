@@ -7,7 +7,7 @@ Class {
 		'uselessFunctionButton',
 		'browseDuplicationButton'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #utility }
@@ -57,6 +57,21 @@ PWBCallTreeBrowser >> accept: anEntity [
 	^ ({DPFragmentLocation} includes: anEntity class) not
 ]
 
+{ #category : #api }
+PWBCallTreeBrowser >> followAction [
+	((self needUpdate: toSelect) and: [ self accept: toSelect ])
+		ifFalse: [ ^ self ].
+	self model selected: toSelect.
+	self updateRoassal
+]
+
+{ #category : #api }
+PWBCallTreeBrowser >> highlightAction [
+	((self needUpdate: toSelect) and: [ self accept: toSelect ])
+		ifFalse: [ ^ self ].
+	diagramPresenter highlight: toSelect
+]
+
 { #category : #initialization }
 PWBCallTreeBrowser >> initializeBrowserModel [
 	model := PWBCallTreeBrowserModel new.
@@ -103,14 +118,6 @@ PWBCallTreeBrowser >> initializeToolBar [
 PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter initialExtent: 750 @ 500
-]
-
-{ #category : #accessing }
-PWBCallTreeBrowser >> selectEntity: anEntity [
-	((self needUpdate: anEntity) and: [ self accept: anEntity ])
-		ifFalse: [ ^ self ].
-	self model selected: anEntity.
-	self updateRoassal
 ]
 
 { #category : #accessing }

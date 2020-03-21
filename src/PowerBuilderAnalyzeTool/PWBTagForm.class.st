@@ -9,7 +9,7 @@ Class {
 		'newTagForm',
 		'addNewTag'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

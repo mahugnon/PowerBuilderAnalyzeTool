@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'selectedColor'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #'clipboard handling' }

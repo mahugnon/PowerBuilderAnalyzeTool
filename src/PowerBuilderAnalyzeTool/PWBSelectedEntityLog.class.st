@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'entity'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #accessing }

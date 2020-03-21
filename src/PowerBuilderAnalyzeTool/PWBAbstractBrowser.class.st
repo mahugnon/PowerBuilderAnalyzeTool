@@ -6,9 +6,9 @@ Class {
 		'freeze',
 		'follow',
 		'highlight',
-		'currentState'
+		'toSelect'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }
@@ -29,16 +29,14 @@ PWBAbstractBrowser >> accept: anObject [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-PWBAbstractBrowser >> connectPresenters [
-	freeze whenActivatedDo: [ self toFrozen ].
-	follow whenActivatedDo: [ self toFollow ].
-	highlight whenActivatedDo: [ self toHighlight ]
+{ #category : #'as yet unclassified' }
+PWBAbstractBrowser >> followAction [
+	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-PWBAbstractBrowser >> currentState: aString [
-	currentState := aString
+{ #category : #api }
+PWBAbstractBrowser >> freezeAction [
+	^ self
 ]
 
 { #category : #enumerating }
@@ -73,17 +71,17 @@ PWBAbstractBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #initialization }
 PWBAbstractBrowser >> isFollow [
-	^ currentState = 'Follow'
+	^ follow state
 ]
 
 { #category : #accessing }
 PWBAbstractBrowser >> isFreeze [
-	^ currentState = 'Freeze'
+	^ freeze state
 ]
 
 { #category : #initialization }
 PWBAbstractBrowser >> isHighlight [
-	^ currentState = 'Highlight'
+	^ highlight state
 ]
 
 { #category : #testing }
@@ -106,33 +104,13 @@ PWBAbstractBrowser >> model: anObject [
 	model := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 PWBAbstractBrowser >> needUpdate: anEntity [
 	^ anEntity ~= model selected
 ]
 
 { #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
-	self subclassResponsibility
-]
-
-{ #category : #initialization }
-PWBAbstractBrowser >> toFollow [
-	self currentState: 'Follow'
-]
-
-{ #category : #initialization }
-PWBAbstractBrowser >> toFrozen [
-	self currentState: 'Freeze'
-]
-
-{ #category : #initialization }
-PWBAbstractBrowser >> toHighlight [
-	self currentState: 'Highlight'
-]
-
-{ #category : #'as yet unclassified' }
-PWBAbstractBrowser >> whenSelectEntity [
-	self isFreeze
-		ifTrue: [ ^ self ]
+	toSelect := anEntity.
+	BrowserModeStrategy actionFor: self
 ]

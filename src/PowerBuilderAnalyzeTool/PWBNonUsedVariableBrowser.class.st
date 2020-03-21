@@ -7,7 +7,7 @@ Class {
 		'attributOrBehaviorList',
 		'variableTypeList'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

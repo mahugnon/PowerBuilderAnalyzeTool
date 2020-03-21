@@ -6,7 +6,7 @@ Class {
 		'noteBook',
 		'sourceCodePage'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

@@ -13,7 +13,7 @@ Class {
 		'logBrowser',
 		'logBrowserLabel'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

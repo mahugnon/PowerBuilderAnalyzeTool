@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'icons'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #PowerBuilderAnalyzeTool }

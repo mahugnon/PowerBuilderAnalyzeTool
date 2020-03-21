@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'logsPresenter'
 	],
-	#category : #PowerBuilderAnalyzeTool
+	#category : #'PowerBuilderAnalyzeTool-Core'
 }
 
 { #category : #specs }

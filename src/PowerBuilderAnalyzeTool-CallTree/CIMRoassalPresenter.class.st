@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'diagram',
 		'guiModel',
-		'view'
+		'view',
+		'currentFocus'
 	],
 	#category : #'PowerBuilderAnalyzeTool-CallTree-TreeBase-Presenters'
 }
@@ -57,6 +58,11 @@ CIMRoassalPresenter >> guiModel [
 { #category : #accessing }
 CIMRoassalPresenter >> guiModel: anObject [
 	guiModel := anObject
+]
+
+{ #category : #util }
+CIMRoassalPresenter >> highlight: anEntity [
+	self subclassResponsibility
 ]
 
 { #category : #initialization }
