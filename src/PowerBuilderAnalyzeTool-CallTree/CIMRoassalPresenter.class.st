@@ -79,6 +79,21 @@ CIMRoassalPresenter >> initializeWidgets [
   self initializeDiagram
 ]
 
+{ #category : #initialization }
+CIMRoassalPresenter >> legend: aCanvas [
+	self subclassResponsibility
+]
+
+{ #category : #initialization }
+CIMRoassalPresenter >> processEntityClickEvent: evt [
+	| element |
+	element := evt shape.
+	guiModel selected: element model.
+	self colorSelectedElement: element.
+	guiModel
+		freezeDuring: [ self application globallySelect: element model ]
+]
+
 { #category : #accessing }
 CIMRoassalPresenter >> pwbMooseModel [
 	^ guiModel selectedContent

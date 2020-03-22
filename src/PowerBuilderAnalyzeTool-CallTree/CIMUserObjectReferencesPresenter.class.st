@@ -27,40 +27,8 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 ]
 
 { #category : #initialization }
-CIMUserObjectReferencesPresenter >> drawOn1: aView [
-  | userObjects userObjectElement userObjectElements shapeBuilder methods methodElements |
-  aView @ RTDraggableView.
-  shapeBuilder := RTShapeBuilder new.
-  shapeBuilder rectangle size: [:m |  m numberOfLinesOfCode min: 60 max: 5 ].
-  userObjectElements := RTGroup new.
-  userObjects := self pwbMooseModel collect: #pwbMooseModel.
-  userObjects do: [:userObject |  userObjectElement := (RTBox new color: (Color blue alpha: 0.4)) elementOn: userObject.
-        userObjectElement @ RTPopup.
-        aView add: userObjectElement.
-        methods := userObject methods.
-        methodElements := shapeBuilder elementsOn: methods.
-        aView addAll: methodElements.
-        RTEdgeBuilder new
-           view: aView;
-           objects: methods;
-           connectFrom: #yourself toAll: [:m |  m outgoingInvocations flatCollectAsSet: #candidates ].
-        RTTreeLayout on: methodElements.
-        methodElements @ RTDraggable @ RTPopup.
-        RTNest new on: userObjectElement nest: methodElements.
-        userObjectElement @ RTDraggable.
-        userObjectElements add: userObjectElement ].
-  RTEdgeBuilder new
-     view: aView;
-     shape: (RTLine new attachPoint: RTVerticalAttachPoint instance);
-     objects: userObjects;
-     connectToAll: [:each |  each incomingReferences collect: #from ].
-  RTTreeLayout on: userObjectElements.
-  ^aView
-]
-
-{ #category : #initialization }
 CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
-	| es eb |
+	| es eb borderWhite |
 	aCanvas @ RSDraggableCanvas @ RSZoomToFitCanvas.
 	es := RSEllipse new color: [ :elt | ColorObject colorFor: elt ].
 	es := (self pwbMooseModel
@@ -68,6 +36,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 			| elipse |
 			elipse := RSEllipse new
 				draggable;
+				size: 50;
 				model: modelElement;
 				color: (ColorObject colorFor: modelElement);
 				yourself.
@@ -77,14 +46,26 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 		as: RSGroup.
 	es @ RSLabeled.
 	aCanvas addAll: es.
+	borderWhite := RSBorder new
+		color: Color white;
+		yourself.
 	eb := RSEdgeBuilder arrowedLine
 		canvas: aCanvas;
 		shapes: es;
+		markerEnd:
+			((RSShapeFactory triangle
+				extent: 10 @ 20;
+				color: Color red;
+				border: borderWhite;
+				yourself) asMarker
+				offset: 35;
+				yourself);
 		moveBehind;
+		width: 2;
 		connectFromAll: [ :each | each incomingReferencesSenders ].
-	RSNormalizer size
+	"RSNormalizer size
 		shapes: es;
-		normalize: #numberOfMethods.
+		normalize: #numberOfMethods."
 	RSHorizontalTreeLayout new
 		horizontalGap: 250;
 		on: aCanvas nodes;
@@ -120,14 +101,4 @@ CIMUserObjectReferencesPresenter >> legend: aCanvas [
 		text: 'Not sure of action to perform about the user object'
 			withCircleColor: Color yellow;
 		build
-]
-
-{ #category : #initialization }
-CIMUserObjectReferencesPresenter >> processEntityClickEvent: evt [
-	| element |
-	element := evt shape.
-	guiModel selected: element model.
-	self colorSelectedElement: element.
-	guiModel
-		freezeDuring: [ self application globallySelect: element model ]
 ]
