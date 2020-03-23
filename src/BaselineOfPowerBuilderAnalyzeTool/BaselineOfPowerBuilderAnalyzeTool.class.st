@@ -9,8 +9,7 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [ 
-			self baselineOfPowerBuilderParser: spec.
+			do: [ self baselineOfPowerBuilderParser: spec.
 			self baselineOfRoassal3: spec.
 			self baselineOfColorsExtensions: spec.
 			spec
@@ -21,10 +20,13 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 				package: 'PowerBuilderAnalyzeTool-Query';
 				package: 'PowerBuilderAnalyzeTool-DuplicationGUI';
 				package: 'PowerBuilderAnalyzeTool-CallTree';
+				package: 'PowerBuilderAnalyzeTool-Utils';
 				package: 'PowerBuilderAnalyzeTool'
 					with: [ spec
 						requires:
-							#('PowerBuilderParser' 'Roassal3' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ] ]
+							#('PowerBuilderParser' 'Roassal3' 'PowerBuilderAnalyzeTool-DuplicationGUI' 'PowerBuilderAnalyzeTool-CallTree' 'ColorsExtensions') ] ];
+		package: 'PowerBuilderAnalyzeTool-Tests'
+			with: [ spec requires: #(PowerBuilderAnalyzeTool) ]
 ]
 
 { #category : #baselines }
