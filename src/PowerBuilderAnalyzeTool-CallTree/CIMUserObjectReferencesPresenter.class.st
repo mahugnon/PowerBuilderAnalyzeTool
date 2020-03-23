@@ -30,7 +30,6 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	| es eb borderWhite |
 	aCanvas @ RSDraggableCanvas @ RSZoomToFitCanvas.
-	es := RSEllipse new color: [ :elt | ColorObject colorFor: elt ].
 	es := (self pwbMooseModel
 		collect: [ :modelElement | 
 			| elipse |
@@ -51,7 +50,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 		yourself.
 	eb := RSEdgeBuilder arrowedLine
 		canvas: aCanvas;
-		shapes: es;
+		objects: self pwbMooseModel;
 		markerEnd:
 			((RSShapeFactory triangle
 				extent: 10 @ 20;
@@ -62,14 +61,16 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 				yourself);
 		moveBehind;
 		width: 2;
-		connectFromAll: [ :each | each incomingReferencesSenders ].
+		connectFromAll: [ :each | each incomingReferencesSenders ]
+			to: #yourself.
 	"RSNormalizer size
 		shapes: es;
 		normalize: #numberOfMethods."
-	RSHorizontalTreeLayout new
+	layout := RSHorizontalTreeLayout new.
+	layout
 		horizontalGap: 250;
-		on: aCanvas nodes;
-		verticalGap: 20.
+		verticalGap: 10;
+		on: es.
 	es @ self contextMenu.
 	self legend: aCanvas.
 	"	onDemand: 'Show legend';"
@@ -91,14 +92,14 @@ CIMUserObjectReferencesPresenter >> legend: aCanvas [
 	legend defaultLabel fontSize: 30.
 	legend
 		container: aCanvas;
-		text: 'Each circle is a Powerbuilder user object ';
+		text: 'Each circle is a Powerbuilder class ';
 		text:
-			'Each arrow is a refence from its source user objet to the target object';
-		text: 'Selected user object' withCircleColor: Color paleGreen;
-		text: 'User object to remove' withCircleColor: Color red;
-		text: 'User object to remove refactor'
+			'Each arrow is a group of invocation from its source user class to the target class';
+		text: 'Selected user class' withCircleColor: Color paleGreen;
+		text: 'Deprecated class' withCircleColor: Color red;
+		text: 'User object to refactor'
 			withCircleColor: Color orange;
-		text: 'Not sure of action to perform about the user object'
+		text: 'Not sure of action to perform about the class'
 			withCircleColor: Color yellow;
 		build
 ]

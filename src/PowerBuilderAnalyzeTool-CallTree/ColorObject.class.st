@@ -6,5 +6,5 @@ Class {
 
 { #category : #'as yet unclassified' }
 ColorObject class >> futureActionTags [
-	^ #('Obsolette' 'Not sure' 'To be refactored')
+	^ #('Obsolete' 'Not sure' 'To be refactored')
 ]

@@ -3,9 +3,9 @@ Class {
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
 		'diagramPresenter',
-		'obsoletteVarButton',
 		'uselessFunctionButton',
-		'browseDuplicationButton'
+		'browseDuplicationButton',
+		'obsoleteVarButton'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -39,7 +39,7 @@ PWBCallTreeBrowser class >> defaultSpec [
 			(SpBoxLayout newHorizontal
 				add: #browseDuplicationButton;
 				add: #uselessFunctionButton;
-				add: #obsoletteVarButton;
+				add: #obsoleteVarButton;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #diagramPresenter;
@@ -94,15 +94,15 @@ PWBCallTreeBrowser >> initializeRoassal [
 
 { #category : #initialization }
 PWBCallTreeBrowser >> initializeToolBar [
-	obsoletteVarButton := self newButton
-		label: 'Browse obsolette Var';
+	obsoleteVarButton := self newButton
+		label: 'Browse obsolete Var';
 		help: 'Browse non referenced varables';
 		iconName: #halt;
 		action: [ PWBNonUsedVariableBrowser new
 				selectEntity: model selected;
 				openWithSpec ].
 	uselessFunctionButton := self newButton
-		label: 'Browse obsolette Function';
+		label: 'Browse obsolete Function';
 		help: 'Browser non used function.';
 		action: [ PWBNonUsedFunctionBrowser lunchOn: model selected ];
 		iconName: #glamorousExample;

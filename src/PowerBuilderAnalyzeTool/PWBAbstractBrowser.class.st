@@ -69,7 +69,7 @@ PWBAbstractBrowser >> initializePresenters [
 		associatedRadioButtons:
 			{freeze.
 			highlight}.
-	freeze label: 'Freeze'.
+	freeze label: 'Ignore'.
 	follow label: 'Follow'.
 	highlight label: 'Highlight'.
 	follow state: false
