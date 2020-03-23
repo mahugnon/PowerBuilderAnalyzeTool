@@ -1,9 +1,6 @@
 Class {
 	#name : #PWBNonUsedVariableBrowserTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
-	#instVars : [
-		'browser'
-	],
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
