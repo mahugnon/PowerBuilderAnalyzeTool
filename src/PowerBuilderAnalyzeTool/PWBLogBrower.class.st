@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'logsPresenter'
 	],
-	#category : #'PowerBuilderAnalyzeTool-CallTree-RoassalElementColorStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }
