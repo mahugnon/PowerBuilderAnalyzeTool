@@ -174,7 +174,7 @@ PWBDuplicationBrowser >> initializeMinNumberOfLinesTextInput [
 { #category : #initialization }
 PWBDuplicationBrowser >> initializeModel [
 	model := DuplicationBrowserModel new.
-	model duplicationBrowser: self
+	model pwbBrowser: self
 ]
 
 { #category : #initialization }

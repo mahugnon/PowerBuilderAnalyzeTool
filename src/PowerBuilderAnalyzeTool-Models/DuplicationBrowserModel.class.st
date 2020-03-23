@@ -5,7 +5,6 @@ Class {
 		'duplicationFragments',
 		'duplicationView',
 		'selectedFragmentLocation',
-		'duplicationBrowser',
 		'colorMap',
 		'focusClonedFragment',
 		'duplicationEntities',
@@ -54,11 +53,6 @@ DuplicationBrowserModel >> defaultRoassalView [
 	^ DuplicationBrowserRoassalViewByEntity
 ]
 
-{ #category : #accessing }
-DuplicationBrowserModel >> duplicationBrowser: anObject [
-  duplicationBrowser := anObject
-]
-
 { #category : #initialization }
 DuplicationBrowserModel >> duplicationEntities [
 	| dpLocations |
@@ -104,8 +98,8 @@ DuplicationBrowserModel >> initialize [
 	duplicationFragments := OrderedCollection new.
 	colorMap := OrderedDictionary new.
 	selectedFragmentLocation := DPFragmentLocation new.
-	minNumberOfLines := 11.
-	minNumberOfCharacters := 88
+	minNumberOfLines := 20.
+	minNumberOfCharacters := 160
 ]
 
 { #category : #initialization }

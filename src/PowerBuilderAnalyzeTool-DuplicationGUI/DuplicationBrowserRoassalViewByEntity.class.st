@@ -52,10 +52,10 @@ DuplicationBrowserRoassalViewByEntity >> buildEntitiesShape [
 				when: RSMouseClick
 				do: [ :event | self processEntityClickEvent: event ] ]
 		as: RSGroup.
-		RSGridLayout new
+	RSGridLayout new
 		gapSize: 50;
 		on: etitiesShapes.
-	etitiesShapes @ (RSLabeled new text: [ :elt | elt mooseName ]).
+	etitiesShapes @ (RSLabeled new text: [ :elt | elt name ])
 ]
 
 { #category : #accessing }

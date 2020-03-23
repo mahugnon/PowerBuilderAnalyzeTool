@@ -1,11 +1,28 @@
 Class {
-	#name : #PWBQueryTest,
+	#name : #PWBMooseEntityTest,
 	#superclass : #AbstractPWBCallTreeBrowserTest,
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
 { #category : #tests }
-PWBQueryTest >> testQueryDeadArguments [
+PWBMooseEntityTest >> testIncomingAllInvocationsSenders [
+	self
+		assertCollection: testUserObject1 allIncomingInvocationsSenders
+		hasSameElements:
+			{testUserObject2.
+			testUserObject3.
+			testUserObject4}
+]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testIncomingInvocationsSenders [
+	self
+		assertCollection: testUserObject1 incomingInvocationsSenders
+		hasSameElements: {testUserObject2}
+]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testQueryDeadArguments [
 	self
 		assertCollection:
 			(QueryDeadArguments
@@ -16,7 +33,7 @@ PWBQueryTest >> testQueryDeadArguments [
 ]
 
 { #category : #tests }
-PWBQueryTest >> testQueryDeadLocalVariables [
+PWBMooseEntityTest >> testQueryDeadLocalVariables [
 	self
 		assertCollection:
 			(QueryDeadLocalVariables
@@ -27,7 +44,7 @@ PWBQueryTest >> testQueryDeadLocalVariables [
 ]
 
 { #category : #tests }
-PWBQueryTest >> testQueryDeadVariablesBehavioral [
+PWBMooseEntityTest >> testQueryDeadVariablesBehavioral [
 	| behavioral |
 	behavioral := QueryBehavioral
 		runOn:
@@ -43,7 +60,7 @@ PWBQueryTest >> testQueryDeadVariablesBehavioral [
 ]
 
 { #category : #tests }
-PWBQueryTest >> testQueryDeedAttributesVariables [
+PWBMooseEntityTest >> testQueryDeedAttributesVariables [
 	| query |
 	query := QueryDeadVariables runOn: testUserObject1.
 	self
@@ -54,7 +71,7 @@ PWBQueryTest >> testQueryDeedAttributesVariables [
 ]
 
 { #category : #tests }
-PWBQueryTest >> testQueryDeedVariables [
+PWBMooseEntityTest >> testQueryDeedVariables [
 	| query |
 	query := QueryDeadVariables runOn: testUserObject1.
 	self
@@ -62,4 +79,13 @@ PWBQueryTest >> testQueryDeedVariables [
 		hasSameElements:
 			{testLocalVar3.
 			testArg1}
+]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel [
+	self
+		assertCollection: (testUserObject1 incomingInvocationsSenders: 2)
+		hasSameElements:
+			{testUserObject2.
+			testUserObject3}
 ]

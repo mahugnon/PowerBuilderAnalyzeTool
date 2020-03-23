@@ -69,6 +69,22 @@ AbstractPWBCallTreeBrowserTest >> initializeAccess [
 ]
 
 { #category : #running }
+AbstractPWBCallTreeBrowserTest >> initializeInvocations [
+	FamixPWBInvocation new
+		mooseModel: testModel;
+		sender: testFunction4;
+		candidates: {testFunction1}.
+	FamixPWBInvocation new
+		mooseModel: testModel;
+		sender: testFunction7;
+		candidates: {testFunction4}.
+	FamixPWBInvocation new
+		mooseModel: testModel;
+		sender: testFunction8;
+		candidates: {testFunction7}
+]
+
+{ #category : #running }
 AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
 	testFunction1 := FamixPWBFunction new
 		parentType: testUserObject1;
@@ -79,9 +95,9 @@ AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
 	testFunction3 := FamixPWBFunction new
 		parentType: testUserObject1;
 		name: 'testFunction3'.
-	testFunction1 := FamixPWBFunction new
+"	testFunction1 := FamixPWBFunction new
 		parentType: testUserObject1;
-		name: 'testFunction1'.
+		name: 'testFunction1'."
 	testFunction4 := FamixPWBFunction new
 		parentType: testUserObject2;
 		name: 'testFunction4'.
@@ -91,9 +107,9 @@ AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
 	testFunction6 := FamixPWBFunction new
 		parentType: testUserObject2;
 		name: 'testFunction6'.
-	testFunction1 := FamixPWBFunction new
+	"testFunction1 := FamixPWBFunction new
 		parentType: testUserObject1;
-		name: 'testFunction1'.
+		name: 'testFunction1'."
 	testFunction7 := FamixPWBFunction new
 		parentType: testUserObject3;
 		name: 'testFunction7'.
@@ -186,5 +202,6 @@ AbstractPWBCallTreeBrowserTest >> setUp [
 	self initializeTestUserObject.
 	self initializeTestFunctions.
 	self initializeVariables.
-	self initializeAccess
+	self initializeAccess.
+	self initializeInvocations
 ]
