@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #baseline : 'PowerBuilderParser',
+      #baseline : 'PowerBuilderAnalyzeTool',
       #directory : 'src'
     }
   ]
