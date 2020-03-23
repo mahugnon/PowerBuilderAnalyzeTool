@@ -18,6 +18,17 @@ FamixPWBmajorObject >> incomingInvocationsSenders: anInteger [
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool' }
+FamixPWBmajorObject >> incomingInvocationsSendersWith: aCollection [
+	| result |
+	result := self incomingInvocationsSenders.
+	result
+		addAll:
+			((aCollection flatCollect: #incomingInvocationsSenders)
+				reject: [ :sender | result includes: sender ]).
+	^ result
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBmajorObject >> printString [
 	^ self name
 ]
