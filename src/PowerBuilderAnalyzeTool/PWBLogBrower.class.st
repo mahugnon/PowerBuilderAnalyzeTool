@@ -2,14 +2,24 @@ Class {
 	#name : #PWBLogBrower,
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
-		'logsPresenter'
+		'logsPresenter',
+		'exportButton'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }
 PWBLogBrower class >> defaultSpec [
-	^  super defaultSpec
+	^ SpBoxLayout newVertical
+		add:
+			(SpPanedLayout newHorizontal
+				position: 60;
+				add: #exportButton;
+				yourself)
+			withConstraints: [ :constraints | 
+				constraints
+					height: self toolbarHeight;
+					expand: false ];
 		add: #logsPresenter;
 		yourself
 ]
@@ -29,16 +39,33 @@ PWBLogBrower >> accept: anObject [
 PWBLogBrower >> connectPresenters [ 
 ]
 
+{ #category : #api }
+PWBLogBrower >> followAction [
+	self needRebuild: false.
+	self buildWithSpec
+]
+
+{ #category : #api }
+PWBLogBrower >> highlightAction [
+	self needRebuild: false.
+	self buildWithSpec
+]
+
 { #category : #initialization }
 PWBLogBrower >> initializePresenters [
+	super initializePresenters.
 	logsPresenter := self newList.
 	logsPresenter
 		items: self logger logs;
-	"	display: [ :elt | 
+		"	display: [ :elt | 
 			elt printString.
 			self halt ];"
-		sortingBlock: [ :a :b | a time > b time ];
-		headerTitle: '             Activity Logs       '
+			sortingBlock: [ :a :b | a time > b time ];
+		headerTitle: '             Activity Logs       '.
+	exportButton := self newButton
+		iconName: #glamorousSaveToUrl;
+		label: 'Export';
+		yourself
 ]
 
 { #category : #initialization }
@@ -56,13 +83,7 @@ PWBLogBrower >> logger [
 	^ self application logger
 ]
 
-{ #category : #accessing }
-PWBLogBrower >> selectEntity: anEntity [
-	self needRebuild: false.
-	self buildWithSpec
-]
-
 { #category : #TOREMOVE }
 PWBLogBrower >> title [
-^'Activity Logger'
+^'Log Browser'
 ]

@@ -74,7 +74,7 @@ PWBMooseModelBrowser >> initializePresenters [
 { #category : #initialization }
 PWBMooseModelBrowser >> initializeSearchField [
 	searchField := self newTextInput
-		placeholder: 'rechercher dans le model ...';
+		placeholder: 'Search entities ...';
 		yourself.
 	searchField acceptOnCR: true
 ]
