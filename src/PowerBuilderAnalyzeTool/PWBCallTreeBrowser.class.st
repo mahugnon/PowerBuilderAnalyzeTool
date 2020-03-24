@@ -5,7 +5,8 @@ Class {
 		'diagramPresenter',
 		'uselessFunctionButton',
 		'browseDuplicationButton',
-		'obsoleteVarButton'
+		'obsoleteVarButton',
+		'optionPanel'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }

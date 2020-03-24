@@ -43,7 +43,7 @@ PWBTagForm >> accept: anObject [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 PWBTagForm >> closeTagForm [
 	addNewTag state: false
 ]
@@ -60,11 +60,21 @@ PWBTagForm >> entity [
 	^ entity
 ]
 
-{ #category : #'accessing ' }
+{ #category : #accessing }
 PWBTagForm >> entity: anObject [
 	entity := anObject.
 	newTagForm entity: entity.
 	tagsList items: entity mooseModel allTags
+]
+
+{ #category : #api }
+PWBTagForm >> followAction [
+	
+]
+
+{ #category : #api }
+PWBTagForm >> highlightAction [
+	
 ]
 
 { #category : #initialization }
