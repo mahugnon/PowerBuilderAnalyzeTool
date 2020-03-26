@@ -8,10 +8,56 @@ Class {
 		'chooseLevel',
 		'chooseEntity',
 		'maxLevel',
-		'validateButton'
+		'validateButton',
+		'paramPresenter',
+		'cancel'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
+
+{ #category : #specs }
+OptionPanel class >> defaultSpec [
+	^ SpBoxLayout newVertical
+		add:
+			(SpBoxLayout newHorizontal
+				add: #chooseLevel;
+				add: #chooseEntity;
+				yourself)
+			withConstraints: [ :constraints | 
+				constraints
+					height: self toolbarHeight;
+					width: self buttonWidth;
+					expand: false ];
+		add: #paramPresenter;
+		add:
+			(SpBoxLayout newHorizontal
+				add: #validateButton;
+				add: #cancel;
+				yourself)
+			withConstraints: [ :constraints | 
+				constraints
+					height: self toolbarHeight;
+					expand: false ];
+		yourself
+]
+
+{ #category : #examples }
+OptionPanel class >> runMe [
+	<script>
+	self new openWithSpec
+]
+
+{ #category : #initialization }
+OptionPanel >> connectPresenters [
+	chooseLevel
+		whenActivatedDo: [ paramPresenter := maxLevel.
+			self needRebuild: false.
+			self buildWithSpec ].
+	chooseEntity
+		whenActivatedDo: [ paramPresenter := listPresenter.
+			self needRebuild: false.
+			self buildWithSpec ]
+]
 
 { #category : #initialization }
 OptionPanel >> initializeChooseButtons [
@@ -24,9 +70,8 @@ OptionPanel >> initializeChooseButtons [
 
 { #category : #initialization }
 OptionPanel >> initializeListPresenter [
-	listPresenter := self newList.
+	listPresenter := self newTable.
 	listPresenter
-		enableSearch;
 		addColumn:
 			((SpCheckBoxTableColumn
 				title: ' '
@@ -37,7 +82,7 @@ OptionPanel >> initializeListPresenter [
 				yourself);
 		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name);
 		items: possibleEntities.
-	listPresenter visibleIf: [ chooseEntity state ]
+	listPresenter enableItemSubstringFilter
 ]
 
 { #category : #initialization }
@@ -45,8 +90,7 @@ OptionPanel >> initializeMaxLevel [
 	maxLevel := self newTextInput.
 	maxLevel
 		autoAccept: true;
-		ghostText: 'set max level';
-		visibleIf: [ chooseLevel state ]
+		placeholder: 'set max level'.
 ]
 
 { #category : #initialization }
@@ -59,5 +103,36 @@ OptionPanel >> initializePresenters [
 	validateButton := self newButton.
 	validateButton
 		label: 'Validate';
-		action: [ self validate ]
+		iconName: #smallOk;
+		action: [ self validate ].
+	cancel := self newButton
+		label: 'Close';
+		action: [ self window close ];
+		iconName: #changeRemove;
+		yourself.
+	paramPresenter := maxLevel
+]
+
+{ #category : #initialization }
+OptionPanel >> initializeWindow: aWindowPresenter [
+	super initializeWindow: aWindowPresenter.
+	aWindowPresenter
+		whenClosedDo: [ self application windowClosed: aWindowPresenter ].
+	aWindowPresenter
+		title: self title;
+		initialExtent: 300 @ 200
+]
+
+{ #category : #TOREMOVE }
+OptionPanel >> title [ 
+^'Options'
+]
+
+{ #category : #'private actions' }
+OptionPanel >> validate [
+	optionParameters
+		action:
+			({chooseEntity.
+			chooseLevel} detect: #state) label;
+		maxLevel: maxLevel text asInteger
 ]

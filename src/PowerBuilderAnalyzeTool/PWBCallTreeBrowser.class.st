@@ -41,6 +41,7 @@ PWBCallTreeBrowser class >> defaultSpec [
 				add: #browseDuplicationButton;
 				add: #uselessFunctionButton;
 				add: #obsoleteVarButton;
+				add: #optionPanel;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #diagramPresenter;
@@ -84,7 +85,14 @@ PWBCallTreeBrowser >> initializePresenters [
 	super initializePresenters.
 	self initializeBrowserModel.
 	self initializeRoassal.
-	self initializeToolBar
+	self initializeToolBar.
+	optionPanel := self newButton.
+	optionPanel
+		label: 'Options';
+		icon: PWBBrowserIcons option;
+		action: [ OptionPanel new
+				owner: self;
+				openWithSpec ]
 ]
 
 { #category : #initialization }

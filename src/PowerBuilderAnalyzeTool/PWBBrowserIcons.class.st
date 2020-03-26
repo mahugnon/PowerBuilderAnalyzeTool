@@ -169,6 +169,51 @@ fIVapDtA9t3cvCHaAYHRKkzAUBcJExVgWaEUW7wXCRISgJE3D6CmVE62bPIOvyMSKCTAUnVx
 ]
 
 { #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> ok [
+	^ icons
+			at: #'ok'
+			ifAbsentPut:[ Form fromBinaryStream: self okIcon base64Decoded asByteArray readStream ]
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> okIcon [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
+SFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
+AAH7SURBVDiNpZO/TlRBFMZ/Zy57rzvLXQEpDJIooaE0MYZSfACt9DHsLPAN6KjpbQxU+gBq
+bSjsKGkETDDRmd1Z711mjsXeu+wqnSeZZHLy/Zn5zgyqyt/LObfqnDsIIayHENadcwfOudWb
+sKKqNCXOuceqemmM2QNeikgAUFULHKaUdkVktd/vfwEUuBYIIazFGL8xU/VVBCBfyGbbZFl2
+z1p7BmDaZozxUeOGG1YMRjWqoAqDUY0bVrRmLbY99h3gCHiiquKGNf1egcicKarghhX9Xo6I
+KPAZeCGqKt77M+CuCxVl918ywG9NFBj8qKJvC4CLsizXTBPGCYARuZH8tfbs/zxFZIJp6gRQ
+473fA3aqcZyGdRnrOfLR4Duvbt+fBlqNI8CO935vYc6qEX/rz3lYlCxnHd75C3aXN1g02TVG
+Zyiqivf+o8LOcFSz2M0Zq7L/65Qfccyb5Q2WTGdKGIxqet0cgU9lWT5daDS3BEhJUaAjwuul
+ByiQcR2KNpimswWI8d6vtIGUNm/mDQaZJzdjLG3eap1471emL9F7/wx4r6r4UGOMUHQmEVXj
+K1JSSpsjkyk8L8vyA8A0xCzLjmOMiAj9XoHqhAjQu5XPjTfLsuN2P33K1tpzVd1OKW0ChyLQ
+LTqhW3RCQz5MKW2q6ra19nzmbv/3nf8A9HRNUrFTupEAAAAASUVORK5CYII='
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> option [
+	^ icons
+			at: #'option'
+			ifAbsentPut:[ Form fromBinaryStream: self optionIcon base64Decoded asByteArray readStream ]
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
+PWBBrowserIcons class >> optionIcon [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAACBj
+SFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIA
+AAAJcEhZcwAADsQAAA7EAZUrDhsAAAAHdElNRQfkAxoPJioqPDPQAAAA+0lEQVQoz23Rv0pC
+ARTH8c81NQS5Dhd1rj1oqSGd2mzsAdp6At+hoSC6hQaBCvZnkqjB9B0ae4gaorFoKBtu6sU6
+05dzDofz+/0C6er7QMGehSqKRUJDMBSKxIrz8UDDSEsd1LWNNAymK7HG7FYgP+OGOIHIGKy7
+1NWx/bswFiVQ0sKmKwUVZeyAcyFZXZFDNO1rKgu8OLDr1o2+N3pg2ZWqE3CmrGMJ9DIpsUGK
+l3wnkDFxb8unnHevYqeevcuYqLszmT+54UaoqqLk2hrayZNkreLRsQtfAoEjT1iR+2tUftpM
+G5VY/aClBmqLVk/DKs3CKs3DSkv7N+4fYIg8rLnbwQ8AAAAldEVYdGRhdGU6Y3JlYXRlADIw
+MjAtMDMtMjZUMTU6Mzg6NDIrMDA6MDAxp3I7AAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIwLTAz
+LTI2VDE1OjM4OjQyKzAwOjAwQPrKhwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9y
+Z5vuPBoAAAAASUVORK5CYII='
+]
+
+{ #category : #PowerBuilderAnalyzeTool }
 PWBBrowserIcons class >> pwbAnalyzeTool [
 	^ self icons
 			at: #'pwbAnalyzeTool'
