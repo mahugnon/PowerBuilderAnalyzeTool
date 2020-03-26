@@ -10,14 +10,30 @@ Class {
 }
 
 { #category : #accessing }
+OptionParameters >> action [
+	^ action
+]
+
+{ #category : #accessing }
 OptionParameters >> action: aString [
 	action := aString
+]
+
+{ #category : #accesing }
+OptionParameters >> addEntity: aFamixPWBUserObject [
+	(selectedEntities includes: aFamixPWBUserObject)
+		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
 { #category : #initialization }
 OptionParameters >> initialize [
 	selectedEntities := OrderedCollection new.
 	maxLevel := 1
+]
+
+{ #category : #accessing }
+OptionParameters >> maxLevel [
+	^ maxLevel
 ]
 
 { #category : #'accessing ' }
@@ -28,12 +44,6 @@ OptionParameters >> maxLevel: anInteger [
 { #category : #'add-remove' }
 OptionParameters >> removeEntities: anObject [
 	selectedEntities remove: anObject
-]
-
-{ #category : #accesing }
-OptionParameters >> selectEntity: aFamixPWBUserObject [
-	(selectedEntities includes: aFamixPWBUserObject)
-		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
 { #category : #accessing }

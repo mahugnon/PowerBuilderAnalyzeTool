@@ -6,5 +6,10 @@ Class {
 
 { #category : #visiting }
 QueryIncomingInvocationSendersUpToLevel class >> accept: aString [
-	^ aString = 'Choose level'
+	^ aString = 'level'
+]
+
+{ #category : #running }
+QueryIncomingInvocationSendersUpToLevel >> runOn: anEntity [
+	^ anEntity incomingInvocationsSenders: options maxLevel
 ]

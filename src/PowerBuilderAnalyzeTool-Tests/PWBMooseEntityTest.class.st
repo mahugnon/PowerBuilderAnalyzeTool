@@ -89,3 +89,50 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel [
 			{testUserObject2.
 			testUserObject3}
 ]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
+	| option |
+	option := OptionParameters new
+		maxLevel: 2;
+		action: 'Choose level';
+		yourself.
+	self
+		assertCollection:
+			((QueryIncomingInvocationSenders options: option)
+				runOn: testUserObject1)
+		hasSameElements:
+			{testUserObject2.
+			testUserObject3}
+]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
+	| option |
+	option := OptionParameters new
+		maxLevel: 2;
+		action: 'Choose entity';
+		yourself.
+	self
+		assertCollection:
+			((QueryIncomingInvocationSenders options: option)
+				runOn: testUserObject1)
+		hasSameElements: {testUserObject2}
+]
+
+{ #category : #tests }
+PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
+	| option |
+	option := OptionParameters new
+		maxLevel: 2;
+		action: 'Choose entity';
+		yourself.
+	option addEntity: testUserObject2.
+	self
+		assertCollection:
+			((QueryIncomingInvocationSenders options: option)
+				runOn: testUserObject1)
+		hasSameElements:
+			{testUserObject2.
+			testUserObject3}
+]
