@@ -6,7 +6,7 @@ Class {
 
 { #category : #visiting }
 QueryIncomingInvocationSendersWithEntities class >> accept: aString [
-	^ aString = 'entity'
+	^ aString = 'InvocationWithEntity'
 ]
 
 { #category : #running }

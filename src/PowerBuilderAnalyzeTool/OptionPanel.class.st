@@ -57,10 +57,12 @@ OptionPanel >> browser: aPWBBrowser [
 OptionPanel >> connectPresenters [
 	chooseLevel
 		whenActivatedDo: [ paramPresenter := maxLevel.
+			optionParameters action: 'InvocationAtLevel'.
 			self needRebuild: false.
 			self buildWithSpec ].
 	chooseEntity
 		whenActivatedDo: [ paramPresenter := listPresenter.
+			optionParameters action: 'InvocationWithEntity'.
 			self needRebuild: false.
 			self buildWithSpec ]
 ]
@@ -141,10 +143,5 @@ OptionPanel >> title [
 
 { #category : #'private actions' }
 OptionPanel >> validate [
-	optionParameters
-		action:
-			({chooseEntity.
-			chooseLevel} detect: #state) label;
-		maxLevel: maxLevel text asInteger.
 	browser refreshWithParameters: optionParameters
 ]

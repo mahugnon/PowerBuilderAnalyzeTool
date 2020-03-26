@@ -6,7 +6,7 @@ Class {
 
 { #category : #visiting }
 QueryIncomingInvocationSendersUpToLevel class >> accept: aString [
-	^ aString = 'level'
+	^ aString = 'InvocationAtLevel'
 ]
 
 { #category : #running }
