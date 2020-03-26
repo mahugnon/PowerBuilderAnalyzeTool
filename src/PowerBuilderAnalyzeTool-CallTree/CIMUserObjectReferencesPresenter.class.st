@@ -61,8 +61,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 				yourself);
 		moveBehind;
 		width: 2;
-		connectFromAll: [ :each | each incomingReferencesSenders ]
-			to: #yourself.
+		connectFromAll: [ :each | each incomingInvocations ] to: #yourself.
 	"RSNormalizer size
 		shapes: es;
 		normalize: #numberOfMethods."

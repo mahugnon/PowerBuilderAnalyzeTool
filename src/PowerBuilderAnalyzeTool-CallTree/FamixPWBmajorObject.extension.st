@@ -83,7 +83,7 @@ FamixPWBmajorObject >> outgoingReferencesTarget [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> roassalPresenter [
-	^ CIMFunctionInvocationsPresenter
+	^ CIMUserObjectReferencesPresenter
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

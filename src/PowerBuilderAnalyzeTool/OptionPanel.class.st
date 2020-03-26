@@ -10,7 +10,8 @@ Class {
 		'maxLevel',
 		'validateButton',
 		'paramPresenter',
-		'cancel'
+		'cancel',
+		'browser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -47,6 +48,11 @@ OptionPanel class >> runMe [
 	self new openWithSpec
 ]
 
+{ #category : #accessing }
+OptionPanel >> browser: aPWBBrowser [
+	browser := aPWBBrowser
+]
+
 { #category : #initialization }
 OptionPanel >> connectPresenters [
 	chooseLevel
@@ -80,8 +86,7 @@ OptionPanel >> initializeListPresenter [
 				onDesactivation: [ :entity | optionParameters removeEntities: entity ];
 				width: 20;
 				yourself);
-		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name);
-		items: possibleEntities.
+		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name).
 	listPresenter enableItemSubstringFilter
 ]
 
@@ -123,6 +128,12 @@ OptionPanel >> initializeWindow: aWindowPresenter [
 		initialExtent: 300 @ 200
 ]
 
+{ #category : #accessing }
+OptionPanel >> possibleEntities: aCollection [
+	possibleEntities := aCollection.
+	listPresenter items: possibleEntities
+]
+
 { #category : #TOREMOVE }
 OptionPanel >> title [ 
 ^'Options'
@@ -134,5 +145,6 @@ OptionPanel >> validate [
 		action:
 			({chooseEntity.
 			chooseLevel} detect: #state) label;
-		maxLevel: maxLevel text asInteger
+		maxLevel: maxLevel text asInteger.
+	browser refreshWithParameters: optionParameters
 ]

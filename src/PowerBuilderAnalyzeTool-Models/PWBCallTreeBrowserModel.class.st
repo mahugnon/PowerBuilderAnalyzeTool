@@ -2,7 +2,8 @@ Class {
 	#name : #PWBCallTreeBrowserModel,
 	#superclass : #PWBAbstractModel,
 	#instVars : [
-		'selectionListeners'
+		'selectionListeners',
+		'selectedInvocations'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -18,6 +19,14 @@ PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 ]
 
 { #category : #api }
+PWBCallTreeBrowserModel >> refreshWithParameters: anOptionParameters [
+	selectedInvocations := QueryIncomingInvocationSenders
+		options: anOptionParameters;
+		runOn: selected.
+	pwbBrowser updateRoassal
+]
+
+{ #category : #api }
 PWBCallTreeBrowserModel >> roassal [
 	^ selected roassalPresenter
 ]
@@ -25,13 +34,12 @@ PWBCallTreeBrowserModel >> roassal [
 { #category : #accessing }
 PWBCallTreeBrowserModel >> selected: anObject [
 	selected := anObject.
-	self setContent
+	selectedInvocations := selected incomingInvocationsSenders: 1
 ]
 
 { #category : #initialization }
-PWBCallTreeBrowserModel >> selectedContent [
-	selected ifNil: [ selected setContent ].
-	^ selected content
+PWBCallTreeBrowserModel >> selectedInvocations [
+	^ selectedInvocations
 ]
 
 { #category : #initialization }

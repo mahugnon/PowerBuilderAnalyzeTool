@@ -91,7 +91,8 @@ PWBCallTreeBrowser >> initializePresenters [
 		label: 'Options';
 		icon: PWBBrowserIcons option;
 		action: [ OptionPanel new
-				owner: self;
+				browser: self;
+				possibleEntities: model selectedInvocations;
 				openWithSpec ]
 ]
 
@@ -127,6 +128,11 @@ PWBCallTreeBrowser >> initializeToolBar [
 PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter initialExtent: 750 @ 500
+]
+
+{ #category : #api }
+PWBCallTreeBrowser >> refreshWithParameters: anOptionParameters [
+	model refreshWithParameters: anOptionParameters
 ]
 
 { #category : #accessing }
