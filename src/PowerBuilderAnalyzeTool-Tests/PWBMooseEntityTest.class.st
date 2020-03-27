@@ -110,7 +110,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntity';
+		action: 'InvocationWithEntities';
 		yourself.
 	self
 		assertCollection:
