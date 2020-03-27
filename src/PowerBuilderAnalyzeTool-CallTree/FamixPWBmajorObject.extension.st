@@ -41,6 +41,11 @@ FamixPWBmajorObject >> allReferences [
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBmajorObject >> clean: aCollection [
+	^ aCollection reject: [ :each | self toReject includes: each name ]
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> content [
 	content ifNil: [ self setContent ].
 	^ content
@@ -83,7 +88,7 @@ FamixPWBmajorObject >> outgoingReferencesTarget [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> roassalPresenter [
-	^ CIMFunctionInvocationsPresenter
+	^ CIMUserObjectReferencesPresenter
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
@@ -96,10 +101,14 @@ FamixPWBmajorObject >> setContent [
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBmajorObject >> toReject [
+	^ {'uo_traitement' . 'uo_datawindow'}
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> toSkipForNow: anObject [
 	self flag: 'To be considered later'.
 	^ {FamixPWBCustomType.
-	FamixPWBDataWindow.
 	FamixPWBFunction.
 	FamixPWBEvent} includes: anObject class
 ]

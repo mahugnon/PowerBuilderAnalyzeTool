@@ -3,7 +3,7 @@ Extension { #name : #FamixPWBmajorObject }
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBmajorObject >> incomingInvocationsSenders: anInteger [
 	| totalResult levelResult level scan |
-	totalResult := self incomingInvocationsSenders asOrderedCollection.
+	totalResult := self incomingInvocationsSenders.
 	levelResult := totalResult.
 	level := 1.
 	scan := 0.
@@ -12,20 +12,18 @@ FamixPWBmajorObject >> incomingInvocationsSenders: anInteger [
 			scan := totalResult size.
 			levelResult := (levelResult
 				flatCollect: #incomingInvocationsSenders)
-				reject: [ :sender | totalResult includes: sender ].
+				"reject: [ :sender | totalResult includes: sender ]".
 			totalResult addAll: levelResult ].
-	^ totalResult
+	"totalResult add: self."
+	^ totalResult asOrderedCollection
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBmajorObject >> incomingInvocationsSendersWith: aCollection [
 	| result |
 	result := self incomingInvocationsSenders.
-	result
-		addAll:
-			((aCollection flatCollect: #incomingInvocationsSenders)
-				reject: [ :sender | result includes: sender ]).
-	^ result
+	result addAll: (aCollection flatCollect: #incomingInvocationsSenders).
+	^ result asOrderedCollection
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool' }

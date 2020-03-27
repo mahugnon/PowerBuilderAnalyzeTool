@@ -10,7 +10,8 @@ Class {
 		'maxLevel',
 		'validateButton',
 		'paramPresenter',
-		'cancel'
+		'cancel',
+		'browser'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -47,6 +48,11 @@ OptionPanel class >> runMe [
 	self new openWithSpec
 ]
 
+{ #category : #accessing }
+OptionPanel >> browser: aPWBBrowser [
+	browser := aPWBBrowser
+]
+
 { #category : #initialization }
 OptionPanel >> connectPresenters [
 	chooseLevel
@@ -62,10 +68,10 @@ OptionPanel >> connectPresenters [
 { #category : #initialization }
 OptionPanel >> initializeChooseButtons [
 	chooseLevel := self newRadioButton.
-	chooseLevel label: 'Choose level'.
+	chooseLevel label: 'InvocationAtLevel'.
 	chooseEntity := self newRadioButton.
-	chooseEntity label: 'Choose entity'.
-	chooseLevel associatedRadioButtons: {chooseEntity}.
+	chooseEntity label: 'InvocationWithEntities'.
+	chooseLevel associatedRadioButtons: {chooseEntity}
 ]
 
 { #category : #initialization }
@@ -76,12 +82,11 @@ OptionPanel >> initializeListPresenter [
 			((SpCheckBoxTableColumn
 				title: ' '
 				evaluated: [ :entity | optionParameters selectedEntities includes: entity ])
-				onActivation: [ :entity | optionParameters selectEntity: entity ];
+				onActivation: [ :entity | optionParameters addEntity: entity ];
 				onDesactivation: [ :entity | optionParameters removeEntities: entity ];
 				width: 20;
 				yourself);
-		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name);
-		items: possibleEntities.
+		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name).
 	listPresenter enableItemSubstringFilter
 ]
 
@@ -123,6 +128,12 @@ OptionPanel >> initializeWindow: aWindowPresenter [
 		initialExtent: 300 @ 200
 ]
 
+{ #category : #accessing }
+OptionPanel >> possibleEntities: aCollection [
+	possibleEntities := aCollection.
+	listPresenter items: possibleEntities
+]
+
 { #category : #TOREMOVE }
 OptionPanel >> title [ 
 ^'Options'
@@ -134,5 +145,6 @@ OptionPanel >> validate [
 		action:
 			({chooseEntity.
 			chooseLevel} detect: #state) label;
-		maxLevel: maxLevel text asInteger
+		maxLevel: maxLevel text asInteger.
+	browser refreshWithParameters: optionParameters
 ]

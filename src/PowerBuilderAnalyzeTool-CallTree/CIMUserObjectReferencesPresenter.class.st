@@ -61,12 +61,12 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 				yourself);
 		moveBehind;
 		width: 2;
-		connectFromAll: [ :each | each incomingReferencesSenders ]
+		connectFromAll: [ :each | each incomingInvocationsSenders ]
 			to: #yourself.
 	"RSNormalizer size
 		shapes: es;
 		normalize: #numberOfMethods."
-	layout := RSHorizontalTreeLayout new.
+	layout := RSTreeLayout new.
 	layout
 		horizontalGap: 250;
 		verticalGap: 10;

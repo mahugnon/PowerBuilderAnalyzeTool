@@ -96,7 +96,7 @@ CIMRoassalPresenter >> processEntityClickEvent: evt [
 
 { #category : #accessing }
 CIMRoassalPresenter >> pwbMooseModel [
-	^ guiModel selectedContent
+	^ guiModel selectedInvocations
 ]
 
 { #category : #accessing }
