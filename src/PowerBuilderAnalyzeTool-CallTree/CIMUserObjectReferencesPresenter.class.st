@@ -66,7 +66,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	"RSNormalizer size
 		shapes: es;
 		normalize: #numberOfMethods."
-	layout := RSHorizontalTreeLayout new.
+	layout := RSTreeLayout new.
 	layout
 		horizontalGap: 250;
 		verticalGap: 10;

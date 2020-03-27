@@ -23,8 +23,6 @@ FamixPWBmajorObject >> incomingInvocationsSendersWith: aCollection [
 	| result |
 	result := self incomingInvocationsSenders.
 	result addAll: (aCollection flatCollect: #incomingInvocationsSenders).
-	"reject: [ :sender | result includes: sender ]"
-	"result add: self."
 	^ result asOrderedCollection
 ]
 

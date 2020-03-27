@@ -11,6 +11,5 @@ QueryIncomingInvocationSendersWithEntities class >> accept: aString [
 
 { #category : #running }
 QueryIncomingInvocationSendersWithEntities >> runOn: anEntity [
-	^ self
-		clean: (anEntity incomingInvocationsSendersWith: options selectedEntities)
+	^ anEntity incomingInvocationsSendersWith: options selectedEntities
 ]

@@ -11,5 +11,5 @@ QueryIncomingInvocationSendersUpToLevel class >> accept: aString [
 
 { #category : #running }
 QueryIncomingInvocationSendersUpToLevel >> runOn: anEntity [
-	^ self clean: (anEntity incomingInvocationsSenders: options maxLevel)
+	^ anEntity incomingInvocationsSenders: options maxLevel
 ]

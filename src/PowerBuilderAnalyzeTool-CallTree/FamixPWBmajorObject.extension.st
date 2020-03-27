@@ -41,6 +41,11 @@ FamixPWBmajorObject >> allReferences [
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBmajorObject >> clean: aCollection [
+	^ aCollection reject: [ :each | self toReject includes: each name ]
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> content [
 	content ifNil: [ self setContent ].
 	^ content
@@ -93,6 +98,11 @@ FamixPWBmajorObject >> setContent [
 		flatCollect: #withAllOutgoingInvocationCandidates)
 		asOrderedCollection
 		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool-CallTree' }
+FamixPWBmajorObject >> toReject [
+	^ {'uo_traitement' . 'uo_datawindow'}
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
