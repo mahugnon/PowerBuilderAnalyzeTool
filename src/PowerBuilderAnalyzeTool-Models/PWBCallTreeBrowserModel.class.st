@@ -20,9 +20,8 @@ PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 
 { #category : #api }
 PWBCallTreeBrowserModel >> refreshWithParameters: anOptionParameters [
-	selectedInvocations := QueryIncomingInvocationSenders
-		options: anOptionParameters;
-		runOn: selected.
+	selectedInvocations := (QueryIncomingInvocationSenders
+		options: anOptionParameters) runOn: selected.
 	pwbBrowser updateRoassal
 ]
 

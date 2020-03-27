@@ -6,10 +6,11 @@ Class {
 
 { #category : #visiting }
 QueryIncomingInvocationSendersWithEntities class >> accept: aString [
-	^ aString = 'InvocationWithEntity'
+	^ aString = 'InvocationWithEntities'
 ]
 
 { #category : #running }
 QueryIncomingInvocationSendersWithEntities >> runOn: anEntity [
-	^ anEntity incomingInvocationsSendersWith: options selectedEntities
+	^ self
+		clean: (anEntity incomingInvocationsSendersWith: options selectedEntities)
 ]

@@ -19,7 +19,17 @@ QueryIncomingInvocationSenders class >> options: anOptionParameters [
 		options: anOptionParameters
 ]
 
+{ #category : #running }
+QueryIncomingInvocationSenders >> clean: aCollection [
+	^ aCollection reject: [ :each | self toReject includes: each name ]
+]
+
 { #category : #accessing }
 QueryIncomingInvocationSenders >> options: anOptionParameters [ 
 	options := anOptionParameters
+]
+
+{ #category : #'as yet unclassified' }
+QueryIncomingInvocationSenders >> toReject [
+	^ {'uo_traitement' . 'uo_datawindow'}
 ]

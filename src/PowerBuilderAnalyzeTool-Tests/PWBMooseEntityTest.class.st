@@ -123,7 +123,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntity';
+		action: 'InvocationWithEntities';
 		yourself.
 	option addEntity: testUserObject2.
 	self

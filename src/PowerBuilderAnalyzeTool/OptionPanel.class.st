@@ -57,12 +57,10 @@ OptionPanel >> browser: aPWBBrowser [
 OptionPanel >> connectPresenters [
 	chooseLevel
 		whenActivatedDo: [ paramPresenter := maxLevel.
-			optionParameters action: 'InvocationAtLevel'.
 			self needRebuild: false.
 			self buildWithSpec ].
 	chooseEntity
 		whenActivatedDo: [ paramPresenter := listPresenter.
-			optionParameters action: 'InvocationWithEntity'.
 			self needRebuild: false.
 			self buildWithSpec ]
 ]
@@ -70,10 +68,10 @@ OptionPanel >> connectPresenters [
 { #category : #initialization }
 OptionPanel >> initializeChooseButtons [
 	chooseLevel := self newRadioButton.
-	chooseLevel label: 'Choose level'.
+	chooseLevel label: 'InvocationAtLevel'.
 	chooseEntity := self newRadioButton.
-	chooseEntity label: 'Choose entity'.
-	chooseLevel associatedRadioButtons: {chooseEntity}.
+	chooseEntity label: 'InvocationWithEntities'.
+	chooseLevel associatedRadioButtons: {chooseEntity}
 ]
 
 { #category : #initialization }
@@ -84,7 +82,7 @@ OptionPanel >> initializeListPresenter [
 			((SpCheckBoxTableColumn
 				title: ' '
 				evaluated: [ :entity | optionParameters selectedEntities includes: entity ])
-				onActivation: [ :entity | optionParameters selectEntity: entity ];
+				onActivation: [ :entity | optionParameters addEntity: entity ];
 				onDesactivation: [ :entity | optionParameters removeEntities: entity ];
 				width: 20;
 				yourself);
@@ -143,5 +141,10 @@ OptionPanel >> title [
 
 { #category : #'private actions' }
 OptionPanel >> validate [
+	optionParameters
+		action:
+			({chooseEntity.
+			chooseLevel} detect: #state) label;
+		maxLevel: maxLevel text asInteger.
 	browser refreshWithParameters: optionParameters
 ]

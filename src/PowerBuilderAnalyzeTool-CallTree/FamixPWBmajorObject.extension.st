@@ -99,7 +99,6 @@ FamixPWBmajorObject >> setContent [
 FamixPWBmajorObject >> toSkipForNow: anObject [
 	self flag: 'To be considered later'.
 	^ {FamixPWBCustomType.
-	FamixPWBDataWindow.
 	FamixPWBFunction.
 	FamixPWBEvent} includes: anObject class
 ]
