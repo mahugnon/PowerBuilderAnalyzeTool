@@ -29,8 +29,11 @@ FamixPWBBehavioral >> content [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> incomingInvocationsSenders [
-	^ (self incomingInvocations collectAsSet: #sender)
-		reject: [ :m | (m isKindOf: FamixPWBmajorObject) or: [ m isNoisyMethod ] ]
+	incomingInvocationSenders
+		ifNil: [ incomingInvocationSenders := (self incomingInvocations
+				collectAsSet: #sender)
+				reject: [ :m | (m isKindOf: FamixPWBmajorObject) or: [ m isNoisyMethod ] ] ].
+	^ incomingInvocationSenders
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

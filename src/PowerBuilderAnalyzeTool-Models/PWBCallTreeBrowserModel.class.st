@@ -37,6 +37,12 @@ PWBCallTreeBrowserModel >> selected: anObject [
 ]
 
 { #category : #initialization }
+PWBCallTreeBrowserModel >> selectedContent [
+	selected ifNil: [ selected setContent ].
+	^ selected content
+]
+
+{ #category : #initialization }
 PWBCallTreeBrowserModel >> selectedInvocations [
 	^ selectedInvocations
 ]
