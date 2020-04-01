@@ -28,59 +28,12 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
-	| es eb borderWhite |
 	aCanvas @ RSDraggableCanvas @ RSZoomToFitCanvas.
-	es := (self pwbMooseModel
-		collect: [ :modelElement | 
-			| elipse lbl |
-			lbl := RSLabel new
-				text: modelElement name;
-				yourself.
-			elipse := RSEllipse new
-				size: lbl extent;
-				extent: lbl extent + 10;
-				model: modelElement;
-				color: (ColorObject colorFor: modelElement);
-				yourself.
-			elipse
-				when: RSMouseClick
-				do: [ :event | self processEntityClickEvent: event ].
-			RSComposite new
-				draggable;
-				model: modelElement;
-				shapes: (RSGroup with: elipse with: lbl);
-				yourself ]) as: RSGroup.
-	aCanvas addAll: es.
-	borderWhite := RSBorder new
-		color: Color white;
-		yourself.
-	eb := RSEdgeBuilder arrowedLine
-		canvas: aCanvas;
-		withBorderAttachPoint;
-		objects: self pwbMooseModel;
-		markerEnd:
-			((RSShapeFactory triangle
-				extent: 10 @ 20;
-				color: Color red;
-				border: borderWhite;
-				yourself) asMarker
-				offset: 25;
-				yourself);
-		moveBehind;
-		width: 2;
-		connectFromAll: [ :each | each incomingInvocationsSenders ]
-			to: #yourself.
-	"RSNormalizer size
-		shapes: es;
-		normalize: #numberOfMethods."
-	layout := RSHorizontalTreeLayout new.
-	layout
-		horizontalGap: 250;
-		verticalGap: 10;
-		on: es.
-	es @ self contextMenu.
+	self buildShapesOn: aCanvas.
+	self buildEdgeOn: aCanvas.
+	self buildLayoutOn: aCanvas.
+	self contextMenuOn: aCanvas.
 	self legend: aCanvas.
-	"	onDemand: 'Show legend';"
 	aCanvas @ RSCanvasController.
 	view := aCanvas.
 	^ aCanvas

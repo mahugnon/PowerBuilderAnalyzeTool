@@ -21,6 +21,7 @@ BaselineOfPowerBuilderAnalyzeTool >> baseline: spec [
 				package: 'PowerBuilderAnalyzeTool-DuplicationGUI';
 				package: 'PowerBuilderAnalyzeTool-CallTree';
 				package: 'PowerBuilderAnalyzeTool-Utils';
+				package: 'FamixTags';
 				package: 'PowerBuilderAnalyzeTool'
 					with: [ spec
 						requires:
