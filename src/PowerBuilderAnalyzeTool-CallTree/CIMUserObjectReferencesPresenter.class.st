@@ -32,24 +32,31 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	aCanvas @ RSDraggableCanvas @ RSZoomToFitCanvas.
 	es := (self pwbMooseModel
 		collect: [ :modelElement | 
-			| elipse |
+			| elipse lbl |
+			lbl := RSLabel new
+				text: modelElement name;
+				yourself.
 			elipse := RSEllipse new
-				draggable;
-				size: 50;
+				size: lbl extent;
+				extent: lbl extent + 10;
 				model: modelElement;
 				color: (ColorObject colorFor: modelElement);
 				yourself.
 			elipse
 				when: RSMouseClick
-				do: [ :event | self processEntityClickEvent: event ] ])
-		as: RSGroup.
-	es @ RSLabeled.
+				do: [ :event | self processEntityClickEvent: event ].
+			RSComposite new
+				draggable;
+				model: modelElement;
+				shapes: (RSGroup with: elipse with: lbl);
+				yourself ]) as: RSGroup.
 	aCanvas addAll: es.
 	borderWhite := RSBorder new
 		color: Color white;
 		yourself.
 	eb := RSEdgeBuilder arrowedLine
 		canvas: aCanvas;
+		withBorderAttachPoint;
 		objects: self pwbMooseModel;
 		markerEnd:
 			((RSShapeFactory triangle
@@ -57,7 +64,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 				color: Color red;
 				border: borderWhite;
 				yourself) asMarker
-				offset: 35;
+				offset: 25;
 				yourself);
 		moveBehind;
 		width: 2;
