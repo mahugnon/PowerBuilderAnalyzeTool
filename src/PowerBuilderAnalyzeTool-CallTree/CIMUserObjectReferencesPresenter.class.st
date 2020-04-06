@@ -62,7 +62,7 @@ CIMUserObjectReferencesPresenter >> buildPopupOn: aCanvas [
 							(String
 								streamContents: [ :stream | 
 									stream <<'Functions';cr;
-									<<'---------'.
+									<<'---------';cr.
 									names
 										do: [ :name | 
 											stream
