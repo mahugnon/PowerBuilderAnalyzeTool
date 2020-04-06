@@ -47,17 +47,16 @@ DPDuplicationSystem class >> newFrom: dudeMultiplications with: aModel [
 
 { #category : #improving }
 DPDuplicationSystem >> expandLesserFragments [
-	"('Expand ', self fragments size asString, ' fragments.') synCrLog. "
+	self
+		traceCr: 'Expand ' , self fragments size asString , ' fragments.'.
 	self fragments
 		do: [ :aFragment | 
 			self fragments
 				do: [ :anotherFragment | 
 					aFragment = anotherFragment
-						ifFalse: [ 
-							(aFragment allMembersArePresentIn: anotherFragment)
-								ifTrue: [ 
-									"here we have fragments that are a subgroup of another fragment in term of files so we can expand aFragment"
-									aFragment tryToExpandWith: anotherFragment ] ] ] ]
+						ifFalse: [ (aFragment allMembersArePresentIn: anotherFragment)
+								ifTrue:
+									[ "here we have fragments that are a subgroup of another fragment in term of files so we can expand aFragment" aFragment tryToExpandWith: anotherFragment ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -87,8 +86,11 @@ DPDuplicationSystem >> mergeExplicitFragmentAReturnIfTheMergeIsFinished [
 
 	| programsWithDuplication isAbleToMergeAllFragments |
 	isAbleToMergeAllFragments := true.
-	"('Merge ' , self fragments size asString , ' fragments of duplication.') synCrLog."
-	programsWithDuplication := self fragments flatCollectAsSet: #locationsOfCloneClass.
+	self
+		traceCr:
+			'Merge ' , self fragments size asString , ' fragments of duplication.'.
+	programsWithDuplication := self fragments
+		flatCollectAsSet: #locationsOfCloneClass.
 	programsWithDuplication
 		do: [ :aProgram | 
 			(aProgram mergePossibleDuplications: self)

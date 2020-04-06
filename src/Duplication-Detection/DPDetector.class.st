@@ -119,6 +119,7 @@ DPDetector >> registerFragmentsFor: aProgram [
 	aProgram numberOfLinesOfCode >= self parameters minNumberOfLines
 		ifFalse: [ ^ self ].
 	parameters cleaner reset.	"line added for Cobol"
+	aProgram clearDuplicationCache.
 	self
 		registerFragmentsFor: aProgram
 		sourceAnchor: aProgram sourceAnchor
