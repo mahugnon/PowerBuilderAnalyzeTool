@@ -130,14 +130,13 @@ DuplicationBrowserModel >> minNumberOfLines: anInteger [
 { #category : #accessing }
 DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
 	pwbMooseModel := aFamixPWBUserObject.
+	self traceCr: 'set ' , aFamixPWBUserObject name , ' as pwbMooseModel'.
 	self computeDuplication
 ]
 
 { #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ pwbMooseModel class = FAMIXTypeGroup
-		ifTrue: [ pwbMooseModel allMethods ]
-		ifFalse: [ pwbMooseModel content ]
+	^ pwbMooseModel methods
 ]
 
 { #category : #initialization }
