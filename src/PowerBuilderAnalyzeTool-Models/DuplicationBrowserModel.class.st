@@ -136,7 +136,7 @@ DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
 
 { #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ pwbMooseModel methods
+	^ pwbMooseModel methods reject: #isNoisyMethod
 ]
 
 { #category : #initialization }
