@@ -82,7 +82,7 @@ PWBMooseModelBrowser >> initializeSearchField [
 { #category : #initialization }
 PWBMooseModelBrowser >> initializeTable [
 	| title |
-	modelPresenter := self newTreeTable.
+	modelPresenter := self newTable.
 	title := 'Source code components'.
 	modelPresenter
 		addColumn:
@@ -94,16 +94,7 @@ PWBMooseModelBrowser >> initializeTable [
 						yourself);
 				addColumn: (SpStringTableColumn evaluated: #name);
 				yourself);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Number of Line of code'
-				evaluated: [ :elt | elt numberOfLinesOfCode ]);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Number of invocation'
-				evaluated: [ :elt | elt numberOfIncomingInvocations ]);
-		roots: {model pwbMooseModel};
-		children: [ :elt | elt content ];
+		items: model pwbMooseModel;
 		beResizable
 ]
 

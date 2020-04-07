@@ -6,16 +6,13 @@ FamixPWBBehavioral >> allOutgoingInvocationCandidates [
 	scan := OrderedCollection
 		withAll:
 			(self outgoingInvocationsCandidates
-				reject: [ :method | self noisyMethods includes: method name asLowercase ])
-				asSet.
+				reject: [ :method | method isNoisyMethod ]) asSet.
 	scanTop := 1.
 	[ scanTop > scan size ]
 		whileFalse: [ scan
 				addAll:
 					(((scan at: scanTop) outgoingInvocations flatCollect: #candidates)
-						reject: [ :method | 
-							(self noisyMethods includes: method name asLowercase)
-								or: [ scan includes: method ] ]).
+						reject: [ :method | method isNoisyMethod or: [ scan includes: method ] ]).
 			scanTop := scanTop + 1 ].
 	^ scan
 ]
@@ -37,7 +34,7 @@ FamixPWBBehavioral >> incomingInvocationsSenders [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> isNoisyMethod [
-	^ (self noisyMethods includes: self name)
+	^ (self noisyMethods includes: self name asLowercase)
 		or: [ self class = FamixPWBEvent ]
 ]
 

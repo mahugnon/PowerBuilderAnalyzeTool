@@ -31,18 +31,18 @@ CIMUserObjectReferencesPresenter >> buildEdgeOn: aCanvas [
 				yourself);
 		moveBehind;
 		width: 3;
-		connectFromAll: [ :each | each incomingInvocationsSenders ]
-			to: #yourself.
+		connectFromAll: [ :each | 
+			each = self guiModel selected
+				ifTrue: [ each incomingInvocationsSenders ]
+				ifFalse: [ #() ] ]
+			to: #yourself
+
 	"self buildePopupOnEdges: arrows"
 ]
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> buildLayoutOn: aCanvas [
-	layout := RSHorizontalTreeLayout new.
-	layout
-		horizontalGap: 250;
-		verticalGap: 10;
-		on: aCanvas nodes
+	layout := RSEquidistantCircleLayout new on: aCanvas nodes
 ]
 
 { #category : #'as yet unclassified' }
