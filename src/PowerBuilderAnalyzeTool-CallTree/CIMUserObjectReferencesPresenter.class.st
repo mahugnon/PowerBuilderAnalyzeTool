@@ -22,13 +22,12 @@ CIMUserObjectReferencesPresenter >> buildEdgeOn: aCanvas [
 		withBorderAttachPoint;
 		objects: self pwbMooseModel;
 		markerEnd:
-			((RSShapeFactory triangle
+			(RSShapeFactory triangle
 				extent: 10 @ 15;
 				color: Color red;
 				border: borderWhite;
-				yourself) asMarker
-				offset: 25;
-				yourself);
+				yourself) asMarker;
+		yourself;
 		moveBehind;
 		width: 3;
 		connectFromAll: [ :each | 
