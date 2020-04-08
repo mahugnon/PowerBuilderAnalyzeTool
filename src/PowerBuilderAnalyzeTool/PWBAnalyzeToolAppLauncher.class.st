@@ -132,5 +132,5 @@ PWBAnalyzeToolAppLauncher >> initializeWindow: aWindowPresenter [
 
 { #category : #initialization }
 PWBAnalyzeToolAppLauncher >> title [
-^'PWBAnalyzeTool Luncher'
+^'PWBAnalyzeTool Launcher'
 ]
