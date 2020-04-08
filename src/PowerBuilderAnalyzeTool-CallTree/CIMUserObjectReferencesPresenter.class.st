@@ -42,7 +42,7 @@ CIMUserObjectReferencesPresenter >> buildEdgeOn: aCanvas [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> buildLayoutOn: aCanvas [
-	layout := RSEquidistantCircleLayout new on: aCanvas nodes
+	layout := RSCircleLayout new on: aCanvas nodes
 ]
 
 { #category : #'as yet unclassified' }
@@ -78,7 +78,6 @@ CIMUserObjectReferencesPresenter >> buildPopupOn: aCanvas [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> buildShapesOn: aCanvas [
-
 	aCanvas
 		addAll:
 			((self pwbMooseModel
@@ -93,6 +92,7 @@ CIMUserObjectReferencesPresenter >> buildShapesOn: aCanvas [
 						model: modelElement;
 						color: (ColorObject colorFor: modelElement);
 						yourself.
+					elipse @ self contextMenu.
 					elipse
 						when: RSMouseClick
 						do: [ :event | self processEntityClickEvent: event ].
@@ -120,8 +120,8 @@ CIMUserObjectReferencesPresenter >> contextMenu [
 ]
 
 { #category : #initialization }
-CIMUserObjectReferencesPresenter >> contextMenuOn: aCanvas [
-	aCanvas nodes
+CIMUserObjectReferencesPresenter >> contextMenuOn: aNode [
+	aNode
 		@
 			(RSMenuActivable new
 				menuDo: [ :menu :element | 
@@ -148,20 +148,21 @@ CIMUserObjectReferencesPresenter >> drawOn: aCanvas [
 	aCanvas @ RSCanvasController.
 	self buildPopupOn: aCanvas.
 	view := aCanvas.
+	self highlight: guiModel selected.
 	^ aCanvas
 ]
 
 { #category : #util }
 CIMUserObjectReferencesPresenter >> highlight: anEntity [
 	self
-		colorSelectedElement: (view shapes detect: [ :el | el model = anEntity ])
+		colorSelectedElement: (view nodes detect: [ :el | el model = anEntity ]) nodes first
 ]
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> legend: aCanvas [
 	| legend |
 	legend := RSLegend new.
-	legend defaultLabel fontSize: 30.
+	legend defaultLabel fontSize: 10.
 	legend
 		container: aCanvas;
 		text: 'Each circle is a Powerbuilder class ';
