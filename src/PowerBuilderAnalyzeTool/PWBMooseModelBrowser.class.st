@@ -3,7 +3,9 @@ Class {
 	#superclass : #PWBAbstractBrowser,
 	#instVars : [
 		'modelPresenter',
-		'searchField'
+		'searchField',
+		'allModelPWBObjectButton',
+		'scopedView'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -11,9 +13,13 @@ Class {
 { #category : #specs }
 PWBMooseModelBrowser class >> defaultSpec [
 	^ super defaultSpec
-		add: #searchField
-			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #modelPresenter;
+		add:
+			(SpBoxLayout newHorizontal
+				add: #allModelPWBObjectButton;
+				add: #scopedView;
+				yourself)
+			withConstraints: [ :contraint | contraint height: 20 ];
 		yourself
 ]
 
@@ -27,6 +33,12 @@ PWBMooseModelBrowser class >> runMe [
 PWBMooseModelBrowser >> accept: anObject [
 	^ ({DPFragmentLocation.
 	FamixPWBEvent} includes: anObject class) not
+]
+
+{ #category : #initialization }
+PWBMooseModelBrowser >> connectPresenters [
+	super connectPresenters.
+	self radioButtonsAction
 ]
 
 { #category : #accessing }
@@ -68,7 +80,8 @@ PWBMooseModelBrowser >> initializePresenters [
 		whenSelectionChangedDo: [ :selected | 
 			model selected: selected selectedItem.
 			self freezeDuring: [ self globallySelect: selected selectedItem ] ].
-	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ]
+	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ].
+	self viewRadioButton
 ]
 
 { #category : #initialization }
@@ -82,20 +95,14 @@ PWBMooseModelBrowser >> initializeSearchField [
 { #category : #initialization }
 PWBMooseModelBrowser >> initializeTable [
 	| title |
-	modelPresenter := self newTable.
+	modelPresenter := self newList.
 	title := 'Source code components'.
 	modelPresenter
-		addColumn:
-			(SpCompositeTableColumn new
-				title: title;
-				addColumn:
-					((SpImageTableColumn evaluated: #systemIcon)
-						width: 20;
-						yourself);
-				addColumn: (SpStringTableColumn evaluated: #name);
-				yourself);
-		items: model pwbMooseModel;
-		beResizable
+		display: [ :item | item name ];
+		icons: [ :each | each systemIcon ];
+		sortingBlock: [ :a :b | a methods asSet size > b methods asSet size ];
+		enableItemSubstringFilter;
+		items: model pwbMooseModel
 ]
 
 { #category : #accessing }
@@ -106,6 +113,14 @@ PWBMooseModelBrowser >> modelPresenter [
 { #category : #'as yet unclassified' }
 PWBMooseModelBrowser >> needUpdate: anEntity [
 	^ model selected ~= anEntity
+]
+
+{ #category : #'initialization - actions' }
+PWBMooseModelBrowser >> radioButtonsAction [
+	allModelPWBObjectButton
+		whenActivatedDo: [ modelPresenter items: model pwbMooseModel ].
+	scopedView
+		whenActivatedDo: [ modelPresenter items: {modelPresenter selection selectedItem} ]
 ]
 
 { #category : #initialization }
@@ -126,4 +141,13 @@ PWBMooseModelBrowser >> setModelPresenterSelection [
 { #category : #TOREMOVE }
 PWBMooseModelBrowser >> title [
 ^'MooseModel Browser'
+]
+
+{ #category : #initialization }
+PWBMooseModelBrowser >> viewRadioButton [
+	allModelPWBObjectButton := self newRadioButton.
+	allModelPWBObjectButton label: 'All PWBObjects'.
+	scopedView := self newRadioButton.
+	scopedView label: 'Scoped View'.
+	allModelPWBObjectButton associatedRadioButtons: {scopedView}
 ]
