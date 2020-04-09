@@ -26,9 +26,15 @@ OptionParameters >> addEntity: aFamixPWBUserObject [
 		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
+{ #category : #api }
+OptionParameters >> addTypeToFilter: aClass [
+	typeToFilter add: aClass
+]
+
 { #category : #initialization }
 OptionParameters >> initialize [
 	selectedEntities := OrderedCollection new.
+	typeToFilter := OrderedCollection new.
 	maxLevel := 1
 ]
 
@@ -47,6 +53,11 @@ OptionParameters >> removeEntities: anObject [
 	selectedEntities remove: anObject
 ]
 
+{ #category : #api }
+OptionParameters >> removeTypeToFilter: aClass [
+	typeToFilter remove: aClass
+]
+
 { #category : #accessing }
 OptionParameters >> selectedEntities [
 	^ selectedEntities
@@ -55,9 +66,4 @@ OptionParameters >> selectedEntities [
 { #category : #accessing }
 OptionParameters >> typeTofilter [
 	^ typeToFilter
-]
-
-{ #category : #'as yet unclassified' }
-OptionParameters >> typeTofilter: aCollection [
-	typeToFilter := aCollection
 ]

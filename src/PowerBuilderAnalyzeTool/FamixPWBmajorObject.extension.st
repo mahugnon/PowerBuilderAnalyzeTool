@@ -18,17 +18,17 @@ FamixPWBmajorObject >> incomingInvocationsSenders: anInteger [
 { #category : #'*PowerBuilderAnalyzeTool' }
 FamixPWBmajorObject >> incomingInvocationsSenders: anInteger expectFromMethodsOfType: aCollection [
 	| totalResult levelResult level scan |
-	totalResult := self incomingInvocationsSenders
-		reject: [ :each | aCollection includes: each class ].
+	totalResult := self
+		incomingInvocationsSendersExpectFromMethodsOfType: aCollection.
 	levelResult := totalResult.
 	level := 1.
 	scan := 0.
 	[ level < anInteger and: [ scan < totalResult size ] ]
 		whileTrue: [ level := level + 1.
 			scan := totalResult size.
-			levelResult := (levelResult
-				flatCollect: #incomingInvocationsSenders)
-				reject: [ :each | aCollection includes: each class ].
+			levelResult := levelResult
+				flatCollect:
+					[ :each | each incomingInvocationsSendersExpectFromMethodsOfType: aCollection ].
 			totalResult addAll: levelResult ].
 	^ totalResult asOrderedCollection
 ]
