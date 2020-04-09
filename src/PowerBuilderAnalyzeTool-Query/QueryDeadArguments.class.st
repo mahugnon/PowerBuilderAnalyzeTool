@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDeadArguments,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#category : #'PowerBuilderAnalyzeTool-Query'
 }
 

@@ -31,3 +31,21 @@ PWBCallTreeBrowserTest >> testBrowserStatedMustRemainTheSameIffreeze [
 	browser selectEntity: testUserObject1.
 	self deny: browser model selected equals: testUserObject1
 ]
+
+{ #category : #tests }
+PWBCallTreeBrowserTest >> testInitializationOptionPanel [
+	| panel |
+	panel := OptionPanel new.
+	browser selected: testUserObject1.
+	self assert: panel optionParameters isNotNil.
+	self assert: panel paramPresenter equals: panel maxLevel.
+	panel options selectItem: InvocationWithEntitiesOption.
+	self
+		assert: panel paramPresenter
+		equals: panel possibleEntitiesPresenter.
+	panel options selectItem: FilterConsideredMethodTypeOption.
+	panel validate.
+	self
+		assert: panel optionParameters action
+		equals: FilterConsideredMethodTypeOption
+]

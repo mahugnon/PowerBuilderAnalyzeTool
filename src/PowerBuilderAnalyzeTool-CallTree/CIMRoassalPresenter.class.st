@@ -96,7 +96,10 @@ CIMRoassalPresenter >> processEntityClickEvent: evt [
 
 { #category : #accessing }
 CIMRoassalPresenter >> pwbMooseModel [
-	^ guiModel selectedInvocations
+	| senders |
+	senders := guiModel selectedMethodsInvocationsSendersParents asSet.
+	senders add: guiModel selected.
+	^ senders
 ]
 
 { #category : #accessing }

@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryIncomingInvocationSenders,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#instVars : [
 		'options'
 	],

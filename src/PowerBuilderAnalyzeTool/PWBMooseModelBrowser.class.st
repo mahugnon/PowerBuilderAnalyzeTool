@@ -135,7 +135,7 @@ PWBMooseModelBrowser >> selected [
 
 { #category : #testing }
 PWBMooseModelBrowser >> setModelPresenterSelection [
-	modelPresenter selectItem: modelPresenter roots first
+	modelPresenter selectItem: modelPresenter model items first
 ]
 
 { #category : #TOREMOVE }

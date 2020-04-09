@@ -5,11 +5,15 @@ Class {
 }
 
 { #category : #visiting }
-QueryIncomingInvocationSendersWithEntities class >> accept: aString [
-	^ aString = 'InvocationWithEntities'
+QueryIncomingInvocationSendersWithEntities class >> accept: anObject [
+	^ anObject = InvocationWithEntitiesOption
 ]
 
 { #category : #running }
 QueryIncomingInvocationSendersWithEntities >> runOn: anEntity [
-	^ anEntity incomingInvocationsSendersWith: options selectedEntities
+	| result |
+	result := anEntity incomingInvocationsSenders.
+	result
+		addAll: (options selectedEntities flatCollect: #incomingInvocationsSenders).
+	^ result asOrderedCollection
 ]
