@@ -1,7 +1,7 @@
 Class {
 	#name : #BrowserModeHighLight,
 	#superclass : #AbstractBrowserMode,
-	#category : #'PowerBuilderAnalyzeTool-BrowserMode'
+	#category : #'PowerBuilderAnalyzeTool-Utils-BrowserMode'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDeadMethods,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#instVars : [
 		'entityMethods'
 	],

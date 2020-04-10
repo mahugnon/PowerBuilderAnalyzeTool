@@ -7,7 +7,7 @@ Class {
 		'bibliotheques',
 		'browser'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Utils'
+	#category : #'PowerBuilderAnalyzeTool-Utils-FileSystemNavigation'
 }
 
 { #category : #api }

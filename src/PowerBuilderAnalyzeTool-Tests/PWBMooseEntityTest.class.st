@@ -84,7 +84,10 @@ PWBMooseEntityTest >> testQueryDeedVariables [
 { #category : #tests }
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel [
 	self
-		assertCollection: (testUserObject1 incomingInvocationsSenders: 2)
+		assertCollection:
+			(testUserObject1
+				incomingInvocationsSenders: 2
+				expectFromMethodsOfType: #())
 		hasSameElements:
 			{testUserObject2.
 			testUserObject3}
@@ -95,7 +98,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 	| option |
 	option := OptionParameters new
 		maxLevel: 2;
-		action: 'InvocationAtLevel';
+		action: InvocationAtLevelOption;
 		yourself.
 	self
 		assertCollection:
@@ -110,7 +113,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntities';
+		action: InvocationWithEntitiesOption;
 		yourself.
 	self
 		assertCollection:
@@ -123,7 +126,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntities';
+		action: InvocationWithEntitiesOption;
 		yourself.
 	option addEntity: testUserObject2.
 	self

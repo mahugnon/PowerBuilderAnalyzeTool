@@ -11,7 +11,7 @@ Class {
 		'runModelButton',
 		'modulesFolderButton'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Utils'
+	#category : #'PowerBuilderAnalyzeTool-Utils-FileSystemNavigation'
 }
 
 { #category : #specs }
@@ -24,7 +24,7 @@ CIMIzyFilesNavigator class >> defaultSpec [
 				add: #modulesFolderButton;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-		add: #listPresenter;
+		add: #possibleEntitiesPresenter;
 		add:
 			(SpBoxLayout newHorizontal
 				add: #space;

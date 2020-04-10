@@ -1,7 +1,7 @@
 Class {
 	#name : #ColorTagedObject,
 	#superclass : #ColorObject,
-	#category : #'PowerBuilderAnalyzeTool-CallTree-RoassalElementColorStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalColorElementStrategy'
 }
 
 { #category : #private }

@@ -93,7 +93,8 @@ PWBCallTreeBrowser >> initializePresenters [
 		icon: PWBBrowserIcons option;
 		action: [ OptionPanel new
 				browser: self;
-				possibleEntities: model selectedInvocations;
+				possibleEntities: model selectedMethodsInvocationsSendersParents;
+				updateTypesPresenter: model selectedMethodsInvocationsSendersTypes;
 				openWithSpec ]
 ]
 
@@ -134,6 +135,11 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 { #category : #api }
 PWBCallTreeBrowser >> refreshWithParameters: anOptionParameters [
 	model refreshWithParameters: anOptionParameters
+]
+
+{ #category : #accessing }
+PWBCallTreeBrowser >> selected: aFamixPWBUserObject [
+	model selected: aFamixPWBUserObject
 ]
 
 { #category : #accessing }

@@ -26,16 +26,13 @@ FamixPWBBehavioral >> content [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> incomingInvocationsSenders [
-	incomingInvocationSenders := (self incomingInvocations
-		collectAsSet: #sender)
-		reject: [ :m | (m isKindOf: FamixPWBmajorObject) or: [ m isNoisyMethod ] ].
-	^ incomingInvocationSenders
+	^ (self incomingInvocations collectAsSet: #sender)
+		reject: [ :m | (m isKindOf: FamixPWBmajorObject) or: [ m isNoisyMethod ] ]
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> isNoisyMethod [
-	^ (self noisyMethods includes: self name asLowercase)
-		or: [ self class = FamixPWBEvent ]
+	^ self noisyMethods includes: self name asLowercase
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

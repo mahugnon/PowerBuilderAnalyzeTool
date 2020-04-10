@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'action',
 		'maxLevel',
-		'selectedEntities'
+		'selectedEntities',
+		'typeToFilter'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -25,9 +26,15 @@ OptionParameters >> addEntity: aFamixPWBUserObject [
 		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
+{ #category : #api }
+OptionParameters >> addTypeToFilter: aClass [
+	typeToFilter add: aClass
+]
+
 { #category : #initialization }
 OptionParameters >> initialize [
 	selectedEntities := OrderedCollection new.
+	typeToFilter := OrderedCollection new.
 	maxLevel := 1
 ]
 
@@ -46,7 +53,17 @@ OptionParameters >> removeEntities: anObject [
 	selectedEntities remove: anObject
 ]
 
+{ #category : #api }
+OptionParameters >> removeTypeToFilter: aClass [
+	typeToFilter remove: aClass
+]
+
 { #category : #accessing }
 OptionParameters >> selectedEntities [
 	^ selectedEntities
+]
+
+{ #category : #accessing }
+OptionParameters >> typeTofilter [
+	^ typeToFilter
 ]

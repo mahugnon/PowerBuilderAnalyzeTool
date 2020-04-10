@@ -7,7 +7,9 @@ Class {
 { #category : #running }
 PWBMooseModelBrowserTest >> setUp [
 	super setUp.
-	browser := PWBMooseModelBrowser new
+	browser := PWBMooseModelBrowser new.
+	browser model
+		pwbMooseModel: (testModel allWithType: FamixPWBUserObject)
 ]
 
 { #category : #tests }
@@ -29,7 +31,7 @@ PWBMooseModelBrowserTest >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
 { #category : #tests }
 PWBMooseModelBrowserTest >> testSelectedItemIsNotNil [
 	browser setModelPresenterSelection.
-	self assert: browser modelPresenter selectedItem isNotNil
+	self assert: browser modelPresenter selection selectedItem isNotNil
 ]
 
 { #category : #tests }

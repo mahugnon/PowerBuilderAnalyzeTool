@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDuplication,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#category : #'PowerBuilderAnalyzeTool-Query'
 }
 
