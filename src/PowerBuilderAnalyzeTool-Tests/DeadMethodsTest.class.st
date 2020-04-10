@@ -15,11 +15,11 @@ DeadMethodsTest >> initializeEvents [
 		parentType: testUserObject6;
 		yourself.
 	testModel add: testEvent1.
-	testTrigger1 := FamixPWBEvent new
+	testTrigger1 := FamixPWBTrigger  new
 		name: 'testTrigger1';
 		parentType: testUserObject6;
 		yourself.
-	testModel add: testEvent1
+	testModel add: testTrigger1
 ]
 
 { #category : #running }
@@ -36,7 +36,7 @@ DeadMethodsTest >> setUp [
 		candidates: {testFunction4}.
 	FamixPWBInvocation new
 		mooseModel: testModel;
-		sender: testEvent1;
+		sender: testTrigger1;
 		candidates: {testFunction9}.
 	browser := PWBNonUsedFunctionBrowser new
 ]
@@ -82,21 +82,16 @@ DeadMethodsTest >> testQueryDirectDeadMethods [
 
 { #category : #tests }
 DeadMethodsTest >> testQueryDiscoverDeadMethodsIncrementally [
-	| directDeadMethods |
-	directDeadMethods := QueryDiscoverDeadMethodsIncrementally
-		runOn:
-			{testFunction1.
-			testFunction2.
-			testFunction4.
-			testFunction8.
-			testFunction7.
-			testEvent1}.
 	self
-		assertCollection: directDeadMethods
+		assertCollection: testModel allModelDeadMethodWithAliveStrategy
 		hasSameElements:
 			{testFunction8.
 			testFunction7.
-			testFunction2}
+			testFunction2.
+			testFunction10.
+			testFunction5.
+			testFunction3.
+			testFunction6}
 ]
 
 { #category : #tests }
