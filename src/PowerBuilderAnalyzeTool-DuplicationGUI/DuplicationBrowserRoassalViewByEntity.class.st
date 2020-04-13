@@ -46,16 +46,20 @@ DuplicationBrowserRoassalViewByEntity >> buildEntitiesShape [
 			composite border: border.
 			composite color: Color white.
 			composite model: anEntity.
-			composite @ RSAnimatedPopup @ RSDraggable.
+			composite @ RSDraggable.
 			composite padding: 10.
 			composite
 				when: RSMouseClick
 				do: [ :event | self processEntityClickEvent: event ] ]
 		as: RSGroup.
 	RSGridLayout new
-		gapSize: 50;
+		gapSize: 200;
 		on: etitiesShapes.
-	etitiesShapes @ (RSLabeled new text: [ :elt | elt name ])
+	etitiesShapes
+		@
+			(RSLabeled new
+				text:
+					[ :elt | elt name , String cr , 'dupRate: ' , elt duplicationRate asString ])
 ]
 
 { #category : #accessing }
