@@ -22,6 +22,18 @@ PWBMooseEntityTest >> testIncomingInvocationsSenders [
 ]
 
 { #category : #tests }
+PWBMooseEntityTest >> testQuerIncomingBetweenPWBObject [
+	| queryResult |
+	queryResult := QueryIncomingBetweenPWBObject new
+		runOn: testUserObject1
+		with: testUserObject2.
+	self assert: queryResult keys anyOne equals: testFunction1.
+	self
+		assertCollection: (queryResult at: testFunction1)
+		hasSameElements: {testFunction4}
+]
+
+{ #category : #tests }
 PWBMooseEntityTest >> testQueryDeadArguments [
 	self
 		assertCollection:
