@@ -102,7 +102,7 @@ PWBMooseModelBrowser >> initializeTable [
 		icons: [ :each | each systemIcon ];
 		sortingBlock: [ :a :b | a methods asSet size > b methods asSet size ];
 		enableItemSubstringFilter;
-		items: model pwbMooseModel
+		items: model pwbMooseModel asOrderedCollection
 ]
 
 { #category : #accessing }

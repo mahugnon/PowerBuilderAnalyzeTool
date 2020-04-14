@@ -50,29 +50,23 @@ CIMUserObjectReferencesPresenter >> buildPopupOn: aCanvas [
 	| names text |
 	aCanvas edges
 		do: [ :aRSEdge | 
-			names := ((aRSEdge to model methods reject: #isNoisyMethod)
-				flatCollectAsSet: [ :method | 
-					method incomingInvocationsSenders
-						select: [ :meth | meth parentType = aRSEdge from model ] ])
-				collectAsSet: #name.
+			names := QueryIncomingBetweenPWBObject new
+				runOn: aRSEdge to model
+				with: aRSEdge from model.
 			text := Text new.
-			text
-				append:
-					(Text
-						string: 'Senders:'
-						attributes:
-							{(TextColor new color: Color blue).
-							TextEmphasis bold}).
 			text
 				append:
 					(String
 						streamContents: [ :stream | 
-							stream cr.
 							names
-								do: [ :name | 
-									stream
-										<< name;
-										cr ] ]).
+								keysAndValuesDo: [ :key :value | 
+									value
+										do: [ :aMethod | 
+											stream
+												<< aMethod name;
+												<< ' -> ';
+												<< key name;
+												cr ] ] ]).
 			aRSEdge @ (RSPopup text: text) ]
 ]
 
