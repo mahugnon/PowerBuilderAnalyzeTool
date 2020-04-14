@@ -162,9 +162,34 @@ OptionPanel >> invocationWithEntitiesAction [
 ]
 
 { #category : #accessing }
+OptionPanel >> maxLevel [
+	^ maxLevel
+]
+
+{ #category : #accesing }
+OptionPanel >> optionParameters [
+	^ optionParameters
+]
+
+{ #category : #accessing }
+OptionPanel >> options [
+	^ options
+]
+
+{ #category : #access }
+OptionPanel >> paramPresenter [
+	^ paramPresenter
+]
+
+{ #category : #accessing }
 OptionPanel >> possibleEntities: aCollection [
 	possibleEntities := aCollection.
 	possibleEntitiesPresenter items: possibleEntities
+]
+
+{ #category : #accessing }
+OptionPanel >> possibleEntitiesPresenter [
+	^ possibleEntitiesPresenter
 ]
 
 { #category : #TOREMOVE }

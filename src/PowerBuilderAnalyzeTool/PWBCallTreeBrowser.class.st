@@ -138,6 +138,11 @@ PWBCallTreeBrowser >> refreshWithParameters: anOptionParameters [
 	
 ]
 
+{ #category : #'accessing ' }
+PWBCallTreeBrowser >> selected: aFamixPWBUserObject [
+	model selected: aFamixPWBUserObject
+]
+
 { #category : #accessing }
 PWBCallTreeBrowser >> title [
 ^'Izy view'
