@@ -5,11 +5,13 @@ Class {
 }
 
 { #category : #visiting }
-QueryIncomingInvocationSendersUpToLevel class >> accept: aString [
-	^ aString = 'InvocationAtLevel'
+QueryIncomingInvocationSendersUpToLevel class >> accept: anObject [
+	^ anObject = InvocationAtLevelOption
 ]
 
 { #category : #running }
 QueryIncomingInvocationSendersUpToLevel >> runOn: anEntity [
-	^ anEntity incomingInvocationsSenders: options maxLevel
+	^ anEntity
+		incomingInvocationsSenders: options maxLevel
+		expectFromMethodsOfType: #()
 ]

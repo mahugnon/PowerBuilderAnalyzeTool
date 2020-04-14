@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDeadLocalVariables,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#category : #'PowerBuilderAnalyzeTool-Query'
 }
 

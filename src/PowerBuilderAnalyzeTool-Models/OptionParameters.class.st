@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'action',
 		'maxLevel',
-		'selectedEntities'
+		'selectedEntities',
+		'typeToFilter'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -49,4 +50,14 @@ OptionParameters >> removeEntities: anObject [
 { #category : #accessing }
 OptionParameters >> selectedEntities [
 	^ selectedEntities
+]
+
+{ #category : #accessing }
+OptionParameters >> typeToFilter [
+	^ typeToFilter
+]
+
+{ #category : #accessing }
+OptionParameters >> typeToFilter: anObject [
+	typeToFilter := anObject
 ]

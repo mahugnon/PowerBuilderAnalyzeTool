@@ -26,8 +26,8 @@ CIMUserObjectReferencesPresenter >> buildEdgeOn: aCanvas [
 				extent: 10 @ 15;
 				color: Color red;
 				border: borderWhite;
-				yourself) asMarker
-				offset: 25;
+				yourself) asMarker;
+				
 				yourself);
 		moveBehind;
 		width: 3;

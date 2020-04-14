@@ -10,7 +10,8 @@ PWBMooseModelBrowserModel >> initialize [
 	super initialize.
 	liq_cal := (MooseModel root first allWithType: FamixPWBUserObject)
 		detect: [ :each | each name = 'uo_traitement_liq_cal' ].
-	pwbMooseModel := liq_cal allIncomingReferencesSenders
+		pwbMooseModel := liq_cal allIncomingInvocationsSenders
+
 ]
 
 { #category : #accessing }

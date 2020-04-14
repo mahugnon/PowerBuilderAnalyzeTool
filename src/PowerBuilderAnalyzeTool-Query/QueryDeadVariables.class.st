@@ -1,6 +1,6 @@
 Class {
 	#name : #QueryDeadVariables,
-	#superclass : #AbstractDuplicationQuery,
+	#superclass : #AbstractPWBQuery,
 	#instVars : [
 		'result'
 	],

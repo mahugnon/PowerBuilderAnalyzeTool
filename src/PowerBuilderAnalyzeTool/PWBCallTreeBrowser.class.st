@@ -93,7 +93,7 @@ PWBCallTreeBrowser >> initializePresenters [
 		icon: PWBBrowserIcons option;
 		action: [ OptionPanel new
 				browser: self;
-				possibleEntities: model selectedInvocations;
+				possibleEntities: model selectedMethodsInvocationsSendersParents;
 				openWithSpec ]
 ]
 

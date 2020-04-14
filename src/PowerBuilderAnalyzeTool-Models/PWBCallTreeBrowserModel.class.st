@@ -3,7 +3,7 @@ Class {
 	#superclass : #PWBAbstractModel,
 	#instVars : [
 		'selectionListeners',
-		'selectedInvocations'
+		'selectedMethodsInvocationsSendersParents'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Models'
 }
@@ -20,7 +20,7 @@ PWBCallTreeBrowserModel >> pwbBrowser: aPWBBrowser [
 
 { #category : #api }
 PWBCallTreeBrowserModel >> refreshWithParameters: anOptionParameters [
-	selectedInvocations := (QueryIncomingInvocationSenders
+	selectedMethodsInvocationsSendersParents := (QueryIncomingInvocationSenders
 		options: anOptionParameters) runOn: selected.
 	pwbBrowser updateRoassal
 ]
@@ -33,7 +33,9 @@ PWBCallTreeBrowserModel >> roassal [
 { #category : #accessing }
 PWBCallTreeBrowserModel >> selected: anObject [
 	selected := anObject.
-	selectedInvocations := selected incomingInvocationsSenders: 1
+	selectedMethodsInvocationsSendersParents := selected
+		incomingInvocationsSenders: 1
+		expectFromMethodsOfType: #()
 ]
 
 { #category : #initialization }
@@ -43,8 +45,13 @@ PWBCallTreeBrowserModel >> selectedContent [
 ]
 
 { #category : #initialization }
-PWBCallTreeBrowserModel >> selectedInvocations [
-	^ selectedInvocations
+PWBCallTreeBrowserModel >> selectedMethodsInvocationsSendersParents [
+	^ selectedMethodsInvocationsSendersParents
+]
+
+{ #category : #'as yet unclassified' }
+PWBCallTreeBrowserModel >> selectedMethodsInvocationsSendersTypes [
+	^ selected methodsInvocationsSendersTypes asOrderedCollection
 ]
 
 { #category : #initialization }

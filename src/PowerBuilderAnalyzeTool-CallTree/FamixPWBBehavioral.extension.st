@@ -34,8 +34,7 @@ FamixPWBBehavioral >> incomingInvocationsSenders [
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBBehavioral >> isNoisyMethod [
-	^ (self noisyMethods includes: self name asLowercase)
-		or: [ self class = FamixPWBEvent ]
+	^ self noisyMethods includes: self name asLowercase
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

@@ -11,7 +11,7 @@ Class {
 		'runModelButton',
 		'modulesFolderButton'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Utils'
+	#category : #'PowerBuilderAnalyzeTool-Utils-FileSystemNavigation'
 }
 
 { #category : #specs }

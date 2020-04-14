@@ -95,7 +95,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 	| option |
 	option := OptionParameters new
 		maxLevel: 2;
-		action: 'InvocationAtLevel';
+		action: InvocationAtLevelOption;
 		yourself.
 	self
 		assertCollection:
@@ -110,7 +110,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntities';
+		action: InvocationWithEntitiesOption ;
 		yourself.
 	self
 		assertCollection:
@@ -123,7 +123,7 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
 	| option |
 	option := OptionParameters new
-		action: 'InvocationWithEntities';
+		action: InvocationWithEntitiesOption ;
 		yourself.
 	option addEntity: testUserObject2.
 	self

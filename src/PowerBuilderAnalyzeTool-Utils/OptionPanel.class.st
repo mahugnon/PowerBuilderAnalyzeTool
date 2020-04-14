@@ -3,17 +3,17 @@ Class {
 	#superclass : #PWBPresenter,
 	#instVars : [
 		'possibleEntities',
-		'listPresenter',
 		'optionParameters',
-		'chooseLevel',
-		'chooseEntity',
 		'maxLevel',
 		'validateButton',
 		'paramPresenter',
 		'cancel',
-		'browser'
+		'browser',
+		'options',
+		'possibleEntitiesPresenter',
+		'typesPresenter'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Browsers'
+	#category : #'PowerBuilderAnalyzeTool-Utils-CallTreeOptions'
 }
 
 { #category : #specs }
@@ -21,8 +21,7 @@ OptionPanel class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		add:
 			(SpBoxLayout newHorizontal
-				add: #chooseLevel;
-				add: #chooseEntity;
+				add: #options;
 				yourself)
 			withConstraints: [ :constraints | 
 				constraints
@@ -55,39 +54,11 @@ OptionPanel >> browser: aPWBBrowser [
 
 { #category : #initialization }
 OptionPanel >> connectPresenters [
-	chooseLevel
-		whenActivatedDo: [ paramPresenter := maxLevel.
-			self needRebuild: false.
-			self buildWithSpec ].
-	chooseEntity
-		whenActivatedDo: [ paramPresenter := listPresenter.
-			self needRebuild: false.
-			self buildWithSpec ]
+	options whenSelectedItemChangedDo: [ :item | item new applyOn: self ]
 ]
 
-{ #category : #initialization }
-OptionPanel >> initializeChooseButtons [
-	chooseLevel := self newRadioButton.
-	chooseLevel label: 'InvocationAtLevel'.
-	chooseEntity := self newRadioButton.
-	chooseEntity label: 'InvocationWithEntities'.
-	chooseLevel associatedRadioButtons: {chooseEntity}
-]
-
-{ #category : #initialization }
-OptionPanel >> initializeListPresenter [
-	listPresenter := self newTable.
-	listPresenter
-		addColumn:
-			((SpCheckBoxTableColumn
-				title: ' '
-				evaluated: [ :entity | optionParameters selectedEntities includes: entity ])
-				onActivation: [ :entity | optionParameters addEntity: entity ];
-				onDesactivation: [ :entity | optionParameters removeEntities: entity ];
-				width: 20;
-				yourself);
-		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name).
-	listPresenter enableItemSubstringFilter
+{ #category : #'as yet unclassified' }
+OptionPanel >> filterConsideredMethodTypeAction [
 ]
 
 { #category : #initialization }
@@ -99,11 +70,37 @@ OptionPanel >> initializeMaxLevel [
 ]
 
 { #category : #initialization }
+OptionPanel >> initializeOptions [
+	options := self newDropList.
+	options
+		items: AbstractOptions subclasses;
+		display: [ :e | e optionName ];
+		selectItem: InvocationAtLevelOption
+]
+
+{ #category : #initialization }
+OptionPanel >> initializePossibleEntitiesPresenter [
+	possibleEntitiesPresenter := self newTable.
+	possibleEntitiesPresenter
+		addColumn:
+			((SpCheckBoxTableColumn
+				title: ' '
+				evaluated: [ :entity | optionParameters selectedEntities includes: entity ])
+				onActivation: [ :entity | optionParameters addEntity: entity ];
+				onDesactivation: [ :entity | optionParameters removeEntities: entity ];
+				width: 20;
+				yourself);
+		addColumn: (SpStringTableColumn title: 'Entities' evaluated: #name).
+	possibleEntitiesPresenter enableItemSubstringFilter
+]
+
+{ #category : #initialization }
 OptionPanel >> initializePresenters [
 	possibleEntities := OrderedCollection new.
 	optionParameters := OptionParameters new.
-	self initializeChooseButtons.
-	self initializeListPresenter.
+self initializeOptions.
+	self initializePossibleEntitiesPresenter.
+	self initializeTypesPresenter.
 	self initializeMaxLevel.
 	validateButton := self newButton.
 	validateButton
@@ -119,6 +116,25 @@ OptionPanel >> initializePresenters [
 ]
 
 { #category : #initialization }
+OptionPanel >> initializeTypesPresenter [
+	typesPresenter := self newTable.
+	typesPresenter
+		addColumn:
+			((SpCheckBoxTableColumn
+				title: ' '
+				evaluated:
+					[ :aFamixBehaviour | optionParameters typeTofilter includes: aFamixBehaviour ])
+				onActivation:
+						[ :aFamixBehaviour | optionParameters addTypeToFilter: aFamixBehaviour ];
+				onDesactivation:
+						[ :aFamixBehaviour | optionParameters removeTypeToFilter: aFamixBehaviour ];
+				width: 20;
+				yourself);
+		addColumn: (SpStringTableColumn title: 'Type' evaluated: #name).
+	typesPresenter enableItemSubstringFilter
+]
+
+{ #category : #initialization }
 OptionPanel >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
@@ -128,10 +144,24 @@ OptionPanel >> initializeWindow: aWindowPresenter [
 		initialExtent: 300 @ 200
 ]
 
+{ #category : #'as yet unclassified' }
+OptionPanel >> invocationAtLevelAction [
+paramPresenter := maxLevel.
+	self needRebuild: false.
+	^ self buildWithSpec
+]
+
+{ #category : #'as yet unclassified' }
+OptionPanel >> invocationWithEntitiesAction [
+	paramPresenter := possibleEntitiesPresenter.
+	self needRebuild: false.
+	^ self buildWithSpec
+]
+
 { #category : #accessing }
 OptionPanel >> possibleEntities: aCollection [
 	possibleEntities := aCollection.
-	listPresenter items: possibleEntities
+	possibleEntitiesPresenter items: possibleEntities
 ]
 
 { #category : #TOREMOVE }
@@ -139,12 +169,15 @@ OptionPanel >> title [
 ^'Options'
 ]
 
+{ #category : #'as yet unclassified' }
+OptionPanel >> updateTypesPresenter: aCollection [
+	typesPresenter items: aCollection
+]
+
 { #category : #'private actions' }
 OptionPanel >> validate [
 	optionParameters
-		action:
-			({chooseEntity.
-			chooseLevel} detect: #state) label;
-		maxLevel: maxLevel text asInteger.
-	browser refreshWithParameters: optionParameters
+		action: options selectedItem;
+		maxLevel: (maxLevel text asInteger ifNil: [ 1 ]).
+	browser ifNotNil: [ browser refreshWithParameters: optionParameters ]
 ]
