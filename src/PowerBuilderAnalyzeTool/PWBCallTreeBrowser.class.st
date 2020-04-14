@@ -94,6 +94,7 @@ PWBCallTreeBrowser >> initializePresenters [
 		action: [ OptionPanel new
 				browser: self;
 				possibleEntities: model selectedMethodsInvocationsSendersParents;
+				updateTypesPresenter: model selectedMethodsInvocationsSendersTypes;
 				openWithSpec ]
 ]
 
@@ -133,7 +134,8 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #api }
 PWBCallTreeBrowser >> refreshWithParameters: anOptionParameters [
-	model refreshWithParameters: anOptionParameters
+	model refreshWithParameters: anOptionParameters.
+	
 ]
 
 { #category : #accessing }

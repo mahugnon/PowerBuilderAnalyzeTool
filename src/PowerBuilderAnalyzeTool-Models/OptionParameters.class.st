@@ -29,6 +29,7 @@ OptionParameters >> addEntity: aFamixPWBUserObject [
 { #category : #initialization }
 OptionParameters >> initialize [
 	selectedEntities := OrderedCollection new.
+	typeToFilter := OrderedCollection new.
 	maxLevel := 1
 ]
 

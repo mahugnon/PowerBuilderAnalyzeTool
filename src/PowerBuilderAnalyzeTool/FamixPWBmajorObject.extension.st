@@ -10,11 +10,8 @@ FamixPWBmajorObject >> incomingInvocationsSenders: anInteger [
 	[ level < anInteger and: [ scan < totalResult size ] ]
 		whileTrue: [ level := level + 1.
 			scan := totalResult size.
-			levelResult := (levelResult
-				flatCollect: #incomingInvocationsSenders)
-				"reject: [ :sender | totalResult includes: sender ]".
+			levelResult := levelResult flatCollect: #incomingInvocationsSenders.
 			totalResult addAll: levelResult ].
-	"totalResult add: self."
 	^ totalResult asOrderedCollection
 ]
 

@@ -59,6 +59,9 @@ OptionPanel >> connectPresenters [
 
 { #category : #'as yet unclassified' }
 OptionPanel >> filterConsideredMethodTypeAction [
+paramPresenter := typesPresenter.
+	self needRebuild: false.
+	^ self buildWithSpec
 ]
 
 { #category : #initialization }
@@ -123,11 +126,11 @@ OptionPanel >> initializeTypesPresenter [
 			((SpCheckBoxTableColumn
 				title: ' '
 				evaluated:
-					[ :aFamixBehaviour | optionParameters typeTofilter includes: aFamixBehaviour ])
+					[ :aFamixBehaviour | optionParameters typeToFilter includes: aFamixBehaviour ])
 				onActivation:
 						[ :aFamixBehaviour | optionParameters addTypeToFilter: aFamixBehaviour ];
 				onDesactivation:
-						[ :aFamixBehaviour | optionParameters removeTypeToFilter: aFamixBehaviour ];
+						[ :aFamixBehaviour | optionParameters removeTypeToFilters: aFamixBehaviour ];
 				width: 20;
 				yourself);
 		addColumn: (SpStringTableColumn title: 'Type' evaluated: #name).

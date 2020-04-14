@@ -11,7 +11,7 @@ QueryIncomingInvocationSendersFilterByMethodsTypeUpToLevel class >> accept: anOb
 
 { #category : #running }
 QueryIncomingInvocationSendersFilterByMethodsTypeUpToLevel >> runOn: anEntity [
-anEntity
+	^ anEntity
 		incomingInvocationsSenders: options maxLevel
-		expectFromMethodsOfType: options typeTofilter
+		expectFromMethodsOfType: options typeToFilter
 ]
