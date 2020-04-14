@@ -1,5 +1,5 @@
 Class {
-	#name : #AbstractPWBCallTreeBrowserTest,
+	#name : #AbstractPWBAnalyzeToolTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'testModel',
@@ -35,7 +35,7 @@ Class {
 }
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeAccess [
+AbstractPWBAnalyzeToolTest >> initializeAccess [
 	testModel
 		add:
 			(FamixPWBVariableAccess new
@@ -69,7 +69,7 @@ AbstractPWBCallTreeBrowserTest >> initializeAccess [
 ]
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeInvocations [
+AbstractPWBAnalyzeToolTest >> initializeInvocations [
 	FamixPWBInvocation new
 		mooseModel: testModel;
 		sender: testFunction4;
@@ -85,7 +85,7 @@ AbstractPWBCallTreeBrowserTest >> initializeInvocations [
 ]
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
+AbstractPWBAnalyzeToolTest >> initializeTestFunctions [
 	testFunction1 := FamixPWBFunction new
 		parentType: testUserObject1;
 		name: 'testFunction1'.
@@ -137,7 +137,7 @@ AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
 ]
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeTestUserObject [
+AbstractPWBAnalyzeToolTest >> initializeTestUserObject [
 	testUserObject1 := testModel
 		add: (FamixPWBUserObject new name: 'testUserObject1').
 	testUserObject2 := testModel
@@ -153,7 +153,7 @@ AbstractPWBCallTreeBrowserTest >> initializeTestUserObject [
 ]
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeVariables [
+AbstractPWBAnalyzeToolTest >> initializeVariables [
 	testInstVar1 := FamixPWBAttribute new
 		name: 'iTestInstVar1';
 		parentType: testUserObject1.
@@ -197,7 +197,7 @@ AbstractPWBCallTreeBrowserTest >> initializeVariables [
 ]
 
 { #category : #running }
-AbstractPWBCallTreeBrowserTest >> setUp [
+AbstractPWBAnalyzeToolTest >> setUp [
 	testModel := FamixPWBModel new.
 	self initializeTestUserObject.
 	self initializeTestFunctions.

@@ -1,6 +1,6 @@
 Class {
 	#name : #PWBMooseEntityTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#superclass : #AbstractPWBAnalyzeToolTest,
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 

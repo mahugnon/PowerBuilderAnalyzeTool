@@ -26,6 +26,12 @@ OptionParameters >> addEntity: aFamixPWBUserObject [
 		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
+{ #category : #accesing }
+OptionParameters >> addTypeToFilter: aFamixPWBUserObject [
+	(typeToFilter includes: aFamixPWBUserObject)
+		ifFalse: [ typeToFilter add: aFamixPWBUserObject ]
+]
+
 { #category : #initialization }
 OptionParameters >> initialize [
 	selectedEntities := OrderedCollection new.
@@ -48,6 +54,11 @@ OptionParameters >> removeEntities: anObject [
 	selectedEntities remove: anObject
 ]
 
+{ #category : #'add-remove' }
+OptionParameters >> removeTypeToFilters: anObject [
+	typeToFilter remove: anObject
+]
+
 { #category : #accessing }
 OptionParameters >> selectedEntities [
 	^ selectedEntities
@@ -61,4 +72,9 @@ OptionParameters >> typeToFilter [
 { #category : #accessing }
 OptionParameters >> typeToFilter: anObject [
 	typeToFilter := anObject
+]
+
+{ #category : #accessing }
+OptionParameters >> typeTofilter [
+	^ typeToFilter
 ]

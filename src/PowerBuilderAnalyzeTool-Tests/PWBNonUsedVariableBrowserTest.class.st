@@ -1,6 +1,6 @@
 Class {
 	#name : #PWBNonUsedVariableBrowserTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#superclass : #AbstractPWBAnalyzeToolTest,
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 

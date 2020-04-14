@@ -1,6 +1,6 @@
 Class {
 	#name : #PWBCallTreeBrowserTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#superclass : #AbstractPWBAnalyzeToolTest,
 	#instVars : [
 		'browserModel'
 	],
