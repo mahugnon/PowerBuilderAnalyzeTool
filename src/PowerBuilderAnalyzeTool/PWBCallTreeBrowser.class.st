@@ -6,7 +6,8 @@ Class {
 		'uselessFunctionButton',
 		'browseDuplicationButton',
 		'obsoleteVarButton',
-		'optionPanel'
+		'optionPanel',
+		'optionPanelCurrentWindow'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -39,7 +40,6 @@ PWBCallTreeBrowser class >> defaultSpec [
 		add:
 			(SpBoxLayout newHorizontal
 				add: #browseDuplicationButton;
-				add: #uselessFunctionButton;
 				add: #obsoleteVarButton;
 				add: #optionPanel;
 				yourself)
@@ -57,7 +57,9 @@ PWBCallTreeBrowser class >> run [
 { #category : #visiting }
 PWBCallTreeBrowser >> accept: anEntity [
 	^ ({DPFragmentLocation.
-	FAMIXTypeGroup} includes: anEntity class) not
+	FAMIXTypeGroup.
+	FamixPWBFunction.
+	UndefinedObject} includes: anEntity class) not
 ]
 
 { #category : #api }
@@ -87,15 +89,7 @@ PWBCallTreeBrowser >> initializePresenters [
 	self initializeBrowserModel.
 	self initializeRoassal.
 	self initializeToolBar.
-	optionPanel := self newButton.
-	optionPanel
-		label: 'Options';
-		icon: PWBBrowserIcons option;
-		action: [ OptionPanel new
-				browser: self;
-				possibleEntities: model selectedMethodsInvocationsSendersParents;
-				updateTypesPresenter: model selectedMethodsInvocationsSendersTypes;
-				openWithSpec ]
+
 ]
 
 { #category : #initialization }
@@ -113,17 +107,19 @@ PWBCallTreeBrowser >> initializeToolBar [
 		action: [ PWBNonUsedVariableBrowser new
 				selectEntity: model selected;
 				openWithSpec ].
-	uselessFunctionButton := self newButton
-		label: 'Browse obsolete Function';
-		help: 'Browser non used function.';
-		action: [ PWBNonUsedFunctionBrowser lunchOn: model selected ];
-		iconName: #glamorousExample;
-		yourself.
 	browseDuplicationButton := self newButton
 		label: 'Browse duplication';
 		help: 'Browse duplication between functions.';
 		icon: PWBBrowserIcons duplicationIcon;
-		action: [ PWBDuplicationBrowser lunchOn: model selected ]
+		action: [ PWBDuplicationBrowser lunchOn: model selected ].
+	optionPanel := self newButton.
+	optionPanel
+		label: 'Options';
+		icon: PWBBrowserIcons option;
+		action: [ OptionPanel
+				browser: self
+				possibleEntities: model selectedMethodsInvocationsSendersParents
+				updateTypesPresenter: model selectedMethodsInvocationsSendersTypes ]
 ]
 
 { #category : #initialization }
@@ -134,17 +130,18 @@ PWBCallTreeBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #api }
 PWBCallTreeBrowser >> refreshWithParameters: anOptionParameters [
-	model refreshWithParameters: anOptionParameters
+	model refreshWithParameters: anOptionParameters.
+	
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing ' }
 PWBCallTreeBrowser >> selected: aFamixPWBUserObject [
 	model selected: aFamixPWBUserObject
 ]
 
 { #category : #accessing }
 PWBCallTreeBrowser >> title [
-^'Izy view'
+^'PWBObject Invocations Tree Browser'
 ]
 
 { #category : #api }

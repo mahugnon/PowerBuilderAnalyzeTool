@@ -78,6 +78,7 @@ PWBMooseModelBrowser >> initializePresenters [
 	self initializeSearchField.
 	modelPresenter
 		whenSelectionChangedDo: [ :selected | 
+			self halt.
 			model selected: selected selectedItem.
 			self freezeDuring: [ self globallySelect: selected selectedItem ] ].
 	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ].
@@ -94,25 +95,18 @@ PWBMooseModelBrowser >> initializeSearchField [
 
 { #category : #initialization }
 PWBMooseModelBrowser >> initializeTable [
-	| title |
 	modelPresenter := self newList.
-	title := 'Source code components'.
 	modelPresenter
 		display: [ :item | item name ];
 		icons: [ :each | each systemIcon ];
 		sortingBlock: [ :a :b | a methods asSet size > b methods asSet size ];
 		enableItemSubstringFilter;
-		items: model pwbMooseModel
+		items: model pwbMooseModel asOrderedCollection
 ]
 
 { #category : #accessing }
 PWBMooseModelBrowser >> modelPresenter [
 	^ modelPresenter
-]
-
-{ #category : #'as yet unclassified' }
-PWBMooseModelBrowser >> needUpdate: anEntity [
-	^ model selected ~= anEntity
 ]
 
 { #category : #'initialization - actions' }
@@ -135,7 +129,7 @@ PWBMooseModelBrowser >> selected [
 
 { #category : #testing }
 PWBMooseModelBrowser >> setModelPresenterSelection [
-	modelPresenter selectItem: modelPresenter roots first
+	modelPresenter selectItem: modelPresenter model items first
 ]
 
 { #category : #TOREMOVE }

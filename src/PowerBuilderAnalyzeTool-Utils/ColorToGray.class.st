@@ -1,7 +1,7 @@
 Class {
 	#name : #ColorToGray,
 	#superclass : #ColorFunction,
-	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalColorElementStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalElementColorStrategy'
 }
 
 { #category : #private }

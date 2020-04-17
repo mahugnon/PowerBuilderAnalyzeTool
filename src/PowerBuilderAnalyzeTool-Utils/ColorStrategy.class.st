@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'entity'
 	],
-	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalColorElementStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalElementColorStrategy'
 }
 
 { #category : #private }

@@ -26,11 +26,19 @@ FamixPWBmajorObject >> incomingInvocationsSenders: anInteger expectFromMethodsOf
 	[ level < anInteger and: [ scan < totalResult size ] ]
 		whileTrue: [ level := level + 1.
 			scan := totalResult size.
-			levelResult := levelResult
-				flatCollect:
+			totalResult := levelResult
+				flatCollectAsSet:
 					[ :each | each incomingInvocationsSendersExpectFromMethodsOfType: aCollection ].
 			totalResult addAll: levelResult ].
-	^ totalResult asOrderedCollection
+	^ totalResult asSet
+]
+
+{ #category : #'*PowerBuilderAnalyzeTool' }
+FamixPWBmajorObject >> incomingInvocationsSendersWith: aCollection [
+	| result |
+	result := self incomingInvocationsSenders.
+	result addAll: (aCollection flatCollect: #incomingInvocationsSenders).
+	^ result asOrderedCollection
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool' }

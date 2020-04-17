@@ -1,11 +1,11 @@
 Class {
-	#name : #PWBMooseEntityTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#name : #PWBMooseEntityTests,
+	#superclass : #PWBBrowsersAbstractTest,
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
 { #category : #tests }
-PWBMooseEntityTest >> testIncomingAllInvocationsSenders [
+PWBMooseEntityTests >> testIncomingAllInvocationsSenders [
 	self
 		assertCollection: testUserObject1 allIncomingInvocationsSenders
 		hasSameElements:
@@ -15,29 +15,17 @@ PWBMooseEntityTest >> testIncomingAllInvocationsSenders [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testIncomingInvocationsSenders [
+PWBMooseEntityTests >> testIncomingInvocationsSenders [
 	self
 		assertCollection: testUserObject1 incomingInvocationsSenders
 		hasSameElements: {testUserObject2}
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQuerIncomingBetweenPWBObject [
-	| queryResult |
-	queryResult := QueryIncomingBetweenPWBObject new
-		runOn: testUserObject1
-		with: testUserObject2.
-	self assert: queryResult keys anyOne equals: testFunction1.
-	self
-		assertCollection: (queryResult at: testFunction1)
-		hasSameElements: {testFunction4}
-]
-
-{ #category : #tests }
-PWBMooseEntityTest >> testQueryDeadArguments [
+PWBMooseEntityTests >> testQueryDeadArguments [
 	self
 		assertCollection:
-			(QueryDeadArguments
+			(QueryArguments
 				runOn:
 					{testLocalVar3.
 					testArg1})
@@ -45,7 +33,7 @@ PWBMooseEntityTest >> testQueryDeadArguments [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryDeadLocalVariables [
+PWBMooseEntityTests >> testQueryDeadLocalVariables [
 	self
 		assertCollection:
 			(QueryDeadLocalVariables
@@ -56,7 +44,7 @@ PWBMooseEntityTest >> testQueryDeadLocalVariables [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryDeadVariablesBehavioral [
+PWBMooseEntityTests >> testQueryDeadVariablesBehavioral [
 	| behavioral |
 	behavioral := QueryBehavioral
 		runOn:
@@ -72,7 +60,7 @@ PWBMooseEntityTest >> testQueryDeadVariablesBehavioral [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryDeedAttributesVariables [
+PWBMooseEntityTests >> testQueryDeedAttributesVariables [
 	| query |
 	query := QueryDeadVariables runOn: testUserObject1.
 	self
@@ -83,7 +71,7 @@ PWBMooseEntityTest >> testQueryDeedAttributesVariables [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryDeedVariables [
+PWBMooseEntityTests >> testQueryDeedVariables [
 	| query |
 	query := QueryDeadVariables runOn: testUserObject1.
 	self
@@ -94,19 +82,16 @@ PWBMooseEntityTest >> testQueryDeedVariables [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel [
+PWBMooseEntityTests >> testQueryIncomingInvocationsSendersAtLevel [
 	self
-		assertCollection:
-			(testUserObject1
-				incomingInvocationsSenders: 2
-				expectFromMethodsOfType: #())
+		assertCollection: (testUserObject1 incomingInvocationsSenders: 2)
 		hasSameElements:
 			{testUserObject2.
 			testUserObject3}
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
+PWBMooseEntityTests >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 	| option |
 	option := OptionParameters new
 		maxLevel: 2;
@@ -122,10 +107,10 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersAtLevel2Strategy [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
+PWBMooseEntityTests >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 	| option |
 	option := OptionParameters new
-		action: InvocationWithEntitiesOption;
+		action: InvocationWithEntitiesOption ;
 		yourself.
 	self
 		assertCollection:
@@ -135,10 +120,10 @@ PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy1 [
 ]
 
 { #category : #tests }
-PWBMooseEntityTest >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
+PWBMooseEntityTests >> testQueryIncomingInvocationsSendersWithEntityStrategy2 [
 	| option |
 	option := OptionParameters new
-		action: InvocationWithEntitiesOption;
+		action: InvocationWithEntitiesOption ;
 		yourself.
 	option addEntity: testUserObject2.
 	self

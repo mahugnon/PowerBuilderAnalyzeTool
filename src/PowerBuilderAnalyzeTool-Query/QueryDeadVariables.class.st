@@ -16,7 +16,7 @@ QueryDeadVariables >> instanceVariables [
 { #category : #running }
 QueryDeadVariables >> runOn: anObject [
 	| variables |
-	variables := anObject content flatCollectAsSet: #variables.
+	variables := anObject methods asSet flatCollectAsSet: #variables.
 	variables addAll: anObject attributes.
 	result := variables select: [ :each | each incomingAccesses isEmpty ]
 ]

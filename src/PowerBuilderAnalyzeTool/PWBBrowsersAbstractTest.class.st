@@ -1,5 +1,5 @@
 Class {
-	#name : #AbstractPWBCallTreeBrowserTest,
+	#name : #PWBBrowsersAbstractTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'testModel',
@@ -34,8 +34,8 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeAccess [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> initializeAccess [
 	testModel
 		add:
 			(FamixPWBVariableAccess new
@@ -68,8 +68,8 @@ AbstractPWBCallTreeBrowserTest >> initializeAccess [
 				variable: testArg2)
 ]
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeInvocations [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> initializeInvocations [
 	FamixPWBInvocation new
 		mooseModel: testModel;
 		sender: testFunction4;
@@ -84,8 +84,8 @@ AbstractPWBCallTreeBrowserTest >> initializeInvocations [
 		candidates: {testFunction7}
 ]
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> initializeTestFunctions [
 	testFunction1 := FamixPWBFunction new
 		parentType: testUserObject1;
 		name: 'testFunction1'.
@@ -136,8 +136,8 @@ AbstractPWBCallTreeBrowserTest >> initializeTestFunctions [
 			testFunction10}
 ]
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeTestUserObject [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> initializeTestUserObject [
 	testUserObject1 := testModel
 		add: (FamixPWBUserObject new name: 'testUserObject1').
 	testUserObject2 := testModel
@@ -152,8 +152,8 @@ AbstractPWBCallTreeBrowserTest >> initializeTestUserObject [
 		add: (FamixPWBUserObject new name: 'testUserObject6')
 ]
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> initializeVariables [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> initializeVariables [
 	testInstVar1 := FamixPWBAttribute new
 		name: 'iTestInstVar1';
 		parentType: testUserObject1.
@@ -196,8 +196,8 @@ AbstractPWBCallTreeBrowserTest >> initializeVariables [
 	testModel add: testArg2
 ]
 
-{ #category : #running }
-AbstractPWBCallTreeBrowserTest >> setUp [
+{ #category : #initialization }
+PWBBrowsersAbstractTest >> setUp [
 	testModel := FamixPWBModel new.
 	self initializeTestUserObject.
 	self initializeTestFunctions.

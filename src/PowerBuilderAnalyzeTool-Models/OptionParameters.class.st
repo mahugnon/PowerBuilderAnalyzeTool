@@ -26,9 +26,10 @@ OptionParameters >> addEntity: aFamixPWBUserObject [
 		ifFalse: [ selectedEntities add: aFamixPWBUserObject ]
 ]
 
-{ #category : #api }
-OptionParameters >> addTypeToFilter: aClass [
-	typeToFilter add: aClass
+{ #category : #accesing }
+OptionParameters >> addTypeToFilter: aFamixPWBUserObject [
+	(typeToFilter includes: aFamixPWBUserObject)
+		ifFalse: [ typeToFilter add: aFamixPWBUserObject ]
 ]
 
 { #category : #initialization }
@@ -53,14 +54,24 @@ OptionParameters >> removeEntities: anObject [
 	selectedEntities remove: anObject
 ]
 
-{ #category : #api }
-OptionParameters >> removeTypeToFilter: aClass [
-	typeToFilter remove: aClass
+{ #category : #'add-remove' }
+OptionParameters >> removeTypeToFilters: anObject [
+	typeToFilter remove: anObject
 ]
 
 { #category : #accessing }
 OptionParameters >> selectedEntities [
 	^ selectedEntities
+]
+
+{ #category : #accessing }
+OptionParameters >> typeToFilter [
+	^ typeToFilter
+]
+
+{ #category : #accessing }
+OptionParameters >> typeToFilter: anObject [
+	typeToFilter := anObject
 ]
 
 { #category : #accessing }

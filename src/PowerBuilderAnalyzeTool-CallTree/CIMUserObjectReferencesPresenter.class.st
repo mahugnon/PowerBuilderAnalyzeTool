@@ -22,12 +22,13 @@ CIMUserObjectReferencesPresenter >> buildEdgeOn: aCanvas [
 		withBorderAttachPoint;
 		objects: self pwbMooseModel;
 		markerEnd:
-			(RSShapeFactory triangle
+			((RSShapeFactory triangle
 				extent: 10 @ 15;
 				color: Color red;
 				border: borderWhite;
 				yourself) asMarker;
-		yourself;
+				
+				yourself);
 		moveBehind;
 		width: 3;
 		connectFromAll: [ :each | 
@@ -59,12 +60,23 @@ CIMUserObjectReferencesPresenter >> buildPopupOn: aCanvas [
 						streamContents: [ :stream | 
 							names
 								keysAndValuesDo: [ :key :value | 
+									| args |
+									args := QueryArguments runOn: key.
 									value
 										do: [ :aMethod | 
 											stream
 												<< aMethod name;
 												<< ' -> ';
 												<< key name;
+												<< '( '.
+											args
+												ifNotEmpty: [ 1 to: args size - 1 do: [ :iter | 
+														stream
+															<< (args at: iter) name;
+															<< ', ' ].
+													stream << args last name ].
+											stream
+												<< ' )';
 												cr ] ] ]).
 			aRSEdge @ (RSPopup text: text) ]
 ]

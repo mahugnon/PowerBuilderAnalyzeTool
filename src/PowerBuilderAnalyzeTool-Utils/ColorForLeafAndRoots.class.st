@@ -1,7 +1,7 @@
 Class {
 	#name : #ColorForLeafAndRoots,
 	#superclass : #ColorFunction,
-	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalColorElementStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalElementColorStrategy'
 }
 
 { #category : #private }

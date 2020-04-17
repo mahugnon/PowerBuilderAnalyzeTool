@@ -24,7 +24,7 @@ CIMIzyFilesNavigator class >> defaultSpec [
 				add: #modulesFolderButton;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-		add: #possibleEntitiesPresenter;
+		add: #listPresenter;
 		add:
 			(SpBoxLayout newHorizontal
 				add: #space;

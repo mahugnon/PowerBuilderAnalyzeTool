@@ -2,12 +2,12 @@ Extension { #name : #FamixPWBmajorObject }
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> clean: aCollection [
-	^ aCollection reject: [ :each | self isGenerallyUsed: each ]
+	^ aCollection reject: [ :each | self isGenerallyUsed:  each  ]
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }
 FamixPWBmajorObject >> content [
-	content ifNil: [ self setContent ].
+
 	^ content
 ]
 
@@ -40,7 +40,7 @@ FamixPWBmajorObject >> setContent [
 		reject: [ :method | method isNoisyMethod ])
 		flatCollect: #withAllOutgoingInvocationCandidates)
 		asOrderedCollection
-		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+		sort: [ :a :b | a numberOfMethods  > b numberOfMethods ]
 ]
 
 { #category : #'*PowerBuilderAnalyzeTool-CallTree' }

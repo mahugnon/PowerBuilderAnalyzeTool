@@ -1,23 +1,23 @@
 Class {
-	#name : #PWBNonUsedVariableBrowserTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#name : #PWBNonUsedVariableBrowserTests,
+	#superclass : #PWBBrowsersAbstractTest,
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
-{ #category : #'as yet unclassified' }
-PWBNonUsedVariableBrowserTest >> model [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> model [
 	^ browser model
 ]
 
-{ #category : #running }
-PWBNonUsedVariableBrowserTest >> setUp [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> setUp [
 	super setUp.
 	browser := PWBNonUsedVariableBrowser new
 		selectEntity: testUserObject1
 ]
 
-{ #category : #asserting }
-PWBNonUsedVariableBrowserTest >> testBrowserShouldNotUpdateOnMooseGroup [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> testBrowserShouldNotUpdateOnMooseGroup [
 	| group |
 	group := {testUserObject1.
 	testUserObject2} asMooseGroup.
@@ -25,8 +25,8 @@ PWBNonUsedVariableBrowserTest >> testBrowserShouldNotUpdateOnMooseGroup [
 	self deny: browser selected equals: group
 ]
 
-{ #category : #tests }
-PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> testTrasmissionsToInstVarArgs [
 	self
 		assertCollection: (self model instOrFunctionFor: 'Attributs')
 		hasSameElements:
@@ -39,13 +39,13 @@ PWBNonUsedVariableBrowserTest >> testTrasmissionsToInstVarArgs [
 			testFunction1}
 ]
 
-{ #category : #'as yet unclassified' }
-PWBNonUsedVariableBrowserTest >> testWhenSelectedEntityInstAndVarListShouldBeUpdated [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> testWhenSelectedEntityInstAndVarListShouldBeUpdated [
 	self deny: browser instAndVarList model items isEmpty
 ]
 
-{ #category : #'as yet unclassified' }
-PWBNonUsedVariableBrowserTest >> testWhenSelectionChangedForTheFirstTimeInstAndVarsBecomeADictionnaryWith2Keys [
+{ #category : #accessing }
+PWBNonUsedVariableBrowserTests >> testWhenSelectionChangedForTheFirstTimeInstAndVarsBecomeADictionnaryWith2Keys [
 	self
 		assertCollection: self model instAndVars
 		hasSameElements: {'Attributs' . 'Variables'}

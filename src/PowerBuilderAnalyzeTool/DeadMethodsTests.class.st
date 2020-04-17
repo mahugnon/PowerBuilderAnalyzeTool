@@ -1,6 +1,6 @@
 Class {
-	#name : #DeadMethodsTest,
-	#superclass : #AbstractPWBCallTreeBrowserTest,
+	#name : #DeadMethodsTests,
+	#superclass : #PWBBrowsersAbstractTest,
 	#instVars : [
 		'testEvent1',
 		'testTrigger1'
@@ -8,22 +8,22 @@ Class {
 	#category : #'PowerBuilderAnalyzeTool-Tests'
 }
 
-{ #category : #running }
-DeadMethodsTest >> initializeEvents [
+{ #category : #initialization }
+DeadMethodsTests >> initializeEvents [
 	testEvent1 := FamixPWBEvent new
 		name: 'testEvent1';
 		parentType: testUserObject6;
 		yourself.
 	testModel add: testEvent1.
-	testTrigger1 := FamixPWBTrigger  new
+	testTrigger1 := FamixPWBTrigger new
 		name: 'testTrigger1';
 		parentType: testUserObject6;
 		yourself.
 	testModel add: testTrigger1
 ]
 
-{ #category : #running }
-DeadMethodsTest >> setUp [
+{ #category : #initialization }
+DeadMethodsTests >> setUp [
 	super setUp.
 	FamixPWBInvocation new
 		mooseModel: testModel;
@@ -38,11 +38,11 @@ DeadMethodsTest >> setUp [
 		mooseModel: testModel;
 		sender: testTrigger1;
 		candidates: {testFunction9}.
-	browser := PWBNonUsedFunctionBrowser new
+	browser := PWBDeadMethodsBrowser new
 ]
 
-{ #category : #asserting }
-DeadMethodsTest >> testBrowserShouldNotUpdateOnMooseGroup [
+{ #category : #initialization }
+DeadMethodsTests >> testBrowserShouldNotUpdateOnMooseGroup [
 	| group |
 	group := {testUserObject1.
 	testUserObject2} asMooseGroup.
@@ -50,9 +50,9 @@ DeadMethodsTest >> testBrowserShouldNotUpdateOnMooseGroup [
 	self assert: browser selected ~= group
 ]
 
-{ #category : #tests }
-DeadMethodsTest >> testDeadMethodsStrategy1 [
-	self
+{ #category : #initialization }
+DeadMethodsTests >> testDeadMethodsStrategy1 [
+self
 		assertCollection: testModel allModelDeadMethods
 		hasSameElements:
 			{testFunction8.
@@ -64,8 +64,8 @@ DeadMethodsTest >> testDeadMethodsStrategy1 [
 			testFunction6}
 ]
 
-{ #category : #tests }
-DeadMethodsTest >> testQueryDirectDeadMethods [
+{ #category : #initialization }
+DeadMethodsTests >> testQueryDirectDeadMethods [
 	| directDeadMethods |
 	directDeadMethods := QueryDirectDeadMethods
 		runOn:
@@ -80,8 +80,8 @@ DeadMethodsTest >> testQueryDirectDeadMethods [
 		hasSameElements: {testFunction8}
 ]
 
-{ #category : #tests }
-DeadMethodsTest >> testQueryDiscoverDeadMethodsIncrementally [
+{ #category : #initialization }
+DeadMethodsTests >> testQueryDiscoverDeadMethodsIncrementally [
 	self
 		assertCollection: testModel allModelDeadMethodWithAliveStrategy
 		hasSameElements:
@@ -94,9 +94,21 @@ DeadMethodsTest >> testQueryDiscoverDeadMethodsIncrementally [
 			testFunction6}
 ]
 
-{ #category : #tests }
-DeadMethodsTest >> testQueryInitDeathState [
+{ #category : #initialization }
+DeadMethodsTests >> testQueryInitDeathState [
 	self
 		assert: (testModel allMethods collectAsSet: #isPWBDead) anyOne
 		equals: false
+]
+
+{ #category : #tests }
+DeadMethodsTests >> test_testObject1_has_4_deadMethods [
+	testModel resurrectMethods.
+	self
+		assertCollection: testUserObject1 deadMethods
+		hasSameElements:
+			{testFunction2.
+			testFunction3.
+			testFunction5.
+			testFunction10}
 ]

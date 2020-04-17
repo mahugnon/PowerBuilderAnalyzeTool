@@ -1,5 +1,5 @@
 Class {
 	#name : #ColorFunction,
 	#superclass : #ColorStrategy,
-	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalColorElementStrategy'
+	#category : #'PowerBuilderAnalyzeTool-Utils-RoassalElementColorStrategy'
 }
