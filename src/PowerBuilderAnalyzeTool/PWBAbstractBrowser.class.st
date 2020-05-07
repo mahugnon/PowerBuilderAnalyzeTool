@@ -6,7 +6,8 @@ Class {
 		'freeze',
 		'follow',
 		'highlight',
-		'toSelect'
+		'toSelect',
+		'propagateButton'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
@@ -14,6 +15,11 @@ Class {
 { #category : #specs }
 PWBAbstractBrowser class >> defaultSpec [
 	^ SpBoxLayout newVertical
+		add: #propagateButton withConstraints: [ :constraints | 
+			constraints
+				height: self toolbarHeight;
+				width: 30;
+				expand: false ];
 		add:
 			(SpBoxLayout newHorizontal
 				add: #follow expand: false;
@@ -27,6 +33,12 @@ PWBAbstractBrowser class >> defaultSpec [
 { #category : #visiting }
 PWBAbstractBrowser >> accept: anObject [
 	^ self subclassResponsibility
+]
+
+{ #category : #initialization }
+PWBAbstractBrowser >> connectPresenters [
+	super connectPresenters.
+	propagateButton whenActivatedDo: [ self propagateAction ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -65,6 +77,8 @@ PWBAbstractBrowser >> initializePresenters [
 	freeze := self newRadioButton.
 	follow := self newRadioButton.
 	highlight := self newRadioButton.
+	propagateButton := self newCheckBox.
+	propagateButton label: 'Propagate'.
 	follow
 		associatedRadioButtons:
 			{freeze.
@@ -125,10 +139,15 @@ PWBAbstractBrowser >> needUpdate: anEntity [
 	^ anEntity ~= model selected and: [ self accept: anEntity ]
 ]
 
+{ #category : #api }
+PWBAbstractBrowser >> propagateAction [
+	self globallySelect: (FamixTypeGroup withAll: model selected)
+]
+
 { #category : #accessing }
 PWBAbstractBrowser >> selectEntity: anEntity [
 	toSelect := anEntity.
-	AbstractBrowserMode actionFor: self
+	AbstractBrowserReceiverMode actionFor: self
 ]
 
 { #category : #initialization }

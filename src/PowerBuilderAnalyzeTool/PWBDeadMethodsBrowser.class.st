@@ -22,7 +22,8 @@ PWBDeadMethodsBrowser class >> run [
 
 { #category : #visiting }
 PWBDeadMethodsBrowser >> accept: anObject [
-	^ FamixPWBmajorObject subclasses includes: anObject class
+	^ (FamixPWBmajorObject subclasses includes: anObject class)
+		or: [ anObject class = FamixTypeGroup ]
 ]
 
 { #category : #actions }
@@ -58,6 +59,11 @@ PWBDeadMethodsBrowser >> initializePresenters [
 PWBDeadMethodsBrowser >> initializeWindow: aWindowPresenter [ 
 super initializeWindow: aWindowPresenter .
 aWindowPresenter 	initialExtent: 350 @ 300
+]
+
+{ #category : #accessing }
+PWBDeadMethodsBrowser >> selected [
+	^ self model selected
 ]
 
 { #category : #TOREMOVE }

@@ -5,28 +5,65 @@ Class {
 		'modelPresenter',
 		'searchField',
 		'allModelPWBObjectButton',
-		'scopedView'
+		'scopedView',
+		'separator'
 	],
 	#category : #'PowerBuilderAnalyzeTool-Browsers'
 }
 
 { #category : #specs }
 PWBMooseModelBrowser class >> defaultSpec [
-	^ super defaultSpec
-		add: #modelPresenter;
+	^ SpBoxLayout newVertical
+		add: #propagateButton
+			withConstraints: [ :constraints | 
+			constraints
+				height: self toolbarHeight;
+				width: 100;
+				expand: false ];
 		add:
 			(SpBoxLayout newHorizontal
-				add: #allModelPWBObjectButton;
-				add: #scopedView;
+				add: #follow
+					withConstraints: [ :constraints | 
+					constraints
+						height: self toolbarHeight;
+						width: 100;
+						expand: false ];
+				add: #highlight
+					withConstraints: [ :constraints | 
+					constraints
+						height: self toolbarHeight;
+						width: 100;
+						expand: false ];
+				add: #freeze
+					withConstraints: [ :constraints | 
+					constraints
+						height: self toolbarHeight;
+						width: 100;
+						expand: false ];
+				add: #separator
+					withConstraints: [ :constraints | 
+					constraints
+						height: self toolbarHeight;
+						width: 50;
+						expand: false ];
+				add:
+					(SpBoxLayout newHorizontal
+						add: #allModelPWBObjectButton;
+						add: #scopedView;
+						yourself)
+					withConstraints: [ :contraint | contraint height: 20 ];
 				yourself)
-			withConstraints: [ :contraint | contraint height: 20 ];
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+		add: #modelPresenter;
 		yourself
 ]
 
 { #category : #examples }
 PWBMooseModelBrowser class >> runMe [
 	<script>
-	self new openWithSpec
+	self new
+		setUp;
+		openWithSpec
 ]
 
 { #category : #visiting }
@@ -78,10 +115,15 @@ PWBMooseModelBrowser >> initializePresenters [
 	self initializeSearchField.
 	modelPresenter
 		whenSelectionChangedDo: [ :selected | 
-			model selected: selected selectedItem.
-			self freezeDuring: [ self globallySelect: selected selectedItem ] ].
+			model selected: (FamixTypeGroup withAll: modelPresenter selectedItems).
+			AbstractBrowserSenderMode actionFor: self ].
 	searchField whenTextIsAcceptedDo: [ :text | self searchFor: text ].
-	self viewRadioButton
+	self viewRadioButton.
+	separator := self newLabel
+		label: '|';
+		emphasis: #bold;
+		color: Color white;
+		yourself
 ]
 
 { #category : #initialization }
@@ -96,11 +138,16 @@ PWBMooseModelBrowser >> initializeSearchField [
 PWBMooseModelBrowser >> initializeTable [
 	modelPresenter := self newList.
 	modelPresenter
+		beMultipleSelection;
 		display: [ :item | item name ];
 		icons: [ :each | each systemIcon ];
 		sortingBlock: [ :a :b | a methods asSet size > b methods asSet size ];
-		enableItemSubstringFilter;
-		items: model pwbMooseModel asOrderedCollection
+		enableItemSubstringFilter
+]
+
+{ #category : #'accessing ' }
+PWBMooseModelBrowser >> isPropagate [
+	^ propagateButton state
 ]
 
 { #category : #accessing }
@@ -113,7 +160,10 @@ PWBMooseModelBrowser >> radioButtonsAction [
 	allModelPWBObjectButton
 		whenActivatedDo: [ modelPresenter items: model pwbMooseModel ].
 	scopedView
-		whenActivatedDo: [ modelPresenter items: {modelPresenter selection selectedItem} ]
+		whenActivatedDo: [ modelPresenter items: modelPresenter selectedItems.
+			modelPresenter selectItems: modelPresenter model items.
+			self needRebuild: false.
+			self buildWithSpec ]
 ]
 
 { #category : #initialization }
@@ -129,6 +179,14 @@ PWBMooseModelBrowser >> selected [
 { #category : #testing }
 PWBMooseModelBrowser >> setModelPresenterSelection [
 	modelPresenter selectItem: modelPresenter model items first
+]
+
+{ #category : #initialization }
+PWBMooseModelBrowser >> setUp [
+	model setUp.
+	modelPresenter items: model pwbMooseModel asOrderedCollection.
+	self needRebuild: false.
+	self buildWithSpec
 ]
 
 { #category : #TOREMOVE }

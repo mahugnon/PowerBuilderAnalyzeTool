@@ -136,7 +136,7 @@ DuplicationBrowserModel >> mooseModel: aFamixPWBUserObject [
 
 { #category : #api }
 DuplicationBrowserModel >> mooseModelFunctions [
-	^ pwbMooseModel methods asSet
+	^ (pwbMooseModel flatCollect: #methods) asSet
 ]
 
 { #category : #initialization }
@@ -146,7 +146,7 @@ DuplicationBrowserModel >> refreshRoassal [
 
 { #category : #accessing }
 DuplicationBrowserModel >> selected: anObject [
-	selected := anObject
+	selected := anObject asOrderedCollection
 ]
 
 { #category : #accessing }

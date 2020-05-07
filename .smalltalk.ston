@@ -2,7 +2,8 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'PowerBuilderAnalyzeTool',
-      #directory : 'src'
+      #directory : 'src',
+      #platforms : [  #pharo ]	
     }
   ]
 }

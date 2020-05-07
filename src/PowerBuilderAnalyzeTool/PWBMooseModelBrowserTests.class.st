@@ -9,7 +9,8 @@ PWBMooseModelBrowserTests >> setUp [
 	super setUp.
 	browser := PWBMooseModelBrowser new.
 	browser model
-		pwbMooseModel: (testModel allWithType: FamixPWBUserObject)
+		pwbMooseModel: (testModel allWithType: FamixPWBUserObject).
+	browser setUp
 ]
 
 { #category : #initialization }
@@ -31,17 +32,11 @@ PWBMooseModelBrowserTests >> testSelectedISNotNilWhenAnItemIsSelectedInTheTree [
 { #category : #initialization }
 PWBMooseModelBrowserTests >> testSelectedItemIsNotNil [
 	browser setModelPresenterSelection.
-	self assert: browser modelPresenter selection selectedItem isNotNil
+	self assert: browser modelPresenter selectedItems isNotEmpty
 ]
 
 { #category : #initialization }
 PWBMooseModelBrowserTests >> testSetBrowserState [
 	browser toFollow.
 	self assert: browser isFollow
-]
-
-{ #category : #initialization }
-PWBMooseModelBrowserTests >> testWhenItemIsGloballySelectedApplicationLogsIsnotEmpty [
-	browser setModelPresenterSelection.
-	self assert: PWBApplication current logger logs isNotEmpty
 ]
