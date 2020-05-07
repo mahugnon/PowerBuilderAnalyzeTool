@@ -7,3 +7,4 @@ Metacello new
    onUpgrade: [ :e | e useIncoming ];       
    load   
 ```
+[![Build Status](https://travis-ci.org/mahugnon/PowerBuilderAnalyzeTool.svg?branch=master)](https://travis-ci.org/mahugnon/PowerBuilderAnalyzeTool)
